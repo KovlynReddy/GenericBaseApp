@@ -1,0 +1,117 @@
+﻿@model GenericAppDLL.Models.ViewModels.CreateAddressViewModel
+
+<h4>CreateAddressViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Street" class="control-label"></label>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainStreet" class="control-label"></label>
+                <input asp-for="MainStreet" class="form-control" />
+                <span asp-validation-for="MainStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suburb" class="control-label"></label>
+                <input asp-for="Suburb" class="form-control" />
+                <span asp-validation-for="Suburb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostCode" class="control-label"></label>
+                <input asp-for="PostCode" class="form-control" />
+                <span asp-validation-for="PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+
+
+            <hr/>
+            <div class="form-group">
+                <label asp-for="Lat" class="control-label"></label>
+                <input id="Lat" asp-for="Lat" class="form-control" />
+                <span asp-validation-for="Lat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lon" class="control-label"></label>
+                <input id="Lon" asp-for="lon" class="form-control" />
+                <span asp-validation-for="lon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+    //    if (navigator.geolocation) {
+    //        navigator.geolocation.getCurrentPosition(displayPosition);
+    //    }
+    //    else {
+    //        displayError("Please update your browser to use Geolocation.");
+    //    }
+    //});
+
+    //function displayPosition(pos) {
+    //    let coords = pos.coords;
+    //    console.log(text(new Date(pos.timestamp))   );
+    //    console.log(text(coords.latitude)           );
+    //    console.log(text(coords.longitude)          );
+    //    console.log(text(coords.accuracy)           );
+    //    console.log(text(coords.altitude ?? "n/a")  );
+    //    console.log(text(coords.heading ?? "n/a")   );
+    //    console.log(text(coords.speed ?? "n/a")     );
+    //}
+    
+var x = document.getElementById("Lat");
+var y = document.getElementById("Lon");
+
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+      console.log( "Geolocation is not supported by this browser.");
+  }
+
+
+    function showPosition(position) {
+        console.log(position);
+
+       //console.log( String(position.coords.latitude) );
+       // console.log(String(position.coords.longitude));
+
+        x.value = String(position.coords.latitude);
+        y.value = String(position.coords.longitude);
+       
+
+
+        @*@Model.Lat =  String(position.coords.latitude); 
+        @Model.lon =    String(position.coords.longitude);*@
+        
+    }
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

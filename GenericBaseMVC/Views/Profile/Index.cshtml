@@ -1,0 +1,20 @@
+﻿@model List<GenericAppDLL.Models.ViewModels.CustomerViewModel>
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="CreateProfile">Create </a>
+
+    @foreach (var customer in Model)
+    {
+    @* @Html.Partial("_Profile",customer);
+*@
+    
+            <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <partial name="_Profile" model="customer"></partial>
+        </div>
+        <div class="col-md-4">
+        </div>
+        </div>
+    }
+

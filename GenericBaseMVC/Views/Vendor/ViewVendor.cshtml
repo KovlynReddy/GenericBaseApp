@@ -1,0 +1,71 @@
+﻿@model GenericAppDLL.Models.ViewModels.CreateVendorViewModel
+
+@{
+    ViewData["Title"] = "ViewBarber";
+}
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VendorEmail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VendorEmail)
+        </dd>
+
+                <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VendorName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VendorName)
+        </dd>
+
+    </dl>
+
+    <a asp-controller="Booking" asp-action="Create" class="btn btn-primary" > Book </a>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+        var x = String(position.coords.latitude);
+        var y = String(position.coords.longitude);
+        console.log(x, y);
+    });
+    function getPosition(position) {
+        console.log(position);
+        var x = String(position.coords.latitude);
+        var y = String(position.coords.longitude);
+        console.log(x, y);
+
+        $("lat").val = x;
+        $("lon").val = y;
+
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:44388/Vendor/CreateNew",
+            data: {
+                "slat": x,
+                "slon": y
+            },
+            success: function (tekst) {
+                console.log("successs", tekst);
+                document.getElementById('map').innerHTML = tekst;
+
+                document.open();
+                document.write(tekst);
+                document.close();
+
+            },
+            error: function (request, error) {
+                console.log("ERROR:" + error);
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<GenericAppDLL.Models.Dto.MenuItemDto>
+
+@{
+    ViewData["Title"] = "ViewAll";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row">
+                <td class="col-3">
+                </td>
+                <td class="col-6">
+                    @Html.Partial("_MenuItem", item)
+                </td>
+                <td class="col-3">
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

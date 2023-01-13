@@ -1,0 +1,15 @@
+﻿@model GenericAppDLL.Models.ViewModels.BookingViewModel
+
+<div class="jumbotron">
+    <h1> @Model.CreatedDateTimeString</h1>
+
+    <h1> @Model.BookDateTimeString</h1>
+    <h1> @Model.CompletedDateTimeString</h1>
+    <h1> @Model.ArrivedDateTimeString</h1>
+    <div class="row">
+
+    <a asp-controller="Booking" asp-action="Rate" class="btn btn-primary"> Rate </a>
+    <a asp-controller="Booking" asp-action="Edit" class="btn btn-secondary"> Edit </a>
+    </div>
+</div>
+

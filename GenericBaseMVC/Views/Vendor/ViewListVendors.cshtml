@@ -1,0 +1,35 @@
+﻿@model IEnumerable<GenericAppDLL.Models.DomainModel.Vendor>
+
+@{
+    ViewData["Title"] = "ViewListBarbers";
+}
+
+<h1>ViewListBarbers</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="row">
+                    <td class="col-3">
+                    </td>
+                    <td class="col-6">                          
+                      @Html.Partial("_BarberView", item)   
+                    </td>
+                    <td class="col-3">
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+

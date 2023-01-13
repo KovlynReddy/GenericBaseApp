@@ -1,0 +1,13 @@
+﻿@model GenericAppDLL.Models.Dto.MenuItemDto
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="~/Images/defaultImage.jpg" alt="Card image cap">
+    <div class="card-body">
+        <h3 class="card-title">@Model.ItemName</h3>
+        <h5 class="card-title">@Model.Currency @Model.Cost</h5>
+        <h6 class="card-title">@Model.SKUCode</h6>
+        <p class="card-text">@Model.Caption</p>
+        <a href="#" class="btn btn-primary">Book</a>
+    </div>
+</div>
+

@@ -1,0 +1,7 @@
+﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.PostViewModel>
+
+@foreach (var item in Model) {
+    @Html.Partial("_Post",item);
+
+    <partial name="_Post" model="item"></partial>
+}

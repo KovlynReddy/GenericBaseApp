@@ -1,0 +1,144 @@
+﻿namespace VendorAPI.Controllers;
+
+[Route("api/Visits")]
+[ApiController]
+public class LogVisitsController : Controller
+{
+    private readonly VendorContext _context;
+
+    public LogVisitsController(VendorContext context)
+    {
+        _context = context;
+    }
+
+    // GET: LogVisits
+    public async Task<IActionResult> Index()
+    {
+        return View(await _context.LogVisits.ToListAsync());
+    }
+
+    // GET: LogVisits/Details/5
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var logVisit = await _context.LogVisits
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (logVisit == null)
+        {
+            return NotFound();
+        }
+
+        return View(logVisit);
+    }
+
+    // GET: LogVisits/Create
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: LogVisits/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("BarberGuid,UserGuid,Reason,Rating,Description,BookingTime,ArriveTime,CompletionTime,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] LogVisit logVisit)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Add(logVisit);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(logVisit);
+    }
+
+    // GET: LogVisits/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var logVisit = await _context.LogVisits.FindAsync(id);
+        if (logVisit == null)
+        {
+            return NotFound();
+        }
+        return View(logVisit);
+    }
+
+    // POST: LogVisits/Edit/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("BarberGuid,UserGuid,Reason,Rating,Description,BookingTime,ArriveTime,CompletionTime,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] LogVisit logVisit)
+    {
+        if (id != logVisit.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(logVisit);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!LogVisitExists(logVisit.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        return View(logVisit);
+    }
+
+    // GET: LogVisits/Delete/5
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var logVisit = await _context.LogVisits
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (logVisit == null)
+        {
+            return NotFound();
+        }
+
+        return View(logVisit);
+    }
+
+    // POST: LogVisits/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var logVisit = await _context.LogVisits.FindAsync(id);
+        _context.LogVisits.Remove(logVisit);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+    private bool LogVisitExists(int id)
+    {
+        return _context.LogVisits.Any(e => e.Id == id);
+    }
+}
