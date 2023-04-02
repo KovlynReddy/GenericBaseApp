@@ -1,34 +1,30 @@
 ﻿using VendorAPI.Data.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VendorAPI.Data.Repository
 {
-    public class VendorRepo : IVendor
+    public class CustomerDB : ICustomer
     {
-        public Vendor Delete(int Id)
+        public Customer Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Vendor> Get()
+        public IEnumerable<Customer> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Vendor Get(int Id)
+        public Customer Get(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Vendor Post()
+        public Customer Post()
         {
             throw new NotImplementedException();
         }
 
-        public Vendor Put(Vendor model)
+        public Customer Put(Customer model)
         {
             throw new NotImplementedException();
         }

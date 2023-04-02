@@ -130,7 +130,7 @@ namespace GenericBaseMVC.Areas.Identity.Pages.Account
                     //UploadedImage = Input.UploadedImage,
                 };
 
-                await _customerService.Create(newUser);
+                await _customerService.Post(newUser);
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

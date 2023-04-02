@@ -1,0 +1,23 @@
+﻿@model GenericAppDLL.Models.ViewModels.DirectMessageViewModel
+
+
+<div class="d-flex align-items-baseline mb-4">
+
+    <div class="position-relative avatar">
+        <img class="img-fluid rounded-circle" src="profileimage.png" />
+        <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+            <span class="visually-hidden">new alerts</span>
+        </span>
+    </div>
+
+    <div class="pe-2">
+        <div class="card card-text d-inline-block p-2 px-3 m-1">
+            @Model.Message
+        </div>
+        <div class="small">
+            @Model.CreationDateTime
+        </div>
+    </div>
+    @*text-end justify-content-end*@
+
+</div>

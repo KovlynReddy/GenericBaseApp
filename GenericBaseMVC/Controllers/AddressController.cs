@@ -26,7 +26,7 @@ public class AddressController : Controller
 
         var AllAddresses = await _addressService.GetAll();
         var AllVendors = await _barberService.GetAll();
-        var AllCustomers = await _customerService.GetAll();
+        var AllCustomers = await _customerService.Get();
 
         // Ignore Code
 

@@ -50,7 +50,7 @@ public class ProfileController : Controller
        // UploadedImage = model.UploadedImage
         };
 
-        await _customerService.Create(newUser);
+        await _customerService.Post(newUser);
 
         return View();
     }
@@ -62,7 +62,7 @@ public class ProfileController : Controller
         #region Temp Loggin
 
         string Email = "kovlyn.reddy01@gmail.com";
-        var results = await _customerService.GetAll();
+        var results = await _customerService.Get();
         var model = new List<CustomerViewModel>();
 
         foreach (var customer in results)
@@ -89,7 +89,7 @@ public class ProfileController : Controller
     [HttpPost]
     public async Task<IActionResult> ViewProfile(string Email)
     {
-        var results = await _customerService.GetAll();
+        var results = await _customerService.Get();
         var model = new List<CustomerViewModel>();
 
         foreach (var customer in results)
@@ -114,7 +114,7 @@ public class ProfileController : Controller
 
         public async Task<IActionResult> Index()
     {
-        var results = await _customerService.GetAll();
+        var results = await _customerService.Get();
         var model = new List<CustomerViewModel>();
 
         foreach (var customer in results)

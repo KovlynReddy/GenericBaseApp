@@ -1,79 +1,50 @@
-﻿namespace GenericBaseMVC.Controllers;
+﻿using ChilliSoftAssessmentMeetingMinuteTakerMVC.Hubs;
+using Microsoft.AspNetCore.SignalR;
+
+namespace GenericBaseMVC.Controllers;
 
 public class ChatController : Controller
 {
-    // GET: ChatController
-    public ActionResult Index()
+
+    public IHubContext<MeetingHub> _hub { get; set; }
+    public ChatController(IHubContext<MeetingHub> hub)
+    {
+        _hub = hub;
+    }
+
+    public IActionResult Index()
     {
         return View();
     }
 
-    // GET: ChatController/Details/5
-    public ActionResult Details(int id)
+    public IActionResult AllMyChats()
     {
         return View();
     }
 
-    // GET: ChatController/Create
-    public ActionResult Create()
-    {
-        return View();
-    }
-
-    // POST: ChatController/Create
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public async Task<IActionResult> SendDirectMessage(SendDirectMessageViewModel model)
     {
-        try
+
+        //await ChatService.Create(model);
+
+        var SRMessage = new SignalRMessage()
         {
-            return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            return View();
-        }
+            Message = model.Message,
+            UserId = model.SenderId,
+            ItemId = model.ItemId,
+            MeetingId = model.MeetingId
+        };
+
+        await SendAMessage(SRMessage);
+
+        return RedirectToAction("AttendMeeting", model.MeetingId);
     }
 
-    // GET: ChatController/Edit/5
-    public ActionResult Edit(int id)
+    public async Task<IActionResult> SendAMessage(SignalRMessage Message)
     {
+        await _hub.Clients.All.SendAsync("RecieveMessage", Message);
         return View();
     }
 
-    // POST: ChatController/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
-    {
-        try
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            return View();
-        }
-    }
-
-    // GET: ChatController/Delete/5
-    public ActionResult Delete(int id)
-    {
-        return View();
-    }
-
-    // POST: ChatController/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
-    {
-        try
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            return View();
-        }
-    }
 }

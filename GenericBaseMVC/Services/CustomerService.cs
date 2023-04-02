@@ -3,7 +3,7 @@
 public class CustomerService
 {
 
-    public async Task<List<Customer>> Get()
+    public async Task<List<Customer>> Get(int Id)
     {
         IEnumerable<Customer> barbers = null;
 
@@ -31,7 +31,7 @@ public class CustomerService
 
     }
 
-    public async Task<List<CustomerDto>> GetAll()
+    public async Task<List<CustomerDto>> Get()
     {
         IEnumerable<CustomerDto> barbers = null;
 
@@ -60,7 +60,7 @@ public class CustomerService
     }
 
     
-    public async Task<CreateCustomerDto> Create(CreateCustomerDto newAddress)
+    public async Task<CreateCustomerDto> Post(CreateCustomerDto newAddress)
     {
         CreateCustomerDto User = null;
 

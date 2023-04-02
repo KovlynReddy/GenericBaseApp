@@ -1,0 +1,27 @@
+﻿@model GenericAppDLL.Models.ViewModels.SendDirectMessageViewModel
+
+
+<form asp-action="SendMeetingMessage" asp-controller="Meeting">
+    <input asp-for="SenderId" hidden class="form-control" />
+    <input asp-for="ItemId" id="SendMessageItemId" hidden class="form-control" />
+    <input asp-for="MeetingId" id="SendMessageMeetingId" hidden class="form-control" />
+    <div class="input-group">
+
+        <div class="input-group-text bg-transparent border-0">
+            <button id="SendAttatchment" class="btn btn-light">
+                <i class="fas fa-paperclip"></i>
+            </button>
+        </div>
+        <input asp-for="Message" type="text" class="form-control border-0" placeholder="Write a message..." />
+        <div class="input-group-text bg-transparent border-0">
+            <button class="btn btn-light">
+                <i class="fas fa-smile"></i>
+            </button>
+        </div>
+        <div class="input-group-text bg-transparent border-0">
+            <button type="submit" class="btn btn-light">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</form>

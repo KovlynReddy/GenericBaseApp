@@ -1,34 +1,30 @@
 ﻿using VendorAPI.Data.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VendorAPI.Data.Repository
 {
-    public class VendorRepo : IVendor
+    public class DirectMessageDB : IDirectMessagesDB
     {
-        public Vendor Delete(int Id)
+        public DirectMessage Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Vendor> Get()
+        public IEnumerable<DirectMessage> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Vendor Get(int Id)
+        public DirectMessage Get(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Vendor Post()
+        public DirectMessage Post()
         {
             throw new NotImplementedException();
         }
 
-        public Vendor Put(Vendor model)
+        public DirectMessage Put(DirectMessage model)
         {
             throw new NotImplementedException();
         }

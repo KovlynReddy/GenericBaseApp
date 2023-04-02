@@ -1,5 +1,7 @@
 using VendorAPI.Data.DB;
 using Microsoft.EntityFrameworkCore;
+using VendorAPI.Data.Interface;
+using VendorAPI.Data.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,12 @@ builder.Services.AddDbContext<VendorContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<ICustomer,CustomerDB>();
+builder.Services.AddTransient<IItemDB,ItemDB>();
+builder.Services.AddTransient<IDirectMessagesDB,DirectMessageDB>();
+builder.Services.AddTransient<IPostDB,PostDB>();
+builder.Services.AddTransient<IVendor,VendorRepo>();
 
 var app = builder.Build();
 

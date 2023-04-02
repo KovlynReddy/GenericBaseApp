@@ -2,6 +2,7 @@
 
 public class BaseDto
 {
+    public int Id { get; set; }
     public string CreatedDateTimeString { get; set; }       =  string.Empty;
     public string ArrivedDateTimeString { get; set; }       =  string.Empty;
     public string BookDateTimeString { get; set; }          =  string.Empty;
