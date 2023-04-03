@@ -4,27 +4,27 @@ namespace VendorAPI.Data.Repository
 {
     public class CustomerDB : ICustomer
     {
-        public Customer Delete(int Id)
+        public Task<Customer> Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Customer> Get()
+        public Task<IEnumerable<Customer>> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Customer Get(int Id)
+        public Task<Customer> Get(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Customer Post()
+        public Task<Customer> Post(Customer model)
         {
             throw new NotImplementedException();
         }
 
-        public Customer Put(Customer model)
+        public Task<Customer> Put(Customer model)
         {
             throw new NotImplementedException();
         }

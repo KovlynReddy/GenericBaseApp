@@ -4,27 +4,27 @@ namespace VendorAPI.Data.Repository
 {
     public class ItemDB : IItemDB
     {
-        public Item Delete(int Id)
+        public Task<Item> Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Item> Get()
+        public Task<IEnumerable<Item>> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Item Get(int Id)
+        public Task<Item> Get(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Item Post()
+        public Task<Item> Post(Item model)
         {
             throw new NotImplementedException();
         }
 
-        public Item Put(Item model)
+        public Task<Item> Put(Item model)
         {
             throw new NotImplementedException();
         }

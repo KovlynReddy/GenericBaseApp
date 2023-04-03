@@ -2,29 +2,29 @@
 
 namespace VendorAPI.Data.Repository
 {
-    public class DirectMessageDB : IDirectMessagesDB
+    public class DirectMessageDB : IBase<DirectMessageDto>
     {
-        public DirectMessage Delete(int Id)
+        public Task<DirectMessageDto> Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DirectMessage> Get()
+        public Task<IEnumerable<DirectMessageDto>> Get()
         {
             throw new NotImplementedException();
         }
 
-        public DirectMessage Get(int Id)
+        public Task<DirectMessageDto> Get(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public DirectMessage Post()
+        public Task<DirectMessageDto> Post(DirectMessageDto model)
         {
             throw new NotImplementedException();
         }
 
-        public DirectMessage Put(DirectMessage model)
+        public Task<DirectMessageDto> Put(DirectMessageDto model)
         {
             throw new NotImplementedException();
         }

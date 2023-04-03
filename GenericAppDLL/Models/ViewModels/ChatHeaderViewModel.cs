@@ -8,7 +8,7 @@ namespace GenericAppDLL.Models.ViewModels
 {
     public class ChatHeaderViewModel
     {
-        public string MeetingType { get; set; }
+        public string MeetingType { get; set; } = string.Empty;
         public int Id { get; set; }
         public DateTime CreationDateTime { get; set; }
         public int CreatorId { get; set; }

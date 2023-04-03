@@ -1,5 +1,4 @@
-﻿@model GenericAppDLL.Models.ViewModels.ViewAllChatsViewModel
-
+﻿@model GenericAppDLL.Models.ViewModels.ChatViewModel
 
 <style>
 
@@ -23,23 +22,23 @@
 <div class="row">
 
     <div class="col-4">
-        <partial name="_MeetingsControl" model="Model.OtherMeetings" />
+        <partial name="_ChatHeads" model="Model.ChatHeads" />
     </div>
 
     <div class="col-4">
-        <partial name="_Meeting" model="Model" />
+        <partial name="_ChatContent" model="Model.AllMessages" />
     </div>
 
     <div class="col-4">
-        <partial name="_MeetingItemsControl" model="Model.Items" />
+        <partial name="_ChatHeads" model="Model.ChatHeads" />
     </div>
 
 </div>
 
-<partial name="_meetingItemModal" model="Model.newItem" />
-<partial name="_UpdateMeetingItem" model="Model.newItem" />
-<partial name="_meetingModal" model="Model.newMeeting" />
-
+@*modals*@
+<partial name="" model="Model" />
+<partial name="" model="Model" />
+<partial name="" model="Model" />
 
 <script src="~/lib/aspnet/signalr/dist/browser/"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

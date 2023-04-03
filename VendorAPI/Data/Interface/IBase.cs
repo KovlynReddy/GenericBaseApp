@@ -2,10 +2,10 @@
 {
     public interface IBase<T>
     {
-        T Post();
-        IEnumerable<T> Get();
-        T Get(int Id);
-        T Put(T model);
-        T Delete(int Id);
+        Task<T> Post(T model);
+        Task<IEnumerable<T>> Get();
+        Task<T> Get(int Id);
+        Task<T> Put(T model);
+        Task<T> Delete(int Id);
     }
 }

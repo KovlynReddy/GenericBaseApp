@@ -1,10 +1,9 @@
 ﻿@model GenericAppDLL.Models.ViewModels.SendDirectMessageViewModel
 
 
-<form asp-action="SendMeetingMessage" asp-controller="Meeting">
+<form asp-action="Post" asp-controller="DirectMessage">
     <input asp-for="SenderId" hidden class="form-control" />
-    <input asp-for="ItemId" id="SendMessageItemId" hidden class="form-control" />
-    <input asp-for="MeetingId" id="SendMessageMeetingId" hidden class="form-control" />
+    <input asp-for="RecieverId" id="SendMessageMeetingId" hidden class="form-control" />
     <div class="input-group">
 
         <div class="input-group-text bg-transparent border-0">

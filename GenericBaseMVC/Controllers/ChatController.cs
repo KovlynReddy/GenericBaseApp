@@ -1,14 +1,14 @@
-﻿using ChilliSoftAssessmentMeetingMinuteTakerMVC.Hubs;
+﻿using GenericBaseMVC.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
 namespace GenericBaseMVC.Controllers;
 
 public class ChatController : Controller
 {
+    public IHubContext<MessageHub> _hub { get; set; }
 
-    public IHubContext<MeetingHub> _hub { get; set; }
-    public ChatController(IHubContext<MeetingHub> hub)
-    {
+    public ChatController(IHubContext<MessageHub> hub)
+    {      
         _hub = hub;
     }
 
@@ -17,9 +17,12 @@ public class ChatController : Controller
         return View();
     }
 
-    public IActionResult AllMyChats()
+    public async Task<IActionResult> Get()
     {
-        return View();
+        //await DirectMessageService.Get();
+        //await ChatService.Get();
+
+        return View("AllMyChats");
     }
 
     [HttpPost]
@@ -32,13 +35,12 @@ public class ChatController : Controller
         {
             Message = model.Message,
             UserId = model.SenderId,
-            ItemId = model.ItemId,
-            MeetingId = model.MeetingId
+            MeetingId = model.RecieverId
         };
 
         await SendAMessage(SRMessage);
 
-        return RedirectToAction("AttendMeeting", model.MeetingId);
+        return RedirectToAction("AttendMeeting", model.RecieverId);
     }
 
     public async Task<IActionResult> SendAMessage(SignalRMessage Message)

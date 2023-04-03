@@ -1,8 +1,8 @@
 ﻿using GenericAppDLL.Models.Dto;
 using Microsoft.AspNetCore.SignalR;
 
-namespace ChilliSoftAssessmentMeetingMinuteTakerMVC.Hubs;
-public class MeetingHub : Hub
+namespace GenericBaseMVC.Hubs;
+public class MessageHub : Hub
 {
     public Task SendMessage(SignalRMessage message) {
 

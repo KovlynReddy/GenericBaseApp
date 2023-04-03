@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.Dto;
 
-public class DirectMessageDto
+public class DirectMessageDto : BaseDto
 {
-    public int MeetingId { get; set; }
-    public int UserId { get; set; }
-    public int ItemId { get; set; }
-
-    public string MeetingGuid { get; set; } = string.Empty;
-    public string UserGuid { get; set; } = string.Empty;
-
+    public string SenderGuid { get; set; } = string.Empty;
+    public string RecieverGuid { get; set; } = string.Empty;
+    public string GroupGuid { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
+    public string AttatchmentString { get; set; } = string.Empty;
+    public string Path { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
+    public int Read { get; set; }
 }

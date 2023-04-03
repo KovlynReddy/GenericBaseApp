@@ -6,9 +6,9 @@ namespace GenericBaseMVC.Services;
 
 public static class DirectMessageService
 {
-    public static async Task<List<DirectMessage>> Get()
+    public static async Task<List<DirectMessageDto>> Get(int Id)
     {
-        IEnumerable<DirectMessage> DirectMessages = null;
+        IEnumerable<DirectMessageDto> DirectMessages = null;
 
 
         string apiUrl = "https://localhost:7071/api/DirectMessage";
@@ -21,11 +21,11 @@ public static class DirectMessageService
 
             HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-            var apiresponse = new List<DirectMessage>();
+            var apiresponse = new List<DirectMessageDto>();
 
             if (response.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadAsAsync<List<DirectMessage>>();
+                var data = await response.Content.ReadAsAsync<List<DirectMessageDto>>();
                 //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                 apiresponse = data;
                 //Newtonsoft.Json.JsonConvert.DeserializeObject(data);
@@ -36,12 +36,12 @@ public static class DirectMessageService
 
     }
 
-    public static async Task<List<DirectMessage>> GetAll()
+    public static async Task<List<DirectMessageDto>> Get()
     {
-        IEnumerable<DirectMessage> DirectMessages = null;
+        IEnumerable<DirectMessageDto> DirectMessages = null;
 
 
-        string apiUrl = "https://localhost:7071/api/DirectMessageMinutes/GetAll";
+        string apiUrl = "https://localhost:7071/api/DirectMessage";
 
         using (HttpClient client = new HttpClient())
         {
@@ -51,11 +51,11 @@ public static class DirectMessageService
 
             HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-            var apiresponse = new List<DirectMessage>();
+            var apiresponse = new List<DirectMessageDto>();
 
             if (response.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadAsAsync<List<DirectMessage>>();
+                var data = await response.Content.ReadAsAsync<List<DirectMessageDto>>();
                 //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                 apiresponse = data;
                 //Newtonsoft.Json.JsonConvert.DeserializeObject(data);
@@ -66,18 +66,18 @@ public static class DirectMessageService
 
     }
 
-    public static async Task<List<CreateDirectMessageDto>> Create(SendDirectMessageViewModel model)
+    public static async Task<List<DirectMessageDto>> Post(SendDirectMessageViewModel model)
     {
-        var dto = new SendDirectMessageViewModel() { 
-        SenderId = model.SenderId,
-        Message = model.Message,
-        MeetingId = model.MeetingId
+        var dto = new SendDirectMessageViewModel() {
+            Message = model.Message,
+            SenderGuid = model.SenderGuid,
+            RecieverGuid = model.RecieverGuid
         };
 
 
-        IEnumerable<CreateDirectMessageDto> DirectMessages = null;
+        IEnumerable<DirectMessageDto> DirectMessages = null;
 
-        string apiUrl = "https://localhost:7071/api/DirectMessageMinutes/Create";
+        string apiUrl = "https://localhost:7071/api/DirectMessage";
 
         using (HttpClient client = new HttpClient())
         {
@@ -92,11 +92,11 @@ public static class DirectMessageService
 
             //result.EnsureSuccessStatusCode();
 
-            var apiresponse = new List<CreateDirectMessageDto>();
+            var apiresponse = new List<DirectMessageDto>();
 
             if (result.IsSuccessStatusCode)
             {
-                var data = await result.Content.ReadAsAsync<List<CreateDirectMessageDto>>();
+                var data = await result.Content.ReadAsAsync<List<DirectMessageDto>>();
                 //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                 apiresponse = data;
             }
@@ -106,7 +106,7 @@ public static class DirectMessageService
 
     }
 
-    public static async Task<List<DirectMessage>> Cancel()
+    public static async Task<List<DirectMessage>> Delete()
     {
         IEnumerable<DirectMessage> DirectMessages = null;
 
@@ -136,7 +136,7 @@ public static class DirectMessageService
 
     }
 
-    public static async Task<List<DirectMessage>> Update()
+    public static async Task<List<DirectMessage>> Put()
     {
         IEnumerable<DirectMessage> DirectMessages = null;
 
