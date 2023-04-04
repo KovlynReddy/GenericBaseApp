@@ -18,7 +18,12 @@ namespace VendorAPI.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Vendor> Get(int Id)
+        public Task<IEnumerable<Vendor>> Get(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Vendor>> Get(string Id)
         {
             throw new NotImplementedException();
         }

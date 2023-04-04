@@ -1,0 +1,6 @@
+﻿@model List<GenericAppDLL.Models.ViewModels.ChatHeaderViewModel>
+
+    @foreach (var header in Model)
+    {
+        <partial name="_ChatHeader" model="header" />
+    }

@@ -14,7 +14,12 @@ namespace VendorAPI.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<DirectMessageDto> Get(int Id)
+        public Task<IEnumerable<DirectMessageDto>> Get(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<DirectMessageDto>> Get(string Id)
         {
             throw new NotImplementedException();
         }

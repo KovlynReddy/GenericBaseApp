@@ -1,0 +1,6 @@
+﻿@model List<GenericAppDLL.Models.ViewModels.DirectMessageViewModel>
+
+@foreach (var message in Model)
+{
+    <partial name="_DirectMessageBubble" model="message" />
+}
