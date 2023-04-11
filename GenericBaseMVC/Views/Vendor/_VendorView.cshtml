@@ -1,4 +1,4 @@
-﻿@model GenericAppDLL.Models.DomainModel.Vendor
+﻿@model GenericAppDLL.Models.ViewModels.VendorViewModel
 
 
 <div class="card" style="width: 18rem;">
@@ -10,5 +10,11 @@
         <h6 class="card-title">@Model.Status</h6>
         <p class="card-text">@Model.ModelGUID</p>
         <a href="#" class="btn btn-primary">Book</a>
+        @if (Model.IsMod == 1)
+        {
+        <a asp-controller="Vendor" asp-action="Delete" class="btn btn-primary">Delete</a>
+        <a asp-controller="Menu" asp-action="ManageVendorMenu" asp-route-id="@Model.ModelGUID" class="btn btn-primary">Manage Menu</a>
+            
+        }
     </div>
 </div>

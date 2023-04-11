@@ -2,7 +2,7 @@
 
 public class CreateVendorDto
 {
-    public string VendorEmail { get; set; }
-    public string VendorName { get; set; }
-    public string AddressGuid { get; set; }
+    public string VendorEmail { get; set; } = string.Empty;
+    public string VendorName { get; set; } = string.Empty;
+    public string AddressGuid { get; set; } = string.Empty;
 }

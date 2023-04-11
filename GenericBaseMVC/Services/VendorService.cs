@@ -118,7 +118,7 @@ public class VendorService
     {
         IEnumerable<CreateVendorDto> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Vendor/CreateDto";
+        string apiUrl = "https://localhost:7240/api/Vendor";
 
         using (HttpClient client = new HttpClient())
         {

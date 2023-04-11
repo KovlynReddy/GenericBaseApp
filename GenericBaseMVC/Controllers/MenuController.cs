@@ -13,9 +13,48 @@ public class MenuController : Controller
     }
 
 
-    public ActionResult Index()
+    [HttpGet]
+    public async Task<IActionResult> Dashboard()
     {
-        return View();
+        ShopDashboardViewModel model = new ShopDashboardViewModel();
+        var allVendors = await _VendorService.GetAll();
+        var allItems = await _MenuService.GetAll();
+        var vendorVMs = new List<VendorViewModel>();
+        foreach (var VendorModel in allVendors)
+        {
+            var vendorItems = new List<MenuItemViewModel>();
+
+            foreach (var item in allItems.Where(m => m.VendorGuid == VendorModel.ModelGUID))
+            {
+                vendorItems.Add(new MenuItemViewModel()
+                {
+                    ItemName = item.ItemName,
+                    SKUCode = item.SKUCode,
+                    Caption = item.Caption,
+                    Cost = item.Cost,
+                    CreatorId = item.CreatorId,
+                    Currency = item.Currency,
+                    ItemImage = item.ItemImage,
+                    MenuId = item.MenuId,
+                    IsMod = 1
+                });
+            }
+
+
+            vendorVMs.Add(new VendorViewModel()
+            {
+                VendorName = VendorModel.VendorName,
+                VendorEmail = VendorModel.VendorEmail,
+                ModelGUID = VendorModel.ModelGUID,
+                AverageRating = VendorModel.AverageRating,
+                CreatedDateTime = VendorModel.CreatedDateTime,
+                IsMod = 1,
+                AllVendorItems = vendorItems
+            });
+        }
+
+        model.AllVendors = vendorVMs;
+        return View("ShopDashboard",model);
     }
 
     [HttpGet]
@@ -70,6 +109,53 @@ public class MenuController : Controller
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> ManageVendorMenu(string id)
+    {
+        var allVendors = await _VendorService.GetAll();
+        var allItems = await _MenuService.GetAll();
+        var model = new List<VendorViewModel>();
+        foreach (var VendorModel in allVendors.Where(m=>m.ModelGUID==id))
+        {
+            var vendorItems = new List<MenuItemViewModel>();
+
+            foreach (var item in allItems.Where(m => m.VendorGuid == VendorModel.ModelGUID))
+            {
+                vendorItems.Add(new MenuItemViewModel()
+                {
+                    ItemName = item.ItemName,
+                    SKUCode = item.SKUCode,
+                    Caption = item.Caption,
+                    Cost = item.Cost,
+                    CreatorId = item.CreatorId,
+                    Currency = item.Currency,
+                    ItemImage = item.ItemImage,
+                    MenuId = item.MenuId,
+                    IsMod = 1
+                });
+            }
+
+
+            model.Add(new VendorViewModel()
+            {
+                VendorName = VendorModel.VendorName,
+                VendorEmail = VendorModel.VendorEmail,
+                ModelGUID = VendorModel.ModelGUID,
+                AverageRating = VendorModel.AverageRating,
+                CreatedDateTime = VendorModel.CreatedDateTime,
+                IsMod = 1,
+                AllVendorItems = vendorItems
+            });
+        }
+
+        var addModel = model.FirstOrDefault();
+        CreateMenuItemViewModel addVM = new CreateMenuItemViewModel() { 
+        VendorId = id
+        };
+
+        return View("Create",addVM);
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateMenuItemViewModel newMenuItem)
@@ -80,17 +166,18 @@ public class MenuController : Controller
             {
                 ItemName = newMenuItem.ItemName,
                 //ItemImage       = newMenuItem.ItemImage,
-                UserGuid = User.Identity.Name,
+                UserGuid = User.Identity.Name ?? "",
                 SKUCode = newMenuItem.SKUCode,
                 ModelGuid = new Guid().ToString(),
                 CreatedDateTime = DateTime.Now,
-                CreatorId = User.Identity.Name,
-                VendorGuid = User.Identity.Name,
+                CreatorId = User.Identity.Name?? string.Empty,
+                VendorGuid = User.Identity.Name ?? "",
                 Caption = newMenuItem.Caption,
                 Cost = newMenuItem.Cost,
                 MenuId = newMenuItem.MenuId,
                 Currency = newMenuItem.Currency,
                 CreatedDateTimeString = DateTime.Now.ToString(),
+                VendorId = newMenuItem.VendorId
             };
 
             await _MenuService.Create(model);

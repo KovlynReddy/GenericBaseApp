@@ -52,27 +52,27 @@ public class VendorController : Controller
 
 
 
-    [AllowAnonymous]
-    [Route("~/api/Vendor/Create")]
-    [Route("~/api/Vendor/Create/{VendorEmail}/{VendorName}")]
-    //[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
-    [HttpPost]
-    public async Task<IActionResult> Create( string VendorEmail, string VendorName)//[FromBody]CreateVendorDto Vendor)
-    {
-        Vendor newVendor = new Vendor
-        {
-            VendorEmail = VendorEmail,//Vendor.VendorEmail,//
-            VendorName = VendorName,//Vendor.VendorName,//
-            ModelGUID = new Guid().ToString(),
-            CreatedDateTime = new DateTime().ToString()
-        };
-            _context.Add(newVendor);
-            await _context.SaveChangesAsync();
-            return Ok(newVendor);
-    }
+    //[AllowAnonymous]
+    //[Route("~/api/Vendor/Create")]
+    //[Route("~/api/Vendor/Create/{VendorEmail}/{VendorName}")]
+    ////[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
+    //[HttpPost]
+    //public async Task<IActionResult> Create( string VendorEmail, string VendorName)//[FromBody]CreateVendorDto Vendor)
+    //{
+    //    Vendor newVendor = new Vendor
+    //    {
+    //        VendorEmail = VendorEmail,//Vendor.VendorEmail,//
+    //        VendorName = VendorName,//Vendor.VendorName,//
+    //        ModelGUID = new Guid().ToString(),
+    //        CreatedDateTime = new DateTime().ToString()
+    //    };
+    //        _context.Add(newVendor);
+    //        await _context.SaveChangesAsync();
+    //        return Ok(newVendor);
+    //}
 
     [HttpGet]
-    [Route("~/api/Vendors/GetAll")]
+    [Route("~/api/Vendor/GetAll")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _context.Vendors.ToListAsync();
@@ -80,11 +80,11 @@ public class VendorController : Controller
         return Ok(result);
     }
 
-    [AllowAnonymous]
-    [Route("~/api/Vendor/CreateDto")]
     //[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
+    [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> CreateDto([FromBody]CreateVendorDto Vendor)
+    [Route("~/api/Vendor")]
+    public async Task<IActionResult> Post([FromBody]CreateVendorDto Vendor)
     {
         Vendor newVendor = new Vendor
         {

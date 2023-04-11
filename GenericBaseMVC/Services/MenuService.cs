@@ -66,7 +66,7 @@ public class MenuService
     {
         IEnumerable<CreateMenuItemDto> Menus = null;
 
-        string apiUrl = "https://localhost:7240/api/Menu/CreateDto";
+        string apiUrl = "https://localhost:7240/api/Menu";
 
         using (HttpClient client = new HttpClient())
         {

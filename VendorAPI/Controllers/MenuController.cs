@@ -36,7 +36,8 @@ public class MenuController : Controller
                 ModelGuid = item.ModelGUID,
                 CreatedDateTime = DateTime.Parse(item.CreatedDateTime),
                 CreatorId = User.Identity.Name,
-                //VendorGuid = User.Identity.Name,
+                VendorGuid =item.VendorId,
+                VendorId =item.VendorId,
                 Caption = item.Caption,
                 Cost = item.Cost,
                 MenuId = item.MenuId,
@@ -72,12 +73,10 @@ public class MenuController : Controller
     }
 
 
-
-    [Route("~/api/Menu/CreateDto")]
-    [Route("api/Menu/CreateDto")]
-    [Route("CreateDto")]
+    [AllowAnonymous]
     [HttpPost]
-   public async Task<IActionResult> Create(CreateMenuItemDto item)
+    [Route("~/api/Menu")]
+   public async Task<IActionResult> Post([FromBody]CreateMenuItemDto item)
     {
         if (ModelState.IsValid)
         {
@@ -89,8 +88,8 @@ public class MenuController : Controller
                 SKUCode = item.SKUCode,
                 ModelGUID = Guid.NewGuid().ToString(),
                 CreatedDateTime = DateTime.Now.ToString(),
-                CreatorId = User.Identity.Name,
-                //VendorGuid = User.Identity.Name,
+                CreatorId = User.Identity.Name ?? "",
+                VendorId = item.VendorId,
                 Caption = item.Caption,
                 Cost = item.Cost,
                 MenuId = item.MenuId,

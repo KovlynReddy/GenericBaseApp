@@ -1,14 +1,18 @@
-﻿namespace GenericBaseMVC.Controllers;
+﻿using System.Net;
+
+namespace GenericBaseMVC.Controllers;
 
 public class VendorController : Controller
 {
     public VendorService _VendorService { get; set; }
     public AddressService _addressService { get; set; }
+    public MenuService _itemService { get; set; }
 
     public VendorController()
     {
         _VendorService = new VendorService();
         _addressService = new AddressService();
+        _itemService = new MenuService();
     }
 
 
@@ -16,20 +20,91 @@ public class VendorController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var allVendors = await _VendorService.GetAll(); 
+        var allVendors = await _VendorService.GetAll();
+        var allItems = await _itemService.GetAll();
+        var model = new List<VendorViewModel>();
+        foreach (var VendorModel in allVendors)
+        {
+            var vendorItems = new List<MenuItemViewModel>();
 
-        return View("ViewListVendors",allVendors);
+            foreach (var item in allItems.Where(m=>m.VendorGuid==VendorModel.ModelGUID))
+            {
+                vendorItems.Add(new MenuItemViewModel() { 
+                ItemName    = item.ItemName,
+                SKUCode     = item.SKUCode,
+                Caption     = item.Caption,
+                Cost        = item.Cost,
+                CreatorId   = item.CreatorId,
+                Currency    = item.Currency,
+                ItemImage   = item.ItemImage,
+                MenuId      = item.MenuId,
+                IsMod       = 1
+                });
+            }
+
+
+            model.Add(new VendorViewModel() { 
+            VendorName      = VendorModel.VendorName,
+            VendorEmail     = VendorModel.VendorEmail,
+            ModelGUID       = VendorModel.ModelGUID,
+            AverageRating   = VendorModel.AverageRating,
+            CreatedDateTime = VendorModel.CreatedDateTime,
+            IsMod           = 1,
+            AllVendorItems  = vendorItems
+            });
+        }
+
+        return View("ViewListVendors", model);
     }
 
     [HttpGet]
     public async Task<IActionResult> ViewAll()
     {
         var allVendors = await _VendorService.GetAll();
+        var allItems = await _itemService.GetAll();
+        var model = new List<VendorViewModel>();
+        foreach (var VendorModel in allVendors)
+        {
+            var vendorItems = new List<MenuItemViewModel>();
 
-        return View("ViewListVendors", allVendors);
+            foreach (var item in allItems.Where(m => m.VendorGuid == VendorModel.ModelGUID))
+            {
+                vendorItems.Add(new MenuItemViewModel()
+                {
+                    ItemName = item.ItemName,
+                    SKUCode = item.SKUCode,
+                    Caption = item.Caption,
+                    Cost = item.Cost,
+                    CreatorId = item.CreatorId,
+                    Currency = item.Currency,
+                    ItemImage = item.ItemImage,
+                    MenuId = item.MenuId,
+                    IsMod = 1
+                });
+            }
+
+
+            model.Add(new VendorViewModel()
+            {
+                VendorName = VendorModel.VendorName,
+                VendorEmail = VendorModel.VendorEmail,
+                ModelGUID = VendorModel.ModelGUID,
+                AverageRating = VendorModel.AverageRating,
+                CreatedDateTime = VendorModel.CreatedDateTime,
+                IsMod = 1,
+                AllVendorItems = vendorItems
+            });
+        }
+
+        return View("ViewListVendors", model);
     }
 
     // GET: VendorController/Details/5
+    public async Task<IActionResult> ManageVendorMenu(int id)
+    {
+        return View();
+    }    
+    
     public ActionResult Details(int id)
     {
         return View();
