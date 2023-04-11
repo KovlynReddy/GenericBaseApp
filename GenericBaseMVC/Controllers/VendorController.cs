@@ -2,60 +2,60 @@
 
 public class VendorController : Controller
 {
-    public VendorService _barberService { get; set; }
+    public VendorService _VendorService { get; set; }
     public AddressService _addressService { get; set; }
 
     public VendorController()
     {
-        _barberService = new VendorService();
+        _VendorService = new VendorService();
         _addressService = new AddressService();
     }
 
 
-    // GET: BarberController
+    // GET: VendorController
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var allBarbers = await _barberService.GetAll(); 
+        var allVendors = await _VendorService.GetAll(); 
 
-        return View("ViewListBarbers",allBarbers);
+        return View("ViewListVendors",allVendors);
     }
 
     [HttpGet]
     public async Task<IActionResult> ViewAll()
     {
-        var allBarbers = await _barberService.GetAll();
+        var allVendors = await _VendorService.GetAll();
 
-        return View("ViewListVendors", allBarbers);
+        return View("ViewListVendors", allVendors);
     }
 
-    // GET: BarberController/Details/5
+    // GET: VendorController/Details/5
     public ActionResult Details(int id)
     {
         return View();
     }
 
-    // GET: BarberController/Create
+    // GET: VendorController/Create
     public ActionResult Create()
     {
         return View();
     }
 
-    // POST: BarberController/Create
+    // POST: VendorController/Create
     [HttpPost]
-    public async Task<IActionResult> Create(CreateVendorViewModel newbarbervm)
+    public async Task<IActionResult> Create(CreateVendorViewModel newVendorvm)
     {
         try
 
         {
-            CreateVendorDto newbarber = new CreateVendorDto
+            CreateVendorDto newVendor = new CreateVendorDto
             {
-                VendorEmail = newbarbervm.VendorEmail,
-                VendorName = newbarbervm.VendorName
+                VendorEmail = newVendorvm.VendorEmail,
+                VendorName = newVendorvm.VendorName
             };
           
-            var result = await _barberService.Create(newbarber);
-            return View("ViewBarber",newbarbervm);
+            var result = await _VendorService.Create(newVendor);
+            return View("ViewVendor",newVendorvm);
         }
         catch
         {
@@ -64,7 +64,7 @@ public class VendorController : Controller
         }
     }
 
-    // GET: BarberController/Edit/5
+    // GET: VendorController/Edit/5
     public ActionResult Edit(int id)
     {
         return View();
@@ -78,7 +78,7 @@ public class VendorController : Controller
 
    [HttpPost]
     public async Task<IActionResult> Suggested(string slat , string slon) {
-        // get all barbers
+        // get all Vendors
         double lon;
         float lat;
         try
@@ -98,23 +98,23 @@ public class VendorController : Controller
 
 
 
-        var allBarbers = await _barberService.GetAll();
+        var allVendors = await _VendorService.GetAll();
         var allAddresses = await _addressService.GetAll();
-        var allBarberAddresses = new List<AddressDto>();
-        var suggestedBarbers = new List<AddressDto>();
+        var allVendorAddresses = new List<AddressDto>();
+        var suggestedVendors = new List<AddressDto>();
 
-        // get all barbers addresses
+        // get all Vendors addresses
 
-        foreach (var Barber in allBarbers)
+        foreach (var Vendor in allVendors)
         {
-            allBarberAddresses.Add(allAddresses.FirstOrDefault(m=>m.UserGuid == Barber.ModelGUID));
-            //allBarberAddresses.Add(allAddresses.FirstOrDefault(m => m.UserGuid == Barber.ModelGUID));
+            allVendorAddresses.Add(allAddresses.FirstOrDefault(m=>m.UserGuid == Vendor.ModelGUID));
+            //allVendorAddresses.Add(allAddresses.FirstOrDefault(m => m.UserGuid == Vendor.ModelGUID));
         }
 
         MapViewModel model = new MapViewModel();
 
         // according to my location + - give as suggested
-        foreach (var bAddress in allBarberAddresses)
+        foreach (var bAddress in allVendorAddresses)
         {
             if (bAddress == null || bAddress.Lat == null || string.IsNullOrEmpty(bAddress.Lat))
             {
@@ -128,7 +128,7 @@ public class VendorController : Controller
                 model.Longs.Add(bAddress.lon.ToString());
                 model.Captions.Add(bAddress.Caption);
                 model.Names.Add(bAddress.Number + bAddress.Street);
-                suggestedBarbers.Add(bAddress);
+                suggestedVendors.Add(bAddress);
             }
         }
 
@@ -150,7 +150,7 @@ public class VendorController : Controller
     }
 
 
-    // POST: BarberController/Edit/5
+    // POST: VendorController/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Edit(int id, IFormCollection collection)
@@ -175,7 +175,7 @@ public class VendorController : Controller
         [HttpGet]
     public async Task<IActionResult> DisplaySuggested(string slat, string slon)
     {
-        // get all barbers
+        // get all Vendors
         double lon;
         float lat;
         try
@@ -195,29 +195,29 @@ public class VendorController : Controller
 
 
 
-        var allBarbers = await _barberService.GetAll();
+        var allVendors = await _VendorService.GetAll();
         var allAddresses = await _addressService.GetAll();
-        var allBarberAddresses = new List<AddressDto>();
-        var suggestedBarbers = new List<AddressDto>();
+        var allVendorAddresses = new List<AddressDto>();
+        var suggestedVendors = new List<AddressDto>();
 
-        // get all barbers addresses
+        // get all Vendors addresses
 
-        foreach (var Barber in allBarbers)
+        foreach (var Vendor in allVendors)
         {
-            var barberAddress = allAddresses.FirstOrDefault(m => m.UserGuid == Barber.ModelGUID);
-            if (barberAddress == null)
+            var VendorAddress = allAddresses.FirstOrDefault(m => m.UserGuid == Vendor.ModelGUID);
+            if (VendorAddress == null)
             {
                 continue;
             }
-            barberAddress.Caption = Barber.VendorName;
-            allBarberAddresses.Add(barberAddress);
-            //allBarberAddresses.Add(allAddresses.FirstOrDefault(m => m.UserGuid == Barber.ModelGUID));
+            VendorAddress.Caption = Vendor.VendorName;
+            allVendorAddresses.Add(VendorAddress);
+            //allVendorAddresses.Add(allAddresses.FirstOrDefault(m => m.UserGuid == Vendor.ModelGUID));
         }
 
         MapViewModel model = new MapViewModel();
 
         // according to my location + - give as suggested
-        foreach (var bAddress in allBarberAddresses)
+        foreach (var bAddress in allVendorAddresses)
         {
             if (bAddress == null || bAddress.Lat == null || string.IsNullOrEmpty(bAddress.Lat))
             {
@@ -231,7 +231,7 @@ public class VendorController : Controller
                 model.Longs.Add(bAddress.lon.ToString());
                 model.Captions.Add(bAddress.Caption);
                 model.Names.Add(bAddress.Caption+" - "+bAddress.Number+" " + bAddress.Street);
-                suggestedBarbers.Add(bAddress);
+                suggestedVendors.Add(bAddress);
             }
         }
 
@@ -247,13 +247,13 @@ public class VendorController : Controller
     }
 
 
-    // GET: BarberController/Delete/5
+    // GET: VendorController/Delete/5
     public ActionResult Delete(int id)
     {
         return View();
     }
 
-    // POST: BarberController/Delete/5
+    // POST: VendorController/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Delete(int id, IFormCollection collection)

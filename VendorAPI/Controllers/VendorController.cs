@@ -11,15 +11,15 @@ public class VendorController : Controller
         _context = context;
     }
 
-    // GET: Barbers
+    // GET: Vendors
     [HttpGet]
     public async Task<IActionResult> Index()
     {
         List<Vendor> vendors = new List<Vendor>();
-        vendors.Add(new Vendor { Id = 1, VendorName = "Barber1", VendorEmail = "barber1@gmail.com", AddressGuid = "A1111", AverageRating = "10", Status = 0, CreatedDateTime = new DateTime().ToString(), CreatorId = "C1111", ModelGUID = "B1111", IsDeleted = 0 });
-        vendors.Add(new Vendor { Id = 2, VendorName = "Barber2", VendorEmail = "barber2@gmail.com", AddressGuid = "A2222", AverageRating = "1", Status = 0, CreatedDateTime = new DateTime().ToString(), CreatorId = "C2222", ModelGUID = "B2222", IsDeleted = 0 });
+        vendors.Add(new Vendor { Id = 1, VendorName = "Vendor1", VendorEmail = "Vendor1@gmail.com", AddressGuid = "A1111", AverageRating = "10", Status = 0, CreatedDateTime = new DateTime().ToString(), CreatorId = "C1111", ModelGUID = "B1111", IsDeleted = 0 });
+        vendors.Add(new Vendor { Id = 2, VendorName = "Vendor2", VendorEmail = "Vendor2@gmail.com", AddressGuid = "A2222", AverageRating = "1", Status = 0, CreatedDateTime = new DateTime().ToString(), CreatorId = "C2222", ModelGUID = "B2222", IsDeleted = 0 });
 
-        //_context.Barbers.AddRange(barbers);
+        //_context.Vendors.AddRange(Vendors);
         //_context.SaveChanges();
 
         var result = await _context.Vendors.ToListAsync();
@@ -32,7 +32,7 @@ public class VendorController : Controller
         return Ok(result);
     }
 
-    // GET: Barbers/Details/5
+    // GET: Vendors/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -40,39 +40,39 @@ public class VendorController : Controller
             return NotFound();
         }
 
-        var barber = await _context.Vendors
+        var Vendor = await _context.Vendors
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (barber == null)
+        if (Vendor == null)
         {
             return NotFound();
         }
 
-        return View(barber);
+        return View(Vendor);
     }
 
 
 
     [AllowAnonymous]
-    [Route("~/api/Barbers/Create")]
-    [Route("~/api/Barbers/Create/{VendorEmail}/{VendorName}")]
-    //[Route("api/Barbers/Create?BarberEmail={BarberEmail}&BarberName={BarberName}")]
+    [Route("~/api/Vendor/Create")]
+    [Route("~/api/Vendor/Create/{VendorEmail}/{VendorName}")]
+    //[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
     [HttpPost]
-    public async Task<IActionResult> Create( string VendorEmail, string VendorName)//[FromBody]CreateBarberDto barber)
+    public async Task<IActionResult> Create( string VendorEmail, string VendorName)//[FromBody]CreateVendorDto Vendor)
     {
-        Vendor newBarber = new Vendor
+        Vendor newVendor = new Vendor
         {
-            VendorEmail = VendorEmail,//barber.BarberEmail,//
-            VendorName = VendorName,//barber.BarberName,//
+            VendorEmail = VendorEmail,//Vendor.VendorEmail,//
+            VendorName = VendorName,//Vendor.VendorName,//
             ModelGUID = new Guid().ToString(),
             CreatedDateTime = new DateTime().ToString()
         };
-            _context.Add(newBarber);
+            _context.Add(newVendor);
             await _context.SaveChangesAsync();
-            return Ok(newBarber);
+            return Ok(newVendor);
     }
 
     [HttpGet]
-    [Route("~/api/Barbers/GetAll")]
+    [Route("~/api/Vendors/GetAll")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _context.Vendors.ToListAsync();
@@ -81,28 +81,27 @@ public class VendorController : Controller
     }
 
     [AllowAnonymous]
-    [Route("~/api/Barbers/CreateDto")]
-    [Route("~/api/Barbers/CreateDto/{BarberEmail}/{BarberName}")]
-    //[Route("api/Barbers/Create?BarberEmail={BarberEmail}&BarberName={BarberName}")]
+    [Route("~/api/Vendor/CreateDto")]
+    //[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
     [HttpPost]
-    public async Task<IActionResult> CreateDto([FromBody]CreateVendorDto barber)
+    public async Task<IActionResult> CreateDto([FromBody]CreateVendorDto Vendor)
     {
-        Vendor newBarber = new Vendor
+        Vendor newVendor = new Vendor
         {
-            VendorEmail = barber.VendorEmail,//
-            VendorName = barber.VendorName,//
+            VendorEmail = Vendor.VendorEmail,//
+            VendorName = Vendor.VendorName,//
             ModelGUID = Guid.NewGuid().ToString(),
             CreatedDateTime = DateTime.Now.ToString(),
             AverageRating = "",
             AddressGuid = "",
             Status = 0 
         };
-        _context.Add(newBarber);
+        _context.Add(newVendor);
         await _context.SaveChangesAsync();
-        return Ok(newBarber);
+        return Ok(newVendor);
     }
 
-    // GET: Barbers/Edit/5
+    // GET: Vendors/Edit/5
     [HttpPost]
     public async Task<IActionResult> Edit(int? id)
     {
@@ -111,19 +110,19 @@ public class VendorController : Controller
             return NotFound();
         }
 
-        var barber = await _context.Vendors.FindAsync(id);
-        if (barber == null)
+        var Vendor = await _context.Vendors.FindAsync(id);
+        if (Vendor == null)
         {
             return NotFound();
         }
-        return View(barber);
+        return View(Vendor);
     }
 
     [HttpGet]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("BarberName,AddressGuid,AverageRating,Status,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Vendor barber)
+    public async Task<IActionResult> Edit(int id, [Bind("VendorName,AddressGuid,AverageRating,Status,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Vendor Vendor)
     {
-        if (id != barber.Id)
+        if (id != Vendor.Id)
         {
             return NotFound();
         }
@@ -132,12 +131,12 @@ public class VendorController : Controller
         {
             try
             {
-                _context.Update(barber);
+                _context.Update(Vendor);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BarberExists(barber.Id))
+                if (!VendorExists(Vendor.Id))
                 {
                     return NotFound();
                 }
@@ -148,10 +147,10 @@ public class VendorController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
-        return View(barber);
+        return View(Vendor);
     }
 
-    // GET: Barbers/Delete/5
+    // GET: Vendors/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -159,28 +158,28 @@ public class VendorController : Controller
             return NotFound();
         }
 
-        var barber = await _context.Vendors
+        var Vendor = await _context.Vendors
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (barber == null)
+        if (Vendor == null)
         {
             return NotFound();
         }
 
-        return View(barber);
+        return View(Vendor);
     }
 
-    // POST: Barbers/Delete/5
+    // POST: Vendors/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var barber = await _context.Vendors.FindAsync(id);
-        _context.Vendors.Remove(barber);
+        var Vendor = await _context.Vendors.FindAsync(id);
+        _context.Vendors.Remove(Vendor);
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
-    private bool BarberExists(int id)
+    private bool VendorExists(int id)
     {
         return _context.Vendors.Any(e => e.Id == id);
     }

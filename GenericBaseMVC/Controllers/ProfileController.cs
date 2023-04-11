@@ -3,7 +3,7 @@
 public class ProfileController : Controller
 {
 
-    public VendorService _barberService { get; set; }
+    public VendorService _VendorService { get; set; }
     public CustomerService _customerService { get; set; }
     public AddressService _addressService { get; set; }
     public BookingService _bookingService { get; set; }
@@ -12,7 +12,7 @@ public class ProfileController : Controller
     {
         _addressService = new AddressService();
         _customerService = new CustomerService();
-        _barberService = new VendorService();
+        _VendorService = new VendorService();
         _bookingService = new BookingService();
     }
 

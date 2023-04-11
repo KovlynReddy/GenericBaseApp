@@ -6,7 +6,7 @@ public class CreateAddressViewModel
     public string UserGuid { get; set; }
     public string ModelGuid { get; set; }
     public List<string> people { get; set; } = new List<string>();
-    public int UserCode { get; set; } // either Barber or Customer
+    public int UserCode { get; set; } // either Vendor or Customer
     public string Number { get; set; }
     public string Street { get; set; }
     public string MainStreet { get; set; }

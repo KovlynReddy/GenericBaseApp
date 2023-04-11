@@ -74,8 +74,8 @@ public class MenuService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(newMenu);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newMenu);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 

@@ -4,9 +4,9 @@ public class VendorService
 {
     public async Task<List<Vendor>> GetAll()
     {
-        IEnumerable<Vendor> barbers = null;
+        IEnumerable<Vendor> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers/GetAll";
+        string apiUrl = "https://localhost:7240/api/Vendor/GetAll";
 
         using (HttpClient client = new HttpClient())
         {
@@ -32,9 +32,9 @@ public class VendorService
 
     public async Task<List<Vendor>> Search()
     {
-        IEnumerable<Vendor> barbers = null;
+        IEnumerable<Vendor> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendor";
 
         using (HttpClient client = new HttpClient())
         {
@@ -60,9 +60,9 @@ public class VendorService
 
     public async Task<List<Vendor>> Suggested()
     {
-        IEnumerable<Vendor> barbers = new List<Vendor>();
+        IEnumerable<Vendor> Vendors = new List<Vendor>();
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendor";
 
         using (HttpClient client = new HttpClient())
         {
@@ -88,9 +88,9 @@ public class VendorService
 
     public async Task<List<Vendor>> SortBy()
     {
-        IEnumerable<Vendor> barbers = null;
+        IEnumerable<Vendor> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendor";
 
         using (HttpClient client = new HttpClient())
         {
@@ -114,11 +114,11 @@ public class VendorService
 
     }   
 
-    public async Task<List<CreateVendorDto>> Create(CreateVendorDto newbarber)
+    public async Task<List<CreateVendorDto>> Create(CreateVendorDto newVendor)
     {
-        IEnumerable<CreateVendorDto> barbers = null;
+        IEnumerable<CreateVendorDto> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers/CreateDto";
+        string apiUrl = "https://localhost:7240/api/Vendor/CreateDto";
 
         using (HttpClient client = new HttpClient())
         {
@@ -126,8 +126,8 @@ public class VendorService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(newbarber);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newVendor);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl,payload);
 
@@ -157,12 +157,12 @@ public class VendorService
     //    //_authenticationManager = authenticationManager;
     //}
 
-    //public async Task<ApiResponse<Barber>> Get(int id)
+    //public async Task<ApiResponse<Vendor>> Get(int id)
     //{
     //    var apiResponse = await _baseUrl
-    //      .Append("/v1/Barber/Get")
+    //      .Append("/v1/Vendor/Get")
     //      .PostJsonAsync(id)
-    //      .ReceiveJson<ApiResponse<Barber>>();
+    //      .ReceiveJson<ApiResponse<Vendor>>();
 
     //    return apiResponse;
     //}

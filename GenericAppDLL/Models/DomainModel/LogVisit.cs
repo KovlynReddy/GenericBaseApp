@@ -2,7 +2,7 @@
 
 public class LogVisit : BaseModel
 {
-    public string BarberGuid { get; set; }        = string.Empty;
+    public string VendorGuid { get; set; }        = string.Empty;
     public string UserGuid { get; set; }          = string.Empty;
     public string Reason { get; set; }            = string.Empty;
     public int Rating { get; set; }               

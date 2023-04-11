@@ -48,7 +48,7 @@ public class DealsController : Controller
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("BarberGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
+    public async Task<IActionResult> Create([Bind("VendorGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
     {
         if (ModelState.IsValid)
         {
@@ -80,7 +80,7 @@ public class DealsController : Controller
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("BarberGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
+    public async Task<IActionResult> Edit(int id, [Bind("VendorGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
     {
         if (id != deal.Id)
         {

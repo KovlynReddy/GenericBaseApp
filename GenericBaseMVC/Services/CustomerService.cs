@@ -5,9 +5,9 @@ public class CustomerService
 
     public async Task<List<Customer>> Get(int Id)
     {
-        IEnumerable<Customer> barbers = null;
+        IEnumerable<Customer> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {
@@ -33,7 +33,7 @@ public class CustomerService
 
     public async Task<List<CustomerDto>> Get()
     {
-        IEnumerable<CustomerDto> barbers = null;
+        IEnumerable<CustomerDto> Vendors = null;
 
         string apiUrl = "https://localhost:7240/api/Customers/GetAll";
 
@@ -72,8 +72,8 @@ public class CustomerService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(newAddress);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newAddress);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 

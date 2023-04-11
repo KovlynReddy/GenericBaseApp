@@ -108,24 +108,24 @@ public class CustomersController : Controller
     //[AllowAnonymous]
     [Route("~/api/Customers/CreateDto")]
     [HttpPost]
-    public async Task<ActionResult<CreateCustomerDto>> CreateDto(CreateCustomerDto barber)
+    public async Task<ActionResult<CreateCustomerDto>> CreateDto(CreateCustomerDto Vendor)
     {
-        Customer newBarber = new Customer
+        Customer newVendor = new Customer
         {
-            CustomerEmail = barber.CustomerEmail,//
-            CustomerName = barber.CustomerName,//
+            CustomerEmail = Vendor.CustomerEmail,//
+            CustomerName = Vendor.CustomerName,//
             ModelGUID = Guid.NewGuid().ToString(),
             UserName = Guid.NewGuid().ToString(),
-            Email = barber.CustomerEmail, 
+            Email = Vendor.CustomerEmail, 
             UserId = Guid.NewGuid().ToString(),
             CreatorId = Guid.NewGuid().ToString(),
             CompletedDateTime = DateTime.Now.ToString(),
             CreatedDateTime = DateTime.Now.ToString(),
             CustomerAddress = ""
         };
-        _context.Add(newBarber);
+        _context.Add(newVendor);
         await _context.SaveChangesAsync();
-        return Ok(newBarber);
+        return Ok(newVendor);
     }
 
 

@@ -3,14 +3,14 @@
 
 public class AddressController : Controller
 {
-    public VendorService _barberService { get; set; }
+    public VendorService _VendorService { get; set; }
     public CustomerService _customerService { get; set; }
     public AddressService _addressService { get; set; }
     public AddressController()
     {
         _addressService = new AddressService();
         _customerService = new CustomerService();
-        _barberService = new VendorService();
+        _VendorService = new VendorService();
     }
         
     // GET: AddressController
@@ -25,7 +25,7 @@ public class AddressController : Controller
         LinkAddressViewModel model = new LinkAddressViewModel();
 
         var AllAddresses = await _addressService.GetAll();
-        var AllVendors = await _barberService.GetAll();
+        var AllVendors = await _VendorService.GetAll();
         var AllCustomers = await _customerService.Get();
 
         // Ignore Code

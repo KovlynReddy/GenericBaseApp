@@ -13,6 +13,6 @@ public class BookingViewModel
     public int IsDeleted { get; set; }
     public string ModelGuid { get; set; }
     public string UserGuid { get; set; }
-    public string BarberGuid { get; set; }
+    public string VendorGuid { get; set; }
 }
 

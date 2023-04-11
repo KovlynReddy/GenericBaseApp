@@ -3,9 +3,9 @@
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    //public BarberContext _Db { get; set; }
+    //public VendorContext _Db { get; set; }
 
-    public HomeController(ILogger<HomeController> logger)//,BarberContext Db)
+    public HomeController(ILogger<HomeController> logger)//,VendorContext Db)
     {
         _logger = logger;
        //_Db = Db;

@@ -372,7 +372,7 @@ namespace VendorAPI.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("BarberGuid")
+                    b.Property<string>("VendorGuid")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -565,7 +565,7 @@ namespace VendorAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BarberGuid")
+                    b.Property<string>("VendorGuid")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -624,7 +624,7 @@ namespace VendorAPI.Migrations
                         {
                             Id = 1,
                             ArriveTime = "0001/01/01 00:00:00",
-                            BarberGuid = "B1111",
+                            VendorGuid = "B1111",
                             BookingTime = "0001/01/01 00:00:00",
                             CompletedDateTime = "0001/01/01 00:00:00",
                             CompletionTime = "0001/01/01 00:00:00",
@@ -642,7 +642,7 @@ namespace VendorAPI.Migrations
                         {
                             Id = 2,
                             ArriveTime = "0001/01/01 00:00:00",
-                            BarberGuid = "B2222",
+                            VendorGuid = "B2222",
                             BookingTime = "0001/01/01 00:00:00",
                             CompletedDateTime = "0001/01/01 00:00:00",
                             CompletionTime = "0001/01/01 00:00:00",
@@ -1016,8 +1016,8 @@ namespace VendorAPI.Migrations
                             IsDeleted = 0,
                             ModelGUID = "B1111",
                             Status = 0,
-                            VendorEmail = "barber1@gmail.com",
-                            VendorName = "Barber1"
+                            VendorEmail = "Vendor1@gmail.com",
+                            VendorName = "Vendor1"
                         },
                         new
                         {
@@ -1031,8 +1031,8 @@ namespace VendorAPI.Migrations
                             IsDeleted = 0,
                             ModelGUID = "B2222",
                             Status = 0,
-                            VendorEmail = "barber2@gmail.com",
-                            VendorName = "Barber2"
+                            VendorEmail = "Vendor2@gmail.com",
+                            VendorName = "Vendor2"
                         });
                 });
 

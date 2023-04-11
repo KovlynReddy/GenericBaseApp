@@ -2,9 +2,9 @@
 
 public class VisitService
 {
-    //public BarberContext _Db { get; set; }
+    //public VendorContext _Db { get; set; }
 
-    //public VisitService(BarberContext DB)
+    //public VisitService(VendorContext DB)
     //{
     //    _Db = DB;
     //}
@@ -14,7 +14,7 @@ public class VisitService
         IEnumerable<LogVisit> bookings = null;
 
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {

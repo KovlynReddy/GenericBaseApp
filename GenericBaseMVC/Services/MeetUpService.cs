@@ -4,7 +4,7 @@ public class MeetUpService
 {
     public async Task<List<MeetUpDto>> Get()
     {
-        IEnumerable<MeetUpDto> barbers = null;
+        IEnumerable<MeetUpDto> Vendors = null;
 
         string apiUrl = "https://localhost:7240/api/MeetUp";
 
@@ -70,8 +70,8 @@ public class MeetUpService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(sendInvite);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(sendInvite);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
@@ -103,8 +103,8 @@ public class MeetUpService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(sendInvite);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(sendInvite);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 

@@ -21,10 +21,10 @@ public class AddressesController : Controller
         var person = _context.Customers.FirstOrDefault(m => m.ModelGUID == link.UserGuid);
         if (person == null || person == new Customer())
         {
-            var barber = _context.Vendors.FirstOrDefault(m => m.ModelGUID == link.UserGuid);
-            barber.AddressGuid = link.AddressGuid;
-            _context.Update(barber);
-            _context.Entry(barber).State = EntityState.Modified;
+            var Vendor = _context.Vendors.FirstOrDefault(m => m.ModelGUID == link.UserGuid);
+            Vendor.AddressGuid = link.AddressGuid;
+            _context.Update(Vendor);
+            _context.Entry(Vendor).State = EntityState.Modified;
             _context.SaveChanges();
         }
         else {

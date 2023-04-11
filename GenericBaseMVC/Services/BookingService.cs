@@ -7,7 +7,7 @@ public class BookingService
         IEnumerable<LogVisit> bookings = null;
 
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {
@@ -74,8 +74,8 @@ public class BookingService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(newBooking);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newBooking);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
@@ -100,7 +100,7 @@ public class BookingService
         IEnumerable<LogVisit> bookings = null;
 
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {
@@ -130,7 +130,7 @@ public class BookingService
         IEnumerable<LogVisit> bookings = null;
 
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {

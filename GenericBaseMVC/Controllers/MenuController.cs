@@ -85,7 +85,7 @@ public class MenuController : Controller
                 ModelGuid = new Guid().ToString(),
                 CreatedDateTime = DateTime.Now,
                 CreatorId = User.Identity.Name,
-                BarberGuid = User.Identity.Name,
+                VendorGuid = User.Identity.Name,
                 Caption = newMenuItem.Caption,
                 Cost = newMenuItem.Cost,
                 MenuId = newMenuItem.MenuId,

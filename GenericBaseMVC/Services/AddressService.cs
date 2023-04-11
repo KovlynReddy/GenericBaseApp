@@ -5,9 +5,9 @@ public class AddressService
 
     public async Task<List<AddressDto>> Get()
     {
-        IEnumerable<AddressDto> barbers = null;
+        IEnumerable<AddressDto> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {
@@ -61,9 +61,9 @@ public class AddressService
 
     public async Task<List<AddressDto>> FindClosest()
     {
-        IEnumerable<AddressDto> barbers = null;
+        IEnumerable<AddressDto> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Vendors";
 
         using (HttpClient client = new HttpClient())
         {
@@ -100,8 +100,8 @@ public class AddressService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(newLink);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newLink);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
@@ -133,8 +133,8 @@ public class AddressService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newbarberJson = Newtonsoft.Json.JsonConvert.SerializeObject(newAddress);
-            var payload = new StringContent(newbarberJson, Encoding.UTF8, "application/json");
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newAddress);
+            var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 

@@ -36,7 +36,7 @@ public class MenuController : Controller
                 ModelGuid = item.ModelGUID,
                 CreatedDateTime = DateTime.Parse(item.CreatedDateTime),
                 CreatorId = User.Identity.Name,
-                //BarberGuid = User.Identity.Name,
+                //VendorGuid = User.Identity.Name,
                 Caption = item.Caption,
                 Cost = item.Cost,
                 MenuId = item.MenuId,
@@ -90,7 +90,7 @@ public class MenuController : Controller
                 ModelGUID = Guid.NewGuid().ToString(),
                 CreatedDateTime = DateTime.Now.ToString(),
                 CreatorId = User.Identity.Name,
-                //BarberGuid = User.Identity.Name,
+                //VendorGuid = User.Identity.Name,
                 Caption = item.Caption,
                 Cost = item.Cost,
                 MenuId = item.MenuId,
@@ -103,7 +103,7 @@ public class MenuController : Controller
             await _context.SaveChangesAsync();
             return Ok(newItem);
         }
-        return View(item);
+        return Ok(item);
     }
 
     // GET: Menu/Edit/5

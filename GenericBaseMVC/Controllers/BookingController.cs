@@ -50,7 +50,7 @@ public class BookingController : Controller
                 BookDateTimeString = booking.BookDateTimeString,
                 CreatedDateTimeString = booking.CreatedDateTimeString,
                 ModelGuid = booking.ModelGuid,
-                BarberGuid = booking.BarberGuid,
+                VendorGuid = booking.VendorGuid,
                 UserGuid = booking.UserGuid
             });
         }
@@ -62,8 +62,8 @@ public class BookingController : Controller
     public ActionResult Create()
     {
         CreateBookingViewModel model = new CreateBookingViewModel();
-        model.Barbers = new List<string> { 
-        "Barber1","Barber2"
+        model.Vendors = new List<string> { 
+        "Vendor1","Vendor2"
         };
         return View(model);
     }
@@ -84,7 +84,7 @@ public class BookingController : Controller
             Description =  newBooking.Description ,
             BookingDateTime = newBooking.BookingDateTime,
             BookingDate = newBooking.BookingDateTime,
-            BarberGuid = newBooking.SelectedBarber,
+            VendorGuid = newBooking.SelectedVendor,
             BookingTime = newBooking.BookingDateTime,
             ModelGuid = new Guid().ToString(),
             UserGuid = User.Identity.Name,

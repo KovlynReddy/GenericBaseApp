@@ -155,7 +155,7 @@ namespace VendorAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BarberGuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendorGuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EndDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -205,7 +205,7 @@ namespace VendorAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BarberGuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendorGuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserGuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
@@ -519,7 +519,7 @@ namespace VendorAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "LogVisits",
-                columns: new[] { "Id", "ArriveTime", "BarberGuid", "BookingTime", "CompletedDateTime", "CompletionTime", "CreatedDateTime", "CreatorId", "DeletedDateTime", "Description", "IsDeleted", "ModelGUID", "Rating", "Reason", "UserGuid" },
+                columns: new[] { "Id", "ArriveTime", "VendorGuid", "BookingTime", "CompletedDateTime", "CompletionTime", "CreatedDateTime", "CreatorId", "DeletedDateTime", "Description", "IsDeleted", "ModelGUID", "Rating", "Reason", "UserGuid" },
                 values: new object[,]
                 {
                     { 1, "0001/01/01 00:00:00", "B1111", "0001/01/01 00:00:00", "0001/01/01 00:00:00", "0001/01/01 00:00:00", "0001/01/01 00:00:00", "C1111", "", "Booking", 0, "V1111", 2, "Hair Cut", "C1111" },
@@ -531,8 +531,8 @@ namespace VendorAPI.Migrations
                 columns: new[] { "Id", "AddressGuid", "AverageRating", "CompletedDateTime", "CreatedDateTime", "CreatorId", "DeletedDateTime", "IsDeleted", "ModelGUID", "Status", "VendorEmail", "VendorName" },
                 values: new object[,]
                 {
-                    { 1, "A1111", "10", "", "0001/01/01 00:00:00", "C1111", "", 0, "B1111", 0, "barber1@gmail.com", "Barber1" },
-                    { 2, "A2222", "1", "", "0001/01/01 00:00:00", "C2222", "", 0, "B2222", 0, "barber2@gmail.com", "Barber2" }
+                    { 1, "A1111", "10", "", "0001/01/01 00:00:00", "C1111", "", 0, "B1111", 0, "Vendor1@gmail.com", "Vendor1" },
+                    { 2, "A2222", "1", "", "0001/01/01 00:00:00", "C2222", "", 0, "B2222", 0, "Vendor2@gmail.com", "Vendor2" }
                 });
 
             migrationBuilder.CreateIndex(

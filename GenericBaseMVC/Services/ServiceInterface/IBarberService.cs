@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GenericBaseMVC.Services.ServiceInterface
 {
-    public interface IBarberService
+    public interface IVendorService
     {
 
     }

@@ -29,7 +29,7 @@ public class BookingsController : Controller
                 BookDateTimeString = booking.BookingTime,
                 CreatedDateTimeString = booking.CreatedDateTime,
                 ModelGuid = booking.ModelGUID,
-                BarberGuid = booking.VendorGuid,
+                VendorGuid = booking.VendorGuid,
                 UserGuid = booking.UserGuid
             });
         }
@@ -77,7 +77,7 @@ public class BookingsController : Controller
             CreatedDateTime = DateTime.Now.ToString(),
             Rating = 0,
             Description = newBookingDto.Description,
-            VendorGuid = newBookingDto.BarberGuid,
+            VendorGuid = newBookingDto.VendorGuid,
             UserGuid = newBookingDto.UserGuid,
             CreatorId = newBookingDto.UserGuid
         };
@@ -99,7 +99,7 @@ public class BookingsController : Controller
             CreatedDateTime = DateTime.Now.ToString(),
             Rating = 0,
             Description = newBookingDto.Description,
-            VendorGuid = newBookingDto.BarberGuid,
+            VendorGuid = newBookingDto.VendorGuid,
             UserGuid = newBookingDto.UserGuid,
             CreatorId = newBookingDto.UserGuid
         };

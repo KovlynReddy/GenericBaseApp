@@ -3,7 +3,7 @@
 public class Deal : BaseModel
 {
     [Required]
-    public string BarberGuid { get; set; }    = string.Empty;
+    public string VendorGuid { get; set; }    = string.Empty;
     public string Description { get; set; }   = string.Empty;
     public string StartDate { get; set; }     = string.Empty;
     public string EndDate { get; set; }       = string.Empty;
