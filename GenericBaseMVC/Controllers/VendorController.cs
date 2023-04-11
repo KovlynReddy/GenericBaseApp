@@ -26,7 +26,7 @@ public class VendorController : Controller
     {
         var allBarbers = await _barberService.GetAll();
 
-        return View("ViewListBarbers", allBarbers);
+        return View("ViewListVendors", allBarbers);
     }
 
     // GET: BarberController/Details/5
@@ -165,8 +165,14 @@ public class VendorController : Controller
         }
     }
 
-
     [HttpGet]
+    public async Task<IActionResult> DisplaySuggested(decimal slat, decimal slon)
+    {
+
+        return null;
+    }
+
+        [HttpGet]
     public async Task<IActionResult> DisplaySuggested(string slat, string slon)
     {
         // get all barbers

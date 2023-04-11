@@ -7,6 +7,7 @@ namespace VendorAPI.Controllers
 {
 [Route("api/DirectMessage")]
 [ApiController]
+[AllowAnonymous]
 public class DirectMessageController : Controller
 {
     public IBase<DirectMessageDto> _DB { get; set; }

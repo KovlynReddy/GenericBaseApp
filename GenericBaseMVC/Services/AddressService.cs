@@ -7,7 +7,7 @@ public class AddressService
     {
         IEnumerable<AddressDto> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Barbers";
 
         using (HttpClient client = new HttpClient())
         {
@@ -35,7 +35,7 @@ public class AddressService
     {
         IEnumerable<AddressDto> addresses = null;
 
-        string apiUrl = "https://localhost:44337/api/Address/GetAll";
+        string apiUrl = "https://localhost:7240/api/Address/GetAll";
 
         using (HttpClient client = new HttpClient())
         {
@@ -63,7 +63,7 @@ public class AddressService
     {
         IEnumerable<AddressDto> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Barbers";
 
         using (HttpClient client = new HttpClient())
         {
@@ -92,7 +92,7 @@ public class AddressService
     {
         IEnumerable<LinkAddressDto> Addresses = null;
 
-        string apiUrl = "https://localhost:44337/api/Address/LinkAddress";
+        string apiUrl = "https://localhost:7240/api/Address/LinkAddress";
 
         using (HttpClient client = new HttpClient())
         {
@@ -125,7 +125,7 @@ public class AddressService
     {
         IEnumerable<CreateAddressDto> Addresses = null;
 
-        string apiUrl = "https://localhost:44337/api/Address/CreateDto";
+        string apiUrl = "https://localhost:7240/api/Address/CreateDto";
 
         using (HttpClient client = new HttpClient())
         {

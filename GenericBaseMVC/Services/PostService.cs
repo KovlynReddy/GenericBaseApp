@@ -7,7 +7,7 @@ public class PostService
     {
         IEnumerable<Customer> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Post";
+        string apiUrl = "https://localhost:7240/api/Post";
 
         using (HttpClient client = new HttpClient())
         {

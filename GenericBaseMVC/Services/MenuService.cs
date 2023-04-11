@@ -7,7 +7,7 @@ public class MenuService
         IEnumerable<MenuItemDto> menu = null;
 
 
-        string apiUrl = "https://localhost:44337/api/Menu";
+        string apiUrl = "https://localhost:7240/api/Menu";
 
         using (HttpClient client = new HttpClient())
         {
@@ -37,7 +37,7 @@ public class MenuService
         IEnumerable<MenuItemDto> Menus = null;
 
 
-        string apiUrl = "https://localhost:44337/api/Menu/GetAll";
+        string apiUrl = "https://localhost:7240/api/Menu/GetAll";
 
         using (HttpClient client = new HttpClient())
         {
@@ -66,7 +66,7 @@ public class MenuService
     {
         IEnumerable<CreateMenuItemDto> Menus = null;
 
-        string apiUrl = "https://localhost:44337/api/Menu/CreateDto";
+        string apiUrl = "https://localhost:7240/api/Menu/CreateDto";
 
         using (HttpClient client = new HttpClient())
         {
@@ -100,7 +100,7 @@ public class MenuService
         IEnumerable<MenuItemDto> Menus = null;
 
 
-        string apiUrl = "https://localhost:44337/api/Menu";
+        string apiUrl = "https://localhost:7240/api/Menu";
 
         using (HttpClient client = new HttpClient())
         {
@@ -130,7 +130,7 @@ public class MenuService
         IEnumerable<MenuItemDto> Menus = null;
 
 
-        string apiUrl = "https://localhost:44337/api/Menu";
+        string apiUrl = "https://localhost:7240/api/Menu";
 
         using (HttpClient client = new HttpClient())
         {

@@ -3,11 +3,13 @@
 [Route("Menu/[action]")]
 public class MenuController : Controller
 {
+    public VendorService _VendorService { get; set; }
     public MenuService _MenuService { get; set; }
 
     public MenuController()
     {
         _MenuService = new MenuService();
+        _VendorService = new VendorService();
     }
 
 
@@ -22,6 +24,28 @@ public class MenuController : Controller
         var respomse = await _MenuService.GetAll();
 
         return View(respomse);
+    }    
+    
+    [HttpGet]
+    public async Task<IActionResult> ShopDashboard()
+    {
+        var ventors = await _VendorService.GetAll();
+        var menuItems = await _MenuService.GetAll();
+
+        ShopDashboardViewModel model = new ShopDashboardViewModel();
+
+        return View(model);
+    }    
+    
+    [HttpGet]
+    public async Task<IActionResult> ViewShopDashboard(string id)
+    {
+        var ventors = await _VendorService.GetAll();
+        var menuItems = await _MenuService.GetAll();
+
+        ShopDashboardViewModel model = new ShopDashboardViewModel();
+
+        return View(model);
     }
 
 

@@ -14,7 +14,7 @@ public class VisitService
         IEnumerable<LogVisit> bookings = null;
 
 
-        string apiUrl = "https://localhost:44337/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Barbers";
 
         using (HttpClient client = new HttpClient())
         {

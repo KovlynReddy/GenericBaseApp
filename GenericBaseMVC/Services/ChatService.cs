@@ -12,7 +12,7 @@ public static class ChatService
         IEnumerable<Chat> Chats = null;
 
 
-        string apiUrl = "https://localhost:7071/api/Chat/" + Id;
+        string apiUrl = "https://localhost:7240/api/Chat/" + Id;
 
         using (HttpClient client = new HttpClient())
         {
@@ -42,7 +42,7 @@ public static class ChatService
         IEnumerable<Chat> Chats = null;
 
 
-        string apiUrl = "https://localhost:7071/api/Chat/" + Id;
+        string apiUrl = "https://localhost:7240/api/Chat/" + Id;
 
         using (HttpClient client = new HttpClient())
         {
@@ -71,7 +71,7 @@ public static class ChatService
     {
         IEnumerable<Chat> Chats = null;
 
-        string apiUrl = "https://localhost:7071/api/Chat";
+        string apiUrl = "https://localhost:7240/api/Chat";
 
         using (HttpClient client = new HttpClient())
         {
@@ -105,7 +105,7 @@ public static class ChatService
         IEnumerable<Chat> Chats = null;
 
 
-        string apiUrl = "https://localhost:7071/api/Chat";
+        string apiUrl = "https://localhost:7240/api/Chat";
 
         using (HttpClient client = new HttpClient())
         {
@@ -140,7 +140,7 @@ public static class ChatService
 
         IEnumerable<CreateChatViewModel> Chats = null;
 
-        string apiUrl = "https://localhost:7071/api/Chat/Create";
+        string apiUrl = "https://localhost:7240/api/Chat/Create";
 
         using (HttpClient client = new HttpClient())
         {
@@ -174,7 +174,7 @@ public static class ChatService
         IEnumerable<Chat> Chats = null;
 
 
-        string apiUrl = "https://localhost:7071/api/Chat";
+        string apiUrl = "https://localhost:7240/api/Chat";
 
         using (HttpClient client = new HttpClient())
         {
@@ -204,7 +204,7 @@ public static class ChatService
         IEnumerable<Chat> Chats = null;
 
 
-        string apiUrl = "https://localhost:7071/api/Chat";
+        string apiUrl = "https://localhost:7240/api/Chat";
 
         using (HttpClient client = new HttpClient())
         {

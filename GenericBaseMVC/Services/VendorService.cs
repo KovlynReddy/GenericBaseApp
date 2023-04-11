@@ -6,7 +6,7 @@ public class VendorService
     {
         IEnumerable<Vendor> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Barbers/GetAll";
+        string apiUrl = "https://localhost:7240/api/Barbers/GetAll";
 
         using (HttpClient client = new HttpClient())
         {
@@ -34,7 +34,7 @@ public class VendorService
     {
         IEnumerable<Vendor> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Barbers";
 
         using (HttpClient client = new HttpClient())
         {
@@ -62,7 +62,7 @@ public class VendorService
     {
         IEnumerable<Vendor> barbers = new List<Vendor>();
 
-        string apiUrl = "https://localhost:44337/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Barbers";
 
         using (HttpClient client = new HttpClient())
         {
@@ -90,7 +90,7 @@ public class VendorService
     {
         IEnumerable<Vendor> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Barbers";
+        string apiUrl = "https://localhost:7240/api/Barbers";
 
         using (HttpClient client = new HttpClient())
         {
@@ -118,7 +118,7 @@ public class VendorService
     {
         IEnumerable<CreateVendorDto> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/Barbers/CreateDto";
+        string apiUrl = "https://localhost:7240/api/Barbers/CreateDto";
 
         using (HttpClient client = new HttpClient())
         {

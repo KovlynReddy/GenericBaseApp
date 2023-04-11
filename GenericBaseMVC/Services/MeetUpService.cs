@@ -6,7 +6,7 @@ public class MeetUpService
     {
         IEnumerable<MeetUpDto> barbers = null;
 
-        string apiUrl = "https://localhost:44337/api/MeetUp";
+        string apiUrl = "https://localhost:7240/api/MeetUp";
 
         using (HttpClient client = new HttpClient())
         {
@@ -34,7 +34,7 @@ public class MeetUpService
     {
         IEnumerable<MeetUpDto> addresses = null;
 
-        string apiUrl = "https://localhost:44337/api/MeetUp/GetAll";
+        string apiUrl = "https://localhost:7240/api/MeetUp/GetAll";
 
         using (HttpClient client = new HttpClient())
         {
@@ -62,7 +62,7 @@ public class MeetUpService
     {
         IEnumerable<CreateMeetUpDto> Addresses = null;
 
-        string apiUrl = "https://localhost:44337/api/MeetUp/CreateDto";
+        string apiUrl = "https://localhost:7240/api/MeetUp/CreateDto";
 
         using (HttpClient client = new HttpClient())
         {
@@ -95,7 +95,7 @@ public class MeetUpService
     {
         MeetUpDto Addresses = null;
 
-        string apiUrl = "https://localhost:44337/api/MeetUp/CreateDto";
+        string apiUrl = "https://localhost:7240/api/MeetUp/CreateDto";
 
         using (HttpClient client = new HttpClient())
         {
