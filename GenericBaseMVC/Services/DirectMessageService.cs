@@ -6,12 +6,13 @@ namespace GenericBaseMVC.Services;
 
 public static class DirectMessageService
 {
-    public static async Task<List<DirectMessageDto>> Get(int Id)
+    public static async Task<List<DirectMessageDto>> Get(string Id,string email)
     {
         IEnumerable<DirectMessageDto> DirectMessages = null;
 
 
-        string apiUrl = "https://localhost:7240/api/DirectMessage";
+        //string apiUrl = $"https://localhost:7240/api/DirectMessage?id={Id}&email={email}";
+        string apiUrl = $"https://localhost:7240/api/DirectMessage/{Id}/{email}";
 
         using (HttpClient client = new HttpClient())
         {

@@ -19,19 +19,25 @@
     }
 
 </style>
-<div class="row">
+<div class="row chat-chat">
 
     <div class="col-2">
+        @if (Model.OtherChatHeads.Count > 0)
+        {
+            
         <partial name="_ChatHeads" model="Model.OtherChatHeads" />
+        }
     </div>
 
     <div class="col-8">
         <partial name="_ChatContent" model="Model.AllMessages" />
     </div>
 
-    <div class="col-2">
+        @if (Model.OtherChatHeads.Count > 0)
+        {
+            
         <partial name="_ChatHeads" model="Model.OtherChatHeads" />
-    </div>
+        }
 
 </div>
 

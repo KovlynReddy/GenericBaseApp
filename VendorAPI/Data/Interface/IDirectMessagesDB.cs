@@ -1,11 +1,7 @@
 ﻿namespace VendorAPI.Data.Interface
 {
-    public interface IDirectMessagesDB
+    public interface IDirectMessagesDB : IBase<DirectMessageDto>
     {
-        DirectMessage Post();
-        IEnumerable<DirectMessage> Get();
-        DirectMessage Get(int Id);
-        DirectMessage Put(DirectMessage model);
-        DirectMessage Delete(int Id);
+        Task<IEnumerable<DirectMessageDto>> Get(string id,string email);
     }
 }

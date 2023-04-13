@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using VendorAPI.Data.Interface;
 using VendorAPI.Data.Repository;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ICustomer,CustomerDB>();
 builder.Services.AddTransient<IItemDB,ItemDB>();
-builder.Services.AddTransient<IBase<DirectMessageDto>, DirectMessageDB>();
+builder.Services.AddTransient<IDirectMessagesDB, DirectMessageDB>();
 builder.Services.AddTransient<IPostDB,PostDB>();
 builder.Services.AddTransient<IVendor,VendorRepo>();
 
@@ -31,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.MapControllers();
 

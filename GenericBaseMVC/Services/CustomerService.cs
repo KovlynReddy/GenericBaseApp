@@ -3,11 +3,11 @@
 public class CustomerService
 {
 
-    public async Task<List<Customer>> Get(int Id)
+    public async Task<List<Customer>> Get(string email)
     {
         IEnumerable<Customer> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Vendors";
+        string apiUrl = "https://localhost:7240/api/Customers/" + email;
 
         using (HttpClient client = new HttpClient())
         {
@@ -35,7 +35,7 @@ public class CustomerService
     {
         IEnumerable<CustomerDto> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Customers/GetAll";
+        string apiUrl = "https://localhost:7240/api/Customers";
 
         using (HttpClient client = new HttpClient())
         {

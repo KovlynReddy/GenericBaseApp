@@ -10,8 +10,8 @@ namespace VendorAPI.Controllers
 [AllowAnonymous]
 public class DirectMessageController : Controller
 {
-    public IBase<DirectMessageDto> _DB { get; set; }
-    public DirectMessageController(IBase<DirectMessageDto> DMDb)
+    public IDirectMessagesDB _DB { get; set; }
+    public DirectMessageController(IDirectMessagesDB DMDb)
     {
             _DB = DMDb;
     }
@@ -46,10 +46,10 @@ public class DirectMessageController : Controller
         }    
         
     [HttpGet]
-    [Route("~/api/DirectMessage/Chat/{Id}")]
-    public async  Task<IActionResult> GetChats(string Id)
+        [Route("~/api/DirectMessage/{id}/{email}")]
+        public async Task<IActionResult> Get(string id,string email)
     {
-            var results = await _DB.Get(Id);
+            var results = await _DB.Get(id,email);
 
             var dtos = new List<DM>();
             if (results.ToList().Count > 0)

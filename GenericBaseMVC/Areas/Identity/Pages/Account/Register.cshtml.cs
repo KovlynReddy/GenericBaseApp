@@ -122,6 +122,7 @@ namespace GenericBaseMVC.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.EmailConfirmed = true;
                 CreateCustomerDto newUser = new CreateCustomerDto()
                 {
                     CustomerName = Input.Username,

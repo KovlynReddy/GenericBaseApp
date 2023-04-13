@@ -38,8 +38,37 @@ public class CustomersController : Controller
     }
 
     [HttpGet]
-    [Route("~/api/Customers/GetAll")]
-    public async Task<IActionResult> GetAll()
+    [Route("~/api/Customers/{email}")]
+    public async Task<IActionResult> Get(string email)
+    {
+        var result = await _context.Customers.Where(m=>m.ModelGUID == email || m.CustomerEmail == email || m.Email == email || m.UserId == email || m.Id.ToString() == email).ToListAsync();
+
+        var response = new List<CustomerDto>();
+
+        foreach (var customer in result)
+        {
+
+            CustomerDto CustomerDto = new CustomerDto
+            {
+                CustomerEmail = customer.CustomerEmail,
+                UserGuid = customer.ModelGUID, 
+                CustomerName = customer.CustomerName, 
+                ModelGuid = customer.ModelGUID,
+                CustomerAddress = customer.CustomerAddress,
+                CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
+                CreatedDateTimeString = customer.CreatedDateTime
+            };
+
+            response.Add(CustomerDto);
+
+        }
+
+        return Ok(response);
+    }   
+    
+    [HttpGet]
+    [Route("~/api/Customers")]
+    public async Task<IActionResult> Get()
     {
         var result = await _context.Customers.ToListAsync();
 
