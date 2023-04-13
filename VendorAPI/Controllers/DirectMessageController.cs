@@ -19,14 +19,35 @@ public class DirectMessageController : Controller
 
     [HttpGet]
     [Route("~/api/DirectMessage/{Id}")]
-    public ActionResult Get(int Id)
+    public async Task<IActionResult> Get(string Id)
     {
-        return Ok();
-    }    
+            var results = await _DB.Get(Id);
+
+            var dtos = new List<DM>();
+            if (results.ToList().Count > 0)
+            {
+                foreach (var item in results)
+                {
+                    var entity = new DM()
+                    {
+                        CreatedDateTime = item.CreatedDateTimeString,
+                        CreatorId = item.CreatorGuid,
+                        Id = item.Id,
+                        Message = item.Message,
+                        SenderGuid = item.SenderGuid,
+                        RecieverGuid = item.RecieverGuid
+                    };
+                    dtos.Add(entity);
+                }
+            }
+
+
+            return Ok(results);
+        }    
         
     [HttpGet]
-    [Route("~/api/DirectMessage/{Id}")]
-    public async  Task<ActionResult> Get(string Id)
+    [Route("~/api/DirectMessage/Chat/{Id}")]
+    public async  Task<IActionResult> GetChats(string Id)
     {
             var results = await _DB.Get(Id);
 

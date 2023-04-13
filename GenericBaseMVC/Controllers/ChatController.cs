@@ -74,6 +74,27 @@ public class ChatController : Controller
         return View("AllMyChats",model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Get(string id)
+    {
+        var model = new ChatViewModel();
+        var userEmail = User.Identity.Name ?? "";
+        
+        await DirectMessageService.Get(id);
+        await ChatService.Get(id);
+
+        
+
+        return View("AllMyChats",model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> SendDirectMessage(string id)
+    {
+
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> SendDirectMessage(SendDirectMessageViewModel model)
     {

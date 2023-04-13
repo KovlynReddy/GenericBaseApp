@@ -14,7 +14,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
 
-        return View();
+        return RedirectToAction(actionName:"Feed",controllerName:"Post");
     }
 
     public IActionResult Privacy()

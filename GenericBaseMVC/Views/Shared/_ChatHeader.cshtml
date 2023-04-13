@@ -1,8 +1,18 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ChatHeaderViewModel
 
-<div class="card">
+<div class="card ChatHeader">
     <div class="row">
+        <input value="@Model.Id">
         <img src="/HOLPT1.jpg5ed12b0b-6a54-45f4-901d-7b72e45b8c94.jpg"/>
         <h5>@Model.RecieverName</h5>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(".ChatHeader").click(function () {
+        id = $(this).children('div').children('input').val()
+        console.log("Enter Chat", id);
+        window.location.href = "https://localhost:7140/Chat/Get?id="+id;
+
+    });
+</script>

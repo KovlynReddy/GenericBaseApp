@@ -6,8 +6,11 @@
 
 <h1>ViewListVendors</h1>
 
+<div class="row">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Create"><i class="fa-solid fa-store"></i>Create Vendor</a>
+</div>
 
-    <table class="table">
+<table class="table">
         <thead>
             <tr>
                 <th></th>
@@ -15,7 +18,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody>             
             @foreach (var item in Model)
             {
                 <tr class="row">

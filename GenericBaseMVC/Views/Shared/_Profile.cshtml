@@ -6,7 +6,7 @@
     <div class="card-body">
         <h5 class="card-title">@Model.CustomerName</h5>
         <p class="card-text">@Model.CustomerEmail  @Model.ModelGUID</p>
-        <a href="#" class="btn btn-primary"><i class="fa-solid fa-message"></i>@*Message*@</a>
+        <a asp-action="SendDirectMessage" asp-controller="Chat" asp-route-id="@Model.ModelGUID" class="btn btn-primary"><i class="fa-solid fa-message"></i>@*Message*@</a>
         <a href="#" class="btn btn-secondary"><i class="fas fa-user-plus"></i>@*Add Friend*@</a>
         <a href="#" class="btn btn-success"><i class="fas fa-user"></i>@*View Profile*@</a>
     </div>

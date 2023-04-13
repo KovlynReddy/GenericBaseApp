@@ -42,7 +42,7 @@ public static class ChatService
         IEnumerable<Chat> Chats = null;
 
 
-        string apiUrl = "https://localhost:7240/api/Chat/" + Id;
+        string apiUrl = "https://localhost:7240/api/DirectMessage/Chat/" + Id;
 
         using (HttpClient client = new HttpClient())
         {

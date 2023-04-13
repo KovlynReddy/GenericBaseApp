@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.PostViewModel>
 
+<div class="row">
+<a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Create"><i class="fas fa-pen"></i>Create Post</a>
+</div>
 @foreach (var item in Model)
 {
    @* @Html.Partial("_Post",item);*@

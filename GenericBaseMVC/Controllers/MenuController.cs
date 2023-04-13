@@ -53,7 +53,7 @@ public class MenuController : Controller
             });
         }
 
-        model.AllVendors = vendorVMs;
+        model.AllVendors = vendorVMs.Where(m=>m.AllVendorItems.Count > 0).ToList();
         return View("ShopDashboard",model);
     }
 

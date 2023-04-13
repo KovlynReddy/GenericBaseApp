@@ -1,6 +1,6 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ShopDashboardViewModel
 
-<table class="table">
+<table class="table table-borderless">
     <thead>
         <tr>
             <th></th>
@@ -12,34 +12,28 @@
         @foreach (var vendor in Model.AllVendors)
         {
             <tr class="row">
-                <td class="col-3">
+                <td class="col-2">
                 </td>
-                <td class="col-6">
-                    <table class="table">
+                <td class="col-8">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th> <h3>@vendor.VendorName</h3></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr class="row flex-row flex-nowrap">
                             @foreach (var item in vendor.AllVendorItems)
                             {
-                                <tr class="row">
-                                    <td class="col-3">
-                                    </td>
-                                    <td class="col-6">
+                                    <td class="col">
                                         @Html.Partial("_MenuItem", item)
                                     </td>
-                                    <td class="col-3">
-                                    </td>
-                                </tr>
                             }
+                                </tr>
                         </tbody>
                     </table>
                 </td>
-                <td class="col-3">
+                <td class="col-2">
                 </td>
             </tr>
         }

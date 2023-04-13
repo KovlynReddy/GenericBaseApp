@@ -41,7 +41,7 @@ public static class DirectMessageService
         IEnumerable<DirectMessageDto> DirectMessages = null;
 
 
-        string apiUrl = "https://localhost:7240/api/DirectMessage";
+        string apiUrl = "https://localhost:7240/api/DirectMessage/" + Id;
 
         using (HttpClient client = new HttpClient())
         {
