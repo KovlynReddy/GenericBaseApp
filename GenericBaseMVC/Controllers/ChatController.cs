@@ -132,8 +132,17 @@ public class ChatController : Controller
     [HttpPost]
     public async Task<IActionResult> SendDirectMessage(SendDirectMessageViewModel model)
     {
+        var userEmail = User.Identity.Name ?? "none";
+
+        var Users = await new CustomerService().Get(userEmail);
+        var user = Users.FirstOrDefault();
         await DirectMessageService.Post(model);
         //await ChatService.Create(model);
+        var code = 102;
+        if (user.ModelGUID == model.SenderGuid)
+        {
+            code = 101;
+        }
 
         var SRMessage = new SignalRMessage()
         {
@@ -141,7 +150,7 @@ public class ChatController : Controller
             SenderId = model.SenderGuid,
             RecieverId = model.RecieverGuid,
             Attachment = model.Attachment,
-            Code = 102
+            Code = code
         };
 
         await SendAMessage(SRMessage);
