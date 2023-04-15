@@ -132,25 +132,26 @@ public class ChatController : Controller
     [HttpPost]
     public async Task<IActionResult> SendDirectMessage(SendDirectMessageViewModel model)
     {
-
+        await DirectMessageService.Post(model);
         //await ChatService.Create(model);
 
         var SRMessage = new SignalRMessage()
         {
             Message = model.Message,
-            UserId = model.SenderId,
-            MeetingId = model.RecieverId
+            SenderId = model.SenderGuid,
+            RecieverId = model.RecieverGuid,
+            Attachment = model.Attachment,
+            Code = 102
         };
 
         await SendAMessage(SRMessage);
 
-        return RedirectToAction("AttendMeeting", model.RecieverId);
+        return RedirectToAction(actionName:"SendDirectMessage",routeValues: model.RecieverGuid);
     }
 
-    public async Task<IActionResult> SendAMessage(SignalRMessage Message)
+    public async Task SendAMessage(SignalRMessage Message)
     {
         await _hub.Clients.All.SendAsync("RecieveMessage", Message);
-        return View();
     }
 
 }

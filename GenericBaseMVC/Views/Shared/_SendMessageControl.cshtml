@@ -1,11 +1,14 @@
 ﻿@model GenericAppDLL.Models.ViewModels.SendDirectMessageViewModel
 
-
-<form asp-action="Post" asp-controller="DirectMessage">
+@*      data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="OnBegin" data-ajax-failure="OnFailure"
+      data-ajax-success="OnSuccess" data-ajax-complete="OnComplete">
+      *@
+<form asp-action="SendDirectMessage" asp-controller="Chat">
     <input asp-for="SenderId" hidden class="form-control" />
-    <input asp-for="SenderGuid" hidden class="form-control" />
-    <input asp-for="RecieverId" id="SendMessageMeetingId" hidden class="form-control" />
-    <input asp-for="RecieverGuid" id="SendMessageMeetingId" hidden class="form-control" />
+    <input asp-for="SenderGuid" id="senderId" hidden class="form-control" />
+    <input asp-for="RecieverId" hidden class="form-control" />
+    <input asp-for="RecieverGuid" id="recieverId" hidden class="form-control" />
     <div class="input-group">
 
         <div class="input-group-text bg-transparent border-0">
@@ -13,16 +16,58 @@
                 <i class="fas fa-paperclip"></i>
             </button>
         </div>
-        <input asp-for="Message" type="text" class="form-control border-0" placeholder="Write a message..." />
+        <input id="MessageToSend" asp-for="Message" type="text" class="form-control border-0" placeholder="Write a message..." />
         <div class="input-group-text bg-transparent border-0">
             <button class="btn btn-light">
                 <i class="fas fa-smile"></i>
             </button>
         </div>
         <div class="input-group-text bg-transparent border-0">
-            <button type="submit" class="btn btn-light">
+            <button id="sendDirectMessage" type="submit" class="btn btn-light">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>
-    </div>
+    </div>  
 </form>
+
+        <script type="text/javascript">
+
+    $('#sendDirectMessage').on('click', function () {
+        var senderId = $('#senderId').val();
+        var recieverId = $('#recieverId').val();
+        var attatchment = $('#recieverId').val();
+        var message = $('#MessageToSend').val();
+        var jsonBody = `{SenderId:2,
+            RecieverId:2,
+            SenderGuid: '${senderId}' ,
+            RecieverGuid:'${recieverId}',
+            Message: '${message}',    
+            Attachment:'1'}`;
+            
+            //var jsonBody = {
+            //SenderId:2,
+            //RecieverId:2,
+            //SenderGuid: '${senderId}' ,
+            //RecieverGuid:'${recieverId}',
+            //Message: '${message}',    
+            //Attachment:'1'};
+
+        console.log(senderId, recieverId, message, jsonBody);
+        //$.ajax({  
+        //        type: "POST",  
+        //        url: '@Url.Action("SendDirectMessage")',
+        //        data: jsonBody,
+        //        dataType: "json",  
+        //        contentType: "application/json; charset=utf-8",  
+        //        success: function () {  
+        //           // alert("Data has been added successfully.");  
+        //            LoadData();  
+        //        },  
+        //        error: function () {  
+        //            alert("Error while inserting data");  
+        //        }  
+        //    });  
+
+        console.log("Send Message", $('#MessageToSend'));
+    });
+        </script>

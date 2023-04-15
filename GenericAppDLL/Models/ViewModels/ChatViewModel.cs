@@ -9,8 +9,8 @@ namespace GenericAppDLL.Models.ViewModels
     public class ChatViewModel
     {
         public List<DirectMessageViewModel> AllMessages { get; set; } = new List<DirectMessageViewModel>();
-        public SendDirectMessageViewModel NewMessage { get; set; } 
-        public ChatHeaderViewModel ChatHead { get; set; }
+        public SendDirectMessageViewModel NewMessage { get; set; } = new SendDirectMessageViewModel();
+        public ChatHeaderViewModel ChatHead { get; set; } = new ChatHeaderViewModel();
         public List<ChatHeaderViewModel> OtherChatHeads { get; set; } = new List<ChatHeaderViewModel>();
     }
 }

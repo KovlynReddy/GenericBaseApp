@@ -3,3 +3,130 @@
 <partial name="_Chat" model="Model" />
 
 <partial name="_SendMessageControl" model="Model.NewMessage" />
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<a href="~/lib/microsoft/signalr/dist/browser/signalr.js.map">~/lib/microsoft/signalr/dist/browser/signalr.js.map</a>
+<a href="~/lib/microsoft/signalr/dist/browser/signalr.min.js.map">~/lib/microsoft/signalr/dist/browser/signalr.min.js.map</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        console.log("documentLoaded");
+        const client = new signalR.HubConnectionBuilder().withUrl("/MessageHub").build();
+        client.start();
+
+        client.on("RecieveMessage", message => {
+            var Message = `<div class="d-flex align - items - baseline mb - 4">
+
+                        < div class="position-relative avatar" >
+                            <img class="img-fluid rounded-circle" src = "profileimage2.png" />
+                                <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle" >
+                                    <span class="visually-hidden" > new alerts < /span>
+                                        < /span>
+                                        < /div>
+
+                                        < div class="pe-2" >
+                                            <div class="card card-text d-inline-block p-2 px-3 m-1" >
+                                                ` + message + `
+                                                    < /div>
+                                                    < div class="small" >
+                                                        Sent 15: 00
+                                                            < /div>
+                                                            < /div>
+                                                                </div>`;
+
+            // couldnt get this to work
+            // add message to chat
+            // add message if meeting is correct
+            var currentMeeting = $("#recieverId").val();
+            console.log(currentMeeting, message, Message);
+            debugger;
+            //$("#MeetingChatBody").insertAfter(Message);
+            //$(Message).insertAfter("#MeetingChatBody");
+
+            if (currentMeeting == message.meetingId) {
+                window.location.href = "https://localhost:7140/Chat/SendDirectMessage/" + message.senderId;
+            }
+
+            if (message.code == 102) {
+                // created new Item
+                window.location.href = "https://localhost:7140/Chat/SendDirectMessage/" + message.senderId;
+
+            }
+            if (message.code == 101) {
+                // created new Meeting
+                window.location.href = "https://localhost:7140/Chat/SendDirectMessage?id=" + message.SenderGuid;
+
+            }
+
+
+
+            // reload page
+
+        });
+
+
+        client.start();
+    });
+
+    $('.UpdateItemButton').on('click', function (e) {
+        console.log("Update Item");
+        var children = $(this).children();
+        console.log(children.eq(1).val(), children.eq(2).val(), children.eq(3).val(), children.eq(4).val());
+
+        $("#UpdateItemName").val(children.eq(2).val());
+        $("#UpdateComment").val(children.eq(3).val());
+        $("#UpdateStatusId").val(children.eq(4).val());
+        $("#UpdateItemId").val(children.eq(1).val());
+    });
+
+    $('.MeetingItemOption').on('click', function (e) {
+        console.log("MeetingItemOption");
+        $('.MeetingItemOption').removeClass("focusMenuItem");
+        $(this).toggleClass("focusMenuItem"); //Target Div where toggle class
+
+        let itemId = $(this).children().first().val();
+        console.log(itemId, $(this).children());
+        // focus on this item
+        $("#SendMessageItemId").val(itemId);
+        // Set Message to this id
+
+        e.preventDefault();
+    });
+
+    $('.MeetingOption').on('click', function (e) {
+        console.log("MeetingOption");
+        $('.MeetingOption').removeClass("focusMenuItem");
+        $(this).toggleClass("focusMenuItem"); //Target Div where toggle class
+
+        let meetingId = $(this).children().first().val();
+        console.log(meetingId);
+        // focus on this item
+        $("#SendMessageMeetingId").val(meetingId);
+        // Set Message to this id
+        //window.location.href = "https://localhost:7027/Meeting/AttendMeeting/" + meetingId;
+        //AttendMeeting
+
+        e.preventDefault();
+    });
+    //$('.MenuItem').mouseover(function () {
+    //    $(this).toggleClass("hoverMenuItem"); //Target Div where toggle class
+    //    e.preventDefault();
+    //});
+    $('.MeetingItemOption').hover(function () {
+        console.log("MeetingItemOption");
+        $(this).toggleClass("hoverMenuItem"); //Target Div where toggle class
+        e.preventDefault();
+    });
+
+    $('.MeetingOption').hover(function () {
+        console.log("MeetingOption");
+        $(this).toggleClass("hoverMenuItem"); //Target Div where toggle class
+        e.preventDefault();
+    });
+            //$('.MenuItem').on('hover', function (e) {
+            //    $(this).toggleClass("hoverMenuItem"); //Target Div where toggle class
+            //    e.preventDefault();
+            //});
+</script>

@@ -41,7 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapHub<MessageHub>(pattern: "/MeetingHub");
+app.MapHub<MessageHub>(pattern: "/MessageHub");
 
 app.UseAuthentication();
 app.UseAuthorization();

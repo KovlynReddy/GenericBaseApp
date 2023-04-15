@@ -30,19 +30,21 @@ namespace GenericBaseMVC.Controllers
             var SRMessage = new SignalRMessage()
             {
                 Message = model.Message,
-                UserId = model.SenderId,
-                MeetingId = model.RecieverId
+                SenderId = model.SenderGuid,
+                RecieverId = model.RecieverGuid,
+                Attachment = model.Attachment,
+                Code = 102
             };
 
             await SendAMessage(SRMessage);
-
-            return RedirectToAction("AttendMeeting", model.RecieverId);
+            return Ok();
+            //return RedirectToAction("AttendMeeting", model.RecieverId);
         }
 
         public async Task<IActionResult> SendAMessage(SignalRMessage Message)
         {
             await _hub.Clients.All.SendAsync("RecieveMessage", Message);
-            return View();
+            return Ok();
         }
     }
 }

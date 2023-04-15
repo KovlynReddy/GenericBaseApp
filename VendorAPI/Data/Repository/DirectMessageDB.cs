@@ -56,7 +56,7 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<DirectMessageDto>> Get(string id, string email)
         {
-            var Messages = _context.Messages.Where(m=>m.SenderGuid==id||m.SenderGuid==email||m.RecieverGuid==id||m.RecieverGuid==email).ToList();
+            var Messages = _context.Messages.Where(m=>(m.SenderGuid==id&&m.RecieverGuid == email)||(m.SenderGuid == email && m.RecieverGuid==id)).ToList();
 
             var messages = convertToDto(Messages);
 
