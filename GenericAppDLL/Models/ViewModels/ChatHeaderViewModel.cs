@@ -9,9 +9,9 @@ namespace GenericAppDLL.Models.ViewModels
     public class ChatHeaderViewModel
     {
         public int Id { get; set; }
-        public int CreatorId { get; set; }
+        public string CreatorId { get; set; }
         public string RecieverName { get; set; } = string.Empty;
-        public int ChatId { get; set; }
+        public string ChatId { get; set; }
         public string ProfilePicturePath { get; set; }
     }
 }

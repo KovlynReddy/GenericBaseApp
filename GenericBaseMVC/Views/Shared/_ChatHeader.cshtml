@@ -1,9 +1,12 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ChatHeaderViewModel
 
 <div class="card ChatHeader">
+    <div class="card-body">
+        <h5 class="card-title">@Model.RecieverName</h5>
+    </div>
     <div class="row">
-        <input value="@Model.Id">
-        <img src="/HOLPT1.jpg5ed12b0b-6a54-45f4-901d-7b72e45b8c94.jpg"/>
+        <input value="@Model.ChatId" hidden>
+        <img src="~/ProfileImage.png" />
         <h5>@Model.RecieverName</h5>
     </div>
 </div>
@@ -12,7 +15,7 @@
     $(".ChatHeader").click(function () {
         id = $(this).children('div').children('input').val()
         console.log("Enter Chat", id);
-        window.location.href = "https://localhost:7140/Chat/Get?id="+id;
+        window.location.href = "https://localhost:7140/Chat/SendDirectMessage?id=" + id;
 
     });
 </script>

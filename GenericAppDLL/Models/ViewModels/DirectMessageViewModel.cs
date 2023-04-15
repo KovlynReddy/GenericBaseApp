@@ -16,7 +16,9 @@ namespace GenericAppDLL.Models.ViewModels
         public string ReaderGUID { get; set; }
         public int SenderId { get; set; }
         public string SenderGUID { get; set; }
+        public string MyGuid { get; set; }
         public int ChatId { get; set; }
+
 
         public string Message { get; set; } = string.Empty;
     }

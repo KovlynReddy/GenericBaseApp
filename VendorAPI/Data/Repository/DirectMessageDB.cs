@@ -30,7 +30,11 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<DirectMessageDto>> Get(string Id)
         {
-            throw new NotImplementedException();
+            var Messages = _context.Messages.Where(m => (m.SenderGuid == Id) || ( m.RecieverGuid == Id)).ToList();
+
+            var messages = convertToDto(Messages);
+
+            return messages;
         }
 
         public async Task<DirectMessageDto> Post(DirectMessageDto model)

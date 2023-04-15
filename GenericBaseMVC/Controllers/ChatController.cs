@@ -1,5 +1,5 @@
-﻿using GenericBaseMVC.Hubs;
-using GenericBaseMVC.Services;
+﻿using GenericAppDLL.Models.ViewModels;
+using GenericBaseMVC.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
@@ -43,7 +43,7 @@ public class ChatController : Controller
         {
             RecieverName = reciever.CustomerName,
             ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
-            ChatId = 2,
+            ChatId = "2",
 
         };
 
@@ -90,14 +90,43 @@ public class ChatController : Controller
     {
         var model = new ChatViewModel();
         var userEmail = User.Identity.Name ?? "none";
-
-        var Users = await new CustomerService().Get(userEmail);
-        var Recivers = await new CustomerService().Get(id);
+        var userService = new CustomerService();
+        var Users = await userService.Get(userEmail);
+        var Recivers = await userService.Get(id);
         var user = Users.FirstOrDefault();
         var reciever = Recivers.FirstOrDefault();
-        var allMessagesDto = await DirectMessageService.Get(id, user.ModelGUID);
-        //await ChatService.Get(userEmail);
+        //var allMessagesDto = await DirectMessageService.Get(id, user.ModelGUID);
+        var allMessagesDto = await DirectMessageService.Get(user.ModelGUID);
 
+        var users = new List<string>();
+        users.AddRange(allMessagesDto.Where(m =>  m.RecieverGuid == user.ModelGUID).DistinctBy(k=>k.SenderGuid).Select(t=>t.SenderGuid).ToList());
+        users.AddRange(allMessagesDto.Where(m =>  m.SenderGuid == user.ModelGUID).DistinctBy(k=>k.RecieverGuid).Select(t => t.RecieverGuid).ToList());
+        users = users.Distinct().ToList();
+        //await ChatService.Get(userEmail);
+        allMessagesDto = allMessagesDto.Where(m => (m.SenderGuid == id && m.RecieverGuid == user.ModelGUID) || (m.SenderGuid == user.ModelGUID && m.RecieverGuid == id)).ToList();
+        var OtherChats = new List<ChatHeaderViewModel>();
+        foreach (var userid in users)
+        {
+            //create api endpoint to take list of string to return list of equal size back instead of looping
+            var useridProfile = (await userService.Get(userid)).FirstOrDefault();
+            model.OtherChatHeads.Add(
+                new ChatHeaderViewModel() { 
+                RecieverName = useridProfile.CustomerName,
+                ChatId = useridProfile.ModelGUID,
+                ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png", 
+                CreatorId = useridProfile.ModelGUID,
+                //Id = useridProfile.ModelGUID
+                }
+                );
+        }
+        model.ChatHead = new ChatHeaderViewModel()
+        {
+            RecieverName = user.UserName,
+            ChatId = user.ModelGUID,
+            ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
+            CreatorId = user.ModelGUID,
+            //Id = useridProfile.ModelGUID
+        };
 
         foreach (var message in allMessagesDto)
         {
@@ -108,13 +137,14 @@ public class ChatController : Controller
                 ReaderGUID = message.RecieverGuid,
                 CreationDateTime = message.CreatedDateTime,
                 CreatorGUID = message.CreatorGuid,
+                MyGuid = user.ModelGUID
             });
         }
 
         model.ChatHead = new ChatHeaderViewModel() { 
         RecieverName = reciever.CustomerName,
         ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
-        ChatId = 1,
+        ChatId = "1",
        
         };
 

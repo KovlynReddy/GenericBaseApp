@@ -1,0 +1,40 @@
+﻿@model GenericAppDLL.Models.ViewModels.ChatHeaderViewModel
+
+<div class="card-header bg-transparent">
+    <div class="navbar navbar-expand p-0">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <div class="position-relative avatar">
+                        <img class="img-fluid rounded-circle" src="~/ProfileImage.png" />
+                        <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                            <span class="visually-hidden">new alerts</span>
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    @Model.RecieverName
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <i class="fas fa-phone-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <i class="fas fa-video"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <i class="fas fa-times"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
