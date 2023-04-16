@@ -1,6 +1,6 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ChatHeaderViewModel
 
-<div class="card ChatHeader">
+@*<div class="card ChatHeader">
     <div class="card-body">
         <h5 class="card-title">@Model.RecieverName</h5>
     </div>
@@ -9,6 +9,28 @@
         <img src="~/ProfileImage.png" />
         <h5>@Model.RecieverName</h5>
     </div>
+</div>*@
+<div class="ChatHeader mb-4 card">
+    <div>
+        <input value="@Model.ChatId" hidden>
+    </div>
+<div class="d-flex align-items-baseline card-header">
+    <div class="position-relative avatar">
+        <img class="img-fluid rounded-circle" src="~/ProfileImage.png" />
+        <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+            <span class="visually-hidden">new alerts</span>
+        </span>
+    </div>
+            <div class="d-inline-block chat-other-header-name" >
+                @Model.RecieverName
+            </div>
+    </div>
+<div class="d-flex align-items-baseline card-footer">
+            <small class="d-inline-block">
+            @Model.LastMessage &emsp;&emsp;
+                @Model.LastMessageSent
+            </small>
+</div>
 </div>
 
 <script type="text/javascript">

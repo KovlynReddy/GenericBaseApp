@@ -13,5 +13,7 @@ namespace GenericAppDLL.Models.ViewModels
         public string RecieverName { get; set; } = string.Empty;
         public string ChatId { get; set; }
         public string ProfilePicturePath { get; set; }
+        public string LastMessage { get; set; }
+        public string LastMessageSent { get; set; }
     }
 }

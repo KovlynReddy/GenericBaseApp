@@ -103,10 +103,11 @@ public class ChatController : Controller
         users.AddRange(allMessagesDto.Where(m =>  m.SenderGuid == user.ModelGUID).DistinctBy(k=>k.RecieverGuid).Select(t => t.RecieverGuid).ToList());
         users = users.Distinct().ToList();
         //await ChatService.Get(userEmail);
-        allMessagesDto = allMessagesDto.Where(m => (m.SenderGuid == id && m.RecieverGuid == user.ModelGUID) || (m.SenderGuid == user.ModelGUID && m.RecieverGuid == id)).ToList();
+        var CurrentChatMessages = allMessagesDto.Where(m => (m.SenderGuid == id && m.RecieverGuid == user.ModelGUID) || (m.SenderGuid == user.ModelGUID && m.RecieverGuid == id)).ToList();
         var OtherChats = new List<ChatHeaderViewModel>();
         foreach (var userid in users)
         {
+            var LastMessage = allMessagesDto.Where(m => m.SenderGuid == userid || m.RecieverGuid == userid).OrderBy(k=>k.CreatedDateTime).LastOrDefault();
             //create api endpoint to take list of string to return list of equal size back instead of looping
             var useridProfile = (await userService.Get(userid)).FirstOrDefault();
             model.OtherChatHeads.Add(
@@ -115,10 +116,13 @@ public class ChatController : Controller
                 ChatId = useridProfile.ModelGUID,
                 ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png", 
                 CreatorId = useridProfile.ModelGUID,
+                LastMessage = LastMessage.Message,
+                LastMessageSent = LastMessage.CreatedDateTime.ToString(),
                 //Id = useridProfile.ModelGUID
                 }
                 );
         }
+
         model.ChatHead = new ChatHeaderViewModel()
         {
             RecieverName = user.UserName,
@@ -128,7 +132,7 @@ public class ChatController : Controller
             //Id = useridProfile.ModelGUID
         };
 
-        foreach (var message in allMessagesDto)
+        foreach (var message in CurrentChatMessages)
         {
             model.AllMessages.Add(new DirectMessageViewModel()
             {
@@ -138,6 +142,7 @@ public class ChatController : Controller
                 CreationDateTime = message.CreatedDateTime,
                 CreatorGUID = message.CreatorGuid,
                 MyGuid = user.ModelGUID
+                
             });
         }
 

@@ -21,3 +21,7 @@ body {
 min-height:500px;
 
 }
+
+.chat-other-header-name {
+    margin-left: 2em;
+}
