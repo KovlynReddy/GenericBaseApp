@@ -1,6 +1,15 @@
 ﻿@model List<GenericAppDLL.Models.ViewModels.DirectMessageViewModel>
+@{
+    var emoji = new List<string>()
+    {
+    "face-worried",
+    "face-smile",
+    "face-sad-sweat"
+        };
+}
 
 @foreach (var message in Model)
 {
     <partial name="_DirectMessageBubble" model="message" />
 }
+

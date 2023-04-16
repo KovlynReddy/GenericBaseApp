@@ -1,7 +1,7 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ChatViewModel
 
 <partial name="_Chat" model="Model" />
-
+<partial name="emojiTray" model="@Model.emojis" />
 <partial name="_SendMessageControl" model="Model.NewMessage" />
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
@@ -12,6 +12,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+        $('#emoji-tray').toggle();
         console.log("documentLoaded");
         const client = new signalR.HubConnectionBuilder().withUrl("/MessageHub").build();
         client.start();
@@ -93,6 +94,26 @@
         // Set Message to this id
 
         e.preventDefault();
+    });
+
+
+    $('#Open-Emoji-Tray').on('click', function () {
+        console.log("toggle tray");
+        $('#emoji-tray').toggle();
+    });
+
+     $('.select-emoji').on('click', function () {
+        var classes = $(this).children();
+        var faClass = classes[0].classList[1];  
+        var message = $('#MessageToSend').val();
+
+        var code = GetCodeFromFAClass(faClass);
+        
+        var emojis = `<i class="fa-regular fa-${faClass}"></i>`;
+        message += code;
+        console.log(code,faClass,message,emojis);
+        $('#MessageToSend').val(message);
+        $('#MessageToSend').html(message);
     });
 
     $('.MeetingOption').on('click', function (e) {

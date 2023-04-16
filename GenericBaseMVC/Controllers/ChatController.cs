@@ -1,4 +1,5 @@
 ﻿using GenericAppDLL.Models.ViewModels;
+using GenericBaseMVC.Constants;
 using GenericBaseMVC.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
@@ -89,6 +90,7 @@ public class ChatController : Controller
     public async Task<IActionResult> SendDirectMessage(string id)
     {
         var model = new ChatViewModel();
+        model.emojis = new Emojis().emojis;
         var userEmail = User.Identity.Name ?? "none";
         var userService = new CustomerService();
         var Users = await userService.Get(userEmail);

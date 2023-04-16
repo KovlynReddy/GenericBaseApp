@@ -1,0 +1,13 @@
+﻿@model List<string> 
+<div id="emoji-tray">
+    @foreach (var emoji in Model){
+    <button type="button" class="select-emoji">
+    <i class="fa-regular fa-@emoji"></i>
+    </button>
+    }
+</div>
+
+<script type="text/javascript">
+    //var theme = $("#theme");
+    console.log(newUrl, theme.attr('class'));
+</script>

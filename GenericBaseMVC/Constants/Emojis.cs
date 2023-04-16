@@ -1,0 +1,46 @@
+﻿namespace GenericBaseMVC.Constants
+{
+    public class Emojis
+    {
+        public List<string> emojis { get; set; } = new List<string>()
+    {
+    "face-smile",
+    "face-worried",
+    "face-sad",
+    "face-sad-sweat",
+    "face-awesome",
+    "face-laugh-squint",
+    "face-grin-tears",
+    "face-grin-squint-tears",
+    "face-grin-tongue",
+    "face-laugh-wink",
+    "face-sad-cry",
+    "face-meh",
+    "face-grin-tongue-wink",
+    "face-dizzy",
+    "face-flushed",
+    "face-grin-hearts",
+    "cannabis",
+    "fire",
+    "droplet",
+    "hand-peace",
+    "hand-middle-finger",
+    "hand-wave",
+    "hand-fingers-crossed",
+    "hand-fist",
+    "handshake",
+    "face-surprise",
+    "face-kiss-wink-heart",
+    "face-sunglasses",
+    "face-smile-horns",
+    "face-angry",
+    "face-scream",
+    "face-sleepy",
+    "face-pensive",
+    "face-smirking",
+    "face-meh-blank",
+    "face-zipper",
+    "face-vomit"
+    };
+    }
+}
