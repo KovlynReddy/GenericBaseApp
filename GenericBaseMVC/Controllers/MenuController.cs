@@ -12,8 +12,19 @@ public class MenuController : Controller
         _VendorService = new VendorService();
     }
 
-
     [HttpGet]
+    public async Task<IActionResult> ViewCart()
+    {
+        return View();
+    }    
+    
+    [HttpPost]
+    public async Task<IActionResult> AddToCart(string Id)
+    {
+        return View();
+    }
+
+   [HttpGet]
     public async Task<IActionResult> Dashboard()
     {
         ShopDashboardViewModel model = new ShopDashboardViewModel();
