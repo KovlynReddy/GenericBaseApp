@@ -1,12 +1,108 @@
 ﻿@model GenericAppDLL.Models.ViewModels.CustomerViewModel
+@{
+    var emojiTest = new List<string>() { "face-smile" };
+}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8" style="text-align: -webkit-center;">
 
-
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="~/profileimage.png" alt="Card image cap">
-        <h5 class="card-title">@Model.CustomerName</h5>
-        <p class="card-text">@Model.CustomerEmail  @Model.ModelGUID</p>
-        <a asp-action="SendDirectMessage" asp-controller="Chat" asp-route-itemid="@Model.ModelGUID" class="btn btn-primary">Message</a>
-        <a href="#" class="btn btn-secondary">Add Friend</a>
-        <a href="#" class="btn btn-success">View Profile</a>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/profileimage.png" alt="Card image cap">
+            <h5 class="card-title">@Model.CustomerName</h5>
+            <p class="card-text">@Model.CustomerEmail  @Model.ModelGUID</p>
+            <a asp-action="SendDirectMessage" asp-controller="Chat" asp-route-itemid="@Model.ModelGUID" class="btn btn-primary">Message</a>
+            <a href="#" class="btn btn-secondary">Add Friend</a>
+            <a href="#" class="btn btn-success">View Profile</a>
+        </div>
     </div>
+
+    <div class="col-2"></div>    
+    </div>
+
+<div class="row">
+<div class="col-2"></div>
+    <div class="col-8" style="text-align: -webkit-center;">
+        <ul class="nav nav-tabs  justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#Posts" aria-current="page" href="#Posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " data-bs-toggle="tab" data-bs-target="#Bio" href="#Bio" tabindex="-1" aria-disabled="true">Bio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#MeetUps" href="#MeetUps">Meet Ups</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" data-bs-toggle="tab" data-bs-target="#History" href="#History">History</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" id="Posts" class="tab-pane fade in show active">
+                <h3>Posts</h3>
+                @*<partial name="EmojiTray" model="emojiTest" />*@
+                <p>Posts Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="Bio" class="tab-pane fade">
+                <h3>Bio</h3>
+                @*<partial name="EmojiTray" model="emojiTest" />*@
+                <p>Bio Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="MeetUps" class="tab-pane fade">
+                <h3>MeetUps</h3>
+                @*<partial name="EmojiTray" model="emojiTest" />*@
+                <p>MeetUps Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="History" class="tab-pane fade">
+                <h3>History</h3>
+                @*<partial name="EmojiTray" model="emojiTest" />*@
+                <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+        </div>
+
+    </div>
+<div class="col-2"></div>
+ <div/>
+ </div>
+ 
+ <div class="row">
+<div class="col-2"></div>
+    <div class="col-8" style="text-align: -webkit-center;">
+
+        <div class="tab-content">
+            <div role="tabpanel" id="Posts" class="tab-pane fade in active">
+                <h3>Posts</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>Posts Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="Bio" class="tab-pane fade">
+                <h3>Bio</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>Bio Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="MeetUps" class="tab-pane fade">
+                <h3>MeetUps</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>MeetUps Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>            
+            <div role="tabpanel" id="History" class="tab-pane fade">
+                <h3>History</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+        </div>
+
+
 </div>
+<div class="col-2"></div>
+ <div/>
+ </div>
+
+
