@@ -3,9 +3,9 @@
 public class CustomerService
 {
 
-    public async Task<List<Customer>> Get(string email)
+    public async Task<List<CustomerDto>> Get(string email)
     {
-        IEnumerable<Customer> Vendors = null;
+        IEnumerable<CustomerDto> Vendors = null;
 
         string apiUrl = "https://localhost:7240/api/Customers/" + email;
 
@@ -17,11 +17,11 @@ public class CustomerService
 
             HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-            var apiresponse = new List<Customer>();
+            var apiresponse = new List<CustomerDto>();
 
             if (response.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadAsAsync<List<Customer>>();
+                var data = await response.Content.ReadAsAsync<List<CustomerDto>>();
                 //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                 apiresponse = data;
             }

@@ -18,44 +18,7 @@ public class ChatController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var model = new ChatViewModel();
-        var userEmail = User.Identity.Name ?? "none";
-
-        var Users = await new CustomerService().Get(userEmail);
-        var Recivers = await new CustomerService().Get();
-        var user = Users.FirstOrDefault();
-        var reciever = Recivers.FirstOrDefault();
-        var allMessagesDto = await DirectMessageService.Get("none", user.ModelGUID);
-        //await ChatService.Get(userEmail);
-
-        foreach (var message in allMessagesDto)
-        {
-            model.AllMessages.Add(new DirectMessageViewModel()
-            {
-                Message = message.Message,
-                SenderGUID = message.SenderGuid,
-                ReaderGUID = message.RecieverGuid,
-                CreationDateTime = message.CreatedDateTime,
-                CreatorGUID = message.CreatorGuid,
-            });
-        }
-
-        model.ChatHead = new ChatHeaderViewModel()
-        {
-            RecieverName = reciever.CustomerName,
-            ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
-            ChatId = "2",
-
-        };
-
-        model.NewMessage = new SendDirectMessageViewModel()
-        {
-            SenderGuid = user.ModelGUID,
-            SenderId = user.Id,
-            RecieverGuid = reciever.ModelGuid,
-            RecieverId = reciever.Id,
-            Message = "",
-        };
+        var model = await CreateChatViewModel(string.Empty);
 
         return View("AllMyChats", model);
     }
@@ -89,48 +52,69 @@ public class ChatController : Controller
     [HttpGet]
     public async Task<IActionResult> SendDirectMessage(string id)
     {
+        var model = await CreateChatViewModel(id);
+
+        return View("AllMyChats",model);
+    }
+
+    public async Task<ChatViewModel> CreateChatViewModel(string id) {
         var model = new ChatViewModel();
         model.emojis = new Emojis().emojis;
         var userEmail = User.Identity.Name ?? "none";
         var userService = new CustomerService();
         var Users = await userService.Get(userEmail);
-        var Recivers = await userService.Get(id);
         var user = Users.FirstOrDefault();
-        var reciever = Recivers.FirstOrDefault();
+        var Recievers = new List<CustomerDto>();
+        var allMessagesDto = await DirectMessageService.Get(user.ModelGuid);
+        var reciever = new CustomerDto();
+        if (!string.IsNullOrEmpty(id)){ 
+            Recievers = await userService.Get(id);
+            reciever = Recievers.FirstOrDefault();
+        }
+        else { 
+            Recievers = await userService.Get();
+            var firstMessageId = allMessagesDto.FirstOrDefault(m => m.SenderGuid != user.ModelGuid).SenderGuid;
+            if (string.IsNullOrEmpty(firstMessageId))
+            {
+                firstMessageId = allMessagesDto.FirstOrDefault(m => m.RecieverGuid != user.ModelGuid).RecieverGuid;
+            }
+            reciever = Recievers.FirstOrDefault(m => m.ModelGuid == firstMessageId);
+        } 
+        
+        
         //var allMessagesDto = await DirectMessageService.Get(id, user.ModelGUID);
-        var allMessagesDto = await DirectMessageService.Get(user.ModelGUID);
-
         var users = new List<string>();
-        users.AddRange(allMessagesDto.Where(m =>  m.RecieverGuid == user.ModelGUID).DistinctBy(k=>k.SenderGuid).Select(t=>t.SenderGuid).ToList());
-        users.AddRange(allMessagesDto.Where(m =>  m.SenderGuid == user.ModelGUID).DistinctBy(k=>k.RecieverGuid).Select(t => t.RecieverGuid).ToList());
+        users.AddRange(allMessagesDto.Where(m => m.RecieverGuid == user.ModelGuid).DistinctBy(k => k.SenderGuid).Select(t => t.SenderGuid).ToList());
+        users.AddRange(allMessagesDto.Where(m => m.SenderGuid == user.ModelGuid).DistinctBy(k => k.RecieverGuid).Select(t => t.RecieverGuid).ToList());
         users = users.Distinct().ToList();
         //await ChatService.Get(userEmail);
-        var CurrentChatMessages = allMessagesDto.Where(m => (m.SenderGuid == id && m.RecieverGuid == user.ModelGUID) || (m.SenderGuid == user.ModelGUID && m.RecieverGuid == id)).ToList();
+        var CurrentChatMessages = allMessagesDto.Where(m => (m.SenderGuid == reciever.ModelGuid && m.RecieverGuid == user.ModelGuid) || (m.SenderGuid == user.ModelGuid && m.RecieverGuid == reciever.ModelGuid)).ToList();
         var OtherChats = new List<ChatHeaderViewModel>();
         foreach (var userid in users)
         {
-            var LastMessage = allMessagesDto.Where(m => m.SenderGuid == userid || m.RecieverGuid == userid).OrderBy(k=>k.CreatedDateTime).LastOrDefault();
+            var LastMessage = allMessagesDto.Where(m => m.SenderGuid == userid || m.RecieverGuid == userid).OrderBy(k => k.CreatedDateTime).LastOrDefault();
             //create api endpoint to take list of string to return list of equal size back instead of looping
             var useridProfile = (await userService.Get(userid)).FirstOrDefault();
             model.OtherChatHeads.Add(
-                new ChatHeaderViewModel() { 
-                RecieverName = useridProfile.CustomerName,
-                ChatId = useridProfile.ModelGUID,
-                ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png", 
-                CreatorId = useridProfile.ModelGUID,
-                LastMessage = LastMessage.Message,
-                LastMessageSent = LastMessage.CreatedDateTime.ToString(),
-                //Id = useridProfile.ModelGUID
+                new ChatHeaderViewModel()
+                {
+                    RecieverName = useridProfile.CustomerName,
+                    ChatId = useridProfile.ModelGuid,
+                    ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
+                    CreatorId = useridProfile.ModelGuid,
+                    LastMessage = LastMessage.Message,
+                    LastMessageSent = LastMessage.CreatedDateTime.ToString(),
+                    //Id = useridProfile.ModelGUID
                 }
                 );
         }
 
         model.ChatHead = new ChatHeaderViewModel()
         {
-            RecieverName = user.UserName,
-            ChatId = user.ModelGUID,
+            RecieverName = user.CustomerName,
+            ChatId = user.ModelGuid,
             ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
-            CreatorId = user.ModelGUID,
+            CreatorId = user.ModelGuid,
             //Id = useridProfile.ModelGUID
         };
 
@@ -143,27 +127,30 @@ public class ChatController : Controller
                 ReaderGUID = message.RecieverGuid,
                 CreationDateTime = message.CreatedDateTime,
                 CreatorGUID = message.CreatorGuid,
-                MyGuid = user.ModelGUID
-                
+                MyGuid = user.ModelGuid
+
             });
         }
 
-        model.ChatHead = new ChatHeaderViewModel() { 
-        RecieverName = reciever.CustomerName,
-        ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
-        ChatId = "1",
-       
+        model.ChatHead = new ChatHeaderViewModel()
+        {
+            RecieverName = reciever.CustomerName,
+            ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
+            ChatId = "1",
+
         };
 
-        model.NewMessage = new SendDirectMessageViewModel() { 
-        SenderGuid = user.ModelGUID,
-        SenderId = user.Id,
-        RecieverGuid = reciever.ModelGUID,
-        RecieverId = reciever.Id,
-        Message = "",
+        model.NewMessage = new SendDirectMessageViewModel()
+        {
+            SenderGuid = user.ModelGuid,
+            SenderId = user.Id,
+            RecieverGuid = reciever.ModelGuid,
+            RecieverId = reciever.Id,
+            Message = "",
         };
 
-        return View("AllMyChats",model);
+        return model;
+
     }
 
     [HttpPost]
@@ -176,7 +163,7 @@ public class ChatController : Controller
         await DirectMessageService.Post(model);
         //await ChatService.Create(model);
         var code = 102;
-        if (user.ModelGUID == model.SenderGuid)
+        if (user.ModelGuid == model.SenderGuid)
         {
             code = 101;
         }
