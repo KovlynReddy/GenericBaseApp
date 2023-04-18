@@ -1,4 +1,5 @@
-﻿using GenericAppDLL.Models.ViewModels;
+﻿using AutoMapper;
+using GenericAppDLL.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VendorAPI.Data.Interface;
@@ -12,21 +13,24 @@ namespace VendorAPI.Controllers
         private readonly VendorContext _context;
         private readonly ICartDB _cartDB;
         private readonly IPurchaseDB _purchaseDB;
+        private readonly IMapper mapper;
 
-        public CartController(VendorContext context,ICartDB cartDB , IPurchaseDB purchaseDB)
+        public CartController(VendorContext context,ICartDB cartDB , IPurchaseDB purchaseDB,IMapper mapper)
         {
             _context = context;
             this._cartDB = cartDB;
             this._purchaseDB = purchaseDB;
+            this.mapper = mapper;
         }
 
         [Route("~/api/Cart/{id}/{headers}")]
         [HttpGet]
         public async Task<IActionResult> Get(string id, string headers)
         {
-            _cartDB.Get(id);
+            var results = await _purchaseDB.Get(id);
 
-            return Ok();
+
+            return Ok(results);
 
         }
 
@@ -34,9 +38,10 @@ namespace VendorAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string Id)
         {
-            _purchaseDB.Get(Id);
 
-            return Ok();
+            var results = await _cartDB.Get(Id);
+
+            return Ok(results);
 
         }
 
@@ -44,38 +49,20 @@ namespace VendorAPI.Controllers
 
         [Route("~/api/Cart")]
         [HttpPost]
-        public async Task<IActionResult> Post(CreatePurchaseItemDto newCart)
+        public async Task<IActionResult> Post(CreatePurchaseDto newCart)
         {
-
-            await _cartDB.Post(new PurchasedItem()
-            {
-                Amount = newCart.Amount,
-                CartId = newCart.CartId,
-                Cost = newCart.Cost,
-                CreatedDateTime = newCart.DatePurchased,
-                IsPaid = 0,
-                ItemGuid = newCart.ItemGuid,
-                ModelGUID = newCart.ModelGuid,
-            });
+            var dto = mapper.Map<PurchaseDto>(newCart);
+            await _purchaseDB.Post(dto);
             return Ok();
 
         }
 
         [Route("~/api/Cart/Item")]
         [HttpPost]
-        public async Task<IActionResult> Post(CreatePurchaseDto newCart)
+        public async Task<IActionResult> Post(CreatePurchaseItemDto newCart)
         {
-            await _purchaseDB.Post(new Purchase()
-            {
-                Amount = newCart.Amount,
-                CartId = newCart.CartId,
-                Cost = newCart.Cost,
-                CreatedDateTime = newCart.DatePurchased,
-                Currency = newCart.Currency,
-                IsPaid = 0,
-                ModelGUID = newCart.ModelGuid,
-                Total = newCart.Total
-            });
+            var dto = mapper.Map<PurchaseItemDto>(newCart);
+            await _cartDB.Post(dto);
 
             var items = await _cartDB.Get(newCart.CartId);
             var purchases = await _purchaseDB.Get(newCart.CartId);                                                                                                                                                                                                                                                                                  

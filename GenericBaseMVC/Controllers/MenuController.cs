@@ -1,4 +1,7 @@
-﻿namespace GenericBaseMVC.Controllers;
+﻿using AutoMapper;
+using NuGet.Packaging;
+
+namespace GenericBaseMVC.Controllers;
 
 [Route("Menu/[action]")]
 public class MenuController : Controller    
@@ -6,21 +9,50 @@ public class MenuController : Controller
     public VendorService _VendorService { get; set; }
     public MenuService _MenuService { get; set; }
     public CartService _cartService { get; set; }
+    public IMapper Mapper { get; }
 
-    public MenuController()
+    public MenuController(IMapper mapper)
     {
         _MenuService = new MenuService();
         _VendorService = new VendorService();
         _cartService = new CartService();
+        Mapper = mapper;
     }
 
     [HttpGet]
     public async Task<IActionResult> ViewCart()
     {
-        await _cartService.Get("var1","var2");
-        await _cartService.Get("varr1");
+        var model = new CartViewModel();
+        var userEmail = User.Identity.Name ?? "none";
+        var userService = new CustomerService();
+        var Users = await userService.Get(userEmail);
+        var user = Users.FirstOrDefault();
+        var userId = user.ModelGuid;
 
-        return View();
+        var purchases = await _cartService.Get(userId, "none");
+        var items = new List<PurchaseItemDto>();
+        var menuItems = new List<MenuItemViewModel>();
+
+        if (purchases.Count != 0)
+        {
+            foreach (var purchase in purchases.Where(m=>m.IsPaid == 0))
+            {
+                var purchaseItems = await _cartService.Get(purchase.CartId);
+                items.AddRange(purchaseItems);
+            }
+        }
+
+        var allItems = await _MenuService.GetAll();
+        foreach (var item in items)
+        {
+            var VMs = Mapper.Map<List<MenuItemViewModel>>(allItems.Where(m=>m.ModelGuid == item.ItemGuid).ToList());
+            menuItems.AddRange(VMs);
+        }
+
+        model.purchasedItems = Mapper.Map<List<PurchaseItemViewModel>>(items);
+        model.Items = menuItems;
+
+        return View(model);
     }    
     
     [HttpPost]
@@ -35,7 +67,7 @@ public class MenuController : Controller
         var purchases = await _cartService.Get(userId,"none");
         var unpaid = purchases.FirstOrDefault(m => m.IsPaid == 0);
         var cartId = "";
-        if (unpaid.ModelGuid.Length > 5)
+        if (unpaid!= null && !string.IsNullOrEmpty(unpaid.ModelGuid))
         {
             cartId = unpaid.ModelGuid;
         }
@@ -51,7 +83,8 @@ public class MenuController : Controller
                 Cost = model.Cost,
                 ModelGuid = cartId,
                 Total = model.Cost * model.Amount,
-                ItemId = model.ModelGUID
+                ItemId = model.ModelGUID,
+                CreatorId = userId
             });
         }
 
@@ -68,7 +101,7 @@ public class MenuController : Controller
             Total = model.Cost * model.Amount
         });
 
-        return View();
+        return RedirectToAction("Dashboard");
     }
 
    [HttpGet]

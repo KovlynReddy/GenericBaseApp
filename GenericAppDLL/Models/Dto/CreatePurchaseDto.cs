@@ -11,6 +11,7 @@ namespace GenericAppDLL.Models.Dto
         public int Total { get; set; }
         public string DatePurchased { get; set; } = string.Empty;
         public string CreatedDateTime { get; set; } = string.Empty;
+        public string CreatorId { get; set; } = string.Empty;
         public string Currency { get; set; } = string.Empty;
         public string CartId { get; set; } = string.Empty;
         public string ItemId { get; set; } = string.Empty;

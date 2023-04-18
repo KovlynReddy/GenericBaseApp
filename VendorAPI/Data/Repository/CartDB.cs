@@ -32,7 +32,8 @@ namespace VendorAPI.Data.Repository
         public async Task<IEnumerable<PurchaseItemDto>> Get(string Id)
         {
             var rawResult = _context.PurchasedItems.Where(m => m.CreatorId == Id || m.CartId == Id || m.ModelGUID == Id).ToList();
-            return mapper.Map<List<PurchaseItemDto>>(rawResult);
+            var results = mapper.Map<List<PurchaseItemDto>>(rawResult);
+            return results;
         }
 
         public async Task<PurchaseItemDto> Post(PurchaseItemDto model)

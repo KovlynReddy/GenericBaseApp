@@ -16,6 +16,7 @@ namespace GenericAppDLL.Models.ViewModels
         public string Caption { get; set; }
         public int Cost { get; set; }
         public int Amount { get; set; }
+        public int Total { get; set; }
         public int IsMod { get; set; }
         public string Currency { get; set; }
         public string CreatorId { get; set; }

@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
-using GenericAppDLL.Models.DomainModel;
-using GenericAppDLL.Models.Dto;
-using GenericAppDLL.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GenericAppDLL.Models.Mappers;
 
-namespace GenericAppDLL.Models.Mappers
+namespace GenericBaseMVC.Data.Mapper
 {
-    public class Mapper :Profile
+    public class Mapper : Profile
     {
         public Mapper()
         {
@@ -36,7 +29,7 @@ namespace GenericAppDLL.Models.Mappers
             CreateMap<MenuItemDto, Item>().ReverseMap();
             CreateMap<MenuItemDto, MenuItemViewModel>().ReverseMap();
             CreateMap<MenuItemDto, CreateMenuItemViewModel>().ReverseMap();
-            
+
             //CreateMap<DirectMessageDto, DM>().ReverseMap();
 
         }

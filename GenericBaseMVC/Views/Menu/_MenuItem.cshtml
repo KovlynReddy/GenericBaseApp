@@ -24,6 +24,9 @@
             <div class="modal-body">
                 <div class="row">             
                     <input asp-for="@Model.ModelGUID" value="@Model.ModelGUID" hidden class="form-control">
+                        <input asp-for="@Model.Currency" value="@Model.Currency" hidden class="form-control">
+                        <input asp-for="@Model.Cost" value="@Model.Cost" hidden class="form-control">
+                        <input asp-for="@Model.SKUCode" value="@Model.SKUCode" hidden class="form-control">
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Amount:</label>
                     <input asp-for="Amount" type="number" class="form-control">

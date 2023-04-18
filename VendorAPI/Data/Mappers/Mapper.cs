@@ -1,23 +1,27 @@
 ﻿using AutoMapper;
-using GenericAppDLL.Models.DomainModel;
-using GenericAppDLL.Models.Dto;
+using GenericAppDLL.Models.Mappers;
 using GenericAppDLL.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GenericAppDLL.Models.Mappers
+namespace VendorAPI.Data.Mappers
 {
-    public class Mapper :Profile
+    //public class Mapper : GenericAppDLL.Models.Mappers.Mapper
+    //{
+    //    public Mapper()
+    //    :base()
+    //    {
+
+    //    }
+    //}
+    public class Mapper : Profile
     {
         public Mapper()
         {
             CreateMap<PurchaseDto, Purchase>().ReverseMap();
             CreateMap<CreatePurchaseDto, Purchase>().ReverseMap();
+            CreateMap<CreatePurchaseDto, PurchaseDto>().ReverseMap();
             CreateMap<PurchaseDto, PurchaseViewModel>().ReverseMap();
             CreateMap<PurchaseItemDto, PurchasedItem>().ReverseMap();
+            CreateMap<PurchaseItemDto, CreatePurchaseItemDto>().ReverseMap();
             CreateMap<PurchaseItemDto, PurchaseItemViewModel>().ReverseMap();
             CreateMap<DirectMessage, DM>().ReverseMap();
             CreateMap<DirectMessageDto, DirectMessageViewModel>().ReverseMap();
@@ -36,9 +40,10 @@ namespace GenericAppDLL.Models.Mappers
             CreateMap<MenuItemDto, Item>().ReverseMap();
             CreateMap<MenuItemDto, MenuItemViewModel>().ReverseMap();
             CreateMap<MenuItemDto, CreateMenuItemViewModel>().ReverseMap();
-            
+
             //CreateMap<DirectMessageDto, DM>().ReverseMap();
 
         }
     }
+
 }
