@@ -20,18 +20,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <form asp-action="AddToCart" asp-controller="Cart">
+                <form asp-action="AddToCart" asp-controller="Menu">
             <div class="modal-body">
                 <div class="row">             
-                    <input asp-for="ModelGUID" hidden type="text" class="form-control">
+                    <input asp-for="@Model.ModelGUID" value="@Model.ModelGUID" hidden class="form-control">
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Amount:</label>
-                    <input type="number" class="form-control">
+                    <input asp-for="Amount" type="number" class="form-control">
                 </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="CreateMeetUp" type="button" class="btn btn-primary">Add To Cart</button>
+                <button id="CreateMeetUp" type="submit" class="btn btn-primary">Add To Cart</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
                 </form>

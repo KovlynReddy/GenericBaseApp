@@ -16,8 +16,12 @@ builder.Services.AddDbContext<VendorContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 builder.Services.AddTransient<ICustomer,CustomerDB>();
 builder.Services.AddTransient<IItemDB,ItemDB>();
+builder.Services.AddTransient<IPurchaseDB,PurchaseDB>();
+builder.Services.AddTransient<ICartDB,CartDB>();
 builder.Services.AddTransient<IDirectMessagesDB, DirectMessageDB>();
 builder.Services.AddTransient<IPostDB,PostDB>();
 builder.Services.AddTransient<IVendor,VendorRepo>();

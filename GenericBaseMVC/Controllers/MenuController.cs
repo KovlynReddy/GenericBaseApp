@@ -1,26 +1,73 @@
 ﻿namespace GenericBaseMVC.Controllers;
 
 [Route("Menu/[action]")]
-public class MenuController : Controller
+public class MenuController : Controller    
 {
     public VendorService _VendorService { get; set; }
     public MenuService _MenuService { get; set; }
+    public CartService _cartService { get; set; }
 
     public MenuController()
     {
         _MenuService = new MenuService();
         _VendorService = new VendorService();
+        _cartService = new CartService();
     }
 
     [HttpGet]
     public async Task<IActionResult> ViewCart()
     {
+        await _cartService.Get("var1","var2");
+        await _cartService.Get("varr1");
+
         return View();
     }    
     
     [HttpPost]
-    public async Task<IActionResult> AddToCart(string Id)
+    public async Task<IActionResult> AddToCart(MenuItemViewModel model)
     {
+        var userEmail = User.Identity.Name ?? "none";
+        var userService = new CustomerService();
+        var Users = await userService.Get(userEmail);
+        var user = Users.FirstOrDefault();
+        var userId = user.ModelGuid;
+
+        var purchases = await _cartService.Get(userId,"none");
+        var unpaid = purchases.FirstOrDefault(m => m.IsPaid == 0);
+        var cartId = "";
+        if (unpaid.ModelGuid.Length > 5)
+        {
+            cartId = unpaid.ModelGuid;
+        }
+        else 
+        {
+            cartId = Guid.NewGuid().ToString();
+            await _cartService.Post(new CreatePurchaseDto() {
+                CartId = cartId,
+                Currency = model.Currency,
+                CreatedDateTime = DateTime.Now.ToString(),
+                IsPaid = 0,
+                Amount = model.Amount,
+                Cost = model.Cost,
+                ModelGuid = cartId,
+                Total = model.Cost * model.Amount,
+                ItemId = model.ModelGUID
+            });
+        }
+
+        await _cartService.Post(new CreatePurchaseItemDto()
+        {
+            CartId = cartId,
+            CreatedDateTime = DateTime.Now.ToString(),
+            IsPaid = 0,
+            ItemGuid = model.ModelGUID,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = model.Amount,
+            Cost = model.Cost,
+            Currency = model.Currency,
+            Total = model.Cost * model.Amount
+        });
+
         return View();
     }
 
@@ -47,6 +94,7 @@ public class MenuController : Controller
                     Currency = item.Currency,
                     ItemImage = item.ItemImage,
                     MenuId = item.MenuId,
+                    ModelGUID = item.ModelGuid,
                     IsMod = 1
                 });
             }
