@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.DomainModel;
 using VendorAPI.Data.Interface;
 
 namespace VendorAPI.Data.Repository
@@ -46,12 +47,19 @@ namespace VendorAPI.Data.Repository
 
         public async Task<PurchaseDto> Put(PurchaseDto model)
         {
-            var entity = mapper.Map<Purchase>(model);
-            var rawResult = _context.Update(entity);
+            //mapper.Map<Purchase>(model);
+            var entity = _context.Purchases.FirstOrDefault(m=>m.ModelGUID == model.ModelGuid || m.CartId == model.CartId);
+            //var rawResult = _context.Update(entity);
+            entity.IsPaid = model.IsPaid;
+            var IsPaid = _context.Entry(entity).Property("IsPaid").IsModified;
             _context.SaveChanges();
 
-            return mapper.Map<PurchaseDto>(rawResult.Entity);
+            return mapper.Map<PurchaseDto>(entity);
         }
 
+        public Task<List<PurchaseDto>> Put(List<PurchaseDto> model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

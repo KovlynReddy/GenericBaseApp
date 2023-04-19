@@ -55,6 +55,28 @@ namespace VendorAPI.Controllers
             await _purchaseDB.Post(dto);
             return Ok();
 
+        }        
+        
+        [Route("~/api/Cart/{cartId}")]
+        [HttpPost]
+        public async Task<IActionResult> Post(string cartId)
+        {
+            var trolley = await _cartDB.Get(cartId);
+            var purchases = await _purchaseDB.Get(cartId);
+
+            foreach (var item in trolley)
+            {
+                item.IsPaid = 1;
+            }
+            var purchase = purchases.FirstOrDefault();
+            purchase.IsPaid = 1;
+            var currentPurchase = purchase;
+
+            await _purchaseDB.Put(currentPurchase);
+            await _cartDB.Put(trolley.ToList());
+
+            return Ok();
+
         }
 
         [Route("~/api/Cart/Item")]

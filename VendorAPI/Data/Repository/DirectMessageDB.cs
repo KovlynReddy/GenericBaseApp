@@ -96,5 +96,10 @@ namespace VendorAPI.Data.Repository
             return messages;
 
         }
+
+        public Task<List<DirectMessageDto>> Put(List<DirectMessageDto> model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

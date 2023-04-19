@@ -1,0 +1,23 @@
+﻿@model GenericAppDLL.Models.ViewModels.PurchaseItemViewModel
+
+<div class="d-flex">
+
+<div class="card card-text" style="width: 18rem;">
+    <div class="row">
+    <div class="col-4">
+    <img class="card-img" src="~/Images/defaultImage.jpg" alt="Card image cap">
+    </div>
+    <div class="col-8">
+    <div class="">
+        <span> Item : @Model.ItemName</span><br />
+        <span> Cost @Model.Cost <input asp-for="@Model.Amount" style="max-width:5em;" type="number" /> </span><br />
+        <span>Total @Model.Total</span>
+        <span>
+        <button data-toggle="modal" data-target="#Modal" class="btn btn-primary AddItemToCart">Edit</button>
+        </span>
+    </div>
+    </div>
+    </div>
+</div>
+
+</div>

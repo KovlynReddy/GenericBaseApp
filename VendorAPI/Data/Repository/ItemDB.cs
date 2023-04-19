@@ -33,5 +33,10 @@ namespace VendorAPI.Data.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<Item>> Put(List<Item> model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,1 +1,28 @@
 ﻿@model GenericAppDLL.Models.ViewModels.CartViewModel
+
+<div class="row">
+    <div class="col-3">
+        @foreach (var item in Model.purchases)
+        {
+
+        }
+    </div>
+    <div class="col-9">
+
+        @foreach (var item in Model.Items)
+        {
+
+        }
+
+        <form asp-action="PurchaseTrolley" asp-controller="Menu">
+            <input asp-for="@Model.CartId" hidden />
+            @foreach (var item in Model.purchasedItems)
+            {
+                <partial name="_CartItem" model="item" />
+
+            }
+            <button type="submit" value="Purchase" class="btn btn-primary"><i></i></button>
+        </form>
+    </div>
+
+</div>

@@ -7,6 +7,7 @@
         Task<IEnumerable<T>> Get(int Id);
         Task<IEnumerable<T>> Get(string Id);
         Task<T> Put(T model);
+        Task<List<T>> Put(List<T> model);
         Task<T> Delete(int Id);
     }
 }

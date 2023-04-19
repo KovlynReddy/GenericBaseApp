@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using NuGet.Packaging;
+using static Humanizer.In;
 
 namespace GenericBaseMVC.Controllers;
 
@@ -32,30 +33,47 @@ public class MenuController : Controller
         var purchases = await _cartService.Get(userId, "none");
         var items = new List<PurchaseItemDto>();
         var menuItems = new List<MenuItemViewModel>();
+        var allItems = await _MenuService.GetAll();
 
         if (purchases.Count != 0)
         {
             foreach (var purchase in purchases.Where(m=>m.IsPaid == 0))
             {
                 var purchaseItems = await _cartService.Get(purchase.CartId);
+
+                foreach (var item in purchaseItems)
+                {
+                    item.ItemName = allItems.FirstOrDefault(m=>m.ModelGuid==item.ItemGuid).ItemName;
+                }
+
                 items.AddRange(purchaseItems);
+                model.CartId = purchase.CartId;
             }
         }
 
-        var allItems = await _MenuService.GetAll();
         foreach (var item in items)
         {
             var VMs = Mapper.Map<List<MenuItemViewModel>>(allItems.Where(m=>m.ModelGuid == item.ItemGuid).ToList());
+            
             menuItems.AddRange(VMs);
         }
 
         model.purchasedItems = Mapper.Map<List<PurchaseItemViewModel>>(items);
         model.Items = menuItems;
+        
 
         return View(model);
-    }    
-    
+    }
+
     [HttpPost]
+    public async Task<IActionResult> PurchaseTrolley(CartViewModel model)
+    {
+        var results = await _cartService.Post(model.CartId);
+
+        return View();
+    }
+
+        [HttpPost]
     public async Task<IActionResult> AddToCart(MenuItemViewModel model)
     {
         var userEmail = User.Identity.Name ?? "none";
@@ -98,7 +116,9 @@ public class MenuController : Controller
             Amount = model.Amount,
             Cost = model.Cost,
             Currency = model.Currency,
-            Total = model.Cost * model.Amount
+            Total = model.Cost * model.Amount,
+            VendorGuid = model.VendorGuid,
+            ItemName = model.ItemName
         });
 
         return RedirectToAction("Dashboard");
@@ -128,7 +148,8 @@ public class MenuController : Controller
                     ItemImage = item.ItemImage,
                     MenuId = item.MenuId,
                     ModelGUID = item.ModelGuid,
-                    IsMod = 1
+                    IsMod = 1,
+                    VendorGuid = item.VendorGuid
                 });
             }
 
@@ -272,7 +293,7 @@ public class MenuController : Controller
                 VendorId = newMenuItem.VendorId
             };
 
-            await _MenuService.Create(model);
+            await _MenuService.Post(model);
 
 
             return RedirectToAction(nameof(Index));
@@ -284,3 +305,4 @@ public class MenuController : Controller
     }
 
 }
+

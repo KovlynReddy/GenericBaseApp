@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
+using Microsoft.AspNetCore.Components.Web;
 using VendorAPI.Data.Interface;
 
 namespace VendorAPI.Data.Repository
@@ -52,6 +53,26 @@ namespace VendorAPI.Data.Repository
             _context.SaveChanges();
 
             return mapper.Map<PurchaseItemDto>(rawResult.Entity);
+        }
+
+        public async Task<List<PurchaseItemDto>> Put(List<PurchaseItemDto> model)
+        {
+            var dmodel = mapper.Map<List<PurchasedItem>>(model);
+            var dlist = dmodel.ToList();
+            //var rawResult = _context.UpdateRange(dlist);
+
+            foreach (var item in dmodel)
+            {
+                //var result = _context.Update(item);
+                var ditem = _context.PurchasedItems.FirstOrDefault(m=>m.ModelGUID == item.ModelGUID || m.Id == item.Id);
+                ditem.IsPaid = item.IsPaid;
+                var IsPaid = _context.Entry(ditem).Property("IsPaid").IsModified;
+                
+                _context.SaveChanges();
+            }
+
+            //return mapper.Map<PurchaseItemDto>(rawResult.Entity);
+            return new List<PurchaseItemDto>();
         }
     }
 }
