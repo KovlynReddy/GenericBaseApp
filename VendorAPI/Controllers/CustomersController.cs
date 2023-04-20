@@ -38,6 +38,15 @@ public class CustomersController : Controller
     }
 
     [HttpGet]
+    [Route("~/api/Customers/{email}/{state}")]
+    public async Task<IActionResult> Get(string email,int state)
+    {
+
+
+        return Ok();
+    }
+
+    [HttpGet]
     [Route("~/api/Customers/{email}")]
     public async Task<IActionResult> Get(string email)
     {

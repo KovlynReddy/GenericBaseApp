@@ -1,13 +1,13 @@
 ﻿namespace GenericBaseMVC.Services
 {
-    public class CartService
+    public class RelationshipService
     {
-        public async Task<List<PurchaseItemDto>> Get(string id)
+        public async Task<List<RelationshipDto>> Get(string id)
         {
-            IEnumerable<PurchaseItemDto> Cart = null;
+            IEnumerable<RelationshipDto> Relationship = null;
 
 
-            string apiUrl = "https://localhost:7240/api/Shop/Item/" + id;
+            string apiUrl = "https://localhost:7240/api/Relationship/" + id;
 
             using (HttpClient client = new HttpClient())
             {
@@ -17,11 +17,11 @@
 
                 HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                var apiresponse = new List<PurchaseItemDto>();
+                var apiresponse = new List<RelationshipDto>();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadAsAsync<List<PurchaseItemDto>>();
+                    var data = await response.Content.ReadAsAsync<List<RelationshipDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                     //Newtonsoft.Json.JsonConvert.DeserializeObject(data);
@@ -32,13 +32,13 @@
 
         }
 
-        public async Task<List<PurchaseDto>> Get(string id, string headers)
+        public async Task<List<RelationshipDto>> Get(string id, string headers)
         {
-            IEnumerable<PurchaseDto> Cart = null;
+            IEnumerable<RelationshipDto> Relationship = null;
 
 
-            //string apiUrl = "https://localhost:7240/api/Cart?id="+id+"&headers="+headers;
-            string apiUrl = $"https://localhost:7240/api/Cart/{id}/{headers}";
+            //string apiUrl = "https://localhost:7240/api/Relationship?id="+id+"&headers="+headers;
+            string apiUrl = $"https://localhost:7240/api/Relationship/{id}/{headers}";
 
             using (HttpClient client = new HttpClient())
             {
@@ -48,11 +48,11 @@
 
                 HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                var apiresponse = new List<PurchaseDto>();
+                var apiresponse = new List<RelationshipDto>();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadAsAsync<List<PurchaseDto>>();
+                    var data = await response.Content.ReadAsAsync<List<RelationshipDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                     //Newtonsoft.Json.JsonConvert.DeserializeObject(data);
@@ -64,11 +64,11 @@
         }
 
 
-        public async Task<PurchaseItemDto> Post(CreatePurchaseItemDto newCart)
+        public async Task<RelationshipDto> Post(CreateRelationshipDto newRelationship)
         {
-            IEnumerable<PurchaseItemDto> Carts = null;
+            IEnumerable<RelationshipDto> Relationships = null;
 
-            string apiUrl = "https://localhost:7240/api/Shop/Item";
+            string apiUrl = "https://localhost:7240/api/Relationship";
 
             using (HttpClient client = new HttpClient())
             {
@@ -76,18 +76,18 @@
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newCart);
+                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newRelationship);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new PurchaseItemDto();
+                var apiresponse = new RelationshipDto();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<PurchaseItemDto>();
+                    var data = await result.Content.ReadAsAsync<RelationshipDto>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -97,11 +97,11 @@
 
         }
 
-        public async Task<PurchaseDto> Post(CreatePurchaseDto newCart)
+        public async Task<RelationshipDto> Post(RelationshipDto newRelationship)
         {
-            IEnumerable<PurchaseDto> Carts = null;
+            IEnumerable<RelationshipDto> Relationships = null;
 
-            string apiUrl = "https://localhost:7240/api/Cart";
+            string apiUrl = "https://localhost:7240/api/Relationship";
 
             using (HttpClient client = new HttpClient())
             {
@@ -109,18 +109,18 @@
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newCart);
+                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newRelationship);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new PurchaseDto();
+                var apiresponse = new RelationshipDto();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<PurchaseDto>();
+                    var data = await result.Content.ReadAsAsync<RelationshipDto>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -130,11 +130,11 @@
 
         }
 
-        public async Task<PurchaseDto> Put(string CartId)
+        public async Task<RelationshipDto> Put(RelationshipDto dto)
         {
-            IEnumerable<PurchaseDto> Carts = null;
+            IEnumerable<RelationshipDto> Relationships = null;
 
-            string apiUrl = "https://localhost:7240/api/Cart/"+CartId;
+            string apiUrl = "https://localhost:7240/api/Relationship" ;
 
             using (HttpClient client = new HttpClient())
             {
@@ -142,18 +142,18 @@
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(CartId);
+                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage result = await client.PutAsync(apiUrl, payload);
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new PurchaseDto();
+                var apiresponse = new RelationshipDto();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<PurchaseDto>();
+                    var data = await result.Content.ReadAsAsync<RelationshipDto>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -164,11 +164,11 @@
         }
 
 
-        public async Task<List<PurchaseItemDto>> Delete(PurchaseItemViewModel newCart)
+        public async Task<List<RelationshipDto>> Delete(PurchaseItemViewModel newRelationship)
         {
-            IEnumerable<PurchaseItemDto> Carts = null;
+            IEnumerable<RelationshipDto> Relationships = null;
 
-            string apiUrl = "https://localhost:7240/api/Shop/Item";
+            string apiUrl = "https://localhost:7240/api/Relationship";
 
             using (HttpClient client = new HttpClient())
             {
@@ -176,18 +176,18 @@
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newCart);
+                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newRelationship);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new List<PurchaseItemDto>();
+                var apiresponse = new List<RelationshipDto>();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<List<PurchaseItemDto>>();
+                    var data = await result.Content.ReadAsAsync<List<RelationshipDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -197,11 +197,11 @@
 
         }
 
-        public async Task<List<PurchaseDto>> Delete(PurchaseViewModel newCart)
+        public async Task<List<RelationshipDto>> Delete(PurchaseViewModel newRelationship)
         {
-            IEnumerable<PurchaseDto> Carts = null;
+            IEnumerable<RelationshipDto> Relationships = null;
 
-            string apiUrl = "https://localhost:7240/api/Cart";
+            string apiUrl = "https://localhost:7240/api/Relationship";
 
             using (HttpClient client = new HttpClient())
             {
@@ -209,18 +209,18 @@
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newCart);
+                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(newRelationship);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new List<PurchaseDto>();
+                var apiresponse = new List<RelationshipDto>();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<List<PurchaseDto>>();
+                    var data = await result.Content.ReadAsAsync<List<RelationshipDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }

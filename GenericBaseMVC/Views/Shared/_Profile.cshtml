@@ -1,15 +1,17 @@
 ﻿@model GenericAppDLL.Models.ViewModels.CustomerViewModel
 
-<form asp-action="ViewProfile" asp-controller="Profile" asp-route-email="@Model.ModelGUID">
 <div class="card" style="width: 18rem;">
-    <input asp-for="ModelGUID" hidden/>
     <img class="card-img-top" src="~/profileimage.png" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">@Model.CustomerName</h5>
         <p class="card-text">@Model.CustomerEmail  @Model.ModelGUID</p>
+        <div class="d-flex">
         <a asp-action="SendDirectMessage" asp-controller="Chat" asp-route-id="@Model.ModelGUID" class="btn btn-primary"><i class="fa-solid fa-message"></i>@*Message*@</a>
         <a asp-action="SendFriendRequest" asp-controller="Profile" asp-route-id="@Model.ModelGUID" class="btn btn-secondary"><i class="fas fa-user-plus"></i>@*Add Friend*@</a>
+<form asp-action="ViewProfile" asp-controller="Profile" asp-route-email="@Model.ModelGUID">
+        <input asp-for="ModelGUID" hidden/>
         <button type="submit" asp-action="ViewProfile" asp-controller="Profile" asp-route-id="@Model.ModelGUID" class="btn btn-success"><i class="fas fa-user"></i>@*View Profile*@</button>
+</form>
+            </div>
     </div>
 </div>
-</form>

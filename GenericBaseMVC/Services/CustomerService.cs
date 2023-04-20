@@ -29,6 +29,34 @@ public class CustomerService
             return apiresponse;
         }
 
+    }    
+    
+    public async Task<List<CustomerDto>> Get(string email,int state)
+    {
+        IEnumerable<CustomerDto> Vendors = null;
+
+        string apiUrl = "https://localhost:7240/api/Customers/" + email +"/"+state;
+
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(apiUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+            var apiresponse = new List<CustomerDto>();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsAsync<List<CustomerDto>>();
+                //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
+                apiresponse = data;
+            }
+
+            return apiresponse;
+        }
+
     }
 
     public async Task<List<CustomerDto>> Get()

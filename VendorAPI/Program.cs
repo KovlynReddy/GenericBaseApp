@@ -25,6 +25,7 @@ builder.Services.AddTransient<ICartDB,CartDB>();
 builder.Services.AddTransient<IDirectMessagesDB, DirectMessageDB>();
 builder.Services.AddTransient<IPostDB,PostDB>();
 builder.Services.AddTransient<IVendor,VendorRepo>();
+builder.Services.AddTransient<IRelationship,RelationshipDB>();
 
 var app = builder.Build();
 
