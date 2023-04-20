@@ -1,9 +1,18 @@
-﻿using VendorAPI.Data.Interface;
+﻿using AutoMapper;
+using VendorAPI.Data.Interface;
 
 namespace VendorAPI.Data.Repository
 {
     public class RelationshipDB : IRelationship
     {
+        private readonly VendorContext _context;
+        private readonly IMapper mapper;
+
+        public RelationshipDB(VendorContext context, IMapper mapper)
+        {
+            _context = context;
+            this.mapper = mapper;
+        }
         public async Task<RelationshipDto> Delete(int Id)
         {
             throw new NotImplementedException();
@@ -11,7 +20,10 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<RelationshipDto>> Get()
         {
-            throw new NotImplementedException();
+            var rawresults = _context.Relationships.ToList();
+            var results = mapper.Map<List<RelationshipDto>>(rawresults);
+
+            return results;
         }
 
         public async Task<IEnumerable<RelationshipDto>> Get(int Id)
@@ -21,17 +33,29 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<RelationshipDto>> Get(string Id)
         {
-            throw new NotImplementedException();
+            var rawresults = _context.Relationships.Where(m=>m.SenderId == Id || m.RecieverId == Id).ToList();
+            var results = mapper.Map<List<RelationshipDto>>(rawresults);
+
+            return results;
         }
 
         public async Task<RelationshipDto> Post(RelationshipDto model)
         {
-            throw new NotImplementedException();
+            var dmodel = mapper.Map<Relationship>(model);
+            _context.Relationships.Add(dmodel);
+            _context.SaveChanges();
+
+            return model;
         }        
         
         public async Task<RelationshipDto> Post(CreateRelationshipDto model)
         {
-            throw new NotImplementedException();
+            var dmodel = mapper.Map<Relationship>(model);
+            _context.Relationships.Add(dmodel);
+            _context.SaveChanges();
+
+            var dto = mapper.Map<RelationshipDto>(model);
+            return dto;
         }
 
         public async Task<RelationshipDto> Put(RelationshipDto model)

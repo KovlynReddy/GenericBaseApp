@@ -24,7 +24,7 @@ namespace VendorAPI.Controllers
         {
             var response = _relationDb.Get();
 
-            return Ok();
+            return Ok(response);
 
         }        
         
@@ -32,9 +32,9 @@ namespace VendorAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string Id)
         {
-            var response = _relationDb.Get(Id);
+            var response = await _relationDb.Get(Id);
 
-            return Ok();
+            return Ok(response);
 
         }
 

@@ -87,7 +87,25 @@ public class ProfileController : Controller
     public async Task<IActionResult> ViewFriendRequests()
     {
         var email = User.Identity.Name;
-        var model = _customerService.Get(email,1); 
+        var currentUser =(await _customerService.Get(email)).FirstOrDefault(); 
+        var friendRequests = await _relationshipService.Get(currentUser.ModelGuid);
+        var userProfiles = new List<CustomerDto>();
+        var model = new ViewFriendRequestsViewModel();
+
+        foreach (var relationship in friendRequests)
+        {
+            if (relationship.SenderId == currentUser.ModelGuid)
+            {
+                userProfiles.Add((await _customerService.Get(relationship.RecieverId)).FirstOrDefault());
+            }
+            else {
+                userProfiles.Add((await _customerService.Get(relationship.SenderId)).FirstOrDefault());
+            }
+        }
+
+        var userProfileVMs = Mapper.Map<List<CustomerViewModel>>(userProfiles);
+
+        model.users = userProfileVMs;
 
         return View("ViewProfile",model); 
        
