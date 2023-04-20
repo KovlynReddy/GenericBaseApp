@@ -31,6 +31,12 @@ namespace GenericBaseMVC.Data.Mapper
             CreateMap<MenuItemDto, CreateMenuItemViewModel>().ReverseMap();
 
             //CreateMap<DirectMessageDto, DM>().ReverseMap();
+            CreateMap<CustomerDto, Customer>().ReverseMap();
+            CreateMap<CustomerDto, CreateCustomerViewModel>().ReverseMap();
+            CreateMap<CustomerDto, CustomerViewModel>().ReverseMap();
+            CreateMap<CustomerDto, EditCustomerDto>().ReverseMap();
+            CreateMap<CustomerViewModel, EditCustomerDto>().ReverseMap();
+            CreateMap<CustomerViewModel, CreateCustomerDto>().ReverseMap();
 
         }
     }

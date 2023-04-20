@@ -1,4 +1,6 @@
-﻿namespace GenericBaseMVC.Controllers;
+﻿using AutoMapper;
+
+namespace GenericBaseMVC.Controllers;
 
 public class ProfileController : Controller
 {
@@ -7,14 +9,27 @@ public class ProfileController : Controller
     public CustomerService _customerService { get; set; }
     public AddressService _addressService { get; set; }
     public BookingService _bookingService { get; set; }
+    public IMapper Mapper { get; }
 
-    public ProfileController()
+    public ProfileController(IMapper mapper)
     {
         _addressService = new AddressService();
         _customerService = new CustomerService();
         _VendorService = new VendorService();
         _bookingService = new BookingService();
+        Mapper = mapper;
     }
+
+    public async Task<ProfileViewModel> GetCustomerProfile(string email) {
+        ProfileViewModel model = new ProfileViewModel();
+
+        var customerDetails =(await _customerService.Get(email)).FirstOrDefault();
+
+        model.profileDetails = Mapper.Map<CustomerViewModel>(customerDetails);
+
+        return model;
+    }
+
 
     [HttpGet]
     public IActionResult CreateProfile() {
@@ -59,60 +74,60 @@ public class ProfileController : Controller
     [HttpGet]
     public async Task<IActionResult> ViewProfile()
     {
-        #region Temp Loggin
+        var email = User.Identity.Name;
+        var model = await GetCustomerProfile(email); 
 
-        string Email = "kovlyn.reddy01@gmail.com";
-        var results = await _customerService.Get();
-        var model = new List<CustomerViewModel>();
+        return View("ViewProfile",model); 
+       
+    }       
+    
+    [HttpGet]
+    public async Task<IActionResult> ViewFriendRequests()
+    {
+        var email = User.Identity.Name;
+        var model = await GetCustomerProfile(email); 
 
-        foreach (var customer in results)
-        {
-            var customerVM = new CustomerViewModel()
-            {
-                CustomerName = customer.CustomerName,
-                CustomerEmail = customer.CustomerEmail,
-                ModelGUID = customer.ModelGuid
-            };
+        return View("ViewProfile",model); 
+       
+    }    
+    
+    [HttpPost]
+    public async Task<IActionResult> ViewProfile(CustomerViewModel email)
+    {
+        var model = await GetCustomerProfile(email.ModelGUID); 
 
-            model.Add(customerVM);
+        return View("ViewProfile",model); 
+       
+    }    
+    
+    [HttpPost]
+    public async Task<IActionResult> AcceptFriendRequest(CustomerViewModel email)
+    {
+        var model = await GetCustomerProfile(email.ModelGUID); 
 
+        return View("ViewProfile",model); 
+       
+    }    
+    
+    [HttpPost]
+    public async Task<IActionResult> DeclineFriendRequest(CustomerViewModel email)
+    {
+        var model = await GetCustomerProfile(email.ModelGUID); 
 
-        }
-
-        var MyProfile = model.FirstOrDefault(m => m.CustomerEmail == Email);
-
-
-        return View(MyProfile); 
-        #endregion
+        return View("ViewProfile",model); 
+       
     }
 
     [HttpPost]
-    public async Task<IActionResult> ViewProfile(string Email)
+    public async Task<IActionResult> SendFriendRequest(CustomerViewModel email)
     {
-        var results = await _customerService.Get();
-        var model = new List<CustomerViewModel>();
+        var model = await GetCustomerProfile(email.ModelGUID);
 
-        foreach (var customer in results)
-        {
-            var customerVM = new CustomerViewModel()
-            {
-                CustomerName = customer.CustomerName,
-                CustomerEmail = customer.CustomerEmail,
-                ModelGUID = customer.ModelGuid
-            };
+        return View("ViewProfile", model);
 
-            model.Add(customerVM);
-
-
-        }
-
-        var MyProfile = model.FirstOrDefault(m=>m.CustomerEmail==Email);
-
-
-        return View(MyProfile);
     }
 
-        public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index()
     {
         var results = await _customerService.Get();
         var model = new List<CustomerViewModel>();

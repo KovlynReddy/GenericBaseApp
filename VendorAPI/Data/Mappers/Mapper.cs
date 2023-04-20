@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.Dto;
 using GenericAppDLL.Models.Mappers;
 using GenericAppDLL.Models.ViewModels;
 
@@ -40,6 +41,12 @@ namespace VendorAPI.Data.Mappers
             CreateMap<MenuItemDto, Item>().ReverseMap();
             CreateMap<MenuItemDto, MenuItemViewModel>().ReverseMap();
             CreateMap<MenuItemDto, CreateMenuItemViewModel>().ReverseMap();
+            CreateMap<CustomerDto, Customer>().ReverseMap();
+            CreateMap<CustomerDto, CreateCustomerViewModel>().ReverseMap();
+            CreateMap<CustomerDto, CustomerViewModel>().ReverseMap();
+            CreateMap<CustomerDto, EditCustomerDto>().ReverseMap();
+            CreateMap<CustomerViewModel, EditCustomerDto>().ReverseMap();
+            CreateMap<CustomerViewModel, CreateCustomerDto>().ReverseMap();
 
             //CreateMap<DirectMessageDto, DM>().ReverseMap();
 
