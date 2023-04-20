@@ -2,18 +2,21 @@
 
 <div class="d-flex">
 
-    <div class="card card-text" style="width: 18rem;">
+    <div class="card card-text">
         <div class="row">
             <div class="col-4">
                 <img class="card-img" src="~/Images/defaultImage.jpg" alt="Card image cap">
             </div>
             <div class="col-8">
                 <div class="">
-                    <span> Item : @Model.ItemName</span><br />
-                    <span> Cost @Model.Cost <input asp-for="@Model.Amount" style="max-width:5em;" type="number" /> </span><br />
-                    <span>Total @Model.Total</span>
+                <div class="">
+                    <span> Username : @Model.CustomerName</span><br />
+                    <span> User Email : @Model.CustomerEmail</span><br />
+                    <span> Sent : @Model.CreatedDateTime</span><br />
+                </div>
                     <span>
-                        <button data-toggle="modal" data-target="#Modal" class="btn btn-primary AddItemToCart">Edit</button>
+                        <button data-toggle="modal" data-target="#Modal" class="btn btn-success AddItemToCart">Accept</button>
+                        <button data-toggle="modal" data-target="#Modal" class="btn btn-danger AddItemToCart">Decline</button>
                     </span>
                 </div>
             </div>

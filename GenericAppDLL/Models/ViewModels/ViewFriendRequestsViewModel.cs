@@ -8,6 +8,6 @@ namespace GenericAppDLL.Models.ViewModels
 {
     public class ViewFriendRequestsViewModel
     {
-        public List<FriendRequestViewModel> users { get; set; }
+        public List<FriendRequestViewModel> users { get; set; } = new List<FriendRequestViewModel>();
     }
 }

@@ -94,20 +94,30 @@ public class ProfileController : Controller
 
         foreach (var relationship in friendRequests)
         {
+            string otherProfileId;
             if (relationship.SenderId == currentUser.ModelGuid)
             {
-                userProfiles.Add((await _customerService.Get(relationship.RecieverId)).FirstOrDefault());
+                otherProfileId = relationship.RecieverId;
             }
             else {
-                userProfiles.Add((await _customerService.Get(relationship.SenderId)).FirstOrDefault());
+                otherProfileId = relationship.SenderId;
             }
+            var otherUser = (await _customerService.Get(otherProfileId)).FirstOrDefault();
+            userProfiles.Add(otherUser);
+
+            model.users.Add(new FriendRequestViewModel() { 
+            SenderGuid = relationship.SenderId,
+            ModelGUID = relationship.RecieverId,
+            RelationshipGuid = relationship.ModelGUID,
+            CustomerName = otherUser.CustomerName,
+            CustomerEmail = otherUser.CustomerEmail,
+            Status = relationship.Status,
+            ProfileImagePath = "",
+            CreatedDateTime = relationship.CreatedDateTime 
+            });
         }
 
-        var userProfileVMs = Mapper.Map<List<CustomerViewModel>>(userProfiles);
-
-        model.users = userProfileVMs;
-
-        return View("ViewProfile",model); 
+        return View(model); 
        
     }    
     
