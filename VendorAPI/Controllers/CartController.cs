@@ -29,23 +29,9 @@ namespace VendorAPI.Controllers
         {
             var results = await _purchaseDB.Get(id);
 
-
             return Ok(results);
 
         }
-
-        [Route("~/api/Cart/Item/{Id}")]
-        [HttpGet]
-        public async Task<IActionResult> Get(string Id)
-        {
-
-            var results = await _cartDB.Get(Id);
-
-            return Ok(results);
-
-        }
-
-
 
         [Route("~/api/Cart")]
         [HttpPost]
@@ -58,8 +44,8 @@ namespace VendorAPI.Controllers
         }        
         
         [Route("~/api/Cart/{cartId}")]
-        [HttpPost]
-        public async Task<IActionResult> Post(string cartId)
+        [HttpPut]
+        public async Task<IActionResult> Put(string cartId)
         {
             var trolley = await _cartDB.Get(cartId);
             var purchases = await _purchaseDB.Get(cartId);
@@ -79,27 +65,6 @@ namespace VendorAPI.Controllers
 
         }
 
-        [Route("~/api/Cart/Item")]
-        [HttpPost]
-        public async Task<IActionResult> Post(CreatePurchaseItemDto newCart)
-        {
-            var dto = mapper.Map<PurchaseItemDto>(newCart);
-            await _cartDB.Post(dto);
-
-            var items = await _cartDB.Get(newCart.CartId);
-            var purchases = await _purchaseDB.Get(newCart.CartId);                                                                                                                                                                                                                                                                                  
-
-            var total = items.Sum(m=>m.Total);
-            var purchase = purchases.FirstOrDefault();
-            purchase.Total = total;   
-
-
-            await _purchaseDB.Put(purchase);
-
-            return Ok();
-
-        }
-
         [Route("~/api/Cart")]
         [HttpDelete]
         public async Task<IActionResult> Delete(PurchaseViewModel newCart)
@@ -108,15 +73,7 @@ namespace VendorAPI.Controllers
             return Ok();
 
         }
-
-        [Route("~/api/Cart/Item")]
-        [HttpDelete]
-        public async Task<IActionResult> Delete(PurchaseItemViewModel newCart)
-        {
-
-            return Ok();
-
-        }        
+  
         
         [Route("~/api/Cart")]
         [HttpPatch]
@@ -127,14 +84,7 @@ namespace VendorAPI.Controllers
 
         }
 
-        [Route("~/api/Cart/Item")]
-        [HttpPatch]
-        public async Task<IActionResult> Patch(PurchaseItemViewModel newCart)
-        {
 
-            return Ok();
-
-        }
 
 
 

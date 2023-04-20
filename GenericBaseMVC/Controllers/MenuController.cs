@@ -68,9 +68,9 @@ public class MenuController : Controller
     [HttpPost]
     public async Task<IActionResult> PurchaseTrolley(CartViewModel model)
     {
-        var results = await _cartService.Post(model.CartId);
+        var results = await _cartService.Put(model.CartId);
 
-        return View();
+        return RedirectToAction("ViewCart");
     }
 
         [HttpPost]
@@ -118,7 +118,8 @@ public class MenuController : Controller
             Currency = model.Currency,
             Total = model.Cost * model.Amount,
             VendorGuid = model.VendorGuid,
-            ItemName = model.ItemName
+            ItemName = model.ItemName,
+            DatePurchased = "n/a",
         });
 
         return RedirectToAction("Dashboard");

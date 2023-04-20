@@ -7,7 +7,7 @@
             IEnumerable<PurchaseItemDto> Cart = null;
 
 
-            string apiUrl = "https://localhost:7240/api/Cart/Item/" + id;
+            string apiUrl = "https://localhost:7240/api/Shop/Item/" + id;
 
             using (HttpClient client = new HttpClient())
             {
@@ -68,7 +68,7 @@
         {
             IEnumerable<PurchaseItemDto> Carts = null;
 
-            string apiUrl = "https://localhost:7240/api/Cart/Item";
+            string apiUrl = "https://localhost:7240/api/Shop/Item";
 
             using (HttpClient client = new HttpClient())
             {
@@ -130,7 +130,7 @@
 
         }
 
-        public async Task<PurchaseDto> Post(string CartId)
+        public async Task<PurchaseDto> Put(string CartId)
         {
             IEnumerable<PurchaseDto> Carts = null;
 
@@ -145,7 +145,7 @@
                 var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(CartId);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
+                HttpResponseMessage result = await client.PutAsync(apiUrl, payload);
 
                 //result.EnsureSuccessStatusCode();
 
@@ -168,7 +168,7 @@
         {
             IEnumerable<PurchaseItemDto> Carts = null;
 
-            string apiUrl = "https://localhost:7240/api/Cart/Item";
+            string apiUrl = "https://localhost:7240/api/Shop/Item";
 
             using (HttpClient client = new HttpClient())
             {
