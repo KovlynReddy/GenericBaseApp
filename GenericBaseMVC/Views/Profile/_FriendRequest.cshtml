@@ -15,8 +15,8 @@
                     <span> Sent : @Model.CreatedDateTime</span><br />
                 </div>
                     <span>
-                        <button data-toggle="modal" data-target="#Modal" class="btn btn-success AddItemToCart">Accept</button>
-                        <button data-toggle="modal" data-target="#Modal" class="btn btn-danger AddItemToCart">Decline</button>
+                        <a asp-action="AcceptFriendRequest" asp-controller="Profile" asp-route-id="@Model.SenderGuid" class="btn btn-success AddItemToCart">Accept</a>
+                        <a asp-action="DeclineFriendRequest" asp-controller="Profile" asp-route-id="@Model.SenderGuid" data-target="#Modal" class="btn btn-danger AddItemToCart">Decline</a>
                     </span>
                 </div>
             </div>

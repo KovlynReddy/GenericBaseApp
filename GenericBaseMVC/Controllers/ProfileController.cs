@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericBaseMVC.Handlers;
 
 namespace GenericBaseMVC.Controllers;
 
@@ -10,7 +11,9 @@ public class ProfileController : Controller
     public AddressService _addressService { get; set; }
     public BookingService _bookingService { get; set; }
     public RelationshipService _relationshipService { get; set; }
+    public ProfileHandler _profileHandler { get; set; }
     public IMapper Mapper { get; }
+
 
     public ProfileController(IMapper mapper)
     {
@@ -19,6 +22,7 @@ public class ProfileController : Controller
         _VendorService = new VendorService();
         _bookingService = new BookingService();
         _relationshipService = new RelationshipService();
+        _profileHandler = new ProfileHandler(mapper);
         Mapper = mapper;
     }
 
@@ -87,35 +91,7 @@ public class ProfileController : Controller
     public async Task<IActionResult> ViewFriendRequests()
     {
         var email = User.Identity.Name;
-        var currentUser =(await _customerService.Get(email)).FirstOrDefault(); 
-        var friendRequests = await _relationshipService.Get(currentUser.ModelGuid);
-        var userProfiles = new List<CustomerDto>();
-        var model = new ViewFriendRequestsViewModel();
-
-        foreach (var relationship in friendRequests)
-        {
-            string otherProfileId;
-            if (relationship.SenderId == currentUser.ModelGuid)
-            {
-                otherProfileId = relationship.RecieverId;
-            }
-            else {
-                otherProfileId = relationship.SenderId;
-            }
-            var otherUser = (await _customerService.Get(otherProfileId)).FirstOrDefault();
-            userProfiles.Add(otherUser);
-
-            model.users.Add(new FriendRequestViewModel() { 
-            SenderGuid = relationship.SenderId,
-            ModelGUID = relationship.RecieverId,
-            RelationshipGuid = relationship.ModelGUID,
-            CustomerName = otherUser.CustomerName,
-            CustomerEmail = otherUser.CustomerEmail,
-            Status = relationship.Status,
-            ProfileImagePath = "",
-            CreatedDateTime = relationship.CreatedDateTime 
-            });
-        }
+        var model = await _profileHandler.ViewFriendRequests(email);
 
         return View(model); 
        
@@ -130,32 +106,18 @@ public class ProfileController : Controller
        
     }    
     
-    [HttpPost]
-    public async Task<IActionResult> AcceptFriendRequest(CustomerViewModel email)
+    [HttpGet]
+    public async Task<IActionResult> AcceptFriendRequest(string id)
     {
-        string id = "";
-        var relationship = (await _relationshipService.Get(id)).FirstOrDefault();
-
-        relationship.Status = 2;
-        relationship.DateReplied = DateTime.Now.ToString();
-        relationship.CompletedDateTime = DateTime.Now.ToString();
-
-        await _relationshipService.Put(relationship);
+        var relationship = await _profileHandler.RespondToFriendRequest(id, 2);
 
         return RedirectToAction("ViewFriendRequests");
     }    
     
-    [HttpPost]
-    public async Task<IActionResult> DeclineFriendRequest(CustomerViewModel email)
+    [HttpGet]
+    public async Task<IActionResult> DeclineFriendRequest(string id)
     {
-        string id = "";
-        var relationship = (await _relationshipService.Get(id)).FirstOrDefault();
-
-        relationship.Status = 3;
-        relationship.DateReplied = DateTime.Now.ToString();
-        relationship.CompletedDateTime = DateTime.Now.ToString();
-
-        await _relationshipService.Put(relationship);
+        var relationship = await _profileHandler.RespondToFriendRequest(id, 3);
 
         return RedirectToAction("ViewFriendRequests");
 
@@ -165,20 +127,8 @@ public class ProfileController : Controller
     public async Task<IActionResult> SendFriendRequest(string id)
     {
         var email = User.Identity.Name;
-        var recieverProfile = (await _customerService.Get(id)).FirstOrDefault();
-        var senderProfile = (await _customerService.Get(email)).FirstOrDefault();
+        var model = await _profileHandler.SendFriendRequest(id,email);
 
-        var model = new CreateRelationshipDto() {
-            SenderId = senderProfile.ModelGuid,
-            RecieverId = recieverProfile.ModelGuid,
-            CreatedDateTime = DateTime.Now.ToString(),
-            CreatorId = email,
-            Status = 0,
-            ModelGUID = Guid.NewGuid().ToString(),
-            DateSent = DateTime.Now.ToString(),
-        };
-
-        await _relationshipService.Post(model);
 
 
         return View("ViewProfile", model);
@@ -187,22 +137,8 @@ public class ProfileController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var results = await _customerService.Get();
-        var model = new List<CustomerViewModel>();
-
-        foreach (var customer in results)
-        {
-            var customerVM = new CustomerViewModel()
-            {
-                CustomerName = customer.CustomerName,
-                CustomerEmail = customer.CustomerEmail,
-                ModelGUID = customer.ModelGuid
-            };
-
-            model.Add(customerVM);
-
-
-        }
+        var email = User.Identity.Name;
+        var model = await _profileHandler.GetAllProfiles(email);
 
         return View(model);
     }

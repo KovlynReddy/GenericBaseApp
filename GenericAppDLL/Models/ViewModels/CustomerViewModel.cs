@@ -11,4 +11,5 @@ public class CustomerViewModel
     public string CustomerAddress { get; set; } = string.Empty;
     public string DOBString { get; set; } = string.Empty;
     public DateOnly DOB { get; set; } = new DateOnly();
+    public int IsFriend { get; set; }
 }

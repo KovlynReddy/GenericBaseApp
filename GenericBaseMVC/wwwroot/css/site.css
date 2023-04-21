@@ -25,3 +25,7 @@ min-height:500px;
 .chat-other-header-name {
     margin-left: 2em;
 }
+
+.Card-Header {
+    margin-bottom: -15px;
+}
