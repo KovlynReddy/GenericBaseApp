@@ -4,35 +4,31 @@
     ViewData["Title"] = "ViewListVendors";
 }
 
-<h1>ViewListVendors</h1>
-
+@*<h1>ViewListVendors</h1>*@
 <div class="row">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Create"><i class="fa-solid fa-store"></i>Create Vendor</a>
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+    <a class="btn btn-primary text-dark" asp-area="" asp-controller="Vendor" asp-action="Create"><i class="fa-solid fa-store"></i></a>
+    </div>
+    <div class="col-3">
+    </div>
 </div>
 
-<table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>             
-            @foreach (var item in Model)
-            {
-                <tr class="row">
-                    <td class="col-3">
-                    </td>
-                    <td class="col-6">                          
-                      @Html.Partial("_VendorView", item)   
-                    </td>
-                    <td class="col-3">
-                    </td>
-                </tr>
+       <div class="row">
+        <div class="col-3">
+        </div>
+       <div class="col-6">                          
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_VendorView", item)   
 
-            }
-        </tbody>
-    </table>
+        }
+      </div>
+      <div class="col-3">
+      </div>
+      </div>
+
+
 
 

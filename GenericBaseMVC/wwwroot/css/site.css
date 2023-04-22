@@ -29,3 +29,7 @@ min-height:500px;
 .Card-Header {
     margin-bottom: -15px;
 }
+
+li a {
+color:black !important;
+}

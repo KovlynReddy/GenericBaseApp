@@ -43,7 +43,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom bg-primary box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GenericBaseMVC</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-cannabis"></i>GenericBaseMVC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -66,18 +66,18 @@
                                 </li>*@
                                 @*<li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Feed"><i class="fas fa-inbox"></i>Feed</a>
-                                </li>*@
-                                <li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewFriendRequests"><i class="fas fa-user-plus"></i>Friend Requests </a>
-                                </li>                                
+                                </li>*@                               
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comments"></i>Chats </a>
+                                </li>
+                                <li class="nav-item dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewProfile"><i class="fas fa-user"></i>My Profile </a>
                                 </li>
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index"><i class="fas fa-users"></i>All Profiles </a>
                                 </li>
                                 <li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewProfile"><i class="fas fa-user"></i>My Profile </a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewFriendRequests"><i class="fas fa-user-plus"></i>Friend Requests </a>
                                 </li>
                             </ul>
                         </li>
@@ -140,7 +140,8 @@
                         </li>
 
                     </ul>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Notifications" asp-action="Index"><i class="fa-regular fa-bell"></i></a>
+                    <a class="nav-link text-dark p-1" asp-area="" asp-controller="Notifications" asp-action="Index"><i class="fa-regular fa-bell"></i></a>
+                    <a class="nav-link text-dark p-1" asp-area="" asp-controller="Settings" asp-action="Index"><i class="fa-solid fa-gears"></i></a>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

@@ -1,7 +1,13 @@
 ﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.PostViewModel>
 
 <div class="row">
-<a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Create"><i class="fas fa-pen"></i>Create Post</a>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+    <a class="btn btn-primary text-dark" asp-area="" asp-controller="Post" asp-action="Create"><i class="fas fa-pen"></i></a>
+    </div>
+    <div class="col-md-3">
+    </div>
 </div>
 @foreach (var item in Model)
 {
