@@ -19,24 +19,6 @@ public class CustomersController : Controller
         return View(await _context.Customers.ToListAsync());
     }
 
-    // GET: Customers/Details/5
-    public async Task<IActionResult> Details(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var customer = await _context.Customers
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-
-        return View(customer);
-    }
-
     [HttpGet]
     [Route("~/api/Customers/{email}/{state}")]
     public async Task<IActionResult> Get(string email,int state)
@@ -104,11 +86,6 @@ public class CustomersController : Controller
         return Ok(response);
     }
 
-    // GET: Customers/Create
-    public IActionResult Create()
-    {
-        return View();
-    }
 
     // POST: Customers/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -127,18 +104,16 @@ public class CustomersController : Controller
     }
 
     // GET: Customers/Edit/5
-    public async Task<IActionResult> Edit(int? id)
+    [HttpPut]
+    [Route("~/api/Customers/UpdateTheme")]
+    public async Task<IActionResult> UpdateTheme(CustomerDto customer)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        var entity = _context.Customers.FirstOrDefault(m => m.ModelGUID == customer.ModelGuid || m.Email == customer.CustomerEmail);
+        //var rawResult = _context.Update(entity);
+        entity.SelectedTheme = customer.SelectedTheme;
+        var IsPaid = _context.Entry(entity).Property("SelectedTheme").IsModified;
+        _context.SaveChanges();
 
-        var customer = await _context.Customers.FindAsync(id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
         return View(customer);
     }
 
@@ -164,60 +139,6 @@ public class CustomersController : Controller
         _context.Add(newVendor);
         await _context.SaveChangesAsync();
         return Ok(newVendor);
-    }
-
-
-    // POST: Customers/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Customer customer)
-    {
-        if (id != customer.Id)
-        {
-            return NotFound();
-        }
-
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                _context.Update(customer);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(customer.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        return View(customer);
-    }
-
-    // GET: Customers/Delete/5
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var customer = await _context.Customers
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-
-        return View(customer);
     }
 
     // POST: Customers/Delete/5

@@ -1,0 +1,9 @@
+﻿@model GenericAppDLL.Models.ViewModels.ThemeControlViewModel
+
+@foreach(var theme in Model.Themes){
+    @Html.RadioButtonFor(model => model.SelectedTheme, theme.ThemeCode) @theme.ThemeName
+    <br />
+@*    
+    <input asp-for="SelectedTheme" class="Theme-Control-option" onselect="ChangeTheme(@theme.ThemeCode)" type="radio" name="SelectedTheme" title="@theme.ThemeName" value="@theme.ThemeCode" class="form-control">
+    <br />*@
+}

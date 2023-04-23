@@ -1,4 +1,9 @@
-﻿
+﻿$(".Theme-Control-option").on('click', function () {
+    var val = $(this).val();
+    ChangeTheme(val);
+    console.log(val);
+});
+
 function ChangeTheme(themeName) {
 var theme = $("#theme");
 var newUrl = `/lib/bootstrap-themes/${themeName}/bootstrap.css`
@@ -65,5 +70,3 @@ function GetCodeFromFAClass(className) {
 }
 
 console.log(emojis);
-
-ChangeTheme("Candy");
