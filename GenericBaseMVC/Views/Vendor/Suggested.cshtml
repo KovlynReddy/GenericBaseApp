@@ -34,6 +34,11 @@
                 document.open();
                 document.write(tekst);
                 document.close();
+                var selectedTheme = $("#Theme-Selected").val();
+                if (selectedTheme == "" || selectedTheme == null) {
+                    selectedTheme = "Neon";
+                }
+                Ch
                 },
                 error: function (request, error) {
                     console.log("ERROR:ready" + error);
@@ -54,6 +59,11 @@
                 document.open();
                 document.write(tekst);
                 document.close();
+                var selectedTheme = $("#Theme-Selected").val();
+                if (selectedTheme == "" || selectedTheme == null) {
+                    selectedTheme = "Neon";
+                }
+                Ch
                 },
                 error: function (request, error) {
                     console.log("ERROR:ready" + error);
@@ -81,7 +91,12 @@
 
                     document.open();
                     document.write(tekst);
-                    document.close();
+                document.close();
+                var selectedTheme = $("#Theme-Selected").val();
+                if (selectedTheme == "" || selectedTheme == null) {
+                    selectedTheme = "Neon";
+                }
+                ChangeTheme(selectedTheme);
 
                 },
                 error: function (request, error) {
@@ -103,6 +118,11 @@
                 document.open();
                 document.write(tekst);
                 document.close();
+                var selectedTheme = $("#Theme-Selected").val();
+                if (selectedTheme == "" || selectedTheme == null) {
+                    selectedTheme = "Neon";
+                }
+                Ch
                 },
                 error: function (request, error) {
                     console.log("ERROR:getPosition" + error);

@@ -49,7 +49,7 @@ namespace GenericBaseMVC.Handlers
             }
 
             result.profiles = profiles;
-
+            result.settings.SelectedTheme = currentUser.SelectedTheme;
             return result;
         }
 
@@ -135,6 +135,8 @@ namespace GenericBaseMVC.Handlers
                     CreatedDateTime = relationship.CreatedDateTime
                 });
             }
+
+            model.settings.SelectedTheme = currentUser.SelectedTheme;
 
             return model;
         }

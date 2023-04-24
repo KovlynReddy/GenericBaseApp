@@ -58,7 +58,9 @@ public class AddressController : Controller
                                   Text = a.VendorEmail.ToString()
                               }).ToList());
 
-
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View(model);
     }
 
@@ -106,8 +108,11 @@ public class AddressController : Controller
 
         };
 
-        
 
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View("_MapView",model);
     }
 

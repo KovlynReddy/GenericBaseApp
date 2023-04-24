@@ -32,7 +32,7 @@ public class ProfileController : Controller
         var customerDetails =(await _customerService.Get(email)).FirstOrDefault();
 
         model.profileDetails = Mapper.Map<CustomerViewModel>(customerDetails);
-
+        model.settings.SelectedTheme = customerDetails.SelectedTheme;
         return model;
     }
 

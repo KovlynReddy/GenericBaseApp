@@ -1,4 +1,6 @@
-﻿namespace GenericBaseMVC.Controllers;
+﻿using GenericBaseMVC.Services;
+
+namespace GenericBaseMVC.Controllers;
 
 public class PostController : Controller
 {
@@ -15,6 +17,7 @@ public class PostController : Controller
     {
         var AllPostsDTO = await  _PostService.GetAll();
         var AllPostVM = new List<PostViewModel>();
+        var model = new ViewListPostViewModel();
 
         foreach (var post in AllPostsDTO)
         {
@@ -33,6 +36,15 @@ public class PostController : Controller
             AllPostVM.Add(newEntity);
 
         }
+
+        model.posts = AllPostVM;
+
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+
+
         return View(AllPostVM);
     }
 
@@ -63,12 +75,23 @@ public class PostController : Controller
         model.Posts = AllPostVM;
         model.settings.SelectedTheme = "Mint";
 
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name; 
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View(model);
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        return View();
+        var model = new CreatePostViewModel();
+
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+
+        return View(model);
     }
 
     [HttpPost]

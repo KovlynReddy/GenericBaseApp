@@ -26,11 +26,14 @@ public class ChatController : Controller
     public async Task<IActionResult> Get()
     {
         var model = new ChatViewModel();
-        var userEmail = User.Identity.Name;
-        
-        await new CustomerService().Get(userEmail);
-        await DirectMessageService.Get(userEmail);
-        await ChatService.Get(userEmail);
+        var email = User.Identity.Name;
+
+        await new CustomerService().Get(email);
+        await DirectMessageService.Get(email);
+        await ChatService.Get(email);
+        var _customerService = new CustomerService();
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
         return View("AllMyChats",model);
     }
@@ -39,12 +42,13 @@ public class ChatController : Controller
     public async Task<IActionResult> Get(string id)
     {
         var model = new ChatViewModel();
-        var userEmail = User.Identity.Name ?? "";
-        
         await DirectMessageService.Get(id);
         await ChatService.Get(id);
 
-        
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
         return View("AllMyChats",model);
     }
@@ -148,6 +152,8 @@ public class ChatController : Controller
             RecieverId = reciever.Id,
             Message = "",
         };
+
+        model.settings.SelectedTheme = user.SelectedTheme;
 
         return model;
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.ViewModels;
 using NuGet.Packaging;
 using static Humanizer.In;
 
@@ -60,7 +61,9 @@ public class MenuController : Controller
 
         model.purchasedItems = Mapper.Map<List<PurchaseItemViewModel>>(items);
         model.Items = menuItems;
-        
+
+        model.settings.SelectedTheme = user.SelectedTheme;
+
 
         return View(model);
     }
@@ -168,15 +171,26 @@ public class MenuController : Controller
         }
 
         model.AllVendors = vendorVMs.Where(m=>m.AllVendorItems.Count > 0).ToList();
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View("ShopDashboard",model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> ViewAll()
+    public async Task<IActionResult> ViewAll() 
     {
+        var model = new ViewListMenuItems();
         var respomse = await _MenuService.GetAll();
 
-        return View(respomse);
+        model.items = Mapper.Map<List<MenuItemViewModel>>(respomse.ToList());
+
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        return View(model);
     }    
     
     [HttpGet]
@@ -186,7 +200,10 @@ public class MenuController : Controller
         var menuItems = await _MenuService.GetAll();
 
         ShopDashboardViewModel model = new ShopDashboardViewModel();
-
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View(model);
     }    
     
@@ -197,7 +214,10 @@ public class MenuController : Controller
         var menuItems = await _MenuService.GetAll();
 
         ShopDashboardViewModel model = new ShopDashboardViewModel();
-
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View(model);
     }
 
@@ -210,7 +230,7 @@ public class MenuController : Controller
 
     // GET: MenuController/Create
     [HttpGet]
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
         CreateMenuItemViewModel model = new CreateMenuItemViewModel();
 
@@ -219,7 +239,10 @@ public class MenuController : Controller
         model.Currency = "R";
         model.ItemName = "TestCut1";
         model.SKUCode = "TC012709";
-
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View(model);
     }
 
@@ -265,7 +288,12 @@ public class MenuController : Controller
         var addModel = model.FirstOrDefault();
         CreateMenuItemViewModel addVM = new CreateMenuItemViewModel() { 
         VendorId = id
-        };
+        }; 
+        
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        addModel.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
         return View("Create",addVM);
     }

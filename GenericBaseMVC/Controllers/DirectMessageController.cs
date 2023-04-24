@@ -16,6 +16,7 @@ namespace GenericBaseMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string Id)
         {
+            
             var allMessages = await DirectMessageService.Get(Id);
 
             return View(allMessages);

@@ -37,15 +37,16 @@ public class BookingController : Controller
     [HttpGet]
     public async Task<IActionResult> ViewAll() {
 
+        var model = new ViewListBookingViewModel();
         List<BookingDto> response = new List<BookingDto>();
 
         response = await _bookingService.GetAll();
 
-        List<BookingViewModel> model = new List<BookingViewModel>();
+        List<BookingViewModel> bookings = new List<BookingViewModel>();
        
         foreach (var booking in response)
         {
-            model.Add(new BookingViewModel
+            bookings.Add(new BookingViewModel
             {
                 BookDateTimeString = booking.BookDateTimeString,
                 CreatedDateTimeString = booking.CreatedDateTimeString,
@@ -54,17 +55,26 @@ public class BookingController : Controller
                 UserGuid = booking.UserGuid
             });
         }
+        model.bookings = bookings;
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
         return View("ViewListBookings",model);
     }
 
     // GET: BookingController/Create
-    public ActionResult Create()
+    public async Task<ActionResult> Create()
     {
         CreateBookingViewModel model = new CreateBookingViewModel();
         model.Vendors = new List<string> { 
         "Vendor1","Vendor2"
         };
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View(model);
     }
 

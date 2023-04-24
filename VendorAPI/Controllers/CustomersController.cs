@@ -47,7 +47,8 @@ public class CustomersController : Controller
                 ModelGuid = customer.ModelGUID,
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
-                CreatedDateTimeString = customer.CreatedDateTime
+                CreatedDateTimeString = customer.CreatedDateTime,
+                SelectedTheme = customer.SelectedTheme
             };
 
             response.Add(CustomerDto);

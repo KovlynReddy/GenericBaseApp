@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using GenericAppDLL.Models.ViewModels;
+using System.Net;
 
 namespace GenericBaseMVC.Controllers;
 
@@ -23,6 +24,8 @@ public class VendorController : Controller
         var allVendors = await _VendorService.GetAll();
         var allItems = await _itemService.GetAll();
         var model = new List<VendorViewModel>();
+        var vm = new ViewListVendorViewModel();
+
         foreach (var VendorModel in allVendors)
         {
             var vendorItems = new List<MenuItemViewModel>();
@@ -54,7 +57,9 @@ public class VendorController : Controller
             });
         }
 
-        return View("ViewListVendors", model);
+        vm.vendors = model;
+
+        return View("ViewListVendors", vm);
     }
 
     [HttpGet]
@@ -63,6 +68,8 @@ public class VendorController : Controller
         var allVendors = await _VendorService.GetAll();
         var allItems = await _itemService.GetAll();
         var model = new List<VendorViewModel>();
+        var vm = new ViewListVendorViewModel();
+
         foreach (var VendorModel in allVendors)
         {
             var vendorItems = new List<MenuItemViewModel>();
@@ -96,7 +103,15 @@ public class VendorController : Controller
             });
         }
 
-        return View("ViewListVendors", model);
+        vm.vendors = model;
+
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        vm.settings.SelectedTheme = currentCustomer.SelectedTheme;
+
+
+        return View("ViewListVendors", vm);
     }
 
     // GET: VendorController/Details/5
@@ -212,6 +227,10 @@ public class VendorController : Controller
         model.CenterLon = (30.984297).ToString();
         model.Scale = 100.ToString();
         model.Zoom = 16.ToString();
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
 
         return View("_MapView", model);
@@ -221,6 +240,11 @@ public class VendorController : Controller
     [HttpGet]
     public async Task<IActionResult> DisplaySuggestedLocations(MapViewModel model)
     {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+
         return View("_MapView",model);
     }
 
@@ -315,6 +339,10 @@ public class VendorController : Controller
         model.CenterLon = slon.Replace(',', '.');
         model.Scale = 100.ToString();
         model.Zoom = 16.ToString();
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
 
         return View("_MapView", model);

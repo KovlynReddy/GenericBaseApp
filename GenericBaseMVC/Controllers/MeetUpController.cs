@@ -34,6 +34,10 @@ public class MeetUpController : Controller
     public async Task<IActionResult> Create() {
 
         var model = new MapViewModel();
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
         return View("_MapView", model);
     }
 
