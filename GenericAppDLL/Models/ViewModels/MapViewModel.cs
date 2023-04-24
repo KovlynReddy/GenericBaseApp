@@ -13,6 +13,16 @@ public class MapViewModel : BaseViewModel
     public string Zoom { get; set; }
 }
 
+public class CreateMeetupMapViewModel : MapViewModel {
+    public CreateMeetUpViewModel newMeetup { get; set; } = new CreateMeetUpViewModel();
+
+}
+
+public class CreateBookingMapViewModel : MapViewModel {
+    public CreateBookingViewModel newBooking { get; set; } = new CreateBookingViewModel();
+
+}
+
 public class MapMark {
 
     public string Lat { get; set; }

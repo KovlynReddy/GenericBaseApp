@@ -47,6 +47,10 @@ namespace VendorAPI.Data.Mappers
             CreateMap<MenuItemDto, MenuItemViewModel>().ReverseMap();
             CreateMap<MenuItemDto, CreateMenuItemViewModel>().ReverseMap();
 
+            CreateMap<Meetup, MeetUpDto>().ReverseMap();
+            CreateMap<Meetup, CreateMeetUpDto>().ReverseMap();
+            CreateMap<MeetUpDto, CreateMeetUpDto>().ReverseMap();
+
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<CustomerDto, CreateCustomerViewModel>().ReverseMap();
             CreateMap<CustomerDto, CustomerViewModel>().ReverseMap();

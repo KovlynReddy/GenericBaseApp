@@ -233,7 +233,7 @@ public class VendorController : Controller
         model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
 
-        return View("_MapView", model);
+        return View("_SuggestedMapView", model);
        // return RedirectToAction("DisplaySuggested",model);
     }
 
@@ -245,7 +245,7 @@ public class VendorController : Controller
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
         model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
-        return View("_MapView",model);
+        return View("_SuggestedMapView",model);
     }
 
 
@@ -345,7 +345,7 @@ public class VendorController : Controller
         model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
 
-        return View("_MapView", model);
+        return View("_SuggestedMapView", model);
         // return RedirectToAction("DisplaySuggested",model);
     }
 

@@ -37,6 +37,10 @@ namespace GenericBaseMVC.Data.Mapper
             CreateMap<UpdateRelationshipDto, Relationship>().ReverseMap();
 
             //CreateMap<DirectMessageDto, DM>().ReverseMap();
+            CreateMap<MeetUpDto, CreateMeetUpDto>().ReverseMap();
+            CreateMap<CreateMeetUpViewModel,CreateMeetUpDto >().ReverseMap();
+            CreateMap<MeetUpDto,MeetupViewModel >().ReverseMap();
+            
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<CustomerDto, CreateCustomerViewModel>().ReverseMap();
             CreateMap<CustomerDto, CustomerViewModel>().ReverseMap();

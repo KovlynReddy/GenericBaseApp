@@ -30,11 +30,11 @@ public class MeetUpService
 
     }
 
-    public async Task<List<MeetUpDto>> GetAll()
+    public async Task<List<MeetUpDto>> Get(string id)
     {
         IEnumerable<MeetUpDto> addresses = null;
 
-        string apiUrl = "https://localhost:7240/api/MeetUp/GetAll";
+        string apiUrl = "https://localhost:7240/api/MeetUp/"+id;
 
         using (HttpClient client = new HttpClient())
         {
@@ -62,7 +62,7 @@ public class MeetUpService
     {
         IEnumerable<CreateMeetUpDto> Addresses = null;
 
-        string apiUrl = "https://localhost:7240/api/MeetUp/CreateDto";
+        string apiUrl = "https://localhost:7240/api/MeetUp";
 
         using (HttpClient client = new HttpClient())
         {
@@ -95,7 +95,7 @@ public class MeetUpService
     {
         MeetUpDto Addresses = null;
 
-        string apiUrl = "https://localhost:7240/api/MeetUp/CreateDto";
+        string apiUrl = "https://localhost:7240/api/MeetUp";
 
         using (HttpClient client = new HttpClient())
         {
