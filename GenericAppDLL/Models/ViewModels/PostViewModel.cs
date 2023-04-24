@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class PostViewModel
+    public class PostViewModel : BaseViewModel
     {
         public string SenderGuid { get; set; } = string.Empty;
         public string RecieverGuid { get; set; } = string.Empty;

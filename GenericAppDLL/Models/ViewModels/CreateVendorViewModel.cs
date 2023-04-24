@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class CreateVendorViewModel
+public class CreateVendorViewModel : BaseViewModel
 {
     public string VendorEmail { get; set; } = string.Empty;
     public string VendorName { get; set; } = string.Empty;

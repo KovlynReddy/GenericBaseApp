@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class VendorViewModel
+    public class VendorViewModel : BaseViewModel
     {
         public List<MenuItemViewModel> AllVendorItems { get; set; }
         public string VendorName { get; set; } = string.Empty;

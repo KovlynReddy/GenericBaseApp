@@ -2,7 +2,7 @@
 
 namespace GenericAppDLL.Models.ViewModels;
 
-public class CreatePostViewModel
+public class CreatePostViewModel : BaseViewModel
 {
     public string SenderGuid { get; set; } = string.Empty;
     public string RecieverGuid { get; set; } = string.Empty;

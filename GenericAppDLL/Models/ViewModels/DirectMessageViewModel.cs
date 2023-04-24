@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class DirectMessageViewModel
+    public class DirectMessageViewModel : BaseViewModel
     {
         public int Id { get; set; }
         public DateTime CreationDateTime { get; set; }

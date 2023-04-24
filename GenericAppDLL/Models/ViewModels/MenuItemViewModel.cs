@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class MenuItemViewModel
+    public class MenuItemViewModel : BaseViewModel
     {
 
         public string ItemName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class ShopDashboardViewModel
+    public class ShopDashboardViewModel : BaseViewModel
     {
         public List<VendorViewModel> AllVendors { get; set; } =  new List<VendorViewModel>();
         public List<MenuItemViewModel> AllMenuItems { get; set; } = new List<MenuItemViewModel>();

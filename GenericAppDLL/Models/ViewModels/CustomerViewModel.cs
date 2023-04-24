@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class CustomerViewModel
+public class CustomerViewModel : BaseViewModel
 {
     public IFormFile? UploadedImage { get; set; }
     public string ProfileImagePath { get; set; } = string.Empty;

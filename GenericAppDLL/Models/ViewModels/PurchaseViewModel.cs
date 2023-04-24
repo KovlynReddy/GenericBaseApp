@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class PurchaseViewModel
+    public class PurchaseViewModel : BaseViewModel
     {
         public int Total { get; set; }
         public string DatePurchased { get; set; } = string.Empty;

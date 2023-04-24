@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class CreateMenuItemViewModel 
+public class CreateMenuItemViewModel : BaseViewModel
 {
     public string ItemName { get; set; } = string.Empty;
     public string MenuId { get; set; }    = string.Empty;

@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public  class CreateMeetUpViewModel
+public  class CreateMeetUpViewModel : BaseViewModel
 {
     public List<(string,string)> ListPeople { get; set; }
     public (string,string) SelectedPerson { get; set; }

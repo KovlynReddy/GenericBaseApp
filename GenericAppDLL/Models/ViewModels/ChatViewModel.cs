@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class ChatViewModel
+    public class ChatViewModel : BaseViewModel
     {
         public List<DirectMessageViewModel> AllMessages { get; set; } = new List<DirectMessageViewModel>();
         public SendDirectMessageViewModel NewMessage { get; set; } = new SendDirectMessageViewModel();

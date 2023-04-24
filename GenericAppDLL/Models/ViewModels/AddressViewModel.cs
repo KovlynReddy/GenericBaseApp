@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class AddressViewModel
+public class AddressViewModel : BaseViewModel
 {
     public string Number { get; set; }
     public string Street { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class CartViewModel
+    public class CartViewModel : BaseViewModel
     {
         public string CartId { get; set; } = string.Empty;
         public List<PurchaseItemViewModel> purchasedItems { get; set; } = new List<PurchaseItemViewModel>();

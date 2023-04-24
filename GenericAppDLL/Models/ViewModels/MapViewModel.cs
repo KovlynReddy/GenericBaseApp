@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class MapViewModel
+public class MapViewModel : BaseViewModel
 {
     public List<string> Lats { get; set; } = new List<string>();
     public List<string> Longs { get; set; } = new List<string>();

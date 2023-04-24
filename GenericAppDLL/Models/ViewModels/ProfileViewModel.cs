@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : BaseViewModel
     {
         public CustomerViewModel profileDetails { get; set; }
     }

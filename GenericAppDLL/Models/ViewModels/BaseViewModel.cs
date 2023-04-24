@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class NotificationViewModel : BaseViewModel
+    public class BaseViewModel 
     {
+        public string Theme { get; set; }
+        public SettingsImplementationViewModel settings { get; set; }
     }
 }

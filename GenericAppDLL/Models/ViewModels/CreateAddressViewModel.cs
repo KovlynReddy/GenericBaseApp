@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class CreateAddressViewModel
+public class CreateAddressViewModel : BaseViewModel
 {
     public DateTime CreatedDateTime { get; set; }
     public string UserGuid { get; set; }

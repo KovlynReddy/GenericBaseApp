@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class ViewFriendRequestsViewModel
+    public class ViewFriendRequestsViewModel : BaseViewModel
     {
         public List<FriendRequestViewModel> users { get; set; } = new List<FriendRequestViewModel>();
     }

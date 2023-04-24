@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class ChatHeaderViewModel
+    public class ChatHeaderViewModel : BaseViewModel
     {
         public int Id { get; set; }
         public string CreatorId { get; set; }

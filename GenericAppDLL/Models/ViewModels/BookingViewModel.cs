@@ -1,6 +1,6 @@
 ﻿namespace GenericAppDLL.Models.ViewModels;
 
-public class BookingViewModel
+public class BookingViewModel : BaseViewModel
 {
     public string CreatedDateTimeString { get; set; }
     public string ArrivedDateTimeString { get; set; }

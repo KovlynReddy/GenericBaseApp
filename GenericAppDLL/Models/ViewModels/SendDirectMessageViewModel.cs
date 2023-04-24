@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class SendDirectMessageViewModel
+    public class SendDirectMessageViewModel : BaseViewModel
     {
         public int SenderId { get; set; }
         public int RecieverId { get; set; }
