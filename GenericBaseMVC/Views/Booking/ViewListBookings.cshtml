@@ -1,4 +1,7 @@
-﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.BookingViewModel>
+﻿@model GenericAppDLL.Models.ViewModels.ViewListBookingViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
 
 @{
     ViewData["Title"] = "ViewListBookings";
@@ -14,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.bookings)
         {
             <tr class="row">
                 <td class="col-3">

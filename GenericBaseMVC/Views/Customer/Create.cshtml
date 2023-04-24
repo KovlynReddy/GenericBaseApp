@@ -1,4 +1,7 @@
-﻿@model GenericAppDLL.Models.DomainModel.Customer
+﻿@model GenericAppDLL.Models.ViewModels.CustomerViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
 
 @{
     ViewData["Title"] = "Create";
@@ -28,19 +31,19 @@
                 <span asp-validation-for="CustomerAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
+                <label asp-for="ModelGUID" class="control-label"></label>
+                <input asp-for="ModelGUID" class="form-control" />
+                <span asp-validation-for="ModelGUID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="CustomerEmail" class="control-label"></label>
+                <input asp-for="CustomerEmail" class="form-control" />
+                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
             </div>
 
             <div class="form-group">

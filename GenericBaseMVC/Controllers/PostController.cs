@@ -38,6 +38,7 @@ public class PostController : Controller
 
     public async Task<IActionResult> Feed()
     {
+        var model = new FeedViewModel();
         var AllPostsDTO = await _PostService.GetAll();
         var AllPostVM = new List<PostViewModel>();
 
@@ -59,7 +60,10 @@ public class PostController : Controller
             AllPostVM.Add(newEntity);
 
         }
-        return View(AllPostVM);
+        model.Posts = AllPostVM;
+        model.settings.SelectedTheme = "Mint";
+
+        return View(model);
     }
 
     public IActionResult Create()

@@ -1,5 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.CartViewModel
 
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 <div class="row">
     <div class="col-3">
         @foreach (var item in Model.purchases)

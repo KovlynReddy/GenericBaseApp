@@ -1,4 +1,7 @@
-﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.AddressViewModel>
+﻿@model GenericAppDLL.Models.ViewModels.ViewListAddressViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -7,40 +10,40 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Number)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().Number)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Street)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().Street)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MainStreet)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().MainStreet)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Suburb)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().Suburb)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostCode)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().PostCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().Country)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lat)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().Lat)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lon)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().lon)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Caption)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().Caption)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ModelGuid)
+                @Html.DisplayNameFor(model => model.addresses.FirstOrDefault().ModelGuid)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.addresses) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Number)

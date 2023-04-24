@@ -1,6 +1,9 @@
-﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.PostViewModel>
+﻿@model GenericAppDLL.Models.ViewModels.ViewListPostViewModel
 
-@foreach (var item in Model) {
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
+@foreach (var item in Model.posts) {
     @Html.Partial("_Post",item);
 
     <partial name="_Post" model="item"></partial>

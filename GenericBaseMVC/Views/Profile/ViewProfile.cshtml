@@ -1,4 +1,7 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ProfileViewModel
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 @{
     var emojiTest = new List<string>() { "face-smile" };
 }

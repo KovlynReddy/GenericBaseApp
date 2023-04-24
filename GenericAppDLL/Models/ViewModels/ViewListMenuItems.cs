@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class BaseViewModel 
+    public class ViewListMenuItems : BaseViewModel
     {
-        public SettingsImplementationViewModel settings { get; set; } = new SettingsImplementationViewModel();
+        public List<MenuItemViewModel> items { get; set; } = new List<MenuItemViewModel>();
     }
 }

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<GenericAppDLL.Models.ViewModels.PostViewModel>
+﻿@model GenericAppDLL.Models.ViewModels.FeedViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
 <div class="row">
     <div class="col-md-3">
@@ -9,7 +11,7 @@
     <div class="col-md-3">
     </div>
 </div>
-@foreach (var item in Model)
+@foreach (var item in Model.Posts)
 {
    @* @Html.Partial("_Post",item);*@
     <div class="row">

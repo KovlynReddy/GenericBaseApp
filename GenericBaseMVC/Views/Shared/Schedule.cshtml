@@ -1,4 +1,7 @@
-﻿@model IEnumerable<GenericAppDLL.Models.Dto.SchedulerDataDto>
+﻿@model GenericAppDLL.Models.ViewModels.MeetingScheduleViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
 
 @{
     ViewData["Title"] = "Calendar";

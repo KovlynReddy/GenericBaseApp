@@ -10,7 +10,6 @@ public class AddressViewModel : BaseViewModel
     public string Country { get; set; }
     public string Lat { get; set; }
     public string lon { get; set; }
-
     public string Caption { get; set; }
     public string ModelGuid { get; set; }
 }

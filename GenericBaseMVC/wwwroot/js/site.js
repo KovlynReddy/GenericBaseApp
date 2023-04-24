@@ -69,4 +69,10 @@ function GetCodeFromFAClass(className) {
 
 }
 
-console.log(emojis);
+var selectedTheme = $("#Theme-Selected").val();
+if (selectedTheme == "" || selectedTheme == null) {
+    selectedTheme = "Neon";
+}
+ChangeTheme(selectedTheme);
+
+console.log(selectedTheme);

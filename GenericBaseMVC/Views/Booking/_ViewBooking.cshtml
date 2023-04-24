@@ -1,5 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.BookingViewModel
 
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 <div class="jumbotron">
     <h1> @Model.CreatedDateTimeString</h1>
 

@@ -1,5 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ViewFriendRequestsViewModel
 
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 @foreach(var item in Model.users)
 {
     <partial name="_FriendRequest" model="item" />

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.ViewModels
 {
-    public class BaseViewModel 
+    public class ViewListBookingViewModel : BaseViewModel
     {
-        public SettingsImplementationViewModel settings { get; set; } = new SettingsImplementationViewModel();
+        public List<BookingViewModel> bookings { get; set; } = new List<BookingViewModel>();
     }
 }

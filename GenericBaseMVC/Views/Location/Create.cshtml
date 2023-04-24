@@ -1,4 +1,7 @@
-﻿@model IEnumerable<GenericAppDLL.Models.DomainModel.Vendor>
+﻿@model GenericAppDLL.Models.ViewModels.CreateVendorViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
 
 <div id="map" style="width:100%;height:400px;"></div>
 

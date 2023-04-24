@@ -1,5 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ChatViewModel
 
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 <partial name="_Chat" model="Model" />
 <partial name="emojiTray" model="@Model.emojis" />
 <partial name="_SendMessageControl" model="Model.NewMessage" />

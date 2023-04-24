@@ -1,4 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.SettingsViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 <form asp-action="SaveSettings" asp-controller="Notification">
 
 @*<partial name="_ThemeControl" model="Model.Themes" />*@

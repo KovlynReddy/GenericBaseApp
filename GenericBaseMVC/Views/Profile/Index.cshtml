@@ -1,5 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ViewListProfilesViewModel
 
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
 <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="CreateProfile">Create </a>
 
     @foreach (var customer in Model.profiles)

@@ -1,4 +1,7 @@
-﻿@model List<GenericAppDLL.Models.ViewModels.VendorViewModel>
+﻿@model GenericAppDLL.Models.ViewModels.SuggestedItemViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
 
 <div id="demo" class="carousel slide" data-bs-ride="carousel">
 
@@ -14,7 +17,7 @@
         <div class="carousel-item active">
             <img src="la.jpg" alt="Los Angeles" class="d-block w-100">
         </div>
-        @foreach (var item in Model)
+        @foreach (var item in Model.vendors)
         {
             <div class="carousel-item">
                 @Html.Partial("_MenuItem", item)

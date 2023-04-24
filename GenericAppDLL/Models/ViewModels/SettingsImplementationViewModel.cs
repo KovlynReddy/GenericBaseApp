@@ -8,5 +8,6 @@ namespace GenericAppDLL.Models.ViewModels
 {
     public class SettingsImplementationViewModel
     {
+        public string SelectedTheme { get; set; }
     }
 }
