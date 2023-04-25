@@ -26,6 +26,8 @@ builder.Services.AddTransient<IDirectMessagesDB, DirectMessageDB>();
 builder.Services.AddTransient<IPostDB,PostDB>();
 builder.Services.AddTransient<IVendor,VendorRepo>();
 builder.Services.AddTransient<IRelationship,RelationshipDB>();
+builder.Services.AddTransient<IPostInteractionDB, PostInteractionDB>();
+builder.Services.AddTransient<IMeetupRequestDB, MeetupRequestDB>();
 
 var app = builder.Build();
 

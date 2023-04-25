@@ -50,6 +50,14 @@ namespace VendorAPI.Data.Mappers
             CreateMap<Meetup, MeetUpDto>().ReverseMap();
             CreateMap<Meetup, CreateMeetUpDto>().ReverseMap();
             CreateMap<MeetUpDto, CreateMeetUpDto>().ReverseMap();
+            
+            CreateMap<MeetupRequestDto, Meetup>().ReverseMap();
+            CreateMap<CreateMeetupRequestDto, CreateMeetupRequestDto>().ReverseMap();
+            CreateMap<CreateMeetupRequestDto, Meetup>().ReverseMap();
+
+            CreateMap<PostInteractionDto, CreatePostInteractionDto>().ReverseMap();
+            CreateMap<PostInteraction, CreatePostInteractionDto>().ReverseMap();
+            CreateMap<PostInteraction, PostInteractionDto>().ReverseMap();
 
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<CustomerDto, CreateCustomerViewModel>().ReverseMap();

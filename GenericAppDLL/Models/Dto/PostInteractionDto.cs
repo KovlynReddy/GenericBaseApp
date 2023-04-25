@@ -13,7 +13,7 @@ namespace GenericAppDLL.Models.Dto
         public string SenderName { get; set; } = string.Empty;
         public string PostGuid { get; set; } = string.Empty;
         public string ReadDateTime { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
+        public int Status { get; set; } 
         public string SentDateTime { get; set; } = string.Empty;
         public string Caption { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
