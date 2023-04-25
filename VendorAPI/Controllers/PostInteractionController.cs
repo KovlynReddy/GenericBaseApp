@@ -22,14 +22,14 @@ namespace VendorAPI.Controllers
 
         [HttpPost]
         [Route("~/api/PostInteraction")]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Post(CreatePostInteractionDto newDto)
         {
             return View();
         }
 
         [HttpPut]
         [Route("~/api/PostInteraction")]
-        public async Task<IActionResult> Put()
+        public async Task<IActionResult> Put(PostInteractionDto newDto)
         {
             return View();
         }

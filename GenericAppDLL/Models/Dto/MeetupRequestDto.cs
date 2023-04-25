@@ -11,7 +11,7 @@ namespace GenericAppDLL.Models.Dto
         public string ReaderGuid { get; set; } = string.Empty;
         public string SenderGuid { get; set; } = string.Empty;
         public string SenderName { get; set; } = string.Empty;
-        public string PostGuid { get; set; } = string.Empty;
+        public string MeetupGuid { get; set; } = string.Empty;
         public string ReadDateTime { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public string SentDateTime { get; set; } = string.Empty;

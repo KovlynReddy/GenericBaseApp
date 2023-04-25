@@ -6,11 +6,13 @@ public class PostController : Controller
 {
     private IHostEnvironment _hostingEnvironment;
     public PostService _PostService { get; set; }
+    public PostInteractionService _postInteractionService { get; set; }
 
     public PostController(IHostEnvironment hostingEnvironment)
     {
         _hostingEnvironment = hostingEnvironment;
         _PostService = new PostService();
+        _postInteractionService = new PostInteractionService();
     }
 
     public async Task<IActionResult> Index()

@@ -2,9 +2,9 @@
 {
     public class PostInteractionService
     {
-        public async Task<List<MeetUpDto>> Get()
+        public async Task<List<PostInteractionDto>> Get()
         {
-            IEnumerable<MeetUpDto> Vendors = null;
+            IEnumerable<PostInteractionDto> Vendors = null;
 
             string apiUrl = "https://localhost:7240/api/MeetUp";
 
@@ -16,11 +16,11 @@
 
                 HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                var apiresponse = new List<MeetUpDto>();
+                var apiresponse = new List<PostInteractionDto>();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadAsAsync<List<MeetUpDto>>();
+                    var data = await response.Content.ReadAsAsync<List<PostInteractionDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -30,9 +30,9 @@
 
         }
 
-        public async Task<List<MeetUpDto>> Get(string email)
+        public async Task<List<PostInteractionDto>> Get(string email)
         {
-            IEnumerable<MeetUpDto> Vendors = null;
+            IEnumerable<PostInteractionDto> Vendors = null;
 
             string apiUrl = "https://localhost:7240/api/MeetUp";
 
@@ -44,11 +44,11 @@
 
                 HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                var apiresponse = new List<MeetUpDto>();
+                var apiresponse = new List<PostInteractionDto>();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadAsAsync<List<MeetUpDto>>();
+                    var data = await response.Content.ReadAsAsync<List<PostInteractionDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -58,9 +58,9 @@
 
         }
 
-        public async Task<List<CreateMeetUpDto>> Create(CreateMeetUpDto sendInvite)
+        public async Task<List<PostInteractionDto>> Create(CreatePostInteractionDto sendInvite)
         {
-            IEnumerable<CreateMeetUpDto> Addresses = null;
+            IEnumerable<PostInteractionDto> Addresses = null;
 
             string apiUrl = "https://localhost:7240/api/MeetUp";
 
@@ -77,11 +77,11 @@
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new List<CreateMeetUpDto>();
+                var apiresponse = new List<PostInteractionDto>();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<List<CreateMeetUpDto>>();
+                    var data = await result.Content.ReadAsAsync<List<PostInteractionDto>>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
@@ -91,9 +91,9 @@
 
         }
 
-        public async Task<MeetUpDto> Put(MeetupResponseDto response)
+        public async Task<PostInteractionDto> Put(PostInteractionDto response)
         {
-            MeetUpDto Addresses = null;
+            PostInteractionDto Addresses = null;
 
             string apiUrl = "https://localhost:7240/api/MeetUp";
 
@@ -110,11 +110,11 @@
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new MeetUpDto();
+                var apiresponse = new PostInteractionDto();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<MeetUpDto>();
+                    var data = await result.Content.ReadAsAsync<PostInteractionDto>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }
