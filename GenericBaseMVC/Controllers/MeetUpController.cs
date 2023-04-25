@@ -23,6 +23,13 @@ public class MeetUpController : Controller
     {
 
         return View();
+    }    
+    
+    [HttpGet]
+    public async Task<IActionResult> Suggested()
+    {
+
+        return View();
     }
 
 
@@ -40,6 +47,29 @@ public class MeetUpController : Controller
 
         return View();
     }
+        
+    [HttpGet]
+    public async Task<IActionResult> Accept(string id)
+    {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
+        var meetups = await _meetupService.Respond(new MeetupResponseDto() { id = id,response = 0, responderId = currentCustomer.ModelGuid}) ;
+        return View();
+    }
+        
+    
+    [HttpGet]
+    public async Task<IActionResult> Deny(string id)
+    {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
+        var meetups = await _meetupService.Respond(new MeetupResponseDto() { id = id, response = 1 , responderId = currentCustomer.ModelGuid });
+        return View();
+    }
 
     [HttpGet]
     public async Task<IActionResult> Create() {
@@ -52,6 +82,9 @@ public class MeetUpController : Controller
         var lats = meetups.Select(m=>m.Lat).Select(m=>m.Replace('(', ' ').Replace(')', ' ')).ToList();
         var lons = meetups.Select(m=>m.lon).Select(m=>m.Replace('(', ' ').Replace(')', ' ')).ToList();
         var captions = meetups.Select(m=>m.Caption).ToList();
+        var meetupIds = meetups.Select(m=>m.ModelGuid).ToList();
+
+        model.ids = meetupIds;
         model.newMeetup.ListPeople = cords;
         model.Lats = lats;
         model.Longs = lons;
@@ -82,6 +115,7 @@ public class MeetUpController : Controller
         var dto = Mapper.Map<CreateMeetUpDto>(model.newMeetup);
         dto.SenderGuid = currentCustomer.ModelGuid;
         dto.DateTimeSent = DateTime.Now.ToString();
+        dto.ModelGuid = Guid.NewGuid().ToString();
 
         var results = await _meetupService.Create(dto);
 

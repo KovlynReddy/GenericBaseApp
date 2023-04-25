@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.DomainModel;
 
 namespace VendorAPI.Controllers;
 
@@ -48,6 +49,22 @@ public class MeetUpController : Controller
         };
 
         _context.Update(invite);
+        _context.SaveChanges();
+
+        return View();
+    }
+
+    [HttpPut]
+    [Route("~/api/MeetUp")]
+    public IActionResult Respond(MeetupResponseDto response)
+    {
+        var drequest = _context.MeetUpRequests.FirstOrDefault(m => m.ModelGUID == response.id );
+        var dmeetup = _context.MeetUps.FirstOrDefault(m => m.ModelGUID == response.id );
+        dmeetup.Status = response.response;
+        drequest.Status = response.response;
+        var IsPaidM = _context.Entry(dmeetup).Property("Status").IsModified;
+        var IsPaidR = _context.Entry(drequest).Property("Status").IsModified;
+
         _context.SaveChanges();
 
         return View();

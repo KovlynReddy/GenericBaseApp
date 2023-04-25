@@ -57,6 +57,7 @@ namespace VendorAPI.Data.DB
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Meetup> MeetUps { get; set; }
+        public DbSet<MeetupRequest> MeetUpRequests { get; set; }
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchasedItem> PurchasedItems { get; set; }

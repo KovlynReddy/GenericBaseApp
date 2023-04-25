@@ -91,7 +91,7 @@ public class MeetUpService
 
     }
 
-    public async Task<MeetUpDto> Respond(CreateMeetUpDto sendInvite)
+    public async Task<MeetUpDto> Respond(MeetupResponseDto response)
     {
         MeetUpDto Addresses = null;
 
@@ -103,10 +103,10 @@ public class MeetUpService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(sendInvite);
+            var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(response);
             var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage result = await client.PostAsync(apiUrl, payload);
+            HttpResponseMessage result = await client.PutAsync(apiUrl, payload);
 
             //result.EnsureSuccessStatusCode();
 

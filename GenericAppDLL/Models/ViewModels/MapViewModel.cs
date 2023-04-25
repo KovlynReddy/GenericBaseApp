@@ -6,6 +6,7 @@ public class MapViewModel : BaseViewModel
     public List<string> Longs { get; set; } = new List<string>();
     public List<string> Captions { get; set; } = new List<string>();
     public List<string> Names { get; set; } = new List<string>();
+    public List<string> ids { get; set; } = new List<string>();
 
     public string CenterLat { get; set; }
     public string CenterLon { get; set; }
