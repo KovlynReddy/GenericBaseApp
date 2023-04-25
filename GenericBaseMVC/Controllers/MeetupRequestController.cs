@@ -17,11 +17,16 @@ namespace GenericBaseMVC.Controllers
         }
         public async Task<IActionResult> Get()
         {
+            var model = new ViewListMeetupRequests();
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+            var results = await _meetupRequestService.Get();
+            model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
-            return View();
+            model.meetups = Mapper.Map<List<MeetupViewRequestModel>>(results.ToList());
+
+            return View("ListView",model);
         }        
         
         public async Task<IActionResult> Accept(string id)

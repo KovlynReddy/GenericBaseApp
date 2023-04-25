@@ -44,7 +44,7 @@ namespace VendorAPI.Data.Repository
 
         public async Task<MeetupRequestDto> Post(MeetupRequestDto model)
         {
-            var entity = mapper.Map<PostInteraction>(model);
+            var entity = mapper.Map<MeetupRequest>(model);
 
             _context.Add(entity);
             _context.SaveChanges();

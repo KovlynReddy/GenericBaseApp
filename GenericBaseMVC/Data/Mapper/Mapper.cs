@@ -48,6 +48,15 @@ namespace GenericBaseMVC.Data.Mapper
             CreateMap<CustomerViewModel, EditCustomerDto>().ReverseMap();
             CreateMap<CustomerViewModel, CreateCustomerDto>().ReverseMap();
 
+            CreateMap<MeetupRequestDto, Meetup>().ReverseMap();
+            CreateMap<CreateMeetupRequestDto, CreateMeetupRequestDto>().ReverseMap();
+            CreateMap<CreateMeetupRequestDto, Meetup>().ReverseMap();
+
+            CreateMap<PostInteractionDto, CreatePostInteractionDto>().ReverseMap();
+            CreateMap<PostInteraction, CreatePostInteractionDto>().ReverseMap();
+            CreateMap<PostInteraction, PostInteractionDto>().ReverseMap();
+
+
         }
     }
 }
