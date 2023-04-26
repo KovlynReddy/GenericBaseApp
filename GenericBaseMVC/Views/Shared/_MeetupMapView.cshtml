@@ -44,7 +44,7 @@
 
 
 <div id="Respond" class="modal" tabindex="-1" role="dialog">
-    <form asp-action="Post" asp-controller="Meetup">
+    <form asp-action="Post" asp-controller="MeetupRequest">
 
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -65,8 +65,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <a id="AcceptMeetup" href="" class="btn btn-primary"> Accept</a>
-                    <a id="DenyMeetup" href="" class="btn btn-primary"> Deny</a>
+                    <a type="submit" id="RequestMeetup" href="" class="btn btn-primary"> Request </a>
+                    @*<button type="submit" id="AcceptMeetup" href="" class="btn btn-primary"> Request </button>*@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -163,8 +163,9 @@
         console.log("respond", id);
         $('#Respond').modal('show');
         var newUrl = "https://localhost:7140/MeetupRequest/";
-        $('#AcceptMeetup').attr('href', newUrl + "Accept/" + id);
-        $('#DenyMeetup').attr('href', newUrl + "Deny/" + id);
+        $('#RequestMeetup').attr('href', newUrl + "Post/" + id);
+        //$('#AcceptMeetup').attr('href', newUrl + "Accept/" + id);
+        //$('#DenyMeetup').attr('href', newUrl + "Deny/" + id);
 
         };
 

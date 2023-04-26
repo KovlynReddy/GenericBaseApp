@@ -22,7 +22,9 @@ namespace VendorAPI.Controllers
         [Route("~/api/MeetupRequest")]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var result = await MeetupRequestDB.Get();
+
+            return Ok(result);
         }
 
         [HttpGet]

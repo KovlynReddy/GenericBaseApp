@@ -51,6 +51,7 @@ namespace GenericBaseMVC.Data.Mapper
             CreateMap<MeetupRequestDto, Meetup>().ReverseMap();
             CreateMap<CreateMeetupRequestDto, CreateMeetupRequestDto>().ReverseMap();
             CreateMap<CreateMeetupRequestDto, Meetup>().ReverseMap();
+            CreateMap<MeetupViewRequestModel, MeetupRequestDto>().ReverseMap();
 
             CreateMap<PostInteractionDto, CreatePostInteractionDto>().ReverseMap();
             CreateMap<PostInteraction, CreatePostInteractionDto>().ReverseMap();

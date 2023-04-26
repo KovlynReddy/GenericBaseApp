@@ -15,7 +15,7 @@ namespace GenericBaseMVC.Controllers
             _meetupService = new MeetUpService();
             _meetupRequestService = new MeetupRequestService();
         }
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> ViewAll()
         {
             var model = new ViewListMeetupRequests();
             var _customerService = new CustomerService();
@@ -26,16 +26,17 @@ namespace GenericBaseMVC.Controllers
 
             model.meetups = Mapper.Map<List<MeetupViewRequestModel>>(results.ToList());
 
-            return View("ListView",model);
-        }        
-        
+            return View("MeetupReqestListView",model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Accept(string id)
         {
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
 
-            var dto = new CreateMeetupRequestDto() { 
+            var dto = new MeetupRequestDto() { 
             SenderGuid = currentCustomer.ModelGuid,
             ModelGuid = Guid.NewGuid().ToString(),
             MeetupGuid = id,
@@ -47,12 +48,47 @@ namespace GenericBaseMVC.Controllers
             CreatedDateTime = DateTime.Now,
             };
 
-            await _meetupRequestService.Post(dto);
+            await _meetupRequestService.Put(dto);
+
+            return RedirectToAction(actionName:"Create",controllerName:"MeetUp");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Deny(string id)
+        {
+            var _customerService = new CustomerService();
+            var email = User.Identity.Name;
+            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
+            var dto = new MeetupRequestDto()
+            {
+                SenderGuid = currentCustomer.ModelGuid,
+                ModelGuid = Guid.NewGuid().ToString(),
+                MeetupGuid = id,
+                SenderName = currentCustomer.CustomerName,
+                SentDateTime = DateTime.Now.ToString(),
+                Status = 1,
+                Description = "",
+                Caption = "",
+                CreatedDateTime = DateTime.Now,
+            };
+
+            await _meetupRequestService.Put(dto);
+
+            return RedirectToAction(actionName: "Create", controllerName: "MeetUp");
+        }
+
+        public async Task<IActionResult> Get(string id)
+        {
+            var _customerService = new CustomerService();
+            var email = User.Identity.Name;
+            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
 
             return View();
-        }       
-        
-        public async Task<IActionResult> Deny(string id)
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Post(string id)
         {
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
@@ -72,24 +108,6 @@ namespace GenericBaseMVC.Controllers
             };
 
             await _meetupRequestService.Post(dto);
-
-
-            return View();
-        }
-
-        public async Task<IActionResult> Get(string id)
-        {
-            var _customerService = new CustomerService();
-            var email = User.Identity.Name;
-            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-
-            return View();
-        }
-        public async Task<IActionResult> Post()
-        {
-            var _customerService = new CustomerService();
-            var email = User.Identity.Name;
-            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
 
             return View();
         }

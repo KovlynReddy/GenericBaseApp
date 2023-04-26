@@ -1,0 +1,8 @@
+﻿@model GenericAppDLL.Models.ViewModels.ViewListMeetupRequests
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+@foreach (var item in Model.meetups)
+{
+    <partial name="_MeetupRequest" model="item"></partial>
+}

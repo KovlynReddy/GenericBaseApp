@@ -1,0 +1,35 @@
+﻿@model GenericAppDLL.Models.ViewModels.MeetupViewRequestModel
+
+
+<div class="d-flex">
+
+    <div class="card card-text" style="width:27em;">
+        <div class="row">
+            <div class="col-4">
+                <img class="card-img" src="~/profileimage.png" alt="Card image cap">
+            </div>
+            <div class="col-8">
+                <div class="">
+                    <div class="">
+                        <h3 class="Card-Header"> @Model.SenderName</h3><br />
+                        <small>@Model.SentDateTime  </small><br />
+                        <small>@Model.Caption  </small><br />
+                        <small>@Model.Description  </small><br />
+@*                        <small>@Model.CustomerEmail  </small><br />
+                        <small>@Model.ModelGUID  </small><br />*@
+                    </div>
+                    <span class="d-flex">
+                        <form asp-action="Respond" asp-controller="MeetupRequest" asp-route-id="@Model.MeetupGuid">
+                            <input asp-for="MeetupGuid" hidden />
+
+                            <a  asp-action="Accept" asp-controller="MeetupRequest" asp-route-id="@Model.MeetupGuid" class="btn btn-success AddItemToCart"><i class="fa-regular fa-circle-check"></i></a>
+                            <a asp-action="Decline" asp-controller="MeetupRequest" asp-route-id="@Model.MeetupGuid" data-target="#Modal" class="btn btn-danger AddItemToCart"><i class="fa-regular fa-circle-xmark"></i></a>
+                        </form>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
