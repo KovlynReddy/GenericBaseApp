@@ -123,11 +123,34 @@ namespace GenericBaseMVC.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.EmailConfirmed = true;
+                string fileNameWithPath = "~/profileimage.png";
+                if (Input.UploadedImage != null)
+                {
+
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+                //create folder if not exist
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                //get file extension
+                FileInfo fileInfo = new FileInfo(Input.UploadedImage.FileName);
+                string fileName = Input.UploadedImage.FileName + Guid.NewGuid().ToString() + fileInfo.Extension;
+
+                fileNameWithPath = Path.Combine(path, fileName);
+
+                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    Input.UploadedImage.CopyTo(stream);
+                }
+                }
+
                 CreateCustomerDto newUser = new CreateCustomerDto()
                 {
                     CustomerName = Input.Username,
                     CustomerEmail = Input.Email,
                     DOB = Input.DOB.ToString(),
+                    ProfileImagePath= fileNameWithPath,
                     //UploadedImage = Input.UploadedImage,
                 };
 
@@ -136,6 +159,7 @@ namespace GenericBaseMVC.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
 
                 if (result.Succeeded)
                 {

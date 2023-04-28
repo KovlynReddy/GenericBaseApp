@@ -84,13 +84,6 @@ public class ProfileController : Controller
     public async Task<IActionResult> CreateProfile(CreateCustomerViewModel model)
     {
         // var results = await _customerService.GetAll();
-        CreateBookingDto testBooking = new CreateBookingDto() { 
-        Description = "sad",
-        Reason = "dw",
-        Code = "dsd"
-        
-        };
-
         //await _bookingService.Create(testBooking);
 
 

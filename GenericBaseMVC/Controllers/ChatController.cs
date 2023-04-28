@@ -131,7 +131,8 @@ public class ChatController : Controller
                 ReaderGUID = message.RecieverGuid,
                 CreationDateTime = message.CreatedDateTime,
                 CreatorGUID = message.CreatorGuid,
-                MyGuid = user.ModelGuid
+                MyGuid = user.ModelGuid,
+                SenderImagePath = user.ProfileImagePath
 
             });
         }

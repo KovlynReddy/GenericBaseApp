@@ -48,7 +48,8 @@ public class CustomersController : Controller
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
-                SelectedTheme = customer.SelectedTheme
+                SelectedTheme = customer.SelectedTheme,
+                ProfileImagePath = customer.ProfileImagePath ?? "~/ProfileImage.png"
             };
 
             response.Add(CustomerDto);
@@ -77,7 +78,8 @@ public class CustomersController : Controller
                 ModelGuid = customer.ModelGUID,
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
-                CreatedDateTimeString = customer.CreatedDateTime
+                CreatedDateTimeString = customer.CreatedDateTime,
+                ProfileImagePath = customer.ProfileImagePath ?? "~/ProfileImage.png"
             };
 
             response.Add(CustomerDto);
@@ -135,7 +137,9 @@ public class CustomersController : Controller
             CreatorId = Guid.NewGuid().ToString(),
             CompletedDateTime = DateTime.Now.ToString(),
             CreatedDateTime = DateTime.Now.ToString(),
-            CustomerAddress = ""
+            CustomerAddress = "",
+            ProfileImagePath = Vendor.ProfileImagePath
+
         };
         _context.Add(newVendor);
         await _context.SaveChangesAsync();

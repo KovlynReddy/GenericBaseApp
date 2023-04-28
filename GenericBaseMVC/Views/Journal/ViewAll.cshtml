@@ -1,7 +1,7 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ViewListJournalViewModel
 
-<partial name="_SettingsImplementation" model="@Model.settings"></partial>
-
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>                                    
+<a class="btn btn-primary text-dark" asp-area="" asp-controller="Journal" asp-action="Create"><i class="fas fa-comments"></i>Journals </a>
 @foreach(var journal in Model.journals){
 
     <partial name="_Journal" model="journal"></partial>

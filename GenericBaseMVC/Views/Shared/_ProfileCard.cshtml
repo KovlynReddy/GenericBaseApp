@@ -1,7 +1,7 @@
 ﻿@model GenericAppDLL.Models.ViewModels.CustomerViewModel
 
 <div class="card">
-    <img class="card-img-top" src="~/profileimage.png" alt="Card image cap">
+    <img class="card-img-top" src="@Model.ProfileImagePath" alt="~/profileimage.png">
     <div class="card-body">
         <h5 class="card-title">@Model.CustomerName</h5>
         <p class="card-text">@Model.CustomerEmail  @Model.ModelGUID</p>
