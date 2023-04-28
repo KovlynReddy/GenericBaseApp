@@ -69,6 +69,12 @@
                                 </li>*@                               
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comments"></i>Chats </a>
+                                </li>                        
+                                <li class="nav-item dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Journal" asp-action="Create"><i class="fas fa-comments"></i>Journals </a>
+                                </li>                                
+                                <li class="nav-item dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Journal" asp-action="ViewAll"><i class="fas fa-comments"></i>View All Journals </a>
                                 </li>
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewProfile"><i class="fas fa-user"></i>My Profile </a>
@@ -108,6 +114,13 @@
                                 Vendor
                             </a>
                             <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li class="nav-item dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Dashboard"><i class="fas fa-cannabis"></i>Shop</a>
+                                </li>
+                                <li class="nav-item dropdown-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="ViewCart"><i class="fas fa-shopping-cart"></i>View Cart </a>
+                                </li>
+
 @*                                <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Create"><i class="fa-solid fa-store"></i>Create Vendor</a>
                                 </li>*@
@@ -132,7 +145,8 @@
                                 </li>*@
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Dashboard"><i class="fas fa-cannabis"></i>Shop</a>
-                                </li>@*
+                                </li>
+                                @*
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Create"><i class="fas fa-seedling"></i>Create </a>
                                 </li>*@

@@ -28,6 +28,7 @@ builder.Services.AddTransient<IVendor,VendorRepo>();
 builder.Services.AddTransient<IRelationship,RelationshipDB>();
 builder.Services.AddTransient<IPostInteractionDB, PostInteractionDB>();
 builder.Services.AddTransient<IMeetupRequestDB, MeetupRequestDB>();
+builder.Services.AddTransient<IJournalDB, JournalDB>();
 
 var app = builder.Build();
 

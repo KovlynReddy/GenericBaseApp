@@ -1,0 +1,42 @@
+﻿@model GenericAppDLL.Models.ViewModels.CreateJournalViewModel
+
+<form asp-action="Create" enctype="multipart/form-data" method="post" asp-controller="Journal">
+    <div class="row">
+    <div class="col-md-4">
+    <img src="/HOLPT1.jpg5ed12b0b-6a54-45f4-901d-7b72e45b8c94.jpg"></img>
+    </div>
+    <div class="col-md-8">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="UserGuid" hidden value="@Model.UserGuid" class="form-label"></input>
+        <input asp-for="ItemGuid" hidden value="@Model.ItemGuid" class="form-label"></input>
+        <input asp-for="Title" class="form-control" >
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <label asp-for="Description" class="form-label">Description</label>
+            <input asp-for="Description" class="form-control">
+
+        </div>
+   </div>    
+   
+   <div class="row">
+        <div class="col-12">
+            <label asp-for="Body" class="form-label">Body</label>
+            <input style="height:20em;" asp-for="Body" class="form-control">
+
+        </div>
+   </div>
+   
+   <div class="row">
+        <div class="col-12 d-flex">
+            <input asp-for="uploads" style="width:10em" class="form-control" />
+            <button type="submit" title="Save" class="btn btn-success">Save</button>
+            <button type="button" title="Cancel" class="btn btn-danger">Cancel</button>
+
+        </div>
+
+    </div>
+
+</form>

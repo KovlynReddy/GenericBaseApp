@@ -99,6 +99,9 @@ public class PostController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreatePostViewModel model)
     {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await new CustomerService().Get(email)).FirstOrDefault();
 
         string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
@@ -118,7 +121,7 @@ public class PostController : Controller
         }
 
         var Dto = new CreatePostDto() { 
-        SenderGuid = Guid.NewGuid().ToString(),
+        SenderGuid = currentCustomer.ModelGuid,
         AttatchmentPath =fileNameWithPath,
         Caption = model.Caption,
         Feature = 1,

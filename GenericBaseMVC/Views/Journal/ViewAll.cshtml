@@ -1,0 +1,8 @@
+﻿@model GenericAppDLL.Models.ViewModels.ViewListJournalViewModel
+
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+@foreach(var journal in Model.journals){
+
+    <partial name="_Journal" model="journal"></partial>
+}

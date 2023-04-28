@@ -17,9 +17,15 @@ namespace GenericBaseMVC.Data.Mapper
             CreateMap<DirectMessageDto, SendDirectMessageViewModel>().ReverseMap();
             CreateMap<DirectMessageDto, DirectMessage>().ReverseMap();
             CreateMap<DirectMessageDto, DM>().ReverseMap();
+
+            CreateMap<JournalEntryDto, JournalEntry>().ReverseMap();
+            CreateMap<JournalEntryDto, CreateJournalViewModel>().ReverseMap();
+            CreateMap<JournalEntryDto, JournalViewModel>().ReverseMap();
+
             CreateMap<PostDto, Post>().ReverseMap();
             CreateMap<PostDto, PostViewModel>().ReverseMap();
             CreateMap<PostDto, CreatePostViewModel>().ReverseMap();
+
             CreateMap<VendorDto, Vendor>().ReverseMap();
             CreateMap<VendorDto, VendorViewModel>().ReverseMap();
             CreateMap<VendorDto, CreateVendorViewModel>().ReverseMap();

@@ -35,6 +35,10 @@ namespace VendorAPI.Data.Mappers
             CreateMap<PostDto, Post>().ReverseMap();
             CreateMap<PostDto, PostViewModel>().ReverseMap();
             CreateMap<PostDto, CreatePostViewModel>().ReverseMap();
+            
+            CreateMap<JournalEntryDto, JournalEntry>().ReverseMap();
+            CreateMap<JournalEntryDto, CreateJournalViewModel>().ReverseMap();
+            CreateMap<JournalEntryDto, JournalViewModel>().ReverseMap();
 
             CreateMap<VendorDto, Vendor>().ReverseMap();
             CreateMap<VendorDto, VendorViewModel>().ReverseMap();
