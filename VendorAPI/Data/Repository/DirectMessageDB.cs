@@ -1,4 +1,5 @@
-﻿using GenericAppDLL.Models.DomainModel;
+﻿using AutoMapper;
+using GenericAppDLL.Models.DomainModel;
 using System.Security.AccessControl;
 using VendorAPI.Data.Interface;
 
@@ -7,8 +8,9 @@ namespace VendorAPI.Data.Repository
     public class DirectMessageDB : IDirectMessagesDB
     {
         private readonly VendorContext _context;
+        public IMapper mapper { get; }
 
-        public DirectMessageDB(VendorContext context)
+        public DirectMessageDB(VendorContext context, IMapper mapper)
         {
             _context = context;
         }

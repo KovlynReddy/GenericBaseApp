@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VendorAPI.Data.Interface
 {
-    public interface ICustomer : IBase<Customer>
+    public interface ICustomer : IBase<CustomerDto>
     {
         //Customer Post();
         //IEnumerable<Customer> Get();

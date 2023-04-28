@@ -2,7 +2,7 @@
 
 namespace VendorAPI.Data.Interface
 {
-    public interface IItemDB : IBase<Item>
+    public interface IItemDB : IBase<MenuItemDto>
     {
     }
 }

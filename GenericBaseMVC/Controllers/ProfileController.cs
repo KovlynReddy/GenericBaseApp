@@ -10,6 +10,9 @@ public class ProfileController : Controller
     public CustomerService _customerService { get; set; }
     public AddressService _addressService { get; set; }
     public BookingService _bookingService { get; set; }
+    public PostService _postService { get; set; }
+    public JournalService _journalService { get; set; }
+    public MeetUpService _meetUpService { get; set; }
     public RelationshipService _relationshipService { get; set; }
     public ProfileHandler _profileHandler { get; set; }
     public IMapper Mapper { get; }
@@ -17,6 +20,9 @@ public class ProfileController : Controller
 
     public ProfileController(IMapper mapper)
     {
+        _postService = new PostService();
+        _meetUpService = new MeetUpService();
+        _journalService = new JournalService();
         _addressService = new AddressService();
         _customerService = new CustomerService();
         _VendorService = new VendorService();
@@ -30,9 +36,33 @@ public class ProfileController : Controller
         ProfileViewModel model = new ProfileViewModel();
 
         var customerDetails =(await _customerService.Get(email)).FirstOrDefault();
+        var currentCustomerId = customerDetails.ModelGuid;
+
+        var relationships = (await _relationshipService.Get(currentCustomerId)).Where(m=>m.Status == 2 ).ToList();
+
+        foreach (var relationship in relationships)
+        {
+            string otherid = "";
+            if (currentCustomerId == relationship.SenderId)
+            {
+                otherid = relationship.RecieverId;
+            }
+            else {
+                otherid = relationship.SenderId;
+            }
+
+            model.Friends.Add(Mapper.Map<CustomerViewModel>(((await _customerService.Get(otherid)).FirstOrDefault())));
+           
+        }
 
         model.profileDetails = Mapper.Map<CustomerViewModel>(customerDetails);
         model.settings.SelectedTheme = customerDetails.SelectedTheme;
+        //model.Friends = _customerService.Get();
+        model.Journals = Mapper.Map<List<JournalViewModel>>(await _journalService.Get(currentCustomerId));
+        model.Posts = Mapper.Map<List<PostViewModel>>(await _postService.Get(currentCustomerId));
+        model.Meetups = Mapper.Map<List<MeetupViewModel>>(await _meetUpService.Get(currentCustomerId));
+
+
         return model;
     }
 

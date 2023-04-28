@@ -30,13 +30,16 @@
                 <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#Posts" aria-current="page" href="#Posts">Posts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " data-bs-toggle="tab" data-bs-target="#Bio" href="#Bio" tabindex="-1" aria-disabled="true">Bio</a>
-            </li>
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Journals" href="#Journals">Journals</a>
+            </li>            
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" data-bs-target="#MeetUps" href="#MeetUps">Meet Ups</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" data-bs-toggle="tab" data-bs-target="#History" href="#History">History</a>
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Friends" href="#Friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " data-bs-toggle="tab" data-bs-target="#Bio" href="#Bio" tabindex="-1" aria-disabled="true">Bio</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -44,13 +47,28 @@
                 <h3>Posts</h3>
                 @*<partial name="EmojiTray" model="emojiTest" />*@
                 <p>Posts Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-
+                @foreach (var item in Model.Posts)
+                {
+                    @* @Html.Partial("_Post",item);*@
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            <partial name="_Post" model="item"></partial>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                }
             </div>
-            <div role="tabpanel" id="Bio" class="tab-pane fade">
-                <h3>Bio</h3>
+            <div role="tabpanel" id="Journals" class="tab-pane fade">
+                <h3>Journals</h3>
                 @*<partial name="EmojiTray" model="emojiTest" />*@
                 <p>Bio Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-
+                @foreach (var journal in Model.Journals)
+                {
+                    <partial name="_Journal" model="journal"></partial>
+                }
             </div>
             <div role="tabpanel" id="MeetUps" class="tab-pane fade">
                 <h3>MeetUps</h3>
@@ -58,9 +76,30 @@
                 <p>MeetUps Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
 
             </div>
-            <div role="tabpanel" id="History" class="tab-pane fade">
-                <h3>History</h3>
-                @*<partial name="EmojiTray" model="emojiTest" />*@
+            <div role="tabpanel" id="Friends" class="tab-pane fade">
+                <h3>Friends</h3>
+                @*<partial name="_Journal" model="journal"></partial>*@
+                <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                @foreach (var customer in Model.Friends)
+    {
+    @* @Html.Partial("_Profile",customer);
+*@
+    
+            <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
+            <partial name="_ProfileSlim" model="customer"></partial>
+        </div>
+        <div class="col-md-3">
+        </div>
+        </div>
+    }
+            </div>            
+            <div role="tabpanel" id="Bio" class="tab-pane fade">
+                <h3>Bio</h3>
+                @*<partial name="_Journal" model="journal"></partial>*@
                 <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
 
             </div>

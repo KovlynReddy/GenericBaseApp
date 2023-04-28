@@ -1,40 +1,77 @@
-﻿using VendorAPI.Data.Interface;
+﻿using AutoMapper;
+using VendorAPI.Data.Interface;
 
 namespace VendorAPI.Data.Repository
 {
     public class ItemDB : IItemDB
     {
+        private readonly VendorContext _context;
+        private readonly IMapper mapper;
+
+        public ItemDB(VendorContext context, IMapper mapper)
+        {
+            _context = context;
+            this.mapper = mapper;
+        }
         public Task<Item> Delete(int Id)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IEnumerable<Item>> Get()
+        public async Task<IEnumerable<MenuItemDto>> Get(string Id)
+        {
+            var rawResult = _context.Items.Where(m => m.CreatorId == Id || m.VendorId == Id || m.ModelGUID == Id).ToList();
+            var results = mapper.Map<List<MenuItemDto>>(rawResult);
+            return results;
+        }
+        public async Task<IEnumerable<MenuItemDto>> Get(int Id)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IEnumerable<Item>> Get(int Id)
+        public async Task<IEnumerable<MenuItemDto>> Get()
         {
-            throw new NotImplementedException();
+            var rawResult = _context.Items.ToList();
+            var results = mapper.Map<List<MenuItemDto>>(rawResult);
+            return results;
         }
 
-        public Task<IEnumerable<Item>> Get(string Id)
+        public async Task<MenuItemDto> Post(MenuItemDto model)
         {
-            throw new NotImplementedException();
+            var entity = mapper.Map<Item>(model);
+            var rawResult = _context.Add(entity);
+            _context.SaveChanges();
+
+            return mapper.Map<MenuItemDto>(rawResult);
         }
 
-        public Task<Item> Post(Item model)
+        public async Task<MenuItemDto> Put(MenuItemDto model)
         {
-            throw new NotImplementedException();
+            var entity = mapper.Map<Item>(model);
+            var rawResult = _context.Update(entity);
+            _context.SaveChanges();
+
+            return mapper.Map<MenuItemDto>(rawResult.Entity);
         }
 
-        public Task<Item> Put(Item model)
+        public async Task<List<MenuItemDto>> Put(List<MenuItemDto> model)
         {
-            throw new NotImplementedException();
+            var dmodel = mapper.Map<List<Item>>(model);
+            var dlist = dmodel.ToList();
+            //var rawResult = _context.UpdateRange(dlist);
+
+            foreach (var item in dmodel)
+            {
+                //var result = _context.Update(item);
+                var ditem = _context.Items.FirstOrDefault(m => m.ModelGUID == item.ModelGUID || m.Id == item.Id);
+                //ditem.IsPaid = item.IsPaid;
+                var IsPaid = _context.Entry(ditem).Property("IsPaid").IsModified;
+
+                _context.SaveChanges();
+            }
+
+            return new List<MenuItemDto>();
         }
 
-        public Task<List<Item>> Put(List<Item> model)
+        Task<MenuItemDto> IBase<MenuItemDto>.Delete(int Id)
         {
             throw new NotImplementedException();
         }

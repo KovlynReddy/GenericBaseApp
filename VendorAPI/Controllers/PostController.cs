@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace VendorAPI.Controllers
 {
@@ -7,16 +8,29 @@ namespace VendorAPI.Controllers
     public class PostController : Controller
     {
         private readonly VendorContext _context;
+        private readonly IMapper mapper;
 
-        public PostController(VendorContext context)
+        public PostController(VendorContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
         // GET: Customers
         public async Task<IActionResult> Feed()
         {
             return View(await _context.Customers.ToListAsync());
+        }
+
+        [HttpGet]
+        [Route("~/api/Post/{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var entities = await _context.Posts.Where(m => m.SenderGuid == id || m.ModelGUID == id).ToListAsync();
+
+            var dtos = mapper.Map<List<PostDto>>(entities);
+
+            return Ok(dtos);
         }
 
         // GET: Customers/Details/5

@@ -3,11 +3,11 @@
 public class PostService
 {
 
-    public async Task<List<Customer>> Get()
+    public async Task<List<PostDto>> Get(string id)
     {
         IEnumerable<Customer> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Post";
+        string apiUrl = "https://localhost:7240/api/Post/" + id;
 
         using (HttpClient client = new HttpClient())
         {
@@ -17,11 +17,11 @@ public class PostService
 
             HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-            var apiresponse = new List<Customer>();
+            var apiresponse = new List<PostDto>();
 
             if (response.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadAsAsync<List<Customer>>();
+                var data = await response.Content.ReadAsAsync<List<PostDto>>();
                 //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                 apiresponse = data;
             }
