@@ -49,7 +49,7 @@ public class CustomersController : Controller
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
                 SelectedTheme = customer.SelectedTheme,
-                ProfileImagePath = customer.ProfileImagePath ?? "~/ProfileImage.png"
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png") ? customer.ProfileImagePath.Split("root\\")[1] : @"ProfileImages/ProfileImage.png"
             };
 
             response.Add(CustomerDto);
@@ -70,6 +70,7 @@ public class CustomersController : Controller
         foreach (var customer in result)
         {
 
+
             CustomerDto CustomerDto = new CustomerDto
             {
                 CustomerEmail = customer.CustomerEmail,
@@ -79,8 +80,8 @@ public class CustomersController : Controller
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
-                ProfileImagePath = customer.ProfileImagePath ?? "~/ProfileImage.png"
-            };
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
+    };
 
             response.Add(CustomerDto);
 

@@ -10,7 +10,7 @@
     <div class="col-8" style="text-align: -webkit-center;">
 
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/profileimage.png" alt="Card image cap">
+            <img class="card-img-top" src="~/@Model.profileDetails.ProfileImagePath" alt="~/profileimage.png">
             <h5 class="card-title">@Model.profileDetails.CustomerName</h5>
             <p class="card-text">@Model.profileDetails.CustomerEmail  @Model.profileDetails.ModelGUID</p>
             <a asp-action="SendDirectMessage" asp-controller="Chat" asp-route-itemid="@Model.profileDetails.ModelGUID" class="btn btn-primary">Message</a>

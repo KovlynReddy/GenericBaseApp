@@ -37,7 +37,8 @@ namespace GenericBaseMVC.Handlers
                     CustomerName = customer.CustomerName,
                     CustomerEmail = customer.CustomerEmail,
                     ModelGUID = customer.ModelGuid,
-                    IsFriend = relationship != null ? relationship.Status : 99
+                    IsFriend = relationship != null ? relationship.Status : 99,
+                    ProfileImagePath = customer.ProfileImagePath
                 };
 
                 //customers.Add(customerVM);
@@ -132,7 +133,7 @@ namespace GenericBaseMVC.Handlers
                     CustomerEmail = otherUser.CustomerEmail,
                     Status = relationship.Status,
                     ProfileImagePath = "",
-                    CreatedDateTime = relationship.CreatedDateTime
+                    CreatedDateTime = relationship.CreatedDateTime,                    
                 });
             }
 

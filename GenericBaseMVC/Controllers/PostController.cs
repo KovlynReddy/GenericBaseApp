@@ -1,7 +1,9 @@
 ﻿using GenericBaseMVC.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GenericBaseMVC.Controllers;
 
+[Authorize]
 public class PostController : Controller
 {
     private IHostEnvironment _hostingEnvironment;

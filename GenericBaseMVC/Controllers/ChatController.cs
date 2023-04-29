@@ -104,7 +104,7 @@ public class ChatController : Controller
                 {
                     RecieverName = useridProfile.CustomerName,
                     ChatId = useridProfile.ModelGuid,
-                    ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
+                    ProfilePicturePath = useridProfile.ProfileImagePath,
                     CreatorId = useridProfile.ModelGuid,
                     LastMessage = LastMessage.Message,
                     LastMessageSent = LastMessage.CreatedDateTime.ToString(),
@@ -117,8 +117,9 @@ public class ChatController : Controller
         {
             RecieverName = user.CustomerName,
             ChatId = user.ModelGuid,
-            ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
+            ProfilePicturePath = user.ProfileImagePath,
             CreatorId = user.ModelGuid,
+            
             //Id = useridProfile.ModelGUID
         };
 
