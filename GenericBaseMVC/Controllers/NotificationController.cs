@@ -50,10 +50,32 @@ namespace GenericBaseMVC.Controllers
             var customerDetails = (await _customerService.Get(email)).FirstOrDefault();
             customerDetails.SelectedTheme = Theme.Themes.SelectedTheme;
 
+            if (Theme.newProfile != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+                //create folder if not exist
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                //get file extension
+                FileInfo fileInfo = new FileInfo(Theme.newProfile.FileName);
+                string fileName = Theme.newProfile.FileName + Guid.NewGuid().ToString() + fileInfo.Extension;
+
+                string fileNameWithPath = Path.Combine(path, fileName);
+
+                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    Theme.newProfile.CopyTo(stream);
+                }
+
+                customerDetails.ProfileImagePath = fileNameWithPath;
+            }
+
             //var updatedCustomer = mapper.Map<CustomerDto>(customerDetails)
 
             await _customerService.Put(customerDetails);
-            return View();
+            return RedirectToAction("Settings");
         }
     }
 }

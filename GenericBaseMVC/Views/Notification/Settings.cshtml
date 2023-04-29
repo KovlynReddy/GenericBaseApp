@@ -3,7 +3,7 @@
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
 
-<form asp-action="SaveSettings" asp-controller="Notification">
+<form asp-action="SaveSettings" enctype="multipart/form-data" method="post" asp-controller="Notification">
 
 @*<partial name="_ThemeControl" model="Model.Themes" />*@
 
@@ -15,6 +15,8 @@
 @*    <input asp-for="@Model.Themes.SelectedTheme" class="Theme-Control-option" onselect="ChangeTheme(@theme.ThemeCode)" type="radio" name="SelectedTheme" title="@theme.ThemeName" value="@theme.ThemeCode" class="form-control">
     <br />*@
     }
+    <label>Update Profile</label>
+    <input asp-for="newProfile" type="file"></input>
 
 <button type="submit" title="Save" value="Save Changes"> Save Changes</button>
 

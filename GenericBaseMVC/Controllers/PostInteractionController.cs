@@ -37,7 +37,7 @@ namespace GenericBaseMVC.Controllers
 
             await _postInteractionService.Create(dto);
 
-            return View();
+            return RedirectToAction("Feed", "Post");
         }
 
         public async Task<IActionResult> Comment(PostInteractionViewModel model)
@@ -62,7 +62,7 @@ namespace GenericBaseMVC.Controllers
 
             await _postInteractionService.Create(dto);
 
-            return View();
+            return RedirectToAction("Feed","Post");
         }
 
 

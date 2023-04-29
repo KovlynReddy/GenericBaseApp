@@ -154,7 +154,7 @@ public class ProfileController : Controller
 
 
 
-        return View("ViewProfile", model);
+        return View("ViewProfile");
 
     }
 

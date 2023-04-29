@@ -177,6 +177,6 @@ public class PostController : Controller
 
         await _PostService.Create(Dto);
 
-        return View();
+        return RedirectToAction("Feed");
     }
 }

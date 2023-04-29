@@ -49,7 +49,7 @@ public class CustomersController : Controller
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
                 SelectedTheme = customer.SelectedTheme,
-                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png") ? customer.ProfileImagePath.Split("root\\")[1] : @"ProfileImages/ProfileImage.png"
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1] : @"ProfileImages/ProfileImage.png"
             };
 
             response.Add(CustomerDto);
@@ -80,7 +80,7 @@ public class CustomersController : Controller
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
-                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
     };
 
             response.Add(CustomerDto);
@@ -115,10 +115,12 @@ public class CustomersController : Controller
         var entity = _context.Customers.FirstOrDefault(m => m.ModelGUID == customer.ModelGuid || m.Email == customer.CustomerEmail);
         //var rawResult = _context.Update(entity);
         entity.SelectedTheme = customer.SelectedTheme;
-        var IsPaid = _context.Entry(entity).Property("SelectedTheme").IsModified;
+        entity.ProfileImagePath = customer.ProfileImagePath;
+        var SelectedTheme = _context.Entry(entity).Property("SelectedTheme").IsModified;
+        var UpdatedProfileImage = _context.Entry(entity).Property("ProfileImagePath").IsModified;
         _context.SaveChanges();
 
-        return View(customer);
+        return Ok(customer);
     }
 
 

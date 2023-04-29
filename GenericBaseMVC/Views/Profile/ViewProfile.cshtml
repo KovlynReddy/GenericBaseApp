@@ -46,7 +46,6 @@
             <div role="tabpanel" id="Posts" class="tab-pane fade in show active">
                 <h3>Posts</h3>
                 @*<partial name="EmojiTray" model="emojiTest" />*@
-                <p>Posts Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
                 @foreach (var item in Model.Posts)
                 {
                     @* @Html.Partial("_Post",item);*@
@@ -64,8 +63,7 @@
             <div role="tabpanel" id="Journals" class="tab-pane fade">
                 <h3>Journals</h3>
                 @*<partial name="EmojiTray" model="emojiTest" />*@
-                <p>Bio Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                @foreach (var journal in Model.Journals)
+               @foreach (var journal in Model.Journals)
                 {
                     <partial name="_Journal" model="journal"></partial>
                 }
@@ -73,34 +71,31 @@
             <div role="tabpanel" id="MeetUps" class="tab-pane fade">
                 <h3>MeetUps</h3>
                 @*<partial name="EmojiTray" model="emojiTest" />*@
-                <p>MeetUps Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-
+            
             </div>
             <div role="tabpanel" id="Friends" class="tab-pane fade">
                 <h3>Friends</h3>
                 @*<partial name="_Journal" model="journal"></partial>*@
-                <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
                 @foreach (var customer in Model.Friends)
-    {
-    @* @Html.Partial("_Profile",customer);
-*@
-    
-            <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
-            <partial name="_ProfileSlim" model="customer"></partial>
-        </div>
-        <div class="col-md-3">
-        </div>
-        </div>
-    }
+                {
+                    @* @Html.Partial("_Profile",customer);
+                *@
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
+                            <partial name="_ProfileSlim" model="customer"></partial>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                }
             </div>            
             <div role="tabpanel" id="Bio" class="tab-pane fade">
                 <h3>Bio</h3>
                 @*<partial name="_Journal" model="journal"></partial>*@
-                <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
 
             </div>
         </div>
