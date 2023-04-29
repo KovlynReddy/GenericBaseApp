@@ -23,7 +23,9 @@ namespace VendorAPI.Controllers
         [Route("~/api/PostInteraction")]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var result = await PostInteractionDB.Get();
+
+            return Ok(result);
         }
 
         [HttpGet]

@@ -18,16 +18,53 @@ namespace GenericBaseMVC.Controllers
 
         public async Task<IActionResult> Like(string id)
         {
-            return View();
-        }
-        public async Task<IActionResult> Comment(PostInteractionViewModel model)
-        {
-            var dto = Mapper.Map<CreatePostInteractionDto>(model);
+            var _customerService = new CustomerService();
+            var email = User.Identity.Name;
+            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
+
+            var newLike = new PostInteractionViewModel()
+            {
+                PostGuid = id,
+                Type = 2,
+                Status = 1,
+                SenderName = currentCustomer.CustomerName,
+                SenderGuid = currentCustomer.ModelGuid,
+                SentDateTime = DateTime.Now.ToString()
+            };
+
+            var dto = Mapper.Map<CreatePostInteractionDto>(newLike);
 
             await _postInteractionService.Create(dto);
 
             return View();
         }
+
+        public async Task<IActionResult> Comment(PostInteractionViewModel model)
+        {
+            var _customerService = new CustomerService();
+            var email = User.Identity.Name;
+            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
+
+            var newComment = new PostInteractionDto()
+            {
+                PostGuid = model.PostGuid,
+                UserGuid = currentCustomer.ModelGuid,
+                Type = 3,
+                Status = 1,
+                Body = model.Body,
+                SenderName = currentCustomer.CustomerName,
+                SenderGuid = currentCustomer.ModelGuid,
+                SentDateTime = DateTime.Now.ToString()
+            };
+            var dto = Mapper.Map<CreatePostInteractionDto>(newComment);
+
+            await _postInteractionService.Create(dto);
+
+            return View();
+        }
+
 
 
         public async Task<IActionResult> Get()

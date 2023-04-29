@@ -6,7 +6,7 @@
         {
             IEnumerable<PostInteractionDto> Vendors = null;
 
-            string apiUrl = "https://localhost:7240/api/MeetUp";
+            string apiUrl = "https://localhost:7240/api/PostInteraction";
 
             using (HttpClient client = new HttpClient())
             {
@@ -34,7 +34,7 @@
         {
             IEnumerable<PostInteractionDto> Vendors = null;
 
-            string apiUrl = "https://localhost:7240/api/MeetUp";
+            string apiUrl = "https://localhost:7240/api/PostInteraction/"+email;
 
             using (HttpClient client = new HttpClient())
             {
@@ -62,7 +62,7 @@
         {
             IEnumerable<PostInteractionDto> Addresses = null;
 
-            string apiUrl = "https://localhost:7240/api/MeetUp";
+            string apiUrl = "https://localhost:7240/api/PostInteraction";
 
             using (HttpClient client = new HttpClient())
             {
@@ -95,7 +95,7 @@
         {
             PostInteractionDto Addresses = null;
 
-            string apiUrl = "https://localhost:7240/api/MeetUp";
+            string apiUrl = "https://localhost:7240/api/PostInteraction";
 
             using (HttpClient client = new HttpClient())
             {

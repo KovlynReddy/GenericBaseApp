@@ -1,4 +1,5 @@
-﻿using GenericBaseMVC.Services;
+﻿using GenericAppDLL.Models.DomainModel;
+using GenericBaseMVC.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GenericBaseMVC.Controllers;
@@ -28,9 +29,17 @@ public class PostController : Controller
 
             var postInteractions = await _postInteractionService.Get(post.ModelGuid);
             PostFooterViewModel footer = new PostFooterViewModel();
-            footer.NumLikes = postInteractions.Where(m => m.Status == 2).Count();
-            footer.NumComments = postInteractions.Where(m => m.Status == 3).Count();
-            footer.LastComments = postInteractions.Where(m => m.Status == 3).FirstOrDefault() != null ? postInteractions.Where(m => m.Status == 2).FirstOrDefault().Caption :  "Enter A Comment";
+            if (postInteractions != null)
+            {
+                footer.NumLikes = postInteractions.Where(m => m.Type == 2).Count();
+                footer.NumComments = postInteractions.Where(m => m.Type == 3).Count();
+                footer.LastComments = postInteractions.Where(m => m.Type == 3).LastOrDefault() != null ? postInteractions.Where(m => m.Type == 3).LastOrDefault().Body : "Enter A Comment";
+            }
+            else {
+                footer.NumLikes = 0;
+                footer.NumComments = 0;
+                footer.LastComments = "Be The First To Comment";
+            }
 
             //footer.comments = ;
 
