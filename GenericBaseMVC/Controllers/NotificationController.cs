@@ -48,7 +48,11 @@ namespace GenericBaseMVC.Controllers
         public async Task<IActionResult> SaveSettings(SettingsViewModel Theme) {
             var email = User.Identity.Name;
             var customerDetails = (await _customerService.Get(email)).FirstOrDefault();
+            if (!string.IsNullOrEmpty(Theme.Themes.SelectedTheme))
+            {
+
             customerDetails.SelectedTheme = Theme.Themes.SelectedTheme;
+            }
 
             if (Theme.newProfile != null)
             {
@@ -69,7 +73,7 @@ namespace GenericBaseMVC.Controllers
                     Theme.newProfile.CopyTo(stream);
                 }
 
-                customerDetails.ProfileImagePath = fileNameWithPath;
+                customerDetails.ProfileImagePath = fileName;//fileNameWithPath.Split("root\\")[1];
             }
 
             //var updatedCustomer = mapper.Map<CustomerDto>(customerDetails)

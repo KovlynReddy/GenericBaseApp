@@ -49,7 +49,8 @@ public class CustomersController : Controller
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
                 SelectedTheme = customer.SelectedTheme,
-                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1] : @"ProfileImages/ProfileImage.png"
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath : @"ProfileImages/ProfileImage.png"
+                //ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1] : @"ProfileImages/ProfileImage.png"
             };
 
             response.Add(CustomerDto);
@@ -80,7 +81,8 @@ public class CustomersController : Controller
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
-                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath: @"ProfileImages/ProfileImage.png" 
+                //ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
     };
 
             response.Add(CustomerDto);
@@ -141,7 +143,7 @@ public class CustomersController : Controller
             CompletedDateTime = DateTime.Now.ToString(),
             CreatedDateTime = DateTime.Now.ToString(),
             CustomerAddress = "",
-            ProfileImagePath = Vendor.ProfileImagePath
+            ProfileImagePath = Vendor.ProfileImagePath.Split("root\\")[1]
 
         };
         _context.Add(newVendor);
