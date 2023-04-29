@@ -1,5 +1,8 @@
 ﻿@model GenericAppDLL.Models.ViewModels.PostFooterViewModel
 
+@{
+    var commentSectionId = "CommentSection" + Model.postInteraction.PostGuid;
+}
 
 <div class="row">
     <div class="col-md-4">
@@ -20,7 +23,7 @@
     </div>
     <div class="col-md-4">
         @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
-        <button type="button" class="btn btn-secondary"><i class="fas fa-comment-dots"></i>@*Comment*@</button>
+        <button type="button" id="commentSection" data-bs-toggle="collapse" data-bs-target="#@commentSectionId" aria-expanded="false" aria-controls="flush-collapseOne" class="btn btn-secondary"><i class="fas fa-comment-dots"></i>@*Comment*@</button>
     </div>
     <div class="col-md-4">
         <a href="#" class="btn btn-success"><i class="fas fa-retweet"></i>@*Share*@</a>
@@ -31,6 +34,25 @@
     <p>@Model.LastComments</p>
     </div>
 </div>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+@*        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            </button>
+        </h2>*@
+        <div id="@commentSectionId" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#commentSection">
+            <div class="col-8">
+            @foreach (var comment in Model.comments)
+            {
+                <partial name="_PostComment" model="@comment"></partial>
+            }
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <partial name="_SendPostComment" model="@Model.postInteraction"></partial>
 </div>

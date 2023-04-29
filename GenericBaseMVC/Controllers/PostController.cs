@@ -41,6 +41,26 @@ public class PostController : Controller
                 footer.LastComments = "Be The First To Comment";
             }
 
+            if (postInteractions.Where(m => m.Type == 3).FirstOrDefault() != null)
+            {
+                foreach (var comment in postInteractions.Where(m=>m.Type==3).ToList())
+                {
+
+                var _customerService = new CustomerService();
+                var email = comment.SenderGuid;
+                var commentSender = (await _customerService.Get(email)).FirstOrDefault();
+
+                footer.comments.Add(new CommentViewModel() { 
+                SenderGuid = commentSender.ModelGuid,
+                SentDateTime = comment.SentDateTime,
+                Comment = comment.Body,
+                CommentGuid = comment.ModelGuid,
+                SenderProfilePicture = commentSender.ProfileImagePath,
+                SenderName = commentSender.CustomerName
+                });
+                }
+            }
+
             //footer.comments = ;
 
             footer.postInteraction = new PostInteractionViewModel()

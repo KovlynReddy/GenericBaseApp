@@ -1,0 +1,24 @@
+﻿@model GenericAppDLL.Models.ViewModels.CommentViewModel
+
+
+<div class="d-flex align-items-baseline mb-4  messageBubble">
+
+    <div class="position-relative avatar" style="max-width:15%;max-height:15%;">
+        <img class="img-fluid rounded-circle" alt="~/ProfileImage.png" src="~/@Model.SenderProfilePicture"  />
+        <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+            <span class="visually-hidden">new alerts</span>
+        </span>
+    </div>
+
+    <div class="pe-2">
+        <h5>@Model.SenderName</h5>
+        <div class="card card-text d-inline-block p-2 px-3 m-1">
+            @Model.Comment
+        </div>
+        <small class="small">
+            @Model.SentDateTime
+        </small>
+    </div>
+    @*text-end justify-content-end*@
+
+</div>

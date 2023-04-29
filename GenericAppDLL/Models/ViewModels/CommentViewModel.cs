@@ -13,5 +13,6 @@ namespace GenericAppDLL.Models.ViewModels
         public string SenderProfilePicture { get; set; }
         public string SentDateTime { get; set; }
         public string Comment { get; set; }
+        public string SenderName { get; set; }
     }
 }
