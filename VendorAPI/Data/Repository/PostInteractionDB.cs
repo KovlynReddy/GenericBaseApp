@@ -33,7 +33,7 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<PostInteractionDto>> Get(string Id)
         {
-            var results = _context.PostInteractions.Where(m=> m.PostGuid == Id || m.SenderGuid == Id || m.ModelGUID == Id || m.ReaderGuid == Id).ToList();
+            var results = _context.PostInteractions.Where(m=> m.PostGuid == Id || m.SenderGuid == Id || m.ModelGUID == Id || m.ReaderGuid == Id ).ToList();
 
 
             return mapper.Map<List<PostInteractionDto>>(results);

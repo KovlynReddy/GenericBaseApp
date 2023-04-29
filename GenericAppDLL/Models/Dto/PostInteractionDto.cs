@@ -14,7 +14,9 @@ namespace GenericAppDLL.Models.Dto
         public string PostGuid { get; set; } = string.Empty;
         public string ReadDateTime { get; set; } = string.Empty;
         public int Status { get; set; } 
+        public int Type { get; set; } 
         public string SentDateTime { get; set; } = string.Empty;
+        public string Body { get; set; } = string.Empty;
         public string Caption { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
     }

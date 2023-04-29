@@ -30,7 +30,9 @@ namespace VendorAPI.Controllers
         [Route("~/api/PostInteraction/{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            return Ok();
+            var result = await PostInteractionDB.Get(id);
+
+            return Ok(result);
         }
 
         [HttpPost]

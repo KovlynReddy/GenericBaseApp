@@ -15,6 +15,21 @@ namespace GenericBaseMVC.Controllers
             _postInteractionService = new PostInteractionService();
         }
 
+
+        public async Task<IActionResult> Like(string id)
+        {
+            return View();
+        }
+        public async Task<IActionResult> Comment(PostInteractionViewModel model)
+        {
+            var dto = Mapper.Map<CreatePostInteractionDto>(model);
+
+            await _postInteractionService.Create(dto);
+
+            return View();
+        }
+
+
         public async Task<IActionResult> Get()
         {
             var _customerService = new CustomerService();

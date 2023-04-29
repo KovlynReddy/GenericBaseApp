@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericAppDLL.Models.Dto
 {
-    public  class PostDto
+    public  class PostDto : BaseDto
     {
         public string SenderGuid { get; set; } = string.Empty;
         public string RecieverGuid { get; set; } = string.Empty;

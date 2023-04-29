@@ -72,6 +72,7 @@ namespace VendorAPI.Controllers
                     Interactions = model.Interactions,
                     Message = model.Message,
                     RecieverGuid = model.RecieverGuid,
+                    ModelGuid = model.ModelGUID
                 };
 
                 response.Add(Dto);
@@ -135,6 +136,7 @@ namespace VendorAPI.Controllers
                 Interactions    = model.Interactions    ,
                 Message         = model.Message         ,
                 RecieverGuid    = model.RecieverGuid    ,
+                ModelGUID = Guid.NewGuid().ToString()
             };
             _context.Add(newEntity);
             await _context.SaveChangesAsync();
@@ -149,6 +151,7 @@ namespace VendorAPI.Controllers
                 Interactions = newEntity.Interactions,
                 Message = newEntity.Message,
                 RecieverGuid = newEntity.RecieverGuid,
+                ModelGuid = newEntity.ModelGUID
             };
 
 

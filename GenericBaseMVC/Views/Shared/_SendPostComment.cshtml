@@ -1,0 +1,14 @@
+﻿@model GenericAppDLL.Models.ViewModels.PostInteractionViewModel
+
+<form asp-controller="PostInteraction" asp-action="Comment" class="d-flex">
+    <div class="col-md-9">
+        <input asp-for="PostGuid" value="@Model.PostGuid" hidden />
+        <input asp-for="SenderGuid" value="@Model.SenderGuid" hidden />
+        <input asp-for="Caption" value="@Model.Caption" />
+    </div>
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-light">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</form>

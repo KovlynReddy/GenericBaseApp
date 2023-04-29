@@ -6,8 +6,6 @@
     <div class="card-body">
         <h5 class="card-title">@Model.Caption</h5>
         <p class="card-text">@Model.Message </p>
-        <a href="#" class="btn btn-primary"><i class="fa-regular fa-thumbs-up"></i>@*Interact*@</a>
-        <a href="#" class="btn btn-secondary"><i class="fas fa-comment-dots"></i>@*Comment*@</a>
-        <a href="#" class="btn btn-success"><i class="fas fa-retweet"></i>@*Share*@</a>
+        <partial name="_PostInteractions" model="@Model.postFooter"></partial>
     </div>
 </div>
