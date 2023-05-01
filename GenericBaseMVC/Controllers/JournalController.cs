@@ -24,8 +24,18 @@ namespace GenericBaseMVC.Controllers
 
             var journals = await new JournalService().Get(currentCustomer.ModelGuid);
 
+
             model.UserGuid = currentCustomer.ModelGuid;
             model.journals = mapper.Map<List<JournalViewModel>>(journals);
+            foreach (var journal in model.journals)
+            {
+                var csv = journal.uploadPaths;
+                var files = csv.Split(',').ToList();
+                files.Remove("");
+                journal.uploadPathsList = files;
+
+            }
+
 
             return View(model);
         }
@@ -66,7 +76,7 @@ namespace GenericBaseMVC.Controllers
                 {
                     upload.CopyTo(stream);
                 }
-                csv += fileNameWithPath + ",";
+                csv += fileName + ",";
 
             }
 

@@ -2,10 +2,10 @@
 
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
-
+<div class="overflow-auto" style="max-height:60em;">
 @foreach (var item in Model.posts) {
     @Html.Partial("_Post",item);
 
     <partial name="_Post" model="item"></partial>
 }
-
+</div>

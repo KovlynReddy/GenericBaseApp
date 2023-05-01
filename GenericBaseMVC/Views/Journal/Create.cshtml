@@ -3,7 +3,7 @@
 <form asp-action="Create" enctype="multipart/form-data" method="post" asp-controller="Journal">
     <div class="row">
     <div class="col-md-4">
-    <img src="/HOLPT1.jpg5ed12b0b-6a54-45f4-901d-7b72e45b8c94.jpg"></img>
+            <img src="/ProfileImages/DefaultImage.jpg" style="max-height:20em;max-width:20em;"></img>
     </div>
     <div class="col-md-8">
         <label asp-for="Title" class="form-label">Title</label>
@@ -23,10 +23,14 @@
    
    <div class="row">
         <div class="col-12">
+            <div class="paper">
+                <div class="paper-content">
             <label asp-for="Body" class="form-label">Body</label>
-            <input style="height:20em;" asp-for="Body" class="form-control">
+            <textarea style="height:20em;" asp-for="Body" id="BodyTextArea" class="form-control"></textarea>
 
         </div>
+   </div>       
+   </div>
    </div>
    
    <div class="row">
@@ -40,3 +44,12 @@
     </div>
 
 </form>
+
+<script type="text/javascript">
+
+    //$('#BodyTextArea').change(function () {
+    //    var message = $('#BodyTextArea').val();
+    //    $('#BodyValue').val(message);
+    //    console.log(message);
+    //});
+</script>

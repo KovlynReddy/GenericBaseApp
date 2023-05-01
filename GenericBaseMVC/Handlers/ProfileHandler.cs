@@ -132,7 +132,7 @@ namespace GenericBaseMVC.Handlers
                     CustomerName = otherUser.CustomerName,
                     CustomerEmail = otherUser.CustomerEmail,
                     Status = relationship.Status,
-                    ProfileImagePath = "",
+                    ProfileImagePath = otherUser.ProfileImagePath,
                     CreatedDateTime = relationship.CreatedDateTime,                    
                 });
             }

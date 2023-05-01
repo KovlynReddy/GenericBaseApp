@@ -1,14 +1,14 @@
 ﻿@model GenericAppDLL.Models.ViewModels.JournalViewModel
-
+<div class="journal card card-body">
 <div class="row">
-    <div class="col-md-4">
-        <img src="/HOLPT1.jpg5ed12b0b-6a54-45f4-901d-7b72e45b8c94.jpg"></img>
+    <div class="col-md-6">
+        <img src="/@Model.uploadPathsList.FirstOrDefault()" style="max-height:20em;max-width:20em;"></img>
     </div>
-    <div class="col-md-8">
-        <label asp-for="Title" class="form-label">Title</label>
+    <div class="col-md-6 justify-content-end">
         <input asp-for="UserGuid" hidden value="@Model.UserGuid" class="form-label"></input>
         <input asp-for="ItemGuid" hidden value="@Model.ItemGuid" class="form-label"></input>
-        <input asp-for="Title" value="@Model.Title" class="form-control">
+        <input asp-for="Title" value="@Model.Title" style="max-width:20em;text-align:end;margin-left: 3em !important;" class="form-control">
+        <partial name="_ImageCarousel" model="Model.uploadPathsList"></partial>
     </div>
 </div>
 
@@ -20,14 +20,18 @@
     </div>
 </div>
 
-<div class="col-md-12">
+@*<div class="col-md-12" style="max-height:20em;">
     <partial name="_ImageCarousel" model="Model.uploadPathsList"></partial>
-</div>
+</div>*@
 
 <div class="row">
     <div class="col-12">
-        <label asp-for="Body" class="form-label">Body</label>
-        <input style="height:20em;" value="@Model.Body" asp-for="Body" class="form-control">
+            <div class="paper">
+                <div class="paper-content">
+        <textarea style="height:20em;" value="@Model.Body" asp-for="Body" class="form-control"></textarea>
+
+    </div>
+</div>
 
     </div>
 </div>
@@ -42,3 +46,4 @@
 
 </div>
 *@
+</div>

@@ -51,7 +51,7 @@ public class ProfileController : Controller
                 otherid = relationship.SenderId;
             }
 
-            model.Friends.Add(Mapper.Map<CustomerViewModel>(((await _customerService.Get(otherid)).FirstOrDefault())));
+            model.Friends.Add(Mapper.Map<CustomerViewModel>((await _customerService.Get(otherid)).FirstOrDefault()));
            
         }
 

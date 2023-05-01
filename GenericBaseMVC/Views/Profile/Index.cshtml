@@ -2,23 +2,22 @@
 
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
+@*<a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="CreateProfile">Create </a>*@
 
-<a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="CreateProfile">Create </a>
-
+<div class="overflow-auto" style="max-height:60em;">
     @foreach (var customer in Model.profiles)
     {
-    @* @Html.Partial("_Profile",customer);
-*@
-    
-            <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
-            <partial name="_ProfileSlim" model="customer.profileDetails"></partial>
-        </div>
-        <div class="col-md-3">
-        </div>
+    @* @Html.Partial("_Profile",customer);*@    
+       <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
+                <partial name="_ProfileSlim" model="customer.profileDetails"></partial>
+            </div>
+            <div class="col-md-3">
+            </div>
         </div>
     }
+</div>
 

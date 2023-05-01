@@ -15,6 +15,8 @@ namespace GenericAppDLL.Models.ViewModels
         public string Description { get; set; } = string.Empty;
         public List<IFormFile> uploads { get; set; } = new List<IFormFile>();
         public List<string> uploadPaths { get; set; } = new List<string>();
+
+        [MaxLength(500)]
         public string Body { get; set; } = string.Empty;
     }
 }
