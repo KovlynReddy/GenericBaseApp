@@ -16,6 +16,7 @@ public class CreateVendorViewModel : BaseViewModel
     public string Caption { get; set; } = string.Empty;
 
     public string UserGuid { get; set; } = string.Empty;
+    public IFormFile VendorImage { get; set; } 
 
     public string Lat { get; set; } = string.Empty;
     public string lon { get; set; } = string.Empty;

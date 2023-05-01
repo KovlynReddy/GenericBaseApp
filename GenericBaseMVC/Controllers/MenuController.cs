@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.DomainModel;
 using GenericAppDLL.Models.ViewModels;
 using NuGet.Packaging;
 using static Humanizer.In;
@@ -79,6 +80,7 @@ public class MenuController : Controller
         [HttpPost]
     public async Task<IActionResult> AddToCart(MenuItemViewModel model)
     {
+        //var model = (await _MenuService.GetAll()).FirstOrDefault(m=>m.ModelGuid == item.ModelGUID);
         var userEmail = User.Identity.Name ?? "none";
         var userService = new CustomerService();
         var Users = await userService.Get(userEmail);
@@ -123,8 +125,8 @@ public class MenuController : Controller
             VendorGuid = model.VendorGuid,
             ItemName = model.ItemName,
             DatePurchased = "n/a",
+            ItemImage = model.ItemImage == string.Empty || model.ItemImage == null ? "profileimages/defaultimage.jpg" : model.ItemImage
         });
-
         return RedirectToAction("Dashboard");
     }
 
@@ -149,7 +151,7 @@ public class MenuController : Controller
                     Cost = item.Cost,
                     CreatorId = item.CreatorId,
                     Currency = item.Currency,
-                    ItemImage = item.ItemImage,
+                    ItemImage = item.ItemImage == string.Empty || item.ItemImage == null ? "profileimages/defaultimage.jpg" : item.ItemImage,
                     MenuId = item.MenuId,
                     ModelGUID = item.ModelGuid,
                     IsMod = 1,
@@ -166,7 +168,8 @@ public class MenuController : Controller
                 AverageRating = VendorModel.AverageRating,
                 CreatedDateTime = VendorModel.CreatedDateTime,
                 IsMod = 1,
-                AllVendorItems = vendorItems
+                AllVendorItems = vendorItems,
+                VendorImage = VendorModel.VendorImage == string.Empty || VendorModel.VendorImage == null ? "profileimages/defaultimage.jpg" : VendorModel.VendorImage
             });
         }
 
@@ -200,6 +203,8 @@ public class MenuController : Controller
         var menuItems = await _MenuService.GetAll();
 
         ShopDashboardViewModel model = new ShopDashboardViewModel();
+
+
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
@@ -214,6 +219,8 @@ public class MenuController : Controller
         var menuItems = await _MenuService.GetAll();
 
         ShopDashboardViewModel model = new ShopDashboardViewModel();
+
+
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
@@ -266,7 +273,7 @@ public class MenuController : Controller
                     Cost = item.Cost,
                     CreatorId = item.CreatorId,
                     Currency = item.Currency,
-                    ItemImage = item.ItemImage,
+                    ItemImage = item.ItemImage == string.Empty || item.ItemImage == null ? "profileimages/defaultimage.jpg" : item.ItemImage,
                     MenuId = item.MenuId,
                     IsMod = 1
                 });
@@ -281,7 +288,8 @@ public class MenuController : Controller
                 AverageRating = VendorModel.AverageRating,
                 CreatedDateTime = VendorModel.CreatedDateTime,
                 IsMod = 1,
-                AllVendorItems = vendorItems
+                AllVendorItems = vendorItems,
+                VendorImage = VendorModel.VendorImage == string.Empty || VendorModel.VendorImage == null ? "profileimages/profileimage.png" : VendorModel.VendorImage
             });
         }
 
@@ -304,6 +312,23 @@ public class MenuController : Controller
     {
         try
         {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+            //create folder if not exist
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            //get file extension
+            FileInfo fileInfo = new FileInfo(newMenuItem.ItemImage.FileName);
+            string fileName = newMenuItem.ItemImage.FileName + Guid.NewGuid().ToString() + fileInfo.Extension;
+
+            string fileNameWithPath = Path.Combine(path, fileName);
+
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                newMenuItem.ItemImage.CopyTo(stream);
+            }
+
             CreateMenuItemDto model = new CreateMenuItemDto()
             {
                 ItemName = newMenuItem.ItemName,
@@ -319,7 +344,9 @@ public class MenuController : Controller
                 MenuId = newMenuItem.MenuId,
                 Currency = newMenuItem.Currency,
                 CreatedDateTimeString = DateTime.Now.ToString(),
-                VendorId = newMenuItem.VendorId
+                VendorId = newMenuItem.VendorId,
+                MenuItemMainImage = fileName,
+
             };
 
             await _MenuService.Post(model);

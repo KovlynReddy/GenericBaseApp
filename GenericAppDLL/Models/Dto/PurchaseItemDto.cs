@@ -9,6 +9,7 @@ namespace GenericAppDLL.Models.Dto
     public class PurchaseItemDto
     {
         public string ItemName { get; set; } = string.Empty;
+        public string ItemImage { get; set; } = string.Empty;
         public string DatePurchased { get; set; } = string.Empty;
         public string ItemGuid { get; set; } = string.Empty;
         public string VendorGuid { get; set; } = string.Empty;

@@ -30,6 +30,10 @@ min-height:500px;
     margin-bottom: -15px;
 }
 
+input {
+/*background : transparent !important;*/
+}
+
 li a {
 color:black !important;
 }
@@ -46,7 +50,6 @@ color:black !important;
     min-width: 400px;
     height: 480px;
     margin: 0 auto;
-    background: #fafafa;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,.3);
     overflow: hidden;

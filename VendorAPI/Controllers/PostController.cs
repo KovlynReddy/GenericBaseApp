@@ -19,7 +19,7 @@ namespace VendorAPI.Controllers
         // GET: Customers
         public async Task<IActionResult> Feed()
         {
-            return View(await _context.Customers.ToListAsync());
+            return Ok(await _context.Customers.ToListAsync());
         }
 
         [HttpGet]

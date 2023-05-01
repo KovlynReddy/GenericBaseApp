@@ -13,6 +13,7 @@ namespace GenericAppDLL.Models.ViewModels
         public string VendorGuid { get; set; } = string.Empty;
         public string CartId { get; set; } = string.Empty;
         public string ItemName { get; set; } = string.Empty;
+        public string ItemImage { get; set; } = string.Empty;
         public int IsPaid { get; set; }
         public string ModelGuid { get; set; } = string.Empty;
         public int Cost { get; set; }

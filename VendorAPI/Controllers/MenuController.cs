@@ -43,6 +43,7 @@ public class MenuController : Controller
                 MenuId = item.MenuId,
                 Currency = item.Currency,
                 CreatedDateTimeString = item.CreatedDateTime,
+                ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path
 
             };
 
@@ -94,6 +95,7 @@ public class MenuController : Controller
                 Cost = item.Cost,
                 MenuId = item.MenuId,
                 Currency = item.Currency,
+                Path = item.MenuItemMainImage
                 //CreatedDateTimeString = DateTime.Now.ToString(),
 
             };

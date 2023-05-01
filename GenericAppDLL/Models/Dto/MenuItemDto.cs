@@ -10,5 +10,5 @@ public class MenuItemDto : BaseDto
     public string Currency { get; set; }   = string.Empty;
     public string CreatorId { get; set; } = string.Empty;
     public int Cost { get; set; }
-    public IFormFile ItemImage { get; set; }
+    public string ItemImage { get; set; } = string.Empty;
 }

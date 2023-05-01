@@ -14,6 +14,7 @@ namespace GenericAppDLL.Models.ViewModels
         public string AddressGuid { get; set; } = string.Empty;
         public string AverageRating { get; set; } = string.Empty;
         public string CreatedDateTime { get; set; } = string.Empty;
+        public string VendorImage { get; set; } = string.Empty;
         public string ModelGUID { get; set; } = string.Empty;
         public int Status { get; set; }
         public int IsMod { get; set; }

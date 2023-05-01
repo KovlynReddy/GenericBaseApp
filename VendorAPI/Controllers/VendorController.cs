@@ -94,7 +94,8 @@ public class VendorController : Controller
             CreatedDateTime = DateTime.Now.ToString(),
             AverageRating = "",
             AddressGuid = "",
-            Status = 0 
+            Status = 0 ,
+            VendorImage = Vendor.VendorImage
         };
         _context.Add(newVendor);
         await _context.SaveChangesAsync();

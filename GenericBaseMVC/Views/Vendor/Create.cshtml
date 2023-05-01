@@ -7,7 +7,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="VendorEmail" class="control-label"></label>
@@ -18,6 +18,11 @@
                 <label asp-for="VendorName" class="control-label"></label>
                 <input asp-for="VendorName" class="form-control" />
                 <span asp-validation-for="VendorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorImage" class="control-label"></label>
+                <input asp-for="VendorImage" class="form-control" />
+                <span asp-validation-for="VendorImage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Lat" class="control-label"></label>

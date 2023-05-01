@@ -3,7 +3,6 @@
 @{
     var commentSectionId = "CommentSection" + Model.postInteraction.PostGuid;
 }
-
 <div class="row">
     <div class="col-md-4">
         <small href="#" class=""><i class="fa-regular fa-thumbs-up"></i>@Model.NumLikes</small>
@@ -19,14 +18,14 @@
 
 <div class="row">
     <div class="col-md-4">
-        <a asp-action="Like" asp-controller="PostInteraction" asp-route-id="@Model.postInteraction.PostGuid" class="btn btn-primary"><i class="fa-regular fa-thumbs-up"></i>@*Interact*@</a>
+        <a asp-action="Like" style="width: -webkit-fill-available;" asp-controller="PostInteraction" asp-route-id="@Model.postInteraction.PostGuid" class="btn btn-primary"><i class="fa-regular fa-thumbs-up"></i>@*Interact*@</a>
     </div>
     <div class="col-md-4">
         @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
-        <button type="button" id="commentSection" data-bs-toggle="collapse" data-bs-target="#@commentSectionId" aria-expanded="false" aria-controls="flush-collapseOne" class="btn btn-secondary"><i class="fas fa-comment-dots"></i>@*Comment*@</button>
+        <button type="button" style="width: -webkit-fill-available;" id="commentSection" data-bs-toggle="collapse" data-bs-target="#@commentSectionId" aria-expanded="false" aria-controls="flush-collapseOne" class="btn btn-secondary"><i class="fas fa-comment-dots"></i>@*Comment*@</button>
     </div>
     <div class="col-md-4">
-        <a href="#" class="btn btn-success"><i class="fas fa-retweet"></i>@*Share*@</a>
+        <a href="#" style="width: -webkit-fill-available;" class="btn btn-success"><i class="fas fa-retweet"></i>@*Share*@</a>
     </div>
 </div>
 <div class="row">

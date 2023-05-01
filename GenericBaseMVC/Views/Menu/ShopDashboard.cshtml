@@ -11,7 +11,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="overflow-auto">
         @foreach (var vendor in Model.AllVendors)
         {
 
@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="row flex-row flex-nowrap">
+                            <tr class="row flex-row flex-nowrap overflow-auto">
                             @foreach (var item in vendor.AllVendorItems)
                             {
                                     <td class="col">

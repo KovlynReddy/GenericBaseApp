@@ -10,5 +10,6 @@ public class CreateMenuItemDto : BaseDto
     public string Currency { get; set; }    = string.Empty;
     public string VendorId { get; set; }    = string.Empty;
     public string CreatorId { get; set; }   = string.Empty;
+    public string MenuItemMainImage { get; set; }   = string.Empty;
     //public IFormFile ItemImage { get; set; }
 }

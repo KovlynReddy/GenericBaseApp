@@ -11,5 +11,6 @@ public class CreateMenuItemViewModel : BaseViewModel
     public string CreatedDateTime { get; set; }     = string.Empty;
     public string CreatorId { get; set; }           = string.Empty;
     public string VendorId { get; set; } = string.Empty;
+    public IFormFile ItemImage { get; set; }
     //public IFormFile ItemImage { get; set; }
 }

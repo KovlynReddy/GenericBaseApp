@@ -1,4 +1,5 @@
-﻿using GenericAppDLL.Models.ViewModels;
+﻿using GenericAppDLL.Models.DomainModel;
+using GenericAppDLL.Models.ViewModels;
 using System.Net;
 
 namespace GenericBaseMVC.Controllers;
@@ -53,7 +54,8 @@ public class VendorController : Controller
             AverageRating   = VendorModel.AverageRating,
             CreatedDateTime = VendorModel.CreatedDateTime,
             IsMod           = 1,
-            AllVendorItems  = vendorItems
+            AllVendorItems  = vendorItems,
+                VendorImage = VendorModel.VendorImage
             });
         }
 
@@ -84,7 +86,7 @@ public class VendorController : Controller
                     Cost = item.Cost,
                     CreatorId = item.CreatorId,
                     Currency = item.Currency,
-                    ItemImage = item.ItemImage,
+                    ItemImage = item.ItemImage == string.Empty || item.ItemImage == null ? "profileimages/defaultimage.jpg" : item.ItemImage,
                     MenuId = item.MenuId,
                     IsMod = 1
                 });
@@ -99,10 +101,10 @@ public class VendorController : Controller
                 AverageRating = VendorModel.AverageRating,
                 CreatedDateTime = VendorModel.CreatedDateTime,
                 IsMod = 1,
-                AllVendorItems = vendorItems
+                AllVendorItems = vendorItems,
+                VendorImage = VendorModel.VendorImage == string.Empty || VendorModel.VendorImage == null ? "profileimages/profileimage.png" : VendorModel.VendorImage
             });
         }
-
         vm.vendors = model;
 
         var _customerService = new CustomerService();
@@ -136,12 +138,30 @@ public class VendorController : Controller
     public async Task<IActionResult> Create(CreateVendorViewModel newVendorvm)
     {
         try
-
         {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+            //create folder if not exist
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            //get file extension
+            FileInfo fileInfo = new FileInfo(newVendorvm.VendorImage.FileName);
+            string fileName = newVendorvm.VendorImage.FileName + Guid.NewGuid().ToString() + fileInfo.Extension;
+
+            string fileNameWithPath = Path.Combine(path, fileName);
+
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                newVendorvm.VendorImage.CopyTo(stream);
+            }
+
+
             CreateVendorDto newVendor = new CreateVendorDto
             {
                 VendorEmail = newVendorvm.VendorEmail,
-                VendorName = newVendorvm.VendorName
+                VendorName = newVendorvm.VendorName,
+                VendorImage = fileName
             };
           
             var result = await _VendorService.Create(newVendor);

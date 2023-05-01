@@ -1,17 +1,17 @@
 ﻿@model GenericAppDLL.Models.ViewModels.MenuItemViewModel
 
 <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="/ProfileImage.png" alt="Card image cap">
+    <img class="card-img-top" src="/@Model.ItemImage" alt="Card image cap">
     <div class="card-body">
         <h3 class="card-title">@Model.ItemName</h3>
         <h5 class="card-title">@Model.Currency @Model.Cost</h5>
         <h6 class="card-title">@Model.SKUCode</h6>
         <p class="card-text">@Model.Caption</p>
-        <button href="#" data-toggle="modal" data-target="#Modal" class="btn btn-primary AddItemToCart">Add</button>
+        <button href="#" data-toggle="modal" data-target="#@Model.ModelGUID" class="btn btn-primary @Model.ModelGUID">Add</button>
     </div>
 </div>
 
-<div id="Modal" class="modal" tabindex="-1" role="dialog">
+<div id="@Model.ModelGUID" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -30,6 +30,7 @@
                         <input asp-for="@Model.SKUCode" value="@Model.SKUCode" hidden class="form-control">
                         <input asp-for="@Model.ItemName" value="@Model.ItemName" hidden class="form-control">
                         <input asp-for="@Model.MenuId" value="@Model.MenuId" hidden class="form-control">
+                        <input asp-for="@Model.ItemImage" value="@Model.ItemImage" hidden class="form-control">
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Amount:</label>
                     <input asp-for="Amount" type="number" class="form-control">
@@ -47,9 +48,9 @@
 
  <script type="text/javascript">
 
-    $(".AddItemToCart").click(function () {
+    $(".@Model.ModelGUID").click(function () {
         console.log("Add To Cart");
-        $('#Modal').modal('show');
+        $('#@Model.ModelGUID').modal('show');
      });
      
  </script>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VendorAPI.Data.DB;
 
@@ -11,9 +12,10 @@ using VendorAPI.Data.DB;
 namespace VendorAPI.Migrations
 {
     [DbContext(typeof(VendorContext))]
-    partial class VendorContextModelSnapshot : ModelSnapshot
+    [Migration("20230501171118_AddingVendorImage")]
+    partial class AddingVendorImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1123,10 +1125,6 @@ namespace VendorAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ItemGuid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ItemImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
