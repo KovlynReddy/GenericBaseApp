@@ -37,6 +37,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Friends" href="#Friends">Friends</a>
+            </li>            
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Points" href="#Friends">Points</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " data-bs-toggle="tab" data-bs-target="#Bio" href="#Bio" tabindex="-1" aria-disabled="true">Bio</a>
@@ -87,6 +90,26 @@
                         <div class="col-md-6">
                             @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
                             <partial name="_ProfileSlim" model="customer"></partial>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                }
+            </div>              
+            <div role="tabpanel" id="Points" class="tab-pane fade">
+                <h3>Point Transactions</h3>
+                @*<partial name="_Journal" model="journal"></partial>*@
+                @foreach (var pt in Model.Transactions)
+                {
+                    @* @Html.Partial("_Profile",customer);
+                *@
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
+                            <partial name="_PointsTransaction" model="pt"></partial>
                         </div>
                         <div class="col-md-3">
                         </div>

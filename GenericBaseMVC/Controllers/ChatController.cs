@@ -187,6 +187,20 @@ public class ChatController : Controller
 
         await SendAMessage(SRMessage);
 
+        var points = new PointsDto()
+        {
+            AccountGuid = user.AccountGuid,
+            Description = "Post Created",
+            Type = 1,
+            SenderType = 1,
+            UserGuid = user.ModelGuid,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = 150,
+            CreatedDateTime = DateTime.Now.ToString(),
+        };
+
+        await new PointsService().Post(points);
+
         return RedirectToAction(actionName:"SendDirectMessage",routeValues: model.RecieverGuid);
     }
 

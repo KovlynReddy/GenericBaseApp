@@ -109,6 +109,20 @@ namespace GenericBaseMVC.Controllers
 
             await _meetupRequestService.Post(dto);
 
+            var points = new PointsDto()
+            {
+                AccountGuid = currentCustomer.AccountGuid,
+                Description = "Post Created",
+                Type = 1,
+                SenderType = 1,
+                UserGuid = currentCustomer.ModelGuid,
+                ModelGuid = Guid.NewGuid().ToString(),
+                Amount = 150,
+                CreatedDateTime = DateTime.Now.ToString(),
+            };
+
+            await new PointsService().Post(points);
+
             return View();
         }
         public async Task<IActionResult> Put()

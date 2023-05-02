@@ -62,6 +62,9 @@ namespace VendorAPI.Data.Mappers
             CreateMap<PostInteractionDto, CreatePostInteractionDto>().ReverseMap();
             CreateMap<PostInteraction, CreatePostInteractionDto>().ReverseMap();
             CreateMap<PostInteraction, PostInteractionDto>().ReverseMap();
+            
+            CreateMap<PointsDto, Points>().ReverseMap();
+            CreateMap<PointsDto, PointsViewModel>().ReverseMap();
 
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<CustomerDto, CreateCustomerViewModel>().ReverseMap();

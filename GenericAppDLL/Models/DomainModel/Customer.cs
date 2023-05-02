@@ -9,4 +9,6 @@ public class Customer : BaseUser
     public string CustomerAddress { get; set; } = string.Empty;
     public string ProfileImagePath { get; set; } = string.Empty;
     public string SelectedTheme { get; set; } = string.Empty;
+    public string AccountGuid { get; set; } = string.Empty;
+    public string LastTotal { get; set; } = string.Empty;
 }

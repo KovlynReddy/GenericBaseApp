@@ -49,7 +49,9 @@ public class CustomersController : Controller
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
                 SelectedTheme = customer.SelectedTheme,
-                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath : @"ProfileImages/ProfileImage.png"
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath : @"ProfileImages/ProfileImage.png",
+                AccountGuid = customer.AccountGuid,
+                LastTotal = customer.LastTotal
                 //ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1] : @"ProfileImages/ProfileImage.png"
             };
 
@@ -81,7 +83,9 @@ public class CustomersController : Controller
                 CustomerAddress = customer.CustomerAddress,
                 CreatedDateTime = DateTime.Parse(customer.CreatedDateTime),
                 CreatedDateTimeString = customer.CreatedDateTime,
-                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath: @"ProfileImages/ProfileImage.png" 
+                ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath: @"ProfileImages/ProfileImage.png" ,
+                AccountGuid = customer.AccountGuid,
+                LastTotal = customer.LastTotal
                 //ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
     };
 

@@ -21,7 +21,7 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<PostDto>> Get()
         {
-            var rawResult = _context.JournalEntries.ToList();
+            var rawResult = _context.Posts.ToList();
             return mapper.Map<List<PostDto>>(rawResult);
         }
 
@@ -32,7 +32,7 @@ namespace VendorAPI.Data.Repository
 
         public async Task<IEnumerable<PostDto>> Get(string Id)
         {
-            var rawResult = _context.JournalEntries.Where(m => m.CreatorId == Id || m.UserGuid == Id || m.ModelGUID == Id).ToList();
+            var rawResult = _context.Posts.Where(m => m.CreatorId == Id || m.RecieverGuid == Id || m.SenderGuid == Id || m.ModelGUID == Id).ToList();
             var results = mapper.Map<List<PostDto>>(rawResult);
             return results;
         }

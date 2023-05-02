@@ -12,4 +12,6 @@ public class CustomerViewModel : BaseViewModel
     public string DOBString { get; set; } = string.Empty;
     public DateOnly DOB { get; set; } = new DateOnly();
     public int IsFriend { get; set; }
+    public string AccountGuid { get; set; } = string.Empty;
+    public string LastTotal { get; set; } = string.Empty;
 }

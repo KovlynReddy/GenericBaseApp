@@ -72,8 +72,23 @@ public class MenuController : Controller
     [HttpPost]
     public async Task<IActionResult> PurchaseTrolley(CartViewModel model)
     {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
         var results = await _cartService.Put(model.CartId);
+        var points = new PointsDto()
+        {
+            AccountGuid = currentCustomer.AccountGuid,
+            Description = "Post Created",
+            Type = 1,
+            SenderType = 1,
+            UserGuid = currentCustomer.ModelGuid,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = 150,
+            CreatedDateTime = DateTime.Now.ToString(),
+        };
 
+        await new PointsService().Post(points);
         return RedirectToAction("ViewCart");
     }
 

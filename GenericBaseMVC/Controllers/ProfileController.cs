@@ -55,10 +55,27 @@ public class ProfileController : Controller
            
         }
 
+        if (!String.IsNullOrEmpty(customerDetails.AccountGuid))
+        {
+            var transactions = Mapper.Map<List<PointsViewModel>>(await new PointsService().Get(currentCustomerId));
+            model.Transactions = transactions;
+
+            model.TotalPoints = transactions.Sum(m=>m.Amount);
+        }
+
         model.profileDetails = Mapper.Map<CustomerViewModel>(customerDetails);
         model.settings.SelectedTheme = customerDetails.SelectedTheme;
         //model.Friends = _customerService.Get();
-        model.Journals = Mapper.Map<List<JournalViewModel>>(await _journalService.Get(currentCustomerId));
+        model.Journals = Mapper.Map<List<JournalViewModel>>((await _journalService.Get(currentCustomerId)));
+        foreach (var journal in model.Journals)
+        {
+            var csv = journal.uploadPaths;
+            var files = csv.Split(',').ToList();
+            files.Remove("");
+            journal.uploadPathsList = files;
+
+        }
+        //model.Journals = Mapper.Map<List<JournalViewModel>>(await _journalService.Get(currentCustomerId));
         model.Posts = Mapper.Map<List<PostViewModel>>(await _postService.Get(currentCustomerId));
         model.Meetups = Mapper.Map<List<MeetupViewModel>>(await _meetUpService.Get(currentCustomerId));
 
@@ -132,7 +149,25 @@ public class ProfileController : Controller
     [HttpGet]
     public async Task<IActionResult> AcceptFriendRequest(string id)
     {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
         var relationship = await _profileHandler.RespondToFriendRequest(id, 2);
+
+        var points = new PointsDto()
+        {
+            AccountGuid = currentCustomer.AccountGuid,
+            Description = "Post Created",
+            Type = 1,
+            SenderType = 1,
+            UserGuid = currentCustomer.ModelGuid,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = 150,
+            CreatedDateTime = DateTime.Now.ToString(),
+        };
+
+        await new PointsService().Post(points);
 
         return RedirectToAction("ViewFriendRequests");
     }    
@@ -149,10 +184,25 @@ public class ProfileController : Controller
     [HttpGet]
     public async Task<IActionResult> SendFriendRequest(string id)
     {
+        var _customerService = new CustomerService();
         var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
         var model = await _profileHandler.SendFriendRequest(id,email);
 
+        var points = new PointsDto()
+        {
+            AccountGuid = currentCustomer.AccountGuid,
+            Description = "Post Created",
+            Type = 1,
+            SenderType = 1,
+            UserGuid = currentCustomer.ModelGuid,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = 150,
+            CreatedDateTime = DateTime.Now.ToString(),
+        };
 
+        await new PointsService().Post(points);
 
         return View("ViewProfile");
 

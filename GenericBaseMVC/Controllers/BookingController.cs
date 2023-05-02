@@ -81,8 +81,12 @@ public class BookingController : Controller
     // POST: BookingController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(CreateBookingViewModel newBooking)
+    public async Task<ActionResult> Create(CreateBookingViewModel newBooking)
     {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
         CreateBookingDto newBookingDto = new CreateBookingDto
         {
             Reason = newBooking.Reason,
@@ -104,6 +108,20 @@ public class BookingController : Controller
         try
         {
             _bookingService.Create(newBookingDto);
+
+            var points = new PointsDto()
+            {
+                AccountGuid = currentCustomer.AccountGuid,
+                Description = "Post Created",
+                Type = 1,
+                SenderType = 1,
+                UserGuid = currentCustomer.ModelGuid,
+                ModelGuid = Guid.NewGuid().ToString(),
+                Amount = 150,
+                CreatedDateTime = DateTime.Now.ToString(),
+            };
+
+            await new PointsService().Post(points);
 
             return RedirectToAction(nameof(Index));
         }

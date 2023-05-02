@@ -57,6 +57,10 @@ namespace GenericBaseMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateJournalViewModel newJournal)
         {
+            var _customerService = new CustomerService();
+            var email = User.Identity.Name;
+            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
             string csv = "";
             foreach (var upload in newJournal.uploads)
             {
@@ -97,6 +101,20 @@ namespace GenericBaseMVC.Controllers
 
             var results = await new JournalService().Post(dto);
 
+
+            var points = new PointsDto()
+            {
+                AccountGuid = currentCustomer.AccountGuid,
+                Description = "Post Created",
+                Type = 1,
+                SenderType = 1,
+                UserGuid = currentCustomer.ModelGuid,
+                ModelGuid = Guid.NewGuid().ToString(),
+                Amount = 150,
+                CreatedDateTime = DateTime.Now.ToString(),
+            };
+
+            await new PointsService().Post(points);
 
             return View();
         }

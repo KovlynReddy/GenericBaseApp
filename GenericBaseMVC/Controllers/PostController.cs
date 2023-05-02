@@ -83,7 +83,7 @@ public class PostController : Controller
                 postFooter = footer,         
                 PostGuid = post.ModelGuid
             };
-            newEntity.AttatchmentPath = newEntity.AttatchmentPath.Split("root\\")[1];
+            newEntity.AttatchmentPath = newEntity.AttatchmentPath;//.Split("root\\")[1];
 
             AllPostVM.Add(newEntity);
 
@@ -176,6 +176,19 @@ public class PostController : Controller
         };
 
         await _PostService.Create(Dto);
+
+        var points = new PointsDto() { 
+            AccountGuid = currentCustomer.AccountGuid,
+            Description = "Post Created",
+            Type = 1,
+            SenderType = 1,
+            UserGuid  = currentCustomer.ModelGuid,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = 150,
+            CreatedDateTime = DateTime.Now.ToString(),            
+        };
+
+        await new PointsService().Post(points);
 
         return RedirectToAction("Feed");
     }

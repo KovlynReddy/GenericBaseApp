@@ -63,6 +63,7 @@ namespace VendorAPI.Data.DB
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchasedItem> PurchasedItems { get; set; }
         public DbSet<PostInteraction> PostInteractions { get; set; }
+        public DbSet<Points> Points { get; set; }
 
 
     }
