@@ -40,12 +40,12 @@ namespace GenericBaseMVC.Controllers
             var points = new PointsDto()
             {
                 AccountGuid = currentCustomer.AccountGuid,
-                Description = "Post Created",
-                Type = 1,
-                SenderType = 1,
+                Description = "Liked Post",
+                Type = 2,
+                SenderType = 2,
                 UserGuid = currentCustomer.ModelGuid,
                 ModelGuid = Guid.NewGuid().ToString(),
-                Amount = 150,
+                Amount = 5,
                 CreatedDateTime = DateTime.Now.ToString(),
             };
 
@@ -79,12 +79,12 @@ namespace GenericBaseMVC.Controllers
             var points = new PointsDto()
             {
                 AccountGuid = currentCustomer.AccountGuid,
-                Description = "Post Created",
-                Type = 1,
-                SenderType = 1,
+                Description = "Commented On Post",
+                Type = 2,
+                SenderType = 2,
                 UserGuid = currentCustomer.ModelGuid,
                 ModelGuid = Guid.NewGuid().ToString(),
-                Amount = 150,
+                Amount = 15,
                 CreatedDateTime = DateTime.Now.ToString(),
             };
 

@@ -190,12 +190,12 @@ public class ChatController : Controller
         var points = new PointsDto()
         {
             AccountGuid = user.AccountGuid,
-            Description = "Post Created",
-            Type = 1,
-            SenderType = 1,
+            Description = "Message Sent",
+            Type = 8,
+            SenderType = 8,
             UserGuid = user.ModelGuid,
             ModelGuid = Guid.NewGuid().ToString(),
-            Amount = 150,
+            Amount = 1,
             CreatedDateTime = DateTime.Now.ToString(),
         };
 

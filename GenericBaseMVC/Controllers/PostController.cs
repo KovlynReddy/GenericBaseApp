@@ -180,8 +180,8 @@ public class PostController : Controller
         var points = new PointsDto() { 
             AccountGuid = currentCustomer.AccountGuid,
             Description = "Post Created",
-            Type = 1,
-            SenderType = 1,
+            Type = 3,
+            SenderType = 3,
             UserGuid  = currentCustomer.ModelGuid,
             ModelGuid = Guid.NewGuid().ToString(),
             Amount = 150,

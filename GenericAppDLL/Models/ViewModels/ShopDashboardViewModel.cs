@@ -10,5 +10,6 @@ namespace GenericAppDLL.Models.ViewModels
     {
         public List<VendorViewModel> AllVendors { get; set; } =  new List<VendorViewModel>();
         public List<MenuItemViewModel> AllMenuItems { get; set; } = new List<MenuItemViewModel>();
+        public int TotalPoints { get; set; }
     }
 }

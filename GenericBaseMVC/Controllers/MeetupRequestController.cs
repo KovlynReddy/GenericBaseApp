@@ -112,12 +112,12 @@ namespace GenericBaseMVC.Controllers
             var points = new PointsDto()
             {
                 AccountGuid = currentCustomer.AccountGuid,
-                Description = "Post Created",
-                Type = 1,
-                SenderType = 1,
+                Description = "Viewed Post",
+                Type = 5,
+                SenderType = 4,
                 UserGuid = currentCustomer.ModelGuid,
                 ModelGuid = Guid.NewGuid().ToString(),
-                Amount = 150,
+                Amount = 1,
                 CreatedDateTime = DateTime.Now.ToString(),
             };
 

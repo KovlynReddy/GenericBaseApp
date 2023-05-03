@@ -96,21 +96,6 @@ public class MeetUpController : Controller
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
         model.settings.SelectedTheme = currentCustomer.SelectedTheme;
 
-
-        var points = new PointsDto()
-        {
-            AccountGuid = currentCustomer.AccountGuid,
-            Description = "Post Created",
-            Type = 1,
-            SenderType = 1,
-            UserGuid = currentCustomer.ModelGuid,
-            ModelGuid = Guid.NewGuid().ToString(),
-            Amount = 150,
-            CreatedDateTime = DateTime.Now.ToString(),
-        };
-
-        await new PointsService().Post(points);
-
         return View("_MeetupMapView", model);
     }
 
@@ -135,6 +120,21 @@ public class MeetUpController : Controller
 
         var results = await _meetupService.Create(dto);
 
-            return View();
+        var points = new PointsDto()
+        {
+            AccountGuid = currentCustomer.AccountGuid,
+            Description = "Meetup Created",
+            Type = 6,
+            SenderType = 7,
+            UserGuid = currentCustomer.ModelGuid,
+            ModelGuid = Guid.NewGuid().ToString(),
+            Amount = 30,
+            CreatedDateTime = DateTime.Now.ToString(),
+        };
+
+        await new PointsService().Post(points);
+
+
+        return View();
     }
 }

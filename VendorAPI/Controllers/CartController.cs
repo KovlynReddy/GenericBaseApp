@@ -15,12 +15,17 @@ namespace VendorAPI.Controllers
         private readonly IPurchaseDB _purchaseDB;
         private readonly IMapper mapper;
 
-        public CartController(VendorContext context,ICartDB cartDB , IPurchaseDB purchaseDB,IMapper mapper)
+        public ICustomer CustomerDb { get; }
+        public IPointsDB _pointsDb { get; }
+
+        public CartController(VendorContext context,ICartDB cartDB , IPurchaseDB purchaseDB,IMapper mapper, IPointsDB pointsDb, ICustomer customerDb)
         {
             _context = context;
+            _pointsDb = pointsDb;
             this._cartDB = cartDB;
             this._purchaseDB = purchaseDB;
             this.mapper = mapper;
+            CustomerDb = customerDb;
         }
 
         [Route("~/api/Cart/{id}/{headers}")]
@@ -43,12 +48,12 @@ namespace VendorAPI.Controllers
 
         }        
         
-        [Route("~/api/Cart/{cartId}")]
+        [Route("~/api/Cart")]
         [HttpPut]
-        public async Task<IActionResult> Put(string cartId)
+        public async Task<IActionResult> Put(PurchaseCartDto cart)
         {
-            var trolley = await _cartDB.Get(cartId);
-            var purchases = await _purchaseDB.Get(cartId);
+            var trolley = await _cartDB.Get(cart.CartId);
+            var purchases = await _purchaseDB.Get(cart.CartId);
 
             foreach (var item in trolley)
             {
@@ -60,6 +65,37 @@ namespace VendorAPI.Controllers
 
             await _purchaseDB.Put(currentPurchase);
             await _cartDB.Put(trolley.ToList());
+
+            var items = await _cartDB.Get(cart.CartId);
+            var total = items.Sum(m => m.Cost);
+
+            if (cart.Type == 1)
+            {
+                var owner = (await CustomerDb.Get(cart.OwnerGuid)).FirstOrDefault();
+                PointsDto newDto = new PointsDto()
+                {
+                    AccountGuid = owner.AccountGuid,
+                    Description = "Trolley Purchased",
+                    Type = 5,
+                    SenderType = 5,
+                    UserGuid = owner.ModelGuid,
+                    ModelGuid = Guid.NewGuid().ToString(),
+                    Amount = -1 * total * 10,
+                    CreatedDateTime = DateTime.Now.ToString(),
+                };
+
+                //var dto = Mapper.Map<PointsDto>(newDto);
+                var accountId = owner.AccountGuid;
+                if (string.IsNullOrEmpty(owner.AccountGuid))
+                {
+                    accountId = Guid.NewGuid().ToString();
+                    owner.AccountGuid = accountId;
+                    await CustomerDb.Put(owner);
+                }
+                newDto.AccountGuid = accountId;
+
+                var result = await _pointsDb.Post(newDto);
+            }
 
             return Ok();
 

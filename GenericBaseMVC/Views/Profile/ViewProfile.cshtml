@@ -9,7 +9,7 @@
     <div class="col-2"></div>
     <div class="col-8" style="text-align: -webkit-center;">
 
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: -webkit-fill-available;">
             <img class="card-img-top" src="~/@Model.profileDetails.ProfileImagePath" alt="~/profileimage.png">
             <h5 class="card-title">@Model.profileDetails.CustomerName</h5>
             <p class="card-text">@Model.profileDetails.CustomerEmail  @Model.profileDetails.ModelGUID</p>
@@ -98,6 +98,7 @@
             </div>              
             <div role="tabpanel" id="Points" class="tab-pane fade">
                 <h3>Point Transactions</h3>
+                <h5>@Model.TotalPoints</h5>
                 @*<partial name="_Journal" model="journal"></partial>*@
                 @foreach (var pt in Model.Transactions)
                 {

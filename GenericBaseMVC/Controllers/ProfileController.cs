@@ -158,12 +158,12 @@ public class ProfileController : Controller
         var points = new PointsDto()
         {
             AccountGuid = currentCustomer.AccountGuid,
-            Description = "Post Created",
+            Description = "Added Friend",
             Type = 1,
             SenderType = 1,
             UserGuid = currentCustomer.ModelGuid,
             ModelGuid = Guid.NewGuid().ToString(),
-            Amount = 150,
+            Amount = 5,
             CreatedDateTime = DateTime.Now.ToString(),
         };
 
@@ -193,12 +193,12 @@ public class ProfileController : Controller
         var points = new PointsDto()
         {
             AccountGuid = currentCustomer.AccountGuid,
-            Description = "Post Created",
+            Description = "Friend Request Sent",
             Type = 1,
             SenderType = 1,
             UserGuid = currentCustomer.ModelGuid,
             ModelGuid = Guid.NewGuid().ToString(),
-            Amount = 150,
+            Amount = 10,
             CreatedDateTime = DateTime.Now.ToString(),
         };
 

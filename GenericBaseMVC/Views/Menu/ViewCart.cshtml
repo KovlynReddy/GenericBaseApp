@@ -17,15 +17,56 @@
 
         }
 
-        <form asp-action="PurchaseTrolley" asp-controller="Menu">
+        <div id="PurchaseChoice" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Meetup</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                             <form asp-action="PurchaseTrolleyWithCard" asp-controller="Menu">
+                                <input asp-for="@Model.CartId" hidden />
+
+                                <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> Card</button>
+                            </form> 
+                            
+                            
+                            <form asp-action="PurchaseTrolleyWithPoints" asp-controller="Menu">
+                             <input asp-for="@Model.CartId" hidden />
+                                <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> Points</button>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button id="CreateMeetUp" type="submit" class="btn btn-primary">Create MeetUp</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+        </div> 
+
             <input asp-for="@Model.CartId" hidden />
             @foreach (var item in Model.purchasedItems)
             {
                 <partial name="_CartItem" model="item" />
 
             }
-            <button type="submit" value="Purchase" class="btn btn-primary"><i></i></button>
-        </form>
+        <button type="button" id="purchaseTrolley" data-bs-toggle="modal" data-bs-target="#PurchaseChoice" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i></button>
     </div>
 
 </div>
+<script type="text/javascript">
+      $(document).ready(function () {
+   //write your code here
+    $("#purchaseTrolley").click(function () {
+
+        $('#PurchaseChoice').modal('show');
+
+        console.log("Create New Vendor/MeetUp");
+
+    });
+   }); 
+    <script/>

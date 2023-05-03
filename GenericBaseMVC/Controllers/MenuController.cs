@@ -70,25 +70,50 @@ public class MenuController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PurchaseTrolley(CartViewModel model)
+    public async Task<IActionResult> PurchaseTrolleyWithCard(CartViewModel model)
     {
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        var results = await _cartService.Put(model.CartId);
+        var dto = new PurchaseCartDto()
+        {
+            CartId = model.CartId,
+            Type = 2,
+            OwnerGuid = currentCustomer.ModelGuid
+        };
+
+        var results = await _cartService.Put(dto);
+
         var points = new PointsDto()
         {
             AccountGuid = currentCustomer.AccountGuid,
-            Description = "Post Created",
-            Type = 1,
-            SenderType = 1,
+            Description = "Trolley Purchased",
+            Type = 5,
+            SenderType = 5,
             UserGuid = currentCustomer.ModelGuid,
             ModelGuid = Guid.NewGuid().ToString(),
-            Amount = 150,
+            Amount = 1000,
             CreatedDateTime = DateTime.Now.ToString(),
         };
 
         await new PointsService().Post(points);
+        return RedirectToAction("ViewCart");
+    }    
+    
+    [HttpPost]
+    public async Task<IActionResult> PurchaseTrolleyWithPoints(CartViewModel model)
+    {
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        var dto = new PurchaseCartDto() { 
+        CartId = model.CartId,
+        Type = 1,
+        OwnerGuid = currentCustomer.ModelGuid
+        };
+
+        var results = await _cartService.Put(dto);
+
         return RedirectToAction("ViewCart");
     }
 
@@ -193,6 +218,14 @@ public class MenuController : Controller
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
         model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+
+        if (!String.IsNullOrEmpty(currentCustomer.AccountGuid))
+        {
+            var transactions = Mapper.Map<List<PointsViewModel>>(await new PointsService().Get(currentCustomer.ModelGuid));
+
+            model.TotalPoints = transactions.Sum(m => m.Amount);
+        }
+
         return View("ShopDashboard",model);
     }
 

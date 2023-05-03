@@ -112,12 +112,12 @@ public class BookingController : Controller
             var points = new PointsDto()
             {
                 AccountGuid = currentCustomer.AccountGuid,
-                Description = "Post Created",
-                Type = 1,
-                SenderType = 1,
+                Description = "Booking Created",
+                Type = 9,
+                SenderType = 9,
                 UserGuid = currentCustomer.ModelGuid,
                 ModelGuid = Guid.NewGuid().ToString(),
-                Amount = 150,
+                Amount = 25,
                 CreatedDateTime = DateTime.Now.ToString(),
             };
 

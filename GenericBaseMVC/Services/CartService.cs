@@ -130,11 +130,11 @@
 
         }
 
-        public async Task<PurchaseDto> Put(string CartId)
+        public async Task<PurchaseDto> Put(PurchaseCartDto cart)
         {
             IEnumerable<PurchaseDto> Carts = null;
 
-            string apiUrl = "https://localhost:7240/api/Cart/"+CartId;
+            string apiUrl = "https://localhost:7240/api/Cart";
 
             using (HttpClient client = new HttpClient())
             {
@@ -142,7 +142,7 @@
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(CartId);
+                var newVendorJson = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 var payload = new StringContent(newVendorJson, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage result = await client.PutAsync(apiUrl, payload);
