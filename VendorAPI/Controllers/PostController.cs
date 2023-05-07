@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.DomainModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using VendorAPI.Data.Interface;
 
 namespace VendorAPI.Controllers
 {
@@ -9,11 +12,13 @@ namespace VendorAPI.Controllers
     {
         private readonly VendorContext _context;
         private readonly IMapper mapper;
+        private readonly IRelationship relationDb;
 
-        public PostController(VendorContext context, IMapper mapper)
+        public PostController(VendorContext context, IMapper mapper, IRelationship relationDb)
         {
             _context = context;
             this.mapper = mapper;
+            this.relationDb = relationDb;
         }
 
         // GET: Customers
@@ -72,12 +77,24 @@ namespace VendorAPI.Controllers
         }
 
         [HttpGet]
-        [Route("~/api/Post/GetAll")]
-        public async Task<IActionResult> GetAll()
+        [Route("~/api/Post/GetAll/{currentCustomer}")]
+        public async Task<IActionResult> GetAll(string currentCustomer)
          {
-            var result = await _context.Posts.ToListAsync();
-
             var response = new List<PostDto>();
+            var relationships = await relationDb.Get(currentCustomer);
+            foreach (var relationship in relationships)
+            {
+                string otherid = "";
+                if (currentCustomer == relationship.SenderId)
+                {
+                    otherid = relationship.RecieverId;
+                }
+                else
+                {
+                    otherid = relationship.SenderId;
+                }
+                var result = await _context.Posts.Where(m=>m.SenderGuid == otherid).ToListAsync();
+
 
             foreach (var model in result)
             {
@@ -97,6 +114,7 @@ namespace VendorAPI.Controllers
 
                 response.Add(Dto);
 
+            }
             }
 
             return Ok(response);

@@ -15,7 +15,16 @@ public class DirectMessageController : Controller
     {
             _DB = DMDb;
     }
-    // GET: DirectMessageController
+        // GET: DirectMessageController
+
+        [HttpPut]
+        [Route("~/api/Read/DirectMessage")]
+        public async Task<IActionResult> Put(ReadMessageDto messageId) {
+
+            await _DB.Put(messageId.MessageGuid);
+
+            return Ok();
+        }
 
     [HttpGet]
     [Route("~/api/DirectMessage/{Id}")]
@@ -35,7 +44,9 @@ public class DirectMessageController : Controller
                         Id = item.Id,
                         Message = item.Message,
                         SenderGuid = item.SenderGuid,
-                        RecieverGuid = item.RecieverGuid
+                        RecieverGuid = item.RecieverGuid,
+                        Read = item.Read,
+                        ModelGUID = item.ModelGuid
                     };
                     dtos.Add(entity);
                 }
@@ -63,7 +74,9 @@ public class DirectMessageController : Controller
                         Id = item.Id,
                         Message = item.Message,
                         SenderGuid = item.SenderGuid,
-                        RecieverGuid = item.RecieverGuid
+                        RecieverGuid = item.RecieverGuid,
+                        Read = item.Read,
+                        ModelGUID = item.ModelGuid
                     };
                     dtos.Add(entity);
                 }

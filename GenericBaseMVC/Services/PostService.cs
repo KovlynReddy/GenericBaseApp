@@ -31,11 +31,11 @@ public class PostService
 
     }
 
-    public async Task<List<PostDto>> GetAll()
+    public async Task<List<PostDto>> GetAll(string currentCustomer)
     {
         IEnumerable<PostDto> Vendors = null;
 
-        string apiUrl = "https://localhost:7240/api/Post/GetAll";
+        string apiUrl = "https://localhost:7240/api/Post/GetAll/"+ currentCustomer;
 
         using (HttpClient client = new HttpClient())
         {

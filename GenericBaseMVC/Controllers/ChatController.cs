@@ -125,6 +125,10 @@ public class ChatController : Controller
 
         foreach (var message in CurrentChatMessages)
         {
+            if (message.Read == 0 && message.RecieverGuid == user.ModelGuid)
+            {
+                await DirectMessageService.Put(message.ModelGuid);
+            }
             model.AllMessages.Add(new DirectMessageViewModel()
             {
                 Message = message.Message,
@@ -168,6 +172,7 @@ public class ChatController : Controller
 
         var Users = await new CustomerService().Get(userEmail);
         var user = Users.FirstOrDefault();
+        
         await DirectMessageService.Post(model);
         //await ChatService.Create(model);
         var code = 102;

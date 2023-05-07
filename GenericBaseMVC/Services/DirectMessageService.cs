@@ -1,5 +1,7 @@
 ﻿using GenericAppDLL.Models.DomainModel;
 using GenericAppDLL.Models.ViewModels;
+using Humanizer;
+using System.Net.Http;
 using System.Text;
 
 namespace GenericBaseMVC.Services;
@@ -101,7 +103,7 @@ public static class DirectMessageService
         var dto = new SendDirectMessageViewModel() {
             Message = model.Message,
             SenderGuid = model.SenderGuid,
-            RecieverGuid = model.RecieverGuid
+            RecieverGuid = model.RecieverGuid,
         };
 
         IEnumerable<DirectMessageDto> DirectMessages = null;
@@ -164,12 +166,12 @@ public static class DirectMessageService
 
     }
 
-    public static async Task<List<DirectMessage>> Put()
+    public static async Task<List<DirectMessage>> Put(string messageId)
     {
         IEnumerable<DirectMessage> DirectMessages = null;
+        var readMessage = new ReadMessageDto() { MessageGuid = messageId};
 
-
-        string apiUrl = "https://localhost:7240/api/DirectMessage";
+        string apiUrl = "https://localhost:7240/api/Read/DirectMessage" ;
 
         using (HttpClient client = new HttpClient())
         {
@@ -177,10 +179,12 @@ public static class DirectMessageService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await client.GetAsync(apiUrl);
+            var EntityJson = Newtonsoft.Json.JsonConvert.SerializeObject(readMessage);
+            var payload = new StringContent(EntityJson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync(apiUrl, payload);
 
             var apiresponse = new List<DirectMessage>();
-
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsAsync<List<DirectMessage>>();

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GenericBaseMVC.Constants;
+using GenericBaseMVC.Handlers;
 using GenericBaseMVC.Services;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GenericBaseMVC.Controllers
@@ -17,14 +19,35 @@ namespace GenericBaseMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Notifications()
+        public async Task<IActionResult> Notifications()
         {
-            var userEmail = User.Identity.Name;
+            var _postInteractionService = new PostInteractionService();
+            var email = User.Identity.Name;
+            var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
+            // meetups near me which did not expire
+            // friends posts not seen
+
+            var AllPostVM = await PostHandler.GetAllPosts(currentCustomer.ModelGuid);
+
+            foreach (var post in AllPostVM)
+            {
+                // add notification ----------------------------------------------------
+
+            }
 
             // messages read
-            // friends posts not seen
-            // meetups near me which did not expire
+            
 
+            var allMessagesDto = await DirectMessageService.Get(currentCustomer.ModelGuid);
+
+            foreach (var message in allMessagesDto)
+            {
+                if (message.Read == 0 && message.RecieverGuid == currentCustomer.ModelGuid)
+                {
+                    // add notification ----------------------------------------------------
+                }
+            }
 
 
             return View();

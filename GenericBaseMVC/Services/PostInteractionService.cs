@@ -58,9 +58,9 @@
 
         }
 
-        public async Task<List<PostInteractionDto>> Create(CreatePostInteractionDto sendInvite)
+        public async Task<PostInteractionDto> Create(CreatePostInteractionDto sendInvite)
         {
-            IEnumerable<PostInteractionDto> Addresses = null;
+            PostInteractionDto Addresses = null;
 
             string apiUrl = "https://localhost:7240/api/PostInteraction";
 
@@ -77,11 +77,11 @@
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new List<PostInteractionDto>();
+                var apiresponse = new PostInteractionDto();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<List<PostInteractionDto>>();
+                    var data = await result.Content.ReadAsAsync<PostInteractionDto>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }

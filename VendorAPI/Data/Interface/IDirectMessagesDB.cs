@@ -3,5 +3,6 @@
     public interface IDirectMessagesDB : IBase<DirectMessageDto>
     {
         Task<IEnumerable<DirectMessageDto>> Get(string id,string email);
+        Task<DirectMessageDto> Put(string id);
     }
 }
