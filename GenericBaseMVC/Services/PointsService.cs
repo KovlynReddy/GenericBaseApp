@@ -59,9 +59,9 @@
 
         }
 
-        public async Task<List<PointsDto>> Post(PointsDto sendInvite)
+        public async Task<PointsDto> Post(PointsDto sendInvite)
         {
-            IEnumerable<PointsDto> Addresses = null;
+            PointsDto Addresses = null;
 
             string apiUrl = "https://localhost:7240/api/Points";
 
@@ -78,11 +78,11 @@
 
                 //result.EnsureSuccessStatusCode();
 
-                var apiresponse = new List<PointsDto>();
+                var apiresponse = new PointsDto();
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var data = await result.Content.ReadAsAsync<List<PointsDto>>();
+                    var data = await result.Content.ReadAsAsync<PointsDto>();
                     //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                     apiresponse = data;
                 }

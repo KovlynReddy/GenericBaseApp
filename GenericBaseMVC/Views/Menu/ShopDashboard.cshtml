@@ -3,43 +3,26 @@
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
 
-<table class="table table-borderless">
-    <thead>
-        <tr>
-            <th>Points Balance :  <strong>@Model.TotalPoints</strong></th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody class="overflow-auto">
-        @foreach (var vendor in Model.AllVendors)
-        {
+<div class="row">
+    <h5>Points Balance :  <strong>@Model.TotalPoints</strong></h5>
+</div>
 
-            <tr class="row">
-                <td class="col-2">
-                </td>
-                <td class="col-8">
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th> <h3>@vendor.VendorName</h3></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="row flex-row flex-nowrap overflow-auto">
-                            @foreach (var item in vendor.AllVendorItems)
-                            {
-                                    <td class="col">
-                                        @Html.Partial("_MenuItem", item)
-                                    </td>
-                            }
-                                </tr>
-                        </tbody>
-                    </table>
-                </td>
-                <td class="col-2">
-                </td>
-            </tr>
+<div class="row overflow-auto ">
+@*<div class="col-2">
+</div>
+    <div class="col-8 overflow-auto">*@
+@foreach (var vendor in Model.AllVendors)
+{
+    <div class="row overflow-auto p-3">
+        @foreach (var item in vendor.AllVendorItems)
+        {
+            <div class="col">
+                @Html.Partial("_MenuItem", item)
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+}
+@*</div>
+<div class="col-2">
+</div>*@
+</div>

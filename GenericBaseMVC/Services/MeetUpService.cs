@@ -58,9 +58,9 @@ public class MeetUpService
 
     }
 
-    public async Task<List<CreateMeetUpDto>> Create(CreateMeetUpDto sendInvite)
+    public async Task<CreateMeetUpDto> Create(CreateMeetUpDto sendInvite)
     {
-        IEnumerable<CreateMeetUpDto> Addresses = null;
+        CreateMeetUpDto Addresses = null;
 
         string apiUrl = "https://localhost:7240/api/MeetUp";
 
@@ -77,11 +77,11 @@ public class MeetUpService
 
             //result.EnsureSuccessStatusCode();
 
-            var apiresponse = new List<CreateMeetUpDto>();
+            var apiresponse = new CreateMeetUpDto();
 
             if (result.IsSuccessStatusCode)
             {
-                var data = await result.Content.ReadAsAsync<List<CreateMeetUpDto>>();
+                var data = await result.Content.ReadAsAsync<CreateMeetUpDto>();
                 //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
                 apiresponse = data;
             }

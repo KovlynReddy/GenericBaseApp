@@ -79,6 +79,6 @@ public class MeetUpController : Controller
 
         _context.SaveChanges();
 
-        return Ok();
+        return Ok(newInvite);
     }
 }

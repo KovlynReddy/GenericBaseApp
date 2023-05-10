@@ -1,17 +1,21 @@
 ﻿using AutoMapper;
+using GenericBaseMVC.Hubs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace GenericBaseMVC.Controllers
 {
     public class MeetupRequestController : Controller
     {
         public IMapper Mapper { get; }
+        public IHubContext<MeetHub> Hub { get; }
         public MeetUpService _meetupService { get; set; }
         public MeetupRequestService _meetupRequestService { get; set; }
 
-        public MeetupRequestController(IMapper mapper)
+        public MeetupRequestController(IMapper mapper, IHubContext<MeetHub> hub)
         {
             Mapper = mapper;
+            Hub = hub;
             _meetupService = new MeetUpService();
             _meetupRequestService = new MeetupRequestService();
         }
@@ -123,7 +127,9 @@ namespace GenericBaseMVC.Controllers
 
             await new PointsService().Post(points);
 
-            return View();
+            await SendMeetRequest(new SignalRMeet());
+
+            return RedirectToAction("Create","MeetUp");
         }
         public async Task<IActionResult> Put()
         {
@@ -132,6 +138,12 @@ namespace GenericBaseMVC.Controllers
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
 
             return View();
+        }
+
+        public async Task<IActionResult> SendMeetRequest(SignalRMeet Message)
+        {
+            await Hub.Clients.All.SendAsync("MeetupRequestRecieved", Message);
+            return Ok();
         }
     }
 }

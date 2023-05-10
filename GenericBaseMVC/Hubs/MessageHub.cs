@@ -7,5 +7,7 @@ public class MessageHub : Hub
     public Task SendMessage(SignalRMessage message) {
 
         return Clients.All.SendAsync(method:"RecieveMessage",message);
-    }
+    }    
+    
+
 }
