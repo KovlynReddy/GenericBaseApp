@@ -1,15 +1,17 @@
-﻿using GenericBaseMVC.Services;
+﻿using GenericAppDLL.Models.DomainModel;
+using GenericBaseMVC.Services;
 
 namespace GenericBaseMVC.Handlers
 {
     public static class NotificationHandler
     {
-        public static async Task<int> GetNotifications(string email) {
+        public static async Task<NotificationsViewModel> GetNotifications(string email) {
             int notifications = 0;
             var _customerService = new CustomerService();
             var _postInteractionService = new PostInteractionService();
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
             var _PostService = new PostService();
+            var model = new NotificationsViewModel();
             // meetups near me which did not expire
             // friends posts not seen
 
@@ -26,6 +28,13 @@ namespace GenericBaseMVC.Handlers
                 {
                 // add notification ----------------------------------------------------
                 notifications++;
+                    model.notifications.Add(new NotificationViewModel() { 
+                    DateTime = post.CreatedDateTimeString ,
+                    Description = "New Post",
+                    Heading = post.Caption,
+                    Link ="testlinkPost" ,
+                    Type = 1
+                    });
                 }
             }
             
@@ -41,10 +50,20 @@ namespace GenericBaseMVC.Handlers
                 {
                     notifications++;
                     // add notification ----------------------------------------------------
+                    model.notifications.Add(new NotificationViewModel()
+                    {
+                        DateTime = message.CreatedDateTimeString,
+                        Description = "New Message",
+                        Heading = message.Message,
+                        Link = "testlinkkmessage",
+                        Type = 2
+                    });
                 }
             }
 
-            return notifications;
+            model.NumNotifcations = notifications;
+
+            return model;
 
         }
     }

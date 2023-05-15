@@ -1,3 +1,8 @@
-﻿
+﻿@model GenericAppDLL.Models.ViewModels.NotificationsViewModel
+
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
+@foreach (var notification in Model.notifications)
+{
+    <partial name="_Notification" model="@notification"></partial>
+}

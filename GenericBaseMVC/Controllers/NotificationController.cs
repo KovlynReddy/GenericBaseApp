@@ -24,33 +24,35 @@ namespace GenericBaseMVC.Controllers
             var _postInteractionService = new PostInteractionService();
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-
+            var model = new NotificationsViewModel();
             // meetups near me which did not expire
             // friends posts not seen
 
-            var AllPostVM = await PostHandler.GetAllPosts(currentCustomer.ModelGuid);
+            //var AllPostVM = await PostHandler.GetAllPosts(currentCustomer.ModelGuid);
 
-            foreach (var post in AllPostVM)
-            {
-                // add notification ----------------------------------------------------
+            //foreach (var post in AllPostVM)
+            //{
+            //    // add notification ----------------------------------------------------
 
-            }
+            //}
 
-            // messages read
-            
-
-            var allMessagesDto = await DirectMessageService.Get(currentCustomer.ModelGuid);
-
-            foreach (var message in allMessagesDto)
-            {
-                if (message.Read == 0 && message.RecieverGuid == currentCustomer.ModelGuid)
-                {
-                    // add notification ----------------------------------------------------
-                }
-            }
+            //// messages read
 
 
-            return View();
+            //var allMessagesDto = await DirectMessageService.Get(currentCustomer.ModelGuid);
+
+            //foreach (var message in allMessagesDto)
+            //{
+            //    if (message.Read == 0 && message.RecieverGuid == currentCustomer.ModelGuid)
+            //    {
+            //        // add notification ----------------------------------------------------
+            //    }
+            //}
+
+            model = await NotificationHandler.GetNotifications(email);
+            model.settings = await SettingsHandler.GetSettings(email);
+
+            return View(model);
         }
 
         [HttpGet]

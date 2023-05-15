@@ -157,7 +157,12 @@
                         </li>
 
                     </ul>
-                    <a class="nav-link text-dark p-1" asp-area="" asp-controller="Notification" asp-action="Notifications"><i class="fa-regular fa-bell"></i></a>
+                    <a class="nav-link text-dark p-1 btn-group-vertical" asp-area="" asp-controller="Notification" asp-action="Notifications"><i class="fa-regular fa-bell"></i>
+                        <small class="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle">
+                            <small id="notifications"> 99+ </small>
+                            <small class="visually-hidden">New alerts</small>
+                        </small>
+                    </a>
                     <a class="nav-link text-dark p-1" asp-area="" asp-controller="Notification" asp-action="Settings"><i class="fa-solid fa-gears"></i></a>
                     <partial name="_LoginPartial" />
                 </div>
