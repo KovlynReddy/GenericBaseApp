@@ -35,7 +35,7 @@ public class PostController : Controller
 
         model.posts = AllPostVM;
 
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
 
         return View(AllPostVM);
@@ -80,7 +80,7 @@ public class PostController : Controller
         model.Posts = AllPostVM;
         model.settings.SelectedTheme = "Mint";
 
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }
 
@@ -91,7 +91,7 @@ public class PostController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         return View(model);
     }

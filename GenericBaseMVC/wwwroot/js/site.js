@@ -70,9 +70,18 @@ function GetCodeFromFAClass(className) {
 }
 
 var selectedTheme = $("#Theme-Selected").val();
+var numNotifications = $("#Settings-Notification-Num").val();
+
 if (selectedTheme == "" || selectedTheme == null) {
     selectedTheme = "Neon";
 }
+
+if (numNotifications == "" || numNotifications == null || numNotifications == 0) {
+    numNotifications = 0;
+    $("#notification-num-parent").hide();
+}
+
+$("#notifications-num").html(numNotifications);
 ChangeTheme(selectedTheme);
 
 console.log(selectedTheme);

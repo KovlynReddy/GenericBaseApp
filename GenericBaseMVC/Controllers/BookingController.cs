@@ -59,7 +59,7 @@ public class BookingController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         return View("ViewListBookings",model);
     }
@@ -74,7 +74,7 @@ public class BookingController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }
 

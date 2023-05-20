@@ -20,7 +20,7 @@ namespace GenericBaseMVC.Controllers
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-            model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+            model.settings = await SettingsHandler.GetSettings(email);
 
             var journals = await new JournalService().Get(currentCustomer.ModelGuid);
 
@@ -48,7 +48,7 @@ namespace GenericBaseMVC.Controllers
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
 
             CreateJournalViewModel model = new CreateJournalViewModel();
-            model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+            model.settings = await SettingsHandler.GetSettings(email);
             model.UserGuid = currentCustomer.ModelGuid;
 
             return View(model);

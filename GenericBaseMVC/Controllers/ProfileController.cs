@@ -64,7 +64,7 @@ public class ProfileController : Controller
         }
 
         model.profileDetails = Mapper.Map<CustomerViewModel>(customerDetails);
-        model.settings.SelectedTheme = customerDetails.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         //model.Friends = _customerService.Get();
         model.Journals = Mapper.Map<List<JournalViewModel>>((await _journalService.Get(currentCustomerId)));
         foreach (var journal in model.Journals)
@@ -121,8 +121,8 @@ public class ProfileController : Controller
     public async Task<IActionResult> ViewProfile()
     {
         var email = User.Identity.Name;
-        var model = await GetCustomerProfile(email); 
-
+        var model = await GetCustomerProfile(email);
+        model.settings = await SettingsHandler.GetSettings(email);
         return View("ViewProfile",model); 
        
     }       
@@ -132,7 +132,7 @@ public class ProfileController : Controller
     {
         var email = User.Identity.Name;
         var model = await _profileHandler.ViewFriendRequests(email);
-
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model); 
        
     }    
@@ -212,7 +212,7 @@ public class ProfileController : Controller
     {
         var email = User.Identity.Name;
         var model = await _profileHandler.GetAllProfiles(email);
-
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }
 }

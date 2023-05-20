@@ -33,7 +33,7 @@ public class ChatController : Controller
         await ChatService.Get(email);
         var _customerService = new CustomerService();
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         return View("AllMyChats",model);
     }
@@ -48,7 +48,7 @@ public class ChatController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         return View("AllMyChats",model);
     }

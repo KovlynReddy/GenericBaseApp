@@ -26,7 +26,7 @@ namespace GenericBaseMVC.Controllers
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
             var results = await _meetupRequestService.Get();
-            model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+            model.settings = await SettingsHandler.GetSettings(email);
 
             model.meetups = Mapper.Map<List<MeetupViewRequestModel>>(results.ToList());
 

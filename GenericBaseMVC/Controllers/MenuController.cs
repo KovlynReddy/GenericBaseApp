@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GenericAppDLL.Models.DomainModel;
 using GenericAppDLL.Models.ViewModels;
+using GenericBaseMVC.Handlers;
 using NuGet.Packaging;
 using static Humanizer.In;
 
@@ -63,7 +64,7 @@ public class MenuController : Controller
         model.purchasedItems = Mapper.Map<List<PurchaseItemViewModel>>(items);
         model.Items = menuItems;
 
-        model.settings.SelectedTheme = user.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(userEmail);
 
 
         return View(model);
@@ -217,7 +218,7 @@ public class MenuController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         if (!String.IsNullOrEmpty(currentCustomer.AccountGuid))
         {
@@ -240,7 +241,7 @@ public class MenuController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }    
     
@@ -256,7 +257,7 @@ public class MenuController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }    
     
@@ -272,7 +273,7 @@ public class MenuController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }
 
@@ -297,7 +298,7 @@ public class MenuController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }
 
@@ -349,7 +350,7 @@ public class MenuController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        addModel.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        addVM.settings = await SettingsHandler.GetSettings(email);
 
         return View("Create",addVM);
     }

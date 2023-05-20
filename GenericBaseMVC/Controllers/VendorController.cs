@@ -1,5 +1,6 @@
 ﻿using GenericAppDLL.Models.DomainModel;
 using GenericAppDLL.Models.ViewModels;
+using GenericBaseMVC.Handlers;
 using System.Net;
 
 namespace GenericBaseMVC.Controllers;
@@ -60,7 +61,8 @@ public class VendorController : Controller
         }
 
         vm.vendors = model;
-
+        var email = User.Identity.Name;
+        vm.settings = await SettingsHandler.GetSettings(email);
         return View("ViewListVendors", vm);
     }
 
@@ -110,7 +112,7 @@ public class VendorController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        vm.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        vm.settings = await SettingsHandler.GetSettings(email);
 
 
         return View("ViewListVendors", vm);
@@ -250,7 +252,7 @@ public class VendorController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
 
         return View("_SuggestedMapView", model);
@@ -263,7 +265,7 @@ public class VendorController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         return View("_SuggestedMapView",model);
     }
@@ -362,7 +364,7 @@ public class VendorController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
 
 
         return View("_SuggestedMapView", model);

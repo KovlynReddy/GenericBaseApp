@@ -1,4 +1,6 @@
-﻿namespace GenericBaseMVC.Controllers;
+﻿using GenericBaseMVC.Handlers;
+
+namespace GenericBaseMVC.Controllers;
 
 
 public class AddressController : Controller
@@ -60,7 +62,7 @@ public class AddressController : Controller
 
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View(model);
     }
 
@@ -112,7 +114,7 @@ public class AddressController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        model.settings.SelectedTheme = currentCustomer.SelectedTheme;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View("_MapView",model);
     }
 
