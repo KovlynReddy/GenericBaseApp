@@ -46,6 +46,7 @@ public class PostController : Controller
         var _customerService = new CustomerService();
         var email = User.Identity.Name; 
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+
         var model = new FeedViewModel();
 
         var numNotifications = await NotificationHandler.GetNotifications(currentCustomer.ModelGuid);

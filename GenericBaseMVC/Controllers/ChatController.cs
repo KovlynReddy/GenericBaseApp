@@ -71,6 +71,10 @@ public class ChatController : Controller
         var Recievers = new List<CustomerDto>();
         var allMessagesDto = await DirectMessageService.Get(user.ModelGuid);
         var reciever = new CustomerDto();
+        if (allMessagesDto == null || allMessagesDto.Count == 0)
+        {
+            return model;
+        }
         if (!string.IsNullOrEmpty(id)){ 
             Recievers = await userService.Get(id);
             reciever = Recievers.FirstOrDefault();
