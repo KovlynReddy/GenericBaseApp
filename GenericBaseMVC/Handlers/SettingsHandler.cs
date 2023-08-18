@@ -17,5 +17,13 @@ namespace GenericBaseMVC.Handlers
 
             return model;
         }
+
+        public static async Task<AdvertisingHelper> GetAdvertisments(string email) {
+            var adverts = new AdvertisingHelper();
+            var advertDtos = await new AdvertisingService().Get(email);
+
+
+            return adverts;
+        }
     }
 }

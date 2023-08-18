@@ -7,6 +7,9 @@ namespace GenericBaseMVC.Data.Mapper
     {
         public Mapper()
         {
+            CreateMap<CreateAdvertViewModel, AdvertisingDto>();
+            CreateMap<AdvertisingDto, Advert>();
+
             CreateMap<PurchaseDto, Purchase>().ReverseMap();
             CreateMap<CreatePurchaseDto, Purchase>().ReverseMap();
             CreateMap<PurchaseDto, PurchaseViewModel>().ReverseMap();

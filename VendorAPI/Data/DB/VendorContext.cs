@@ -46,6 +46,7 @@ namespace VendorAPI.Data.DB
         //    base.OnConfiguring(optionsBuilder);
         //}
 
+        public DbSet<Advert> Adverts { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Deal> Deals { get; set; }

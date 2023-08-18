@@ -30,6 +30,7 @@ builder.Services.AddTransient<IPostInteractionDB, PostInteractionDB>();
 builder.Services.AddTransient<IMeetupRequestDB, MeetupRequestDB>();
 builder.Services.AddTransient<IJournalDB, JournalDB>();
 builder.Services.AddTransient<IPointsDB, PointsDB>();
+builder.Services.AddTransient<IAdvertsDB, AdvertisingDB>();
 
 var app = builder.Build();
 

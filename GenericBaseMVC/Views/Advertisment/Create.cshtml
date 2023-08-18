@@ -1,0 +1,66 @@
+﻿@model GenericAppDLL.Models.ViewModels.CreateAdvertViewModel
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" method="post" asp-controller="Advertisment">
+
+            <div class="row">
+                <div class="col-12">
+                    <label asp-for="Caption" class="form-label">Caption</label>
+                    <input asp-for="Caption" style="width: -webkit-fill-available;" class="">
+
+                </div>
+            </div>            
+            
+            <div class="row">
+                <div class="col-12">
+                    <label asp-for="Hyperlink" class="form-label">Hyperlink</label>
+                    <input asp-for="Hyperlink" style="width: -webkit-fill-available;" class="">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="paper" style="height:144px">
+                        <div class="paper-content">
+                            <label asp-for="Description" class="form-label">Body</label>
+                            <textarea style="height:20em;" asp-for="Description" id="BodyTextArea" class=""></textarea>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 d-flex">
+                    <input asp-for="uploads" style="width:7em" class="form-control" />                 
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="StartingDate" class="control-label"></label>
+                        <input asp-for="StartingDate" class="form-control" />
+                        <span asp-validation-for="StartingDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="CompletionDate" class="control-label"></label>
+                        <input asp-for="CompletionDate" class="form-control" />
+                        <span asp-validation-for="CompletionDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" title="Save" class="btn btn-success">Save</button>
+            <button type="button" title="Cancel" class="btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>
+
