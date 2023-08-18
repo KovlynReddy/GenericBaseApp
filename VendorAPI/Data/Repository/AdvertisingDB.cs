@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.ViewModels;
 using VendorAPI.Data.Interface;
 
 namespace VendorAPI.Data.Repository
@@ -19,9 +20,10 @@ namespace VendorAPI.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<AdvertisingDto>> Get()
+        public async Task<IEnumerable<AdvertisingDto>> Get()
         {
-            throw new NotImplementedException();
+            var rawResult = _context.Adverts.ToList();
+            return mapper.Map<List<AdvertisingDto>>(rawResult);
         }
 
         public Task<IEnumerable<AdvertisingDto>> Get(int Id)
@@ -34,10 +36,14 @@ namespace VendorAPI.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<AdvertisingDto> Post(AdvertisingDto model)
+        public async Task<AdvertisingDto> Post(AdvertisingDto model)
         {
-            throw new NotImplementedException();
-        }
+            var entity = mapper.Map<Advert>(model);
+            var rawResult = _context.Add(entity);
+            _context.SaveChanges();
+
+            return mapper.Map<AdvertisingDto>(rawResult);
+        }        
 
         public Task<AdvertisingDto> Put(AdvertisingDto model)
         {

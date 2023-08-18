@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,8 +63,10 @@ namespace GenericBaseMVC.Controllers
             return View();
         }
 
-        public IActionResult Hub()
+        public async Task<IActionResult> Hub()
         {
+            var advertDtos = await new AdvertisingService().Get("none");
+
             return View("AdvertisingHub");
         }
     }

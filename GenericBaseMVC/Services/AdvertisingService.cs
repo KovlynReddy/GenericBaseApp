@@ -35,7 +35,7 @@
             IEnumerable<AdvertisingDto> Carts = null;
 
 
-            string apiUrl = "https://localhost:7240/api/advertisment";
+            string apiUrl = "https://localhost:7240/api/advertisment/createdto";
 
             using (HttpClient client = new HttpClient())
             {

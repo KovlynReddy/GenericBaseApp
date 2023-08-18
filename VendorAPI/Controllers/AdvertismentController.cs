@@ -16,17 +16,20 @@ namespace VendorAPI.Controllers
             _db = db;
         }
 
+        [Route("~/api/advertisment/{email}")]
         [HttpGet]
         public async Task<IActionResult> GetAll(string? email)
         {
-            return View(await _context.Adverts.ToListAsync());
+            return Ok(_db.Get());
         }
 
+        [Route("~/api/advertisment/CreateDto")]
         [HttpPost]
-        public async Task<IActionResult> Post(CreateVendorDto dto)
+        public async Task<IActionResult> Post(AdvertisingDto dto)
         {
-            await _db.Post(dto);
-            return View();
+            var results = await _db.Post(dto);
+
+            return Ok(results);
         }
     }
 }
