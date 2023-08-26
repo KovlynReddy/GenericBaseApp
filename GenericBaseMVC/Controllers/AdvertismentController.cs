@@ -54,9 +54,14 @@ namespace GenericBaseMVC.Controllers
             }
 
             model.ImagePath01 = model.uploadPaths[0];
-            model.ImagePath02 = model.uploadPaths[1];
-            model.ImagePath03 = model.uploadPaths[2];
-
+            if (model.uploadPaths.Count>1)
+            {
+                model.ImagePath02 = model.uploadPaths[1]; 
+            }
+            if (model.uploadPaths.Count > 2)
+            {
+                model.ImagePath03 = model.uploadPaths[2];
+            }
             var dto = _mapper.Map<AdvertisingDto>(model);
             var advertDtos = await new AdvertisingService().Post(dto);
 
