@@ -20,7 +20,7 @@ namespace VendorAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(string? email)
         {
-            return Ok(_db.Get());
+            return Ok(await _db.Get());
         }
 
         [Route("~/api/advertisment/CreateDto")]

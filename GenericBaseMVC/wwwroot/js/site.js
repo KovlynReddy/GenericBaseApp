@@ -72,6 +72,31 @@ function GetCodeFromFAClass(className) {
 var selectedTheme = $("#Theme-Selected").val();
 var numNotifications = $("#Settings-Notification-Num").val();
 
+var adverts = $(".side-advert");
+
+if (adverts.length > 1) {
+    var leftAdvertPath = $("#Settings-Left-Side-Advert-Path").val();
+    var leftAdvertDescription = $("#Settings-Left-Side-Advert-Description").val();
+    var leftAdvertLink = $("#Settings-Left-Side-Advert-Hyperlink").val();
+    var leftAdvertCaption = $("#Settings-Left-Side-Advert-Caption").val();
+    var rightAdvertPath = $("#Settings-Right-Side-Advert-Path").val();
+    var rightAdvertDescription = $("#Settings-Right-Side-Advert-Description").val();
+    var rightAdvertLink = $("#Settings-Right-Side-Advert-Hyperlink").val();
+    var rightAdvertCaption = $("#Settings-Right-Side-Advert-Caption").val();
+
+    var leftAdvert = adverts[0];
+    leftAdvert.children[0].src = "/" + leftAdvertPath.split("\\")[leftAdvertPath.split("\\").length - 1];
+    leftAdvert.children[1].children[0].innerHTML = leftAdvertCaption;
+    console.log("leftAdvert", leftAdvert);
+
+    var rightAdvert = adverts[1];
+    rightAdvert.children[0].src = "/" + rightAdvertPath.split("\\")[rightAdvertPath.split("\\").length - 1];
+    rightAdvert.children[1].children[0].innerHTML = rightAdvertCaption;
+    console.log("rightAdvert", rightAdvert);
+}
+
+console.log("side-advert", adverts);
+
 if (selectedTheme == "" || selectedTheme == null) {
     selectedTheme = "Neon";
 }

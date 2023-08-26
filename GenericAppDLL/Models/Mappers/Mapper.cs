@@ -15,6 +15,7 @@ namespace GenericAppDLL.Models.Mappers
         public Mapper()
         {
             CreateMap<AdvertisingDto, Advert>().ReverseMap();
+            CreateMap<SideAdvertViewModel, AdvertisingDto>().ReverseMap();
 
             CreateMap<CreateAdvertViewModel, AdvertisingDto>()
                 .ForPath(dist => dist.VendorGuid, opt => opt.Ignore())
@@ -43,7 +44,6 @@ namespace GenericAppDLL.Models.Mappers
                 .ForPath(dist => dist.StartingDate, opt => opt.MapFrom(src => src.StartingDate))
                 .ForPath(dist => dist.CompletionDate, opt => opt.MapFrom(src => src.CompletionDate))
                 .ReverseMap()
-                .ForPath(dist => dist.advertising, opt => opt.Ignore())
                 .ForPath(dist => dist.settings, opt => opt.Ignore())
                 .ForPath(dist => dist.uploadPaths, opt => opt.Ignore())
                 .ForPath(dist => dist.uploads, opt => opt.Ignore());

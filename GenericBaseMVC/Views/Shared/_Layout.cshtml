@@ -175,7 +175,19 @@
     </header>
     <div class="container m-4">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="row">
+                <div class="col-1">
+                    <partial name="_SideAdvert01" id="left-side-advert" />
+                </div>
+
+                <div class="col-10">
+                    @RenderBody()
+                </div>
+
+                <div class="col-1">
+                    <partial name="_SideAdvert01" id="right-side-advert" />
+                </div>
+            </div>
         </main>
     </div>
 

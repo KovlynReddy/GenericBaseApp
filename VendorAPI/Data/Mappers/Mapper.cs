@@ -17,6 +17,8 @@ namespace VendorAPI.Data.Mappers
     {
         public Mapper()
         {
+            CreateMap<AdvertisingDto, Advert>().ReverseMap();
+
             CreateMap<PurchaseDto, Purchase>().ReverseMap();
             CreateMap<CreatePurchaseDto, Purchase>().ReverseMap();
             CreateMap<CreatePurchaseDto, PurchaseDto>().ReverseMap();

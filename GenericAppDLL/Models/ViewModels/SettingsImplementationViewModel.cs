@@ -10,5 +10,7 @@ namespace GenericAppDLL.Models.ViewModels
     {
         public string SelectedTheme { get; set; }
         public int NumNotifcations { get; set; }
+
+        public List<SideAdvertViewModel> sideAdverts { get; set; } = new List<SideAdvertViewModel>();
     }
 }
