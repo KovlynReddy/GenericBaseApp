@@ -67,7 +67,11 @@ namespace GenericBaseMVC.Controllers
         {
             var advertDtos = await new AdvertisingService().Get("none");
 
-            return View("AdvertisingHub");
+            var model = new BaseViewModel();
+            var email = User.Identity.Name;
+            model.settings = await SettingsHandler.GetSettings(email);
+
+            return View("AdvertisingHub",model);
         }
     }
 }

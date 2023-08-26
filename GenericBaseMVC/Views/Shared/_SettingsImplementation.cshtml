@@ -7,7 +7,8 @@
 
 <div class="Adverts">
     @if (Model.sideAdverts.Count>1)
-    {        
+    {       
+    <input id="Enable-Side-Adverts" type="checkbox" value="@Model.EnableSideAdvert.ToString()" hidden></input>
     <input id="Settings-Left-Side-Advert-Path" value="@Model.sideAdverts[0].ImagePath01" hidden></input>
     <input id="Settings-Left-Side-Advert-Caption" value="@Model.sideAdverts[0].Caption" hidden></input>
     <input id="Settings-Left-Side-Advert-Hyperlink" value="@Model.sideAdverts[0].Hyperlink" hidden></input>

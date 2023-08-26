@@ -1,4 +1,5 @@
 ﻿using GenericBaseMVC.Services;
+using Microsoft.DotNet.Scaffolding.Shared.Project;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Security.Cryptography;
 
@@ -6,7 +7,7 @@ namespace GenericBaseMVC.Handlers
 {
     public static class SettingsHandler
     {
-        public static async Task<SettingsImplementationViewModel> GetSettings(string email)
+        public static async Task<SettingsImplementationViewModel> GetSettings(string email, bool enableSideAdverts = false)
         {
             var _customerService = new CustomerService();
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
@@ -15,8 +16,10 @@ namespace GenericBaseMVC.Handlers
 
             model.SelectedTheme = currentCustomer.SelectedTheme;
             model.NumNotifcations = numNotifications.NumNotifcations;
+
+            model.EnableSideAdvert = enableSideAdverts;
             model.sideAdverts = await GetAdvertisments(email);
-            await GetAdvertisments(email);
+
             return model;
         }
 

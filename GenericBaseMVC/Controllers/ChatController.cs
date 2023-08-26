@@ -19,7 +19,8 @@ public class ChatController : Controller
     public async Task<IActionResult> Index()
     {
         var model = await CreateChatViewModel(string.Empty);
-
+        var email = User.Identity.Name;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View("AllMyChats", model);
     }
 
@@ -58,6 +59,8 @@ public class ChatController : Controller
     {
         var model = await CreateChatViewModel(id);
 
+        var email = User.Identity.Name;
+        model.settings = await SettingsHandler.GetSettings(email);
         return View("AllMyChats",model);
     }
 
@@ -163,8 +166,8 @@ public class ChatController : Controller
             Message = "",
         };
 
-        model.settings.SelectedTheme = user.SelectedTheme;
-
+        var email = User.Identity.Name;
+        model.settings = await SettingsHandler.GetSettings(email);
         return model;
 
     }
@@ -209,6 +212,9 @@ public class ChatController : Controller
         };
 
         await new PointsService().Post(points);
+
+        var email = User.Identity.Name;
+        model.settings = await SettingsHandler.GetSettings(email);
 
         return RedirectToAction(actionName:"SendDirectMessage",routeValues: model.RecieverGuid);
     }

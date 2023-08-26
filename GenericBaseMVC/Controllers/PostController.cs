@@ -81,7 +81,7 @@ public class PostController : Controller
         model.Posts = AllPostVM;
         model.settings.SelectedTheme = "Mint";
 
-        model.settings = await SettingsHandler.GetSettings(email);
+        model.settings = await SettingsHandler.GetSettings(email,true);
         return View(model);
     }
 

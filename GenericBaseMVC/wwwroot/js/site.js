@@ -72,9 +72,13 @@ function GetCodeFromFAClass(className) {
 var selectedTheme = $("#Theme-Selected").val();
 var numNotifications = $("#Settings-Notification-Num").val();
 
+
 var adverts = $(".side-advert");
 
 if (adverts.length > 1) {
+    var enableSideAdverts = $("#Enable-Side-Adverts")[0].value;
+    console.log("enable Side Adverts",enableSideAdverts);
+    if (enableSideAdverts == 'True') {
     var leftAdvertPath = $("#Settings-Left-Side-Advert-Path").val();
     var leftAdvertDescription = $("#Settings-Left-Side-Advert-Description").val();
     var leftAdvertLink = $("#Settings-Left-Side-Advert-Hyperlink").val();
@@ -85,14 +89,19 @@ if (adverts.length > 1) {
     var rightAdvertCaption = $("#Settings-Right-Side-Advert-Caption").val();
 
     var leftAdvert = adverts[0];
-    leftAdvert.children[0].src = "/" + leftAdvertPath.split("\\")[leftAdvertPath.split("\\").length - 1];
+    leftAdvert.children[0].children[0].src = "/" + leftAdvertPath.split("\\")[leftAdvertPath.split("\\").length - 1];
     leftAdvert.children[1].children[0].innerHTML = leftAdvertCaption;
-    console.log("leftAdvert", leftAdvert);
+        leftAdvert.children[0].href = leftAdvertLink;
+        console.log("leftAdvert", leftAdvert);
+        leftAdvert.hidden = false;
 
     var rightAdvert = adverts[1];
-    rightAdvert.children[0].src = "/" + rightAdvertPath.split("\\")[rightAdvertPath.split("\\").length - 1];
+    rightAdvert.children[0].children[0].src = "/" + rightAdvertPath.split("\\")[rightAdvertPath.split("\\").length - 1];
     rightAdvert.children[1].children[0].innerHTML = rightAdvertCaption;
+        rightAdvert.children[0].href = rightAdvertLink;
     console.log("rightAdvert", rightAdvert);
+        rightAdvert.hidden = false;
+    }
 }
 
 console.log("side-advert", adverts);
