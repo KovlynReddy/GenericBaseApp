@@ -74,11 +74,27 @@ public class ChatController : Controller
         var Recievers = new List<CustomerDto>();
         var allMessagesDto = await DirectMessageService.Get(user.ModelGuid);
         var reciever = new CustomerDto();
+       
+        if (!string.IsNullOrEmpty(id))
+        {
+            Recievers = await userService.Get(id);
+            reciever = Recievers.FirstOrDefault();
+        }
+        model.NewMessage = new SendDirectMessageViewModel()
+        {
+            SenderGuid = user.ModelGuid,
+            SenderId = user.Id,
+            RecieverGuid = reciever != null ? reciever.ModelGuid : "",
+            RecieverId = reciever != null ? reciever.Id : 0,
+            Message = "",
+        };
+
+
         if (allMessagesDto == null || allMessagesDto.Count == 0)
         {
             return model;
         }
-        if (!string.IsNullOrEmpty(id)){ 
+        if (id != "null"){ 
             Recievers = await userService.Get(id);
             reciever = Recievers.FirstOrDefault();
         }
@@ -155,15 +171,6 @@ public class ChatController : Controller
             ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
             ChatId = "1",
 
-        };
-
-        model.NewMessage = new SendDirectMessageViewModel()
-        {
-            SenderGuid = user.ModelGuid,
-            SenderId = user.Id,
-            RecieverGuid = reciever.ModelGuid,
-            RecieverId = reciever.Id,
-            Message = "",
         };
 
         var email = User.Identity.Name;

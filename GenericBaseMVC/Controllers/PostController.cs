@@ -49,7 +49,12 @@ public class PostController : Controller
 
         var model = new FeedViewModel();
 
+        if (currentCustomer==null)
+        {
+            return View(model);
+        }
         var numNotifications = await NotificationHandler.GetNotifications(currentCustomer.ModelGuid);
+
         
         var AllPostVM = await PostHandler.GetAllPosts(currentCustomer.ModelGuid);
 
