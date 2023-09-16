@@ -110,4 +110,9 @@ color:black !important;
 
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
-    } 
+    }
+
+.send-button-comment:hover {
+    background-image: none !important;
+background-color:skyblue !important;
+}
