@@ -93,29 +93,30 @@ namespace VendorAPI.Controllers
                 {
                     otherid = relationship.SenderId;
                 }
-                var result = await _context.Posts.Where(m=>m.SenderGuid == otherid).ToListAsync();
+                var result = await _context.Posts.Where(m => m.SenderGuid == otherid).ToListAsync();
 
 
-            foreach (var model in result)
-            {
-
-                PostDto Dto = new PostDto
+                foreach (var model in result)
                 {
-                    SenderGuid = model.SenderGuid,
-                    AttatchmentPath = model.AttatchmentPath.Split("root\\")[1],
-                    Caption = model.Caption,
-                    Feature = model.Feature,
-                    GroupGuid = model.GroupGuid,
-                    Interactions = model.Interactions,
-                    Message = model.Message,
-                    RecieverGuid = model.RecieverGuid,
-                    ModelGuid = model.ModelGUID
-                };
 
-                response.Add(Dto);
+                    PostDto Dto = new PostDto
+                    {
+                        SenderGuid = model.SenderGuid,
+                        AttatchmentPath = model.AttatchmentPath.Split("root\\")[1],
+                        Caption = model.Caption,
+                        Feature = model.Feature,
+                        GroupGuid = model.GroupGuid,
+                        Interactions = model.Interactions,
+                        Message = model.Message,
+                        RecieverGuid = model.RecieverGuid,
+                        ModelGuid = model.ModelGUID
+                    };
 
+                    response.Add(Dto);
+                }
             }
-            }
+
+            response.Reverse();
 
             return Ok(response);
         }
@@ -192,8 +193,6 @@ namespace VendorAPI.Controllers
                 ModelGuid = newEntity.ModelGUID
             };
             // add address 
-
-
 
             return Ok(dto);
         }
