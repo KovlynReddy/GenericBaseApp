@@ -1,4 +1,5 @@
-﻿using GenericAppDLL.Models.ViewModels;
+﻿using AutoMapper;
+using GenericAppDLL.Models.ViewModels;
 using GenericBaseMVC.Constants;
 using GenericBaseMVC.Hubs;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +11,12 @@ namespace GenericBaseMVC.Controllers;
 public class ChatController : Controller
 {
     public IHubContext<MessageHub> _hub { get; set; }
+    public IMapper _mapper { set; get; }
 
-    public ChatController(IHubContext<MessageHub> hub)
+    public ChatController(IHubContext<MessageHub> hub , IMapper mapper)
     {      
         _hub = hub;
+        _mapper = mapper;   
     }
 
     public async Task<IActionResult> Index()
@@ -120,7 +123,7 @@ public class ChatController : Controller
         foreach (var userid in users)
         {
             var LastMessage = allMessagesDto.Where(m => m.SenderGuid == userid || m.RecieverGuid == userid).OrderBy(k => k.CreatedDateTime).LastOrDefault();
-            //create api endpoint to take list of string to return list of equal size back instead of looping
+            //TODO : create api endpoint to take list of string to return list of equal size back instead of looping
             var useridProfile = (await userService.Get(userid)).FirstOrDefault();
             model.OtherChatHeads.Add(
                 new ChatHeaderViewModel()
@@ -187,7 +190,7 @@ public class ChatController : Controller
         var Users = await new CustomerService().Get(userEmail);
         var user = Users.FirstOrDefault();
         
-        await DirectMessageService.Post(model);
+        await DirectMessageService.Post(_mapper.Map<DirectMessageDto>(model));
         //await ChatService.Create(model);
         var code = 102;
         if (user.ModelGuid == model.SenderGuid)

@@ -12,7 +12,6 @@ public static class DirectMessageService
     {
         IEnumerable<DirectMessageDto> DirectMessages = null;
 
-
         //string apiUrl = $"https://localhost:7240/api/DirectMessage?id={Id}&email={email}";
         string apiUrl = $"https://localhost:7240/api/DirectMessage/{Id}/{email}";
 
@@ -98,17 +97,11 @@ public static class DirectMessageService
 
     }
 
-    public static async Task<List<DirectMessageDto>> Post(SendDirectMessageViewModel model)
+    public static async Task<List<DirectMessageDto>> Post(DirectMessageDto model)
     {
-        var dto = new SendDirectMessageViewModel() {
-            Message = model.Message,
-            SenderGuid = model.SenderGuid,
-            RecieverGuid = model.RecieverGuid,
-        };
-
         IEnumerable<DirectMessageDto> DirectMessages = null;
 
-        string apiUrl = "https://localhost:7240/api/DirectMessage";
+        string apiUrl = "https://localhost:7240/api/DirectMessage/Create";
 
         using (HttpClient client = new HttpClient())
         {
@@ -116,7 +109,7 @@ public static class DirectMessageService
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var newEntityJson = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+            var newEntityJson = Newtonsoft.Json.JsonConvert.SerializeObject(model);
             var payload = new StringContent(newEntityJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage result = await client.PostAsync(apiUrl, payload);

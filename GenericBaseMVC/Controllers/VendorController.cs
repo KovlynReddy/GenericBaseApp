@@ -163,7 +163,9 @@ public class VendorController : Controller
             {
                 VendorEmail = newVendorvm.VendorEmail,
                 VendorName = newVendorvm.VendorName,
-                VendorImage = fileName
+                VendorImage = fileName,
+                Lat = newVendorvm.Lat,
+                Lon = newVendorvm.lon
             };
           
             var result = await _VendorService.Create(newVendor);
@@ -219,7 +221,7 @@ public class VendorController : Controller
 
         foreach (var Vendor in allVendors)
         {
-            allVendorAddresses.Add(allAddresses.FirstOrDefault(m=>m.UserGuid == Vendor.ModelGUID));
+            allVendorAddresses.Add(allAddresses.FirstOrDefault(m=>m.ModelGuid == Vendor.AddressGuid));
             //allVendorAddresses.Add(allAddresses.FirstOrDefault(m => m.UserGuid == Vendor.ModelGUID));
         }
 
@@ -234,7 +236,7 @@ public class VendorController : Controller
             }
             var latdistance = float.Parse(bAddress.Lat.Replace('.', ',')) - lat;
             var londistance = double.Parse(bAddress.lon.Replace('.', ',')) - lon;
-            if (  Math.Abs(latdistance) < 10 || Math.Abs(londistance) < 10)
+            if (  Math.Abs(latdistance) < 100 || Math.Abs(londistance) < 100)
             {
                 model.Lats.Add(bAddress.Lat.ToString());
                 model.Longs.Add(bAddress.lon.ToString());

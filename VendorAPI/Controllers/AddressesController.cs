@@ -248,7 +248,7 @@ public class AddressesController : Controller
                 Country = item.Country,
                 PostCode = item.PostCode,
                 ModelGuid = item.ModelGUID,
-                CreatedDateTime = DateTime.Parse( item.CreatedDateTime ),
+                CreatedDateTime = DateTime.TryParse( item.CreatedDateTime  ,out var date ) ? date : DateTime.Now,
                 Lat = item.Lat,
                 lon = item.lon,
                 UserGuid = item.UserGuid

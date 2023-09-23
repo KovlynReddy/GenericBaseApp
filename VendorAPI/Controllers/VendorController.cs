@@ -86,6 +86,14 @@ public class VendorController : Controller
     [Route("~/api/Vendor")]
     public async Task<IActionResult> Post([FromBody]CreateVendorDto Vendor)
     {
+        Address newAddress = new Address()
+        {
+            Lat = Vendor.Lat,
+            lon = Vendor.Lon,
+            ModelGUID = Guid.NewGuid().ToString()
+        };
+
+
         Vendor newVendor = new Vendor
         {
             VendorEmail = Vendor.VendorEmail,//
@@ -93,11 +101,14 @@ public class VendorController : Controller
             ModelGUID = Guid.NewGuid().ToString(),
             CreatedDateTime = DateTime.Now.ToString(),
             AverageRating = "",
-            AddressGuid = "",
+            AddressGuid = newAddress.ModelGUID,
             Status = 0 ,
             VendorImage = Vendor.VendorImage
         };
+
+        _context.Add(newAddress);
         _context.Add(newVendor);
+
         await _context.SaveChangesAsync();
         return Ok(newVendor);
     }

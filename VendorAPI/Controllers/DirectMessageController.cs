@@ -117,8 +117,8 @@ public class DirectMessageController : Controller
 
     // GET: DirectMessageController/Create
     [HttpPost]
-    [Route("~/api/DirectMessage")]
-    public async Task<ActionResult> Post([FromBody]DirectMessageDto model)
+    [Route("~/api/DirectMessage/Create")]
+    public async Task<ActionResult> Create(DirectMessageDto model)
     {
         await _DB.Post(model);
 

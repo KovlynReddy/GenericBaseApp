@@ -1,4 +1,5 @@
-﻿using GenericBaseMVC.Hubs;
+﻿using AutoMapper;
+using GenericBaseMVC.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -7,10 +8,12 @@ namespace GenericBaseMVC.Controllers
     public class DirectMessageController : Controller
     {
         public IHubContext<MessageHub> _hub { get; set; }
+        public IMapper _mapper { get; set; }
 
-        public DirectMessageController(IHubContext<MessageHub> hub)
+        public DirectMessageController(IHubContext<MessageHub> hub , IMapper mapper)
         {
             _hub = hub;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +29,7 @@ namespace GenericBaseMVC.Controllers
         public async Task<IActionResult> Post(SendDirectMessageViewModel model)
         {
 
-            await DirectMessageService.Post(model);
+            await DirectMessageService.Post(_mapper.Map<DirectMessageDto>(model));
 
             var SRMessage = new SignalRMessage()
             {
