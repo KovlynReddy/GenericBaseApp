@@ -1,16 +1,9 @@
-﻿$(document).ready(function () {
+﻿
 $(".Theme-Control-option").on('click', function () {
     var val = $(this).val();
     ChangeTheme(val);
     console.log(val);
 });
-
-function ChangeTheme(themeName) {
-var theme = $("#theme");
-var newUrl = `/lib/bootstrap-themes/${themeName}/bootstrap.css`
-console.log(newUrl, theme.attr('href'));
-theme.attr('href', newUrl);
-}
 
 var emojis = {
     emojis : [
@@ -54,25 +47,6 @@ var emojis = {
 ]
 };
 
-function GetCodeFromFAClass(className) {
-    var matchingCode
-    emojis.emojis.forEach((details, index) => {
-        var emojiDetails = details;
-        faClassName = "fa-" +emojiDetails.emoji[1];
-        emojiCode = emojiDetails.emoji[2];
-        //console.log(className, faClassName, emojiCode, className == faClassName);
-        if (className == faClassName) {
-            matchingCode = emojiCode;
-            return emojiCode;
-        }
-    });
-    return matchingCode;
-
-}
-
-var selectedTheme = $("#Theme-Selected").val();
-var numNotifications = $("#Settings-Notification-Num").val();
-
 
 var adverts = $(".side-advert");
 console.log("Side Adverts", adverts);
@@ -108,6 +82,11 @@ if (adverts.length > 1) {
 
 console.log("side-advert", adverts);
 
+    var selectedTheme = $("#Theme-Selected").val();
+    var numNotifications = $("#Settings-Notification-Num").val();
+
+
+
 if (selectedTheme == "" || selectedTheme == null) {
     selectedTheme = "Neon";
 }
@@ -120,5 +99,27 @@ if (numNotifications == "" || numNotifications == null || numNotifications == 0)
 $("#notifications-num").html(numNotifications);
 ChangeTheme(selectedTheme);
 
-console.log(selectedTheme);
-});
+    console.log(selectedTheme);
+
+function ChangeTheme(themeName) {
+    var theme = $("#theme");
+    var newUrl = `/lib/bootstrap-themes/${themeName}/bootstrap.css`
+    console.log(newUrl, theme.attr('href'));
+    theme.attr('href', newUrl);
+}
+
+function GetCodeFromFAClass(className) {
+    var matchingCode
+    emojis.emojis.forEach((details, index) => {
+        var emojiDetails = details;
+        faClassName = "fa-" + emojiDetails.emoji[1];
+        emojiCode = emojiDetails.emoji[2];
+        //console.log(className, faClassName, emojiCode, className == faClassName);
+        if (className == faClassName) {
+            matchingCode = emojiCode;
+            return emojiCode;
+        }
+    });
+    return matchingCode;
+
+}

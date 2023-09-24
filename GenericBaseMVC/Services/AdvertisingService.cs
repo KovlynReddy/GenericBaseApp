@@ -6,7 +6,7 @@
         {
             IEnumerable<AdvertisingDto> Cart = null;
 
-            string apiUrl = "https://localhost:7240/api/Advertisment/" + id;
+            string apiUrl = "https://localhost:7240/api/Advertisment/Get?email=" + id;
 
             using (HttpClient client = new HttpClient())
             {
@@ -34,7 +34,7 @@
         {
             IEnumerable<AdvertisingDto> Cart = null;
 
-            string apiUrl = "https://localhost:7240/api/Advertisment";
+            string apiUrl = "https://localhost:7240/api/Advertisment/Get";
 
             using (HttpClient client = new HttpClient())
             {

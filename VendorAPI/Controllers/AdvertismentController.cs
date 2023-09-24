@@ -17,7 +17,7 @@ namespace VendorAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(string? email)
+        public async Task<IActionResult> Get(string? email)
         {
             var adverts = await _db.Get();
 
