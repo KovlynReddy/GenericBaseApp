@@ -210,8 +210,6 @@ public class VendorController : Controller
             throw;
         }
 
-
-
         var allVendors = await _VendorService.GetAll();
         var allAddresses = await _addressService.GetAll();
         var allVendorAddresses = new List<AddressDto>();
@@ -247,8 +245,8 @@ public class VendorController : Controller
         }
 
         // display on a map centered at location
-        model.CenterLat = (-29.766807).ToString();
-        model.CenterLon = (30.984297).ToString();
+        model.CenterLat = slat.Replace(',', '.').ToString();
+        model.CenterLon = slon.Replace(',','.').ToString();
         model.Scale = 100.ToString();
         model.Zoom = 16.ToString();
         var _customerService = new CustomerService();

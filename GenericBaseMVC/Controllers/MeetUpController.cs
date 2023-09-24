@@ -28,13 +28,6 @@ public class MeetUpController : Controller
 
         return View();
     }    
-    
-    [HttpGet]
-    public async Task<IActionResult> Suggested()
-    {
-
-        return View();
-    }
 
 
     [HttpGet]
@@ -75,8 +68,8 @@ public class MeetUpController : Controller
         return View();
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Create() {
+    [HttpPost]
+    public async Task<IActionResult> Create(string slat , string slon) {
 
         var model = new CreateMeetupMapViewModel();
 
@@ -93,6 +86,8 @@ public class MeetUpController : Controller
         model.Lats = lats;
         model.Longs = lons;
         model.Captions = captions;
+        model.CenterLat = slat.Replace(',', '.').ToString();
+        model.CenterLon = slon.Replace(',', '.').ToString();
 
 
         var _customerService = new CustomerService();
@@ -101,6 +96,14 @@ public class MeetUpController : Controller
         model.settings = await SettingsHandler.GetSettings(email);
 
         return View("_MeetupMapView", model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> SuggestedMeetup()
+    {
+        var model = new CreateMeetupMapViewModel();
+
+        return View("SuggestedMeetup", model);
     }
 
     [HttpGet]

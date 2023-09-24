@@ -115,16 +115,15 @@
 
     @for (var i = 0; i < @Model.ids.Count; i++)
     {
-
-        @:locations.push(["@Model.Captions[i]", @Model.Lats[i] , @Model.Longs[i] , "@Model.ids[i]"]);
-            
+        @:locations.push(["@Model.Captions[i]", @Model.Lats[i] , @Model.Longs[i] , "@Model.ids[i]"]);            
     }
 
-        var gmarkers = [];
+    var gmarkers = [];
+    //console.log("My Coordinates ",@Model);
     // Map Settings
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
-        center: new google.maps.LatLng(-29.766807, 30.984297),
+        center: new google.maps.LatLng(@Model.CenterLat, @Model.CenterLon),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
@@ -180,10 +179,9 @@
         }
     }
 
-        $("#CreateMeetUp").click(function () {
-            
+        $("#CreateMeetUp").click(function () {          
 
-            console.log("Create New Vendor/MeetUp");    
+            console.log("Create New Vendor/MeetUp");   
 
         });
 

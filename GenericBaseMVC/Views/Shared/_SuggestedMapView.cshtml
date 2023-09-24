@@ -1,8 +1,7 @@
 ﻿@model GenericAppDLL.Models.ViewModels.MapViewModel
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
-
-<div id="map" style="width:100%;height:400px;">m</div>
+<div id="map" style="width:100%;height:400px;">k</div>
 
 <div id="Modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -37,6 +36,8 @@
 
 <script type="text/javascript">
 
+    console.log("My Coordinates ", @Model.CenterLat , @Model.CenterLon);
+
     // Locations: [title, lat, long, number]
     var locations = [
         ['Bar Termini', -29.776807, 30.924297, 1],
@@ -45,24 +46,20 @@
 
     @for (var i = 0; i < @Model.Lats.Count; i++)
     {
-
-        @:locations.push(["@Model.Names[i]", @Model.Lats[i] , @Model.Longs[i] , "@Model.Captions[i]"]);
-            
+        @:locations.push(["@Model.Names[i]", @Model.Lats[i] , @Model.Longs[i] , "@Model.Captions[i]"]);            
     }
 
-
-
-        var gmarkers = [];
+    var gmarkers = [];
+    
     // Map Settings
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
-        center: new google.maps.LatLng(-29.766807, 30.984297),
+        center: new google.maps.LatLng(@Model.CenterLat,@Model.CenterLon),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
     map.addListener("click", (e) => {
     placeMarkerAndPanTo(e.latLng, map);
-
   });
 
     var infowindow = new google.maps.InfoWindow;

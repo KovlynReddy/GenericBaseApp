@@ -1,0 +1,53 @@
+﻿@model GenericAppDLL.Models.ViewModels.CreateMeetupMapViewModel
+
+<div id="map" style="width:100%;height:400px;">t</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var x;
+        var y;
+        if (navigator.geolocation) {
+            var position = navigator.geolocation.getCurrentPosition(getPosition);
+            console.log(position, "suggested meetup");
+            x = String(position.coords.latitude);
+            y = String(position.coords.longitude);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+        console.log(x, y)
+    });
+
+    function getPosition(position) {
+        console.log(position, "suggested meetup");
+        var x = String(position.coords.latitude);
+        var y = String(position.coords.longitude);
+            console.log(x, y, "suggested meetup");
+
+        $.ajax({
+            type: "POST",
+                url: "https://localhost:7140/Meetup/Create",
+            data: {
+                "slat": x,
+                "slon": y
+            },
+            success: function (tekst) {
+                console.log("successs", tekst);
+                document.getElementById('map').innerHTML = tekst;
+
+                document.open();
+                document.write(tekst);
+                document.close();
+                var selectedTheme = $("#Theme-Selected").val();
+                if (selectedTheme == "" || selectedTheme == null) {
+                    selectedTheme = "Neon";
+                }
+                Ch
+            },
+            error: function (request, error) {
+                console.log("ERROR:getPosition" + error);
+            }
+        });
+    }
+</script>
