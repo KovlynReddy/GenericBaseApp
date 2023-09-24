@@ -23,6 +23,14 @@ public class MeetUpController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Schedule()
+    {
+
+        return View();
+    }  
+
+
+    [HttpGet]
     public async Task<IActionResult> ViewAll()
     {
 
