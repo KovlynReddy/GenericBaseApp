@@ -9,7 +9,7 @@ public class ProfileController : Controller
         _context = context;
     }
 
-
+    [HttpGet("GetMyProfile/{ProfileId}")]
     public async Task<IActionResult> GetMyProfile(string ProfileId) {
 
         var response = _context.Customers.ToList().FirstOrDefault(m=>m.ModelGUID == ProfileId || m.CustomerEmail == ProfileId || m.UserId == ProfileId);
@@ -17,6 +17,7 @@ public class ProfileController : Controller
         return Ok(response);
     }
 
+    [HttpGet("Index")]
     public IActionResult Index()
     {
         return View();

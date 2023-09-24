@@ -29,7 +29,7 @@ namespace VendorAPI.Controllers
         }        
         
         [Route("~/api/Relationship/{Id}")]
-        [HttpGet]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> Get(string Id)
         {
             var response = await _relationDb.Get(Id);

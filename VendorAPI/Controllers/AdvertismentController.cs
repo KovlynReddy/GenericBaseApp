@@ -17,7 +17,7 @@ namespace VendorAPI.Controllers
         }
 
         [Route("~/api/advertisment")]
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var adverts = await _db.Get();
@@ -31,7 +31,7 @@ namespace VendorAPI.Controllers
         }
 
         [Route("~/api/advertisment/{email}")]
-        [HttpGet]
+        [HttpGet("GetAll/{email}")]
         public async Task<IActionResult> GetAll(string? email)
         {
             var adverts = await _db.Get();
@@ -52,7 +52,7 @@ namespace VendorAPI.Controllers
         }
 
         [Route("~/api/advertisment/CreateDto")]
-        [HttpPost]
+        [HttpPost("CreateDto")]
         public async Task<IActionResult> Post(AdvertisingDto dto)
         {
             var results = await _db.Post(dto);

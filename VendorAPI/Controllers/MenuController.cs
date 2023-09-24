@@ -12,6 +12,7 @@ public class MenuController : Controller
     }
 
     // GET: Menu
+    [HttpGet("Index")]
     public async Task<IActionResult> Index()
     {
         return View(await _context.Items.ToListAsync());
@@ -56,6 +57,7 @@ public class MenuController : Controller
     }
 
     // GET: Menu/Details/5
+    [HttpGet("{id}")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -107,23 +109,9 @@ public class MenuController : Controller
         return Ok(item);
     }
 
-    // GET: Menu/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var item = await _context.Items.FindAsync(id);
-        if (item == null)
-        {
-            return NotFound();
-        }
-        return View(item);
-    }
 
     // GET: Menu/Delete/5
+    [HttpDelete]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -142,7 +130,7 @@ public class MenuController : Controller
     }
 
     // POST: Menu/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpDelete("DeleteConfirmed")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

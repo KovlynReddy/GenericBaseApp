@@ -26,7 +26,7 @@ public class DirectMessageController : Controller
             return Ok();
         }
 
-    [HttpGet]
+    [HttpGet("{Id}")]
     [Route("~/api/DirectMessage/{Id}")]
     public async Task<IActionResult> Get(string Id)
     {
@@ -56,7 +56,7 @@ public class DirectMessageController : Controller
             return Ok(results);
         }    
         
-    [HttpGet]
+    [HttpGet("{id}/{email}")]
         [Route("~/api/DirectMessage/{id}/{email}")]
         public async Task<IActionResult> Get(string id,string email)
     {

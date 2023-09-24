@@ -12,7 +12,7 @@ public class VendorController : Controller
     }
 
     // GET: Vendors
-    [HttpGet]
+    [HttpGet("Index")]
     public async Task<IActionResult> Index()
     {
         List<Vendor> vendors = new List<Vendor>();
@@ -33,6 +33,7 @@ public class VendorController : Controller
     }
 
     // GET: Vendors/Details/5
+    [HttpGet("Details")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -69,7 +70,7 @@ public class VendorController : Controller
     //        return Ok(newVendor);
     //}
 
-    [HttpGet]
+    [HttpGet("GetAll")]
     [Route("~/api/Vendor/GetAll")]
     public async Task<IActionResult> GetAll()
     {
@@ -80,7 +81,7 @@ public class VendorController : Controller
 
     //[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
     [AllowAnonymous]
-    [HttpPost]
+    [HttpPost("Post")]
     [Route("~/api/Vendor")]
     public async Task<IActionResult> Post([FromBody]CreateVendorDto Vendor)
     {
@@ -110,56 +111,8 @@ public class VendorController : Controller
         return Ok(newVendor);
     }
 
-    // GET: Vendors/Edit/5
-    [HttpPost]
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var Vendor = await _context.Vendors.FindAsync(id);
-        if (Vendor == null)
-        {
-            return NotFound();
-        }
-        return View(Vendor);
-    }
-
-    [HttpGet]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("VendorName,AddressGuid,AverageRating,Status,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Vendor Vendor)
-    {
-        if (id != Vendor.Id)
-        {
-            return NotFound();
-        }
-
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                _context.Update(Vendor);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VendorExists(Vendor.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        return View(Vendor);
-    }
-
     // GET: Vendors/Delete/5
+    [HttpDelete("Delete")]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -177,7 +130,7 @@ public class VendorController : Controller
     }
 
     // POST: Vendors/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpDelete("DeleteConfirmed")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

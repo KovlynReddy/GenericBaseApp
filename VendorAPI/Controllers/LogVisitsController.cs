@@ -12,12 +12,14 @@ public class LogVisitsController : Controller
     }
 
     // GET: LogVisits
+    [HttpGet("Index")]
     public async Task<IActionResult> Index()
     {
         return View(await _context.LogVisits.ToListAsync());
     }
 
     // GET: LogVisits/Details/5
+    [HttpGet("{id}")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -35,11 +37,6 @@ public class LogVisitsController : Controller
         return View(logVisit);
     }
 
-    // GET: LogVisits/Create
-    public IActionResult Create()
-    {
-        return View();
-    }
 
     // POST: LogVisits/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -57,26 +54,10 @@ public class LogVisitsController : Controller
         return View(logVisit);
     }
 
-    // GET: LogVisits/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var logVisit = await _context.LogVisits.FindAsync(id);
-        if (logVisit == null)
-        {
-            return NotFound();
-        }
-        return View(logVisit);
-    }
-
     // POST: LogVisits/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+    [HttpPatch("{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("VendorGuid,UserGuid,Reason,Rating,Description,BookingTime,ArriveTime,CompletionTime,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] LogVisit logVisit)
     {
@@ -109,6 +90,7 @@ public class LogVisitsController : Controller
     }
 
     // GET: LogVisits/Delete/5
+    [HttpDelete]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -127,7 +109,7 @@ public class LogVisitsController : Controller
     }
 
     // POST: LogVisits/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpDelete("DeleteConfirmed")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

@@ -12,12 +12,14 @@ public class BookingsController : Controller
     }
 
     // GET: Bookings
+    [HttpGet("Index")]
     public async Task<IActionResult> Index()
     {
         return View(await _context.Bookings.ToListAsync());
     }
 
     [Route("~/api/Booking/GetAll")]
+    [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()
     {
         var allBookings = await _context.Bookings.ToListAsync();
@@ -39,6 +41,7 @@ public class BookingsController : Controller
 
 
     // GET: Bookings/Details/5
+    [HttpGet("Details")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -57,7 +60,7 @@ public class BookingsController : Controller
     }
 
     // GET: Bookings/Create
-    [HttpGet]
+    [HttpPost("Create")]
     public IActionResult Create()
     {
         return View();
@@ -66,7 +69,7 @@ public class BookingsController : Controller
     // POST: Bookings/Create
     //[AllowAnonymous]
     [Route("~/api/Booking/CreateDto")]
-    [HttpPost]
+    [HttpPost("CreateDto")]
     public async Task<IActionResult> CreateDto([FromBody] CreateBookingDto newBookingDto)
     {
         Booking newBooking = new Booking
@@ -88,7 +91,7 @@ public class BookingsController : Controller
 
 
     [Route("~/api/Booking/CreateMeeetupDto")]
-    [HttpPost]
+    [HttpPost("CreateMeeetupDto")]
     public async Task<ActionResult<CreateBookingDto>> CreateMeetupDto(CreateBookingDto newBookingDto)
     {
         Booking newBooking = new Booking
@@ -108,24 +111,7 @@ public class BookingsController : Controller
         return Ok(newBooking);
     }
 
-    // GET: Bookings/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var booking = await _context.Bookings.FindAsync(id);
-        if (booking == null)
-        {
-            return NotFound();
-        }
-        return View(booking);
-    }
-
-
-    [HttpPost]
+    [HttpPatch("update/{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("VendorGuid,UserGuid,Reason,Rating,Description,BookingTime,ArriveTime,CompletionTime,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Booking booking)
     {
@@ -158,7 +144,7 @@ public class BookingsController : Controller
     }
 
 
-    [HttpGet]
+    [HttpGet("GetCalendarData")]
     public async Task<IActionResult> GetCalendarData(){
 
         List<SchedulerDataDto> data = new List<SchedulerDataDto>();
@@ -192,7 +178,8 @@ public class BookingsController : Controller
         return Ok(data);
     }
 
-    // GET: Bookings/Delete/5
+    // HttpDelete: Bookings/Delete/5
+    [HttpDelete("Delete")]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -211,7 +198,7 @@ public class BookingsController : Controller
     }
 
     // POST: Bookings/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpDelete("DeleteConfirmed")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

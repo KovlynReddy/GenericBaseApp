@@ -19,14 +19,14 @@ public class CustomersController : Controller
         return View(await _context.Customers.ToListAsync());
     }
 
-    [HttpGet]
+    [HttpGet("{email}/{state}")]
     [Route("~/api/Customers/{email}/{state}")]
     public async Task<IActionResult> Get(string email,int state)
     {
         return Ok();
     }
 
-    [HttpGet]
+    [HttpGet("{email}")]
     [Route("~/api/Customers/{email}")]
     public async Task<IActionResult> Get(string email)
     {
@@ -105,7 +105,7 @@ public class CustomersController : Controller
     }
 
     // GET: Customers/Edit/5
-    [HttpPut]
+    [HttpPut("UpdateTheme")]
     [Route("~/api/Customers/UpdateTheme")]
     public async Task<IActionResult> UpdateTheme(CustomerDto customer)
     {
@@ -123,7 +123,7 @@ public class CustomersController : Controller
 
     //[AllowAnonymous]
     [Route("~/api/Customers/CreateDto")]
-    [HttpPost]
+    [HttpPost("CreateDto")]
     public async Task<ActionResult<CreateCustomerDto>> CreateDto(CreateCustomerDto Vendor)
     {
         Customer newVendor = new Customer
@@ -147,7 +147,7 @@ public class CustomersController : Controller
     }
 
     // POST: Customers/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpPost("DeleteConfirmed")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

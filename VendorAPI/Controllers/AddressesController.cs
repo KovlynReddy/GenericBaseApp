@@ -12,7 +12,7 @@ public class AddressesController : Controller
     }
 
 
-    [HttpPost]
+    [HttpPost("LinkAddress")]
     [Route("~/api/Address/LinkAddress")]
     public async Task<IActionResult> LinkAddress(LinkAddressDto link)
     {
@@ -45,7 +45,7 @@ public class AddressesController : Controller
     }
 
     // GET: Addresses
-    [HttpGet]
+    [HttpGet("Index")]
     public async Task<IActionResult> Index()
     {
         var response = ConvertToDto(await _context.Addresses.ToListAsync());
@@ -53,7 +53,7 @@ public class AddressesController : Controller
         return Ok(response);
     }
 
-    [HttpGet]
+    [HttpGet("GetAll")]
     [Route("~/api/Address/GetAll")]
     public async Task<IActionResult> GetAll() {
 
@@ -62,14 +62,14 @@ public class AddressesController : Controller
         return Ok(response);
     }
 
-    [HttpGet]
+    [HttpGet("GetUsersAddress")]
     public async Task<IActionResult> GetUsersAddress(string id) {
         var response = ConvertToDto(await _context.Addresses.Where(m=>m.CreatorId==id).ToListAsync());
 
         return Ok(response);
     }
 
-    [HttpPost]
+    [HttpPost("LinkUserToAddress")]
     public async Task<IActionResult> LinkUserToAddress(string userId , string addressId)
     {
         var address = ConvertToDto(await _context.Addresses.Where(m => m.ModelGUID == addressId).ToListAsync());
@@ -86,6 +86,7 @@ public class AddressesController : Controller
     }
 
     // GET: Addresses/Details/5
+    [HttpGet("Details")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -103,17 +104,10 @@ public class AddressesController : Controller
         return View(address);
     }
 
-    // GET: Addresses/Create
-    [HttpGet]
-    public IActionResult Create()
-    {
-        return View();
-    }
-
     // POST: Addresses/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+    [HttpPost("Create")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Number,Street,MainStreet,Suburb,PostCode,Country,Lat,lon,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Address address)
     {
@@ -128,7 +122,7 @@ public class AddressesController : Controller
 
     [AllowAnonymous]
     [Route("~/api/Address/CreateDto")]
-    [HttpPost]
+    [HttpPost("CreateDto")]
     public async Task<IActionResult> CreateDto(CreateAddressDto newAddressDto)
     {
         Address newAddress = new Address
@@ -152,26 +146,10 @@ public class AddressesController : Controller
         return Ok(newAddress);
     }
 
-    // GET: Addresses/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var address = await _context.Addresses.FindAsync(id);
-        if (address == null)
-        {
-            return NotFound();
-        }
-        return View(address);
-    }
-
     // POST: Addresses/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+    [HttpPatch("Edit")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("Number,Street,MainStreet,Suburb,PostCode,Country,Lat,lon,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Address address)
     {
@@ -204,6 +182,7 @@ public class AddressesController : Controller
     }
 
     // GET: Addresses/Delete/5
+    [HttpDelete("Delete")]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -222,7 +201,7 @@ public class AddressesController : Controller
     }
 
     // POST: Addresses/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpPost("DeleteConfirmed")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

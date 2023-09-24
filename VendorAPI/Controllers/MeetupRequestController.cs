@@ -27,7 +27,7 @@ namespace VendorAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [Route("~/api/MeetupRequest/{id}")]
         public async Task<IActionResult> Get(string id)
         {

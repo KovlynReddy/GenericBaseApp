@@ -28,7 +28,7 @@ namespace VendorAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [Route("~/api/PostInteraction/{id}")]
         public async Task<IActionResult> Get(string id)
         {

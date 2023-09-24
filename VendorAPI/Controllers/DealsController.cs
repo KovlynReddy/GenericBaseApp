@@ -13,13 +13,14 @@ public class DealsController : Controller
     }
 
     // GET: Deals
-    [HttpGet]
+    [HttpGet("Index")]
     public async Task<IActionResult> Index()
     {
         return View(await _context.Deals.ToListAsync());
     }
 
     // GET: Deals/Details/5
+    [HttpGet("{id}")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -37,11 +38,6 @@ public class DealsController : Controller
         return View(deal);
     }
 
-    // GET: Deals/Create
-    public IActionResult Create()
-    {
-        return View();
-    }
 
     // POST: Deals/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -59,26 +55,10 @@ public class DealsController : Controller
         return View(deal);
     }
 
-    // GET: Deals/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var deal = await _context.Deals.FindAsync(id);
-        if (deal == null)
-        {
-            return NotFound();
-        }
-        return View(deal);
-    }
-
     // POST: Deals/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
     // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+    [HttpPatch("{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("VendorGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
     {
@@ -111,6 +91,7 @@ public class DealsController : Controller
     }
 
     // GET: Deals/Delete/5
+    [HttpPost]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -129,7 +110,7 @@ public class DealsController : Controller
     }
 
     // POST: Deals/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpPost("DeleteConfirmed")]
     //[ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
