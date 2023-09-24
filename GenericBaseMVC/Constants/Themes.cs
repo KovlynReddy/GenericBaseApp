@@ -4,31 +4,31 @@
     {
         public List<ThemeViewModel> themes = new List<ThemeViewModel>() { 
         new ThemeViewModel(){ 
-        ThemeName = "Candy 1",
+        ThemeName = " Candy",
         ThemeCode= "Candy",
         },        
             new ThemeViewModel(){ 
-        ThemeName = "Cerulear 1",
+        ThemeName = " Cerulear",
         ThemeCode= "Cerulear",
         },        
             new ThemeViewModel(){ 
-        ThemeName = "Mint 1",
+        ThemeName = " Mint",
         ThemeCode= "Mint",
         },        
             new ThemeViewModel(){ 
-        ThemeName = "Neon 1",
+        ThemeName = " Neon",
         ThemeCode= "Neon",
         },        
             new ThemeViewModel(){ 
-        ThemeName = "Pure-dark 1",
+        ThemeName = " Pure-dark",
         ThemeCode= "Pure-dark",
         },       
             new ThemeViewModel(){ 
-        ThemeName = "Simple 1",
+        ThemeName = " Simple",
         ThemeCode= "Simple",
         },        
             new ThemeViewModel(){ 
-        ThemeName = "Yet-Blue 1",
+        ThemeName = " Yet-Blue",
         ThemeCode= "Yet-Blue",
         },
         
