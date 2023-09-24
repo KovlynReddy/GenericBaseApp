@@ -25,7 +25,26 @@ public class MeetUpController : Controller
     [HttpGet]
     public async Task<IActionResult> Schedule()
     {
-        var model = new BaseViewModel();
+        var model = new ScheduleViewModel();
+
+        model.events = new List<EventViewModel>()
+        { 
+            new EventViewModel(){ 
+                start = "2023-09-09",
+                end = "2023-09-09",
+                title = "Event Test 1"
+            },
+            new EventViewModel(){
+                start = "2023-10-09",
+                end = "2023-10-09",
+                title = "Event Test 2"
+            },
+            new EventViewModel(){
+                start = "2023-09-10",
+                end = "2023-09-10",
+                title = "Event Test 3"
+            }
+        };
 
         var _customerService = new CustomerService();
         var email = User.Identity.Name;

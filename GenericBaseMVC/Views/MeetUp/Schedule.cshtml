@@ -1,17 +1,37 @@
-﻿@model GenericAppDLL.Models.ViewModels.BaseViewModel
+﻿@model GenericAppDLL.Models.ViewModels.ScheduleViewModel
+
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
 <div id='calendar'></div>
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
-<script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var json = @Html.Raw(Json.Serialize(@Model.events));
+        console.log("Events ",json );
+        Render(json);
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
+        Render();
+        });
+
+    function Render() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth'
+            });
+        calendar.render();
+    }
+
+    function Render(json) {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: json
         });
         calendar.render();
-    });
+    }
 
 </script>
