@@ -132,7 +132,7 @@ public class ProfileController : Controller
     {
         var email = User.Identity.Name;
         var model = await _profileHandler.ViewFriendRequests(email);
-        model.settings = await SettingsHandler.GetSettings(email);
+        model.settings = await SettingsHandler.GetSettings(email, true);
         return View(model); 
        
     }    
@@ -212,7 +212,8 @@ public class ProfileController : Controller
     {
         var email = User.Identity.Name;
         var model = await _profileHandler.GetAllProfiles(email);
-        model.settings = await SettingsHandler.GetSettings(email);
+        model.settings = await SettingsHandler.GetSettings(email, true);
         return View(model);
     }
 }
+ 

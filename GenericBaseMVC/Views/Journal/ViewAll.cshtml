@@ -1,7 +1,16 @@
 ﻿@model GenericAppDLL.Models.ViewModels.ViewListJournalViewModel
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
-<partial name="_SettingsImplementation" model="@Model.settings"></partial>                                    
-<a class="btn btn-primary text-dark" asp-area="" asp-controller="Journal" asp-action="Create"><i class="fas fa-comments"></i>Journals </a>
+<div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+        <a class="btn btn-primary text-dark" asp-area="" asp-controller="Journal" asp-action="Create"><i class="fas fa-paper-plane"></i> New </a>
+    </div>
+    <div class="col-2">
+    </div>
+</div>
+
 @foreach(var journal in Model.journals){         
         <div class="row">
        <div class="col-2">

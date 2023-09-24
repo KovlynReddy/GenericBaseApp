@@ -2,7 +2,18 @@
 
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
-@foreach (var item in Model.meetups)
-{
-    <partial name="_MeetupRequest" model="item"></partial>
-}
+<div class="row">
+
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+
+        @foreach (var item in Model.meetups)
+        {
+            <partial name="_MeetupRequest" model="item"></partial>
+        }
+
+    </div>
+    <div class="col-2">
+    </div>
+</div>

@@ -2,8 +2,18 @@
 
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
+<div class="row">
 
-@foreach(var item in Model.users)
-{
-    <partial name="_FriendRequest" model="item" />
-}
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+
+        @foreach (var item in Model.users)
+        {
+            <partial name="_FriendRequest" model="item" />
+        }
+
+    </div>
+    <div class="col-2">
+    </div>
+</div>

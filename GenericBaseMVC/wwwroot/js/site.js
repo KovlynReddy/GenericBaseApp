@@ -1,4 +1,5 @@
-﻿$(".Theme-Control-option").on('click', function () {
+﻿$(document).ready(function () {
+$(".Theme-Control-option").on('click', function () {
     var val = $(this).val();
     ChangeTheme(val);
     console.log(val);
@@ -74,6 +75,7 @@ var numNotifications = $("#Settings-Notification-Num").val();
 
 
 var adverts = $(".side-advert");
+console.log("Side Adverts", adverts);
 
 if (adverts.length > 1) {
     var enableSideAdverts = $("#Enable-Side-Adverts")[0].value;
@@ -119,3 +121,4 @@ $("#notifications-num").html(numNotifications);
 ChangeTheme(selectedTheme);
 
 console.log(selectedTheme);
+});

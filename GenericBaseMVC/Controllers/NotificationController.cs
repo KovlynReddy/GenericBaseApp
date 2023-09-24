@@ -75,8 +75,7 @@ namespace GenericBaseMVC.Controllers
             var customerDetails = (await _customerService.Get(email)).FirstOrDefault();
             if (!string.IsNullOrEmpty(Theme.Themes.SelectedTheme))
             {
-
-            customerDetails.SelectedTheme = Theme.Themes.SelectedTheme;
+                customerDetails.SelectedTheme = Theme.Themes.SelectedTheme;
             }
 
             if (Theme.newProfile != null)

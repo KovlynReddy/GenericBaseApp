@@ -20,7 +20,7 @@ namespace GenericBaseMVC.Controllers
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-            model.settings = await SettingsHandler.GetSettings(email);
+            model.settings = await SettingsHandler.GetSettings(email, true);
 
             var journals = await new JournalService().Get(currentCustomer.ModelGuid);
 

@@ -64,8 +64,7 @@ public class MenuController : Controller
         model.purchasedItems = Mapper.Map<List<PurchaseItemViewModel>>(items);
         model.Items = menuItems;
 
-        model.settings = await SettingsHandler.GetSettings(userEmail);
-
+        model.settings = await SettingsHandler.GetSettings(userEmail,true);
 
         return View(model);
     }
@@ -118,7 +117,7 @@ public class MenuController : Controller
         return RedirectToAction("ViewCart");
     }
 
-        [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> AddToCart(MenuItemViewModel model)
     {
         //var model = (await _MenuService.GetAll()).FirstOrDefault(m=>m.ModelGuid == item.ModelGUID);
