@@ -16,22 +16,7 @@ namespace VendorAPI.Controllers
             _db = db;
         }
 
-        [Route("~/api/advertisment")]
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
-        {
-            var adverts = await _db.Get();
-
-            //foreach (var advert in adverts)
-            //{
-            //    advert.ImagePath01 = advert.ImagePath02.Split();
-            //}
-
-            return Ok(adverts);
-        }
-
-        [Route("~/api/advertisment/{email}")]
-        [HttpGet("GetAll/{email}")]
+        [HttpGet]
         public async Task<IActionResult> GetAll(string? email)
         {
             var adverts = await _db.Get();
@@ -51,8 +36,7 @@ namespace VendorAPI.Controllers
             return Ok(adverts);
         }
 
-        [Route("~/api/advertisment/CreateDto")]
-        [HttpPost("CreateDto")]
+        [HttpPost]
         public async Task<IActionResult> Post(AdvertisingDto dto)
         {
             var results = await _db.Post(dto);

@@ -11,8 +11,8 @@ public class VendorController : Controller
         _context = context;
     }
 
-    // GET: Vendors
-    [HttpGet("Index")]
+    [HttpGet]
+    [Route("~/api/Vendor/Index")]
     public async Task<IActionResult> Index()
     {
         List<Vendor> vendors = new List<Vendor>();
@@ -32,8 +32,8 @@ public class VendorController : Controller
         return Ok(result);
     }
 
-    // GET: Vendors/Details/5
-    [HttpGet("Details")]
+    [HttpGet]
+    [Route("~/api/Vendor/Details")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -51,26 +51,7 @@ public class VendorController : Controller
         return View(Vendor);
     }
 
-    //[AllowAnonymous]
-    //[Route("~/api/Vendor/Create")]
-    //[Route("~/api/Vendor/Create/{VendorEmail}/{VendorName}")]
-    ////[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
-    //[HttpPost]
-    //public async Task<IActionResult> Create( string VendorEmail, string VendorName)//[FromBody]CreateVendorDto Vendor)
-    //{
-    //    Vendor newVendor = new Vendor
-    //    {
-    //        VendorEmail = VendorEmail,//Vendor.VendorEmail,//
-    //        VendorName = VendorName,//Vendor.VendorName,//
-    //        ModelGUID = new Guid().ToString(),
-    //        CreatedDateTime = new DateTime().ToString()
-    //    };
-    //        _context.Add(newVendor);
-    //        await _context.SaveChangesAsync();
-    //        return Ok(newVendor);
-    //}
-
-    [HttpGet("GetAll")]
+    [HttpGet]
     [Route("~/api/Vendor/GetAll")]
     public async Task<IActionResult> GetAll()
     {
@@ -79,9 +60,8 @@ public class VendorController : Controller
         return Ok(result);
     }
 
-    //[Route("api/Vendors/Create?VendorEmail={VendorEmail}&VendorName={VendorName}")]
     [AllowAnonymous]
-    [HttpPost("Post")]
+    [HttpPost]
     [Route("~/api/Vendor")]
     public async Task<IActionResult> Post([FromBody]CreateVendorDto Vendor)
     {
@@ -111,8 +91,7 @@ public class VendorController : Controller
         return Ok(newVendor);
     }
 
-    // GET: Vendors/Delete/5
-    [HttpDelete("Delete")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -127,17 +106,6 @@ public class VendorController : Controller
             return NotFound();
         }
         return View(Vendor);
-    }
-
-    // POST: Vendors/Delete/5
-    [HttpDelete("DeleteConfirmed")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        var Vendor = await _context.Vendors.FindAsync(id);
-        _context.Vendors.Remove(Vendor);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
     }
 
     private bool VendorExists(int id)

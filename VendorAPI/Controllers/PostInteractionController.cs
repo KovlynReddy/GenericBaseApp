@@ -18,7 +18,6 @@ namespace VendorAPI.Controllers
             Mapper = mapper;
         }
 
-
         [HttpGet]
         [Route("~/api/PostInteraction")]
         public async Task<IActionResult> Get()
@@ -28,7 +27,7 @@ namespace VendorAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("~/api/PostInteraction/{id}")]
         public async Task<IActionResult> Get(string id)
         {

@@ -13,20 +13,21 @@ public class CustomersController : Controller
         _context = context;
     }
 
-    // GET: Customers
+    [HttpGet]
+    [Route("~/api/Customers/Index")]
     public async Task<IActionResult> Index()
     {
         return View(await _context.Customers.ToListAsync());
     }
 
-    [HttpGet("{email}/{state}")]
+    [HttpGet]
     [Route("~/api/Customers/{email}/{state}")]
     public async Task<IActionResult> Get(string email,int state)
     {
         return Ok();
     }
 
-    [HttpGet("{email}")]
+    [HttpGet]
     [Route("~/api/Customers/{email}")]
     public async Task<IActionResult> Get(string email)
     {
@@ -87,25 +88,7 @@ public class CustomersController : Controller
         return Ok(response);
     }
 
-
-    // POST: Customers/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Customer customer)
-    {
-        if (ModelState.IsValid)
-        {
-            _context.Add(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        return View(customer);
-    }
-
-    // GET: Customers/Edit/5
-    [HttpPut("UpdateTheme")]
+    [HttpPut]
     [Route("~/api/Customers/UpdateTheme")]
     public async Task<IActionResult> UpdateTheme(CustomerDto customer)
     {
@@ -120,11 +103,9 @@ public class CustomersController : Controller
         return Ok(customer);
     }
 
-
-    //[AllowAnonymous]
     [Route("~/api/Customers/CreateDto")]
-    [HttpPost("CreateDto")]
-    public async Task<ActionResult<CreateCustomerDto>> CreateDto(CreateCustomerDto Vendor)
+    [HttpPost]
+    public async Task<IActionResult> CreateDto(CreateCustomerDto Vendor)
     {
         Customer newVendor = new Customer
         {
@@ -144,17 +125,6 @@ public class CustomersController : Controller
         _context.Add(newVendor);
         await _context.SaveChangesAsync();
         return Ok(newVendor);
-    }
-
-    // POST: Customers/Delete/5
-    [HttpPost("DeleteConfirmed")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        var customer = await _context.Customers.FindAsync(id);
-        _context.Customers.Remove(customer);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
     }
 
     private bool CustomerExists(int id)

@@ -12,15 +12,13 @@ public class DealsController : Controller
         _context = context;
     }
 
-    // GET: Deals
-    [HttpGet("Index")]
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         return View(await _context.Deals.ToListAsync());
     }
 
-    // GET: Deals/Details/5
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -38,10 +36,6 @@ public class DealsController : Controller
         return View(deal);
     }
 
-
-    // POST: Deals/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("VendorGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
@@ -55,10 +49,7 @@ public class DealsController : Controller
         return View(deal);
     }
 
-    // POST: Deals/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPatch("{id}")]
+    [HttpPatch]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("VendorGuid,Description,StartDate,EndDate,Reason,Percentage,Amount,Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Deal deal)
     {
@@ -90,8 +81,7 @@ public class DealsController : Controller
         return View(deal);
     }
 
-    // GET: Deals/Delete/5
-    [HttpPost]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -107,17 +97,6 @@ public class DealsController : Controller
         }
 
         return View(deal);
-    }
-
-    // POST: Deals/Delete/5
-    [HttpPost("DeleteConfirmed")]
-    //[ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        var deal = await _context.Deals.FindAsync(id);
-        _context.Deals.Remove(deal);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
     }
 
     private bool DealExists(int id)

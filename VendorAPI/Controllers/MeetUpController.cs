@@ -16,7 +16,7 @@ public class MeetUpController : Controller
         this.mapper = mapper;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     [Route("~/api/MeetUp/{id}")]
     public IActionResult Get(string id)
     {

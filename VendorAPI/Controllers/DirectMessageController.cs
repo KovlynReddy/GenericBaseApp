@@ -15,7 +15,6 @@ public class DirectMessageController : Controller
     {
             _DB = DMDb;
     }
-        // GET: DirectMessageController
 
         [HttpPut]
         [Route("~/api/Read/DirectMessage")]
@@ -26,7 +25,7 @@ public class DirectMessageController : Controller
             return Ok();
         }
 
-    [HttpGet("{Id}")]
+    [HttpGet]
     [Route("~/api/DirectMessage/{Id}")]
     public async Task<IActionResult> Get(string Id)
     {
@@ -56,7 +55,7 @@ public class DirectMessageController : Controller
             return Ok(results);
         }    
         
-    [HttpGet("{id}/{email}")]
+    [HttpGet]
         [Route("~/api/DirectMessage/{id}/{email}")]
         public async Task<IActionResult> Get(string id,string email)
     {
@@ -112,8 +111,6 @@ public class DirectMessageController : Controller
         return Ok(results);
     }
 
-
-    // GET: DirectMessageController/Create
     [HttpPost]
     [Route("~/api/DirectMessage/Create")]
     public async Task<ActionResult> Create(DirectMessageDto model)

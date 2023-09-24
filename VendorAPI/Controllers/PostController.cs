@@ -22,12 +22,13 @@ namespace VendorAPI.Controllers
         }
 
         // GET: Customers
+        [HttpGet]
         public async Task<IActionResult> Feed()
         {
             return Ok(await _context.Customers.ToListAsync());
         }
 
-        [HttpGet("Get/{id}")]
+        [HttpGet]
         [Route("~/api/Post/{id}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -58,7 +59,8 @@ namespace VendorAPI.Controllers
             return Ok(response);
         }
 
-        // GET: Customers/Details/5
+        [HttpGet]
+        [Route("~/api/Post/Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -76,7 +78,7 @@ namespace VendorAPI.Controllers
             return View(customer);
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         [Route("~/api/Post/GetAll/{currentCustomer}")]
         public async Task<IActionResult> GetAll(string currentCustomer)
          {
@@ -121,26 +123,8 @@ namespace VendorAPI.Controllers
             return Ok(response);
         }
 
-
-        // POST: Customers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost("Create")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ModelGUID,IsDeleted,CreatedDateTime,DeletedDateTime,CompletedDateTime,CreatorId")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customer);
-        }
-
-        //[AllowAnonymous]
         [Route("~/api/Post/CreateDto")]
-        [HttpPost("CreateDto")]
+        [HttpPost]
         public async Task<ActionResult<CreatePostDto>> CreateDto(CreatePostDto model)
         {
             Post newEntity = new Post
@@ -175,9 +159,7 @@ namespace VendorAPI.Controllers
             return Ok(dto);
         }
 
-
-        // GET: Customers/Delete/5
-        [HttpDelete("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -193,17 +175,6 @@ namespace VendorAPI.Controllers
             }
 
             return View(customer);
-        }
-
-        // POST: Customers/Delete/5
-        [HttpDelete("DeleteConfirmed")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)

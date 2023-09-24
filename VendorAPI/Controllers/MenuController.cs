@@ -11,13 +11,11 @@ public class MenuController : Controller
         _context = context;
     }
 
-    // GET: Menu
-    [HttpGet("Index")]
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         return View(await _context.Items.ToListAsync());
     }
-
 
     [Route("~/api/Menu/GetAll")]
     [HttpGet]
@@ -56,8 +54,7 @@ public class MenuController : Controller
         return Ok(response);
     }
 
-    // GET: Menu/Details/5
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -109,8 +106,6 @@ public class MenuController : Controller
         return Ok(item);
     }
 
-
-    // GET: Menu/Delete/5
     [HttpDelete]
     public async Task<IActionResult> Delete(int? id)
     {
@@ -127,17 +122,6 @@ public class MenuController : Controller
         }
 
         return View(item);
-    }
-
-    // POST: Menu/Delete/5
-    [HttpDelete("DeleteConfirmed")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        var item = await _context.Items.FindAsync(id);
-        _context.Items.Remove(item);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
     }
 
     private bool ItemExists(int id)

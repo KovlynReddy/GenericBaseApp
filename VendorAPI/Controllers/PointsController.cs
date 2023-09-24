@@ -21,7 +21,6 @@ namespace VendorAPI.Controllers
             CustomerDb = customerDb;
         }
 
-
         [HttpGet]
         [Route("~/api/Points")]
         public async Task<IActionResult> Get()
@@ -31,7 +30,7 @@ namespace VendorAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("~/api/Points/{id}")]
         public async Task<IActionResult> Get(string id)
         {

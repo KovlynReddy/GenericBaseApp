@@ -29,7 +29,7 @@ namespace VendorAPI.Controllers
         }
 
         [Route("~/api/Cart/{id}/{headers}")]
-        [HttpGet("{id}/{headers}")]
+        [HttpGet]
         public async Task<IActionResult> Get(string id, string headers)
         {
             var results = await _purchaseDB.Get(id);

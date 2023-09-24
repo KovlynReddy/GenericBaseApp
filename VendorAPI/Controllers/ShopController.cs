@@ -23,7 +23,7 @@ namespace VendorAPI.Controllers
         }
 
         [Route("~/api/Shop/Item/{Id}")]
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> Get(string Id)
         {
 

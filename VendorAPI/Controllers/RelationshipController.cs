@@ -17,7 +17,6 @@ namespace VendorAPI.Controllers
             Mapper = mapper;
         }
 
-
         [Route("~/api/Relationship")]
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -29,7 +28,7 @@ namespace VendorAPI.Controllers
         }        
         
         [Route("~/api/Relationship/{Id}")]
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> Get(string Id)
         {
             var response = await _relationDb.Get(Id);
