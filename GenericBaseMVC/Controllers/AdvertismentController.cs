@@ -19,8 +19,10 @@ namespace GenericBaseMVC.Controllers
         {
             return View();
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var advertDtos = await new AdvertisingService().Get();
+
             return View();
         }
 
@@ -72,7 +74,10 @@ namespace GenericBaseMVC.Controllers
         {
             var advertDtos = await new AdvertisingService().Get("none");
 
-            var model = new BaseViewModel();
+            var model = new HubViewModel();
+
+            model.adverts = _mapper.Map<List<SideAdvertViewModel>>(advertDtos);
+
             var email = User.Identity.Name;
             model.settings = await SettingsHandler.GetSettings(email);
 

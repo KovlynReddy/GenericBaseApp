@@ -30,6 +30,35 @@
             }
 
         }
+        public async Task<List<AdvertisingDto>> Get()
+        {
+            IEnumerable<AdvertisingDto> Cart = null;
+
+            string apiUrl = "https://localhost:7240/api/Advertisment";
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                var apiresponse = new List<AdvertisingDto>();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadAsAsync<List<AdvertisingDto>>();
+                    //var table = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataTable>(data);
+                    apiresponse = data;
+                    //Newtonsoft.Json.JsonConvert.DeserializeObject(data);
+                }
+
+                return apiresponse;
+            }
+
+        }
+
         public async Task<AdvertisingDto> Post(AdvertisingDto model)
         {
             IEnumerable<AdvertisingDto> Carts = null;
