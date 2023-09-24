@@ -23,8 +23,6 @@ public class CustomersController : Controller
     [Route("~/api/Customers/{email}/{state}")]
     public async Task<IActionResult> Get(string email,int state)
     {
-
-
         return Ok();
     }
 
@@ -38,7 +36,6 @@ public class CustomersController : Controller
 
         foreach (var customer in result)
         {
-
             CustomerDto CustomerDto = new CustomerDto
             {
                 CustomerEmail = customer.CustomerEmail,
@@ -56,7 +53,6 @@ public class CustomersController : Controller
             };
 
             response.Add(CustomerDto);
-
         }
 
         return Ok(response);
@@ -72,8 +68,6 @@ public class CustomersController : Controller
 
         foreach (var customer in result)
         {
-
-
             CustomerDto CustomerDto = new CustomerDto
             {
                 CustomerEmail = customer.CustomerEmail,
@@ -87,12 +81,9 @@ public class CustomersController : Controller
                 AccountGuid = customer.AccountGuid,
                 LastTotal = customer.LastTotal
                 //ProfileImagePath = !(string.IsNullOrEmpty(customer.ProfileImagePath) || customer.ProfileImagePath == "~/profileimage.png" || customer.ProfileImagePath == "ProfileImages/ProfileImage.png") ? customer.ProfileImagePath.Split("root\\")[1]: @"ProfileImages/ProfileImage.png" 
-    };
-
+            };
             response.Add(CustomerDto);
-
         }
-
         return Ok(response);
     }
 

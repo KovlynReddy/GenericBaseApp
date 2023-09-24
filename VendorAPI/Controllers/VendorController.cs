@@ -50,8 +50,6 @@ public class VendorController : Controller
         return View(Vendor);
     }
 
-
-
     //[AllowAnonymous]
     //[Route("~/api/Vendor/Create")]
     //[Route("~/api/Vendor/Create/{VendorEmail}/{VendorName}")]
@@ -92,7 +90,6 @@ public class VendorController : Controller
             lon = Vendor.Lon,
             ModelGUID = Guid.NewGuid().ToString()
         };
-
 
         Vendor newVendor = new Vendor
         {
@@ -176,7 +173,6 @@ public class VendorController : Controller
         {
             return NotFound();
         }
-
         return View(Vendor);
     }
 

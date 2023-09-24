@@ -25,8 +25,14 @@ public class MeetUpController : Controller
     [HttpGet]
     public async Task<IActionResult> Schedule()
     {
+        var model = new BaseViewModel();
 
-        return View();
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings = await SettingsHandler.GetSettings(email);
+
+        return View(model);
     }  
 
 
@@ -97,7 +103,6 @@ public class MeetUpController : Controller
         model.CenterLat = slat.Replace(',', '.').ToString();
         model.CenterLon = slon.Replace(',', '.').ToString();
 
-
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
@@ -117,7 +122,6 @@ public class MeetUpController : Controller
     [HttpGet]
     public async Task<IActionResult> CreateFromCurrentLocation(string slat, string slon)
     {
-
         return View();
     }
 

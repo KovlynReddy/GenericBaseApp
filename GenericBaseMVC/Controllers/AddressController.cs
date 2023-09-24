@@ -216,7 +216,6 @@ public class AddressController : Controller
         }
     }
 
-
     private List<AddressViewModel> ConvertToViewModel(List<AddressDto> argument)
     {
 
@@ -239,9 +238,7 @@ public class AddressController : Controller
             };
 
             response.Add(Address);
-
         }
-
         return response;
     }
 }

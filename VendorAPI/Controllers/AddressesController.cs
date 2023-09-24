@@ -238,7 +238,6 @@ public class AddressesController : Controller
 
         foreach (var item in argument)
         {
-
             AddressDto Address = new AddressDto
             {
                 Number = item.Number,
@@ -253,18 +252,13 @@ public class AddressesController : Controller
                 lon = item.lon,
                 UserGuid = item.UserGuid
             };
-
             response.Add(Address);
-
         }
-
-
         return response;
     }
 
     private List<Address> ConvertToDomainModel(List<AddressDto> argument)
     {
-
         var response = new List<Address>();
 
         foreach (var item in argument)
@@ -283,11 +277,8 @@ public class AddressesController : Controller
                 Lat = item.Lat,
                 lon = item.lon
             };
-
             response.Add(Address);
-
         }
-
         return response;
     }
 

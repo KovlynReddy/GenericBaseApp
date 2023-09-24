@@ -47,7 +47,6 @@ public class VendorController : Controller
                 });
             }
 
-
             model.Add(new VendorViewModel() { 
             VendorName      = VendorModel.VendorName,
             VendorEmail     = VendorModel.VendorEmail,
@@ -93,7 +92,6 @@ public class VendorController : Controller
                     IsMod = 1
                 });
             }
-
 
             model.Add(new VendorViewModel()
             {
@@ -254,7 +252,6 @@ public class VendorController : Controller
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
         model.settings = await SettingsHandler.GetSettings(email);
 
-
         return View("_SuggestedMapView", model);
        // return RedirectToAction("DisplaySuggested",model);
     }
@@ -289,7 +286,6 @@ public class VendorController : Controller
     [HttpGet]
     public async Task<IActionResult> DisplaySuggested(decimal slat, decimal slon)
     {
-
         return null;
     }
 
@@ -313,8 +309,6 @@ public class VendorController : Controller
             var message = e.Message;
             throw;
         }
-
-
 
         var allVendors = await _VendorService.GetAll();
         var allAddresses = await _addressService.GetAll();
@@ -366,7 +360,6 @@ public class VendorController : Controller
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
         model.settings = await SettingsHandler.GetSettings(email);
 
-
         return View("_SuggestedMapView", model);
         // return RedirectToAction("DisplaySuggested",model);
     }
@@ -384,7 +377,6 @@ public class VendorController : Controller
     public ActionResult Delete(int id, IFormCollection collection)
     {
         try
-
         {
             return RedirectToAction(nameof(Index));
         }

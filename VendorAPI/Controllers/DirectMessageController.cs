@@ -109,8 +109,6 @@ public class DirectMessageController : Controller
                 dtos.Add(entity);
             }
         }
-
-
         return Ok(results);
     }
 
