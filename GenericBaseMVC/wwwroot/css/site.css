@@ -116,3 +116,8 @@ color:black !important;
     background-image: none !important;
 background-color:skyblue !important;
 }
+
+.img-fluid {
+    width: 100% !important;
+    height: 100% !important;
+}

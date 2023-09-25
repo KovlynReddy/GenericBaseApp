@@ -171,7 +171,7 @@ public class ChatController : Controller
         model.ChatHead = new ChatHeaderViewModel()
         {
             RecieverName = reciever.CustomerName,
-            ProfilePicturePath = "C:\\Users\\KovlynR\\Documents\\Projects\\GenericBaseApp\\GenericBaseMVC\\wwwroot\\ProfileImage.png",
+            ProfilePicturePath = reciever.ProfileImagePath,
             ChatId = "1",
 
         };
