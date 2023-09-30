@@ -2,6 +2,7 @@
 using GenericBaseMVC.Hubs;
 using GenericBaseMVC.Services;
 using Microsoft.AspNetCore.SignalR;
+using System.Drawing;
 
 namespace GenericBaseMVC.Controllers;
 
@@ -121,6 +122,15 @@ public class MeetUpController : Controller
         model.Captions = captions;
         model.CenterLat = slat.Replace(',', '.').ToString();
         model.CenterLon = slon.Replace(',', '.').ToString();
+
+        for (var coord = 0;coord < model.Lats.Count; coord++)
+        {
+            model.MapMarks.Add(new MapMark() { 
+            Caption = model.Captions.ToArray()[coord],
+            Lat = model.Lats.ToArray()[coord],
+            Lon = model.Longs.ToArray()[coord]
+            });
+        }
 
         var _customerService = new CustomerService();
         var email = User.Identity.Name;

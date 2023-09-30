@@ -42,6 +42,20 @@
     </form>
 </div>
 
+@foreach (var meetup in Model.MapMarks)
+{
+
+    <div class="pe-2">
+        <div class="card card-text d-inline-block p-2 px-3 m-1">
+            @Html.Raw(meetup.Caption)
+        </div>
+        <div class="small">
+            @meetup.Lat ,&emsp; @meetup.Lat
+        </div>
+    </div>
+}
+
+
 <div id="Respond" class="modal" tabindex="-1" role="dialog">
     <form asp-action="Post" asp-controller="MeetupRequest">
 

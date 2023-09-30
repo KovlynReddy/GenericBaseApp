@@ -1,0 +1,12 @@
+﻿@model GenericAppDLL.Models.ViewModels.VendorViewModel
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="/@Model.VendorImage" alt="Card image cap">
+    <div class="card-body">
+        <h3 class="card-title">@Model.VendorName</h3>
+        <h5 class="card-title">@Model.VendorEmail</h5>
+        <h6 class="card-title">@Model.Status</h6>
+        <p class="card-text">@Model.ModelGUID</p>
+        <button href="#" data-toggle="modal" data-target="#@Model.ModelGUID" class="btn btn-primary @Model.ModelGUID">View</button>
+    </div>
+</div>

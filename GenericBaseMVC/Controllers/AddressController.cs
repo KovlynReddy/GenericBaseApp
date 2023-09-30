@@ -148,7 +148,7 @@ public class AddressController : Controller
                 PostCode = newAddress.PostCode,
                 ModelGuid = newAddress.ModelGuid,
                 CreatedDateTime = DateTime.Now,
-                CreatorGuid = User.Identity.Name,
+                CreatorId = User.Identity.Name,
                 Lat = newAddress.Lat,
                 lon = newAddress.lon,
             };

@@ -24,7 +24,6 @@ namespace GenericBaseMVC.Controllers
 
             var journals = await new JournalService().Get(currentCustomer.ModelGuid);
 
-
             model.UserGuid = currentCustomer.ModelGuid;
             model.journals = mapper.Map<List<JournalViewModel>>(journals);
             foreach (var journal in model.journals)
@@ -35,7 +34,6 @@ namespace GenericBaseMVC.Controllers
                 journal.uploadPathsList = files;
 
             }
-
 
             return View(model);
         }
@@ -50,6 +48,8 @@ namespace GenericBaseMVC.Controllers
             CreateJournalViewModel model = new CreateJournalViewModel();
             model.settings = await SettingsHandler.GetSettings(email);
             model.UserGuid = currentCustomer.ModelGuid;
+
+            model.items = mapper.Map<List<ItemViewModel>>(await (new MenuService().GetAll()));
 
             return View(model);
         }
@@ -81,9 +81,7 @@ namespace GenericBaseMVC.Controllers
                     upload.CopyTo(stream);
                 }
                 csv += fileName + ",";
-
             }
-
 
             var dto = new JournalEntryDto() { 
             Description = newJournal.Description ?? string.Empty,
@@ -94,13 +92,11 @@ namespace GenericBaseMVC.Controllers
             //uploads = newJournal.uploads,
             Body = newJournal.Body ?? string.Empty,
             CreatedDateTimeString = DateTime.Now.ToString(),
-            CompletedDateTime = DateTime.Now,
             ModelGuid = Guid.NewGuid().ToString(),
-            CreatorGuid = newJournal.UserGuid
+            CreatorId = newJournal.UserGuid
             };
 
             var results = await new JournalService().Post(dto);
-
 
             var points = new PointsDto()
             {

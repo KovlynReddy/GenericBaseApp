@@ -7,13 +7,16 @@
     <h5>Points Balance :  <strong>@Model.TotalPoints</strong></h5>
 </div>
 
-<div class="row overflow-auto ">
+
 @*<div class="col-2">
 </div>
     <div class="col-8 overflow-auto">*@
 @foreach (var vendor in Model.AllVendors)
 {
     <div class="row overflow-auto p-3">
+            <div class="col">
+                @Html.Partial("_VendorView", vendor)
+            </div>
         @foreach (var item in vendor.AllVendorItems)
         {
             <div class="col">
@@ -25,4 +28,4 @@
 @*</div>
 <div class="col-2">
 </div>*@
-</div>
+

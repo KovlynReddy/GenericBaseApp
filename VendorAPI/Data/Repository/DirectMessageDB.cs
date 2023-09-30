@@ -84,7 +84,7 @@ namespace VendorAPI.Data.Repository
                     ModelGuid = message.ModelGUID,
                     Read = message.Read,
                     CreatedDateTimeString = message.CreatedDateTime,
-                    CreatorGuid = message.CreatorId,
+                    CreatorId = message.CreatorId,
                     Path = message.Path,
                     IsDeleted = message.IsDeleted,
                     Id = message.Id,

@@ -39,9 +39,8 @@ public class VendorController : Controller
                 SKUCode     = item.SKUCode,
                 Caption     = item.Caption,
                 Cost        = item.Cost,
-                CreatorId   = item.CreatorId,
                 Currency    = item.Currency,
-                ItemImage   = item.ItemImage,
+                ItemImage   = item.Path,
                 MenuId      = item.MenuId,
                 IsMod       = 1
                 });
@@ -85,9 +84,8 @@ public class VendorController : Controller
                     SKUCode = item.SKUCode,
                     Caption = item.Caption,
                     Cost = item.Cost,
-                    CreatorId = item.CreatorId,
                     Currency = item.Currency,
-                    ItemImage = item.ItemImage == string.Empty || item.ItemImage == null ? "profileimages/defaultimage.jpg" : item.ItemImage,
+                    ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
                     MenuId = item.MenuId,
                     IsMod = 1
                 });
@@ -247,6 +245,17 @@ public class VendorController : Controller
         model.CenterLon = slon.Replace(',','.').ToString();
         model.Scale = 100.ToString();
         model.Zoom = 16.ToString();
+
+        for (var coord = 0; coord < model.Lats.Count; coord++)
+        {
+            model.MapMarks.Add(new MapMark()
+            {
+                Caption = model.Captions.ToArray()[coord],
+                Lat = model.Lats.ToArray()[coord],
+                Lon = model.Longs.ToArray()[coord]
+            });
+        }
+
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();

@@ -123,7 +123,7 @@ public class AddressesController : Controller
             CreatedDateTime = newAddressDto.CreatedDateTime.ToString(),
             Lat = newAddressDto.Lat,
             lon = newAddressDto.lon,
-            CreatorId = newAddressDto.CreatorGuid,
+            CreatorId = newAddressDto.CreatorId,
             UserGuid = newAddressDto.UserGuid,
         };
 

@@ -36,7 +36,6 @@ public class MenuService
     {
         IEnumerable<MenuItemDto> Menus = null;
 
-
         string apiUrl = "https://localhost:7240/api/Menu/GetAll";
 
         using (HttpClient client = new HttpClient())

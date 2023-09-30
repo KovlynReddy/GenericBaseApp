@@ -14,22 +14,23 @@ namespace GenericAppDLL.Models.Mappers
     {
         public Mapper()
         {
+            CreateMap<BaseModel, BaseDto>()
+                .ForPath(dist => dist.CreatedDateTime, opt => opt.Ignore())
+                .ForPath(dist => dist.BookDateTime, opt => opt.Ignore())
+                .ForPath(dist => dist.UserGuid, opt => opt.Ignore())
+                .ForPath(dist => dist.VendorGuid, opt => opt.Ignore())
+                .ReverseMap();
+
             CreateMap<AdvertisingDto, Advert>().ReverseMap();
             CreateMap<SideAdvertViewModel, AdvertisingDto>().ReverseMap();
 
             CreateMap<CreateAdvertViewModel, AdvertisingDto>()
-                .ForPath(dist => dist.VendorGuid, opt => opt.Ignore())
-                .ForPath(dist => dist.UserGuid, opt => opt.Ignore())
-                .ForPath(dist => dist.CreatorGuid, opt => opt.Ignore())
+                .IncludeBase<BaseModel, BaseDto>()
+                .ForPath(dist => dist.CreatorId, opt => opt.Ignore())
                 .ForPath(dist => dist.ModelGuid, opt => opt.Ignore())
                 .ForPath(dist => dist.IsDeleted, opt => opt.Ignore())
-                .ForPath(dist => dist.CompletedDateTime, opt => opt.Ignore())
-                .ForPath(dist => dist.BookDateTime, opt => opt.Ignore())
-                .ForPath(dist => dist.ArrivedDateTime, opt => opt.Ignore())
-                .ForPath(dist => dist.CreatedDateTime, opt => opt.Ignore())
                 .ForPath(dist => dist.CompletedDateTimeString, opt => opt.Ignore())
                 .ForPath(dist => dist.BookDateTimeString, opt => opt.Ignore())
-                .ForPath(dist => dist.ArrivedDateTimeString, opt => opt.Ignore())
                 .ForPath(dist => dist.CreatedDateTimeString, opt => opt.Ignore())
                 .ForPath(dist => dist.Caption, opt => opt.MapFrom(src => src.Caption))
                 .ForPath(dist => dist.Description, opt => opt.MapFrom(src => src.Description))

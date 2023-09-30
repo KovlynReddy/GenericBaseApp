@@ -1,14 +1,18 @@
-﻿namespace VendorAPI.Controllers;
+﻿using AutoMapper;
+
+namespace VendorAPI.Controllers;
 
 [Route("api/Menu/[action]")]
 [ApiController]
 public class MenuController : Controller
 {
     private readonly VendorContext _context;
+    private readonly IMapper _mapper;
 
-    public MenuController(VendorContext context)
+    public MenuController(VendorContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -26,30 +30,12 @@ public class MenuController : Controller
 
         foreach (var item in AllItems)
         {
-            var itemDto = new MenuItemDto
-            {
-                ItemName = item.ItemName,
-                //ItemImage = .ItemImage,
-                UserGuid = User.Identity.Name,
-                SKUCode = item.SKUCode,
-                ModelGuid = item.ModelGUID,
-                CreatedDateTime = DateTime.Parse(item.CreatedDateTime),
-                CreatorId = User.Identity.Name,
-                VendorGuid =item.VendorId,
-                VendorId =item.VendorId,
-                Caption = item.Caption,
-                Cost = item.Cost,
-                MenuId = item.MenuId,
-                Currency = item.Currency,
-                CreatedDateTimeString = item.CreatedDateTime,
-                ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path
+            var itemDto = _mapper.Map<MenuItemDto>(item);
 
-            };
+            itemDto.Path = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path;           
 
             response.Add(itemDto);
-
-        }
-               
+        }               
 
         return Ok(response);
     }
@@ -96,7 +82,6 @@ public class MenuController : Controller
                 Currency = item.Currency,
                 Path = item.MenuItemMainImage
                 //CreatedDateTimeString = DateTime.Now.ToString(),
-
             };
 
             _context.Add(newItem);

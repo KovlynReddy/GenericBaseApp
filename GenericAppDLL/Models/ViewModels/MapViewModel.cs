@@ -12,6 +12,8 @@ public class MapViewModel : BaseViewModel
     public string CenterLon { get; set; }
     public string Scale { get; set; }
     public string Zoom { get; set; }
+
+    public List<MapMark> MapMarks { get; set; } = new List<MapMark>();
 }
 
 public class CreateMeetupMapViewModel : MapViewModel {

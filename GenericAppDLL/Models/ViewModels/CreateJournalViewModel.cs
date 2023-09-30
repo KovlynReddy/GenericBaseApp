@@ -13,6 +13,7 @@ namespace GenericAppDLL.Models.ViewModels
         public string Title { get; set; } = string.Empty;
         public string CreatedDateTime { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+        public List<ItemViewModel> items { get; set; } = new List<ItemViewModel>();
         public List<IFormFile> uploads { get; set; } = new List<IFormFile>();
         public List<string> uploadPaths { get; set; } = new List<string>();
 

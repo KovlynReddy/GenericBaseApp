@@ -17,7 +17,18 @@ namespace VendorAPI.Data.Mappers
     {
         public Mapper()
         {
+            CreateMap<BaseModel, BaseDto>()
+                .ForPath(dist => dist.CreatedDateTime, opt => opt.Ignore())
+                .ForPath(dist => dist.BookDateTime, opt => opt.Ignore())
+                .ForPath(dist => dist.UserGuid, opt => opt.Ignore())
+                .ForPath(dist => dist.VendorGuid, opt => opt.Ignore())
+                .ReverseMap();
+
             CreateMap<AdvertisingDto, Advert>().ReverseMap();
+
+            CreateMap<Item, ItemDto>();
+            CreateMap<Item, MenuItemDto>()
+                .IncludeBase<BaseModel, BaseDto>(); 
 
             CreateMap<PurchaseDto, Purchase>().ReverseMap();
             CreateMap<CreatePurchaseDto, Purchase>().ReverseMap();

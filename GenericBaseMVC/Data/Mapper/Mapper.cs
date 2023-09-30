@@ -11,6 +11,9 @@ namespace GenericBaseMVC.Data.Mapper
             CreateMap<AdvertisingDto, SideAdvertViewModel>();
             CreateMap<AdvertisingDto, Advert>();
 
+            CreateMap<MenuItemDto, ItemViewModel>();
+            CreateMap<ItemDto, ItemViewModel>();
+
             CreateMap<PurchaseDto, Purchase>().ReverseMap();
             CreateMap<CreatePurchaseDto, Purchase>().ReverseMap();
             CreateMap<PurchaseDto, PurchaseViewModel>().ReverseMap();

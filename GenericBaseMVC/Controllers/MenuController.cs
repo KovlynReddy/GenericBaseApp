@@ -189,9 +189,8 @@ public class MenuController : Controller
                     SKUCode = item.SKUCode,
                     Caption = item.Caption,
                     Cost = item.Cost,
-                    CreatorId = item.CreatorId,
                     Currency = item.Currency,
-                    ItemImage = item.ItemImage == string.Empty || item.ItemImage == null ? "profileimages/defaultimage.jpg" : item.ItemImage,
+                    ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
                     MenuId = item.MenuId,
                     ModelGUID = item.ModelGuid,
                     IsMod = 1,
@@ -319,9 +318,8 @@ public class MenuController : Controller
                     SKUCode = item.SKUCode,
                     Caption = item.Caption,
                     Cost = item.Cost,
-                    CreatorId = item.CreatorId,
                     Currency = item.Currency,
-                    ItemImage = item.ItemImage == string.Empty || item.ItemImage == null ? "profileimages/defaultimage.jpg" : item.ItemImage,
+                    ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
                     MenuId = item.MenuId,
                     IsMod = 1
                 });

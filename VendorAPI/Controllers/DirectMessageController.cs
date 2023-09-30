@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using VendorAPI.Data.Interface;
 
-namespace VendorAPI.Controllers
-{
+namespace VendorAPI.Controllers;
+
 [Route("api/DirectMessage")]
 [ApiController]
 [AllowAnonymous]
@@ -16,14 +16,14 @@ public class DirectMessageController : Controller
             _DB = DMDb;
     }
 
-        [HttpPut]
-        [Route("~/api/Read/DirectMessage")]
-        public async Task<IActionResult> Put(ReadMessageDto messageId) {
+    [HttpPut]
+    [Route("~/api/Read/DirectMessage")]
+    public async Task<IActionResult> Put(ReadMessageDto messageId) {
 
-            await _DB.Put(messageId.MessageGuid);
+         await _DB.Put(messageId.MessageGuid);
 
-            return Ok();
-        }
+        return Ok();
+    }
 
     [HttpGet]
     [Route("~/api/DirectMessage/{Id}")]
@@ -39,7 +39,7 @@ public class DirectMessageController : Controller
                     var entity = new DM()
                     {
                         CreatedDateTime = item.CreatedDateTimeString,
-                        CreatorId = item.CreatorGuid,
+                        CreatorId = item.CreatorId,
                         Id = item.Id,
                         Message = item.Message,
                         SenderGuid = item.SenderGuid,
@@ -56,34 +56,33 @@ public class DirectMessageController : Controller
         }    
         
     [HttpGet]
-        [Route("~/api/DirectMessage/{id}/{email}")]
-        public async Task<IActionResult> Get(string id,string email)
+    [Route("~/api/DirectMessage/{id}/{email}")]
+    public async Task<IActionResult> Get(string id,string email)
     {
-            var results = await _DB.Get(id,email);
+        var results = await _DB.Get(id, email);
 
-            var dtos = new List<DM>();
-            if (results.ToList().Count > 0)
+        var dtos = new List<DM>();
+        if (results.ToList().Count > 0)
+        {
+            foreach (var item in results)
             {
-                foreach (var item in results)
+                var entity = new DM()
                 {
-                    var entity = new DM()
-                    {
-                        CreatedDateTime = item.CreatedDateTimeString,
-                        CreatorId = item.CreatorGuid,
-                        Id = item.Id,
-                        Message = item.Message,
-                        SenderGuid = item.SenderGuid,
-                        RecieverGuid = item.RecieverGuid,
-                        Read = item.Read,
-                        ModelGUID = item.ModelGuid
-                    };
-                    dtos.Add(entity);
-                }
+                    CreatedDateTime = item.CreatedDateTimeString,
+                    CreatorId = item.CreatorId,
+                    Id = item.Id,
+                    Message = item.Message,
+                    SenderGuid = item.SenderGuid,
+                    RecieverGuid = item.RecieverGuid,
+                    Read = item.Read,
+                    ModelGUID = item.ModelGuid
+                };
+                dtos.Add(entity);
             }
-
-
-            return Ok(results);
         }
+
+        return Ok(results);
+    }
 
     [HttpGet]
     [Route("~/api/DirectMessage")]
@@ -99,7 +98,7 @@ public class DirectMessageController : Controller
                 var entity = new DM() 
                 {
                     CreatedDateTime = item.CreatedDateTimeString,
-                    CreatorId       = item.CreatorGuid,
+                    CreatorId       = item.CreatorId,
                     Id              = item.Id,
                     Message         = item.Message,
                     SenderGuid      = item.SenderGuid,
@@ -120,4 +119,5 @@ public class DirectMessageController : Controller
         return Ok();
     }
 }
-}
+
+ 
