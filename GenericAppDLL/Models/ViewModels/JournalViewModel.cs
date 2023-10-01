@@ -17,5 +17,8 @@ namespace GenericAppDLL.Models.ViewModels
         public string uploadPaths { get; set; } = string.Empty;
         public List<string> uploadPathsList { get; set; } = new List<string>();
         public string Body { get; set; } = string.Empty;
+        public Decimal Rating { get; set; }
+        public int RatingTotal { get; set; }
+        public int RatingEntry { get; set; }
     }
 }

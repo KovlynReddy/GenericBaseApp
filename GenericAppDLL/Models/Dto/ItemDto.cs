@@ -17,5 +17,6 @@ namespace GenericAppDLL.Models.Dto
         public int Cost { get; set; }
         public string Currency { get; set; } = string.Empty;
         public string Path { get; set; } = string.Empty;
+        public Decimal AverageRating { get; set; }
     }
 }

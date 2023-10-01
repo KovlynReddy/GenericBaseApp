@@ -2,9 +2,24 @@
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
 <form asp-action="Create" enctype="multipart/form-data" method="post" asp-controller="Journal">
+
     <div class="row">
-        <div class="col-12">
-            @Html.DropDownList("ItemGuid",Model.items.Select(m=> new SelectListItem(){Text = m.ItemName,Value = m.ModelGuid}), "Select Item")
+        <div class="col-4">
+            @Html.DropDownListFor(model => model.ItemGuid,Model.items.Select(m=> new SelectListItem(){Text = m.ItemName,Value = m.ModelGuid}), "Select Item")
+        </div>
+        <div class="col-8">
+            <div class="star-rating">
+                <input asp-for="RatingEntry" type="radio" id="5-stars" name="RatingEntry" value="5" />
+                <label for="5-stars" class="star">&#9733;</label>
+                <input asp-for="RatingEntry" type="radio" id="4-stars" name="RatingEntry" value="4" />
+                <label for="4-stars" class="star">&#9733;</label>
+                <input asp-for="RatingEntry" type="radio" id="3-stars" name="RatingEntry" value="3" />
+                <label for="3-stars" class="star">&#9733;</label>
+                <input asp-for="RatingEntry" type="radio" id="2-stars" name="RatingEntry" value="2" />
+                <label for="2-stars" class="star">&#9733;</label>
+                <input asp-for="RatingEntry" type="radio" id="1-star" name="RatingEntry" value="1" />
+                <label for="1-star" class="star">&#9733;</label>
+            </div>
         </div>
     </div>
 
@@ -26,34 +41,100 @@
             <input asp-for="Description" style="width: -webkit-fill-available;"class="">
 
         </div>
-   </div>        
+   </div>
    
-   <div class="row">
-        <div class="col-12">
-            <div class="paper">
-                <div class="paper-content">
-            <label asp-for="Body" class="form-label">Body</label>
-            <textarea style="height:20em;" asp-for="Body" id="BodyTextArea" class=""></textarea>
+   <br/>
+   <br/>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Body
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="paper">
+                                <div class="paper-content">
+                                    <textarea style="height:20em;" asp-for="Body" id="BodyTextArea" class=""></textarea>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
         </div>
-   </div>       
-   </div>
-   </div>
-   
-   <div class="row">
-        <div class="col-12 d-flex">
-            <input asp-for="uploads" style="width:7em" class="form-control" />
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Uploads
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body"> 
+                    
+                    <input asp-for="uploads" style="width:7em" class="form-control" />
+                    
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Rating
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="col-4">
+                            @Html.DropDownListFor(model => model.ItemGuid,Model.items.Select(m=> new SelectListItem(){Text = m.ItemName,Value = m.ModelGuid}), "Select Item")
+                        </div>
+                        <div class="col-8">
+                            <div class="star-rating">
+                                <input asp-for="RatingEntry" type="radio" id="5-stars" name="RatingEntry" value="5" />
+                                <label for="5-stars" class="star">&#9733;</label>
+                                <input asp-for="RatingEntry" type="radio" id="4-stars" name="RatingEntry" value="4" />
+                                <label for="4-stars" class="star">&#9733;</label>
+                                <input asp-for="RatingEntry" type="radio" id="3-stars" name="RatingEntry" value="3" />
+                                <label for="3-stars" class="star">&#9733;</label>
+                                <input asp-for="RatingEntry" type="radio" id="2-stars" name="RatingEntry" value="2" />
+                                <label for="2-stars" class="star">&#9733;</label>
+                                <input asp-for="RatingEntry" type="radio" id="1-star" name="RatingEntry" value="1" />
+                                <label for="1-star" class="star">&#9733;</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 d-flex align-content-end justify-content-end" style="">           
             <button type="submit" title="Save" class="btn btn-success">Save</button>
             <button type="button" title="Cancel" class="btn btn-danger">Cancel</button>
 
         </div>
 
     </div>
-
 </form>
 
-<script type="text/javascript">
 
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.1.2/js/star-rating.min.js" integrity="sha512-BjVoLC9Qjuh4uR64WRzkwGnbJ+05UxQZphP2n7TJE/b0D/onZ/vkhKTWpelfV6+8sLtQTUqvZQbvvGnzRZniTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    // Rating Initialization
+    $(document).ready(function () {
+        $('#rateMe1').mdbRate();
+    });
     //$('#BodyTextArea').change(function () {
     //    var message = $('#BodyTextArea').val();
     //    $('#BodyValue').val(message);

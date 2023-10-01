@@ -83,13 +83,16 @@ namespace GenericBaseMVC.Controllers
                 csv += fileName + ",";
             }
 
+            var RatingTotal = 5; 
             var dto = new JournalEntryDto() { 
             Description = newJournal.Description ?? string.Empty,
             ItemGuid = newJournal.ItemGuid ?? string.Empty,
             UserGuid = newJournal.UserGuid ?? string.Empty,
             Title = newJournal.Title ?? string.Empty,
             uploadPaths = csv,
-            //uploads = newJournal.uploads,
+            Rating = decimal.Divide(Convert.ToDecimal(newJournal.RatingEntry) , Convert.ToDecimal(RatingTotal)),
+            RatingTotal = RatingTotal,
+            RatingEntry = newJournal.RatingEntry,
             Body = newJournal.Body ?? string.Empty,
             CreatedDateTimeString = DateTime.Now.ToString(),
             ModelGuid = Guid.NewGuid().ToString(),

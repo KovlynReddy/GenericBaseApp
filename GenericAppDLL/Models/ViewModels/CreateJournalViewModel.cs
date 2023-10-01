@@ -19,5 +19,8 @@ namespace GenericAppDLL.Models.ViewModels
 
         [MaxLength(500)]
         public string Body { get; set; } = string.Empty;
+        public Decimal Rating { get; set; }
+        public int RatingTotal { get; set; }
+        public int RatingEntry { get; set; }
     }
 }

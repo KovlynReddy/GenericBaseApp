@@ -601,6 +601,9 @@ namespace VendorAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<decimal>("AverageRating")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Caption")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -702,6 +705,15 @@ namespace VendorAPI.Migrations
                     b.Property<string>("ModelGUID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RatingEntry")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingTotal")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()

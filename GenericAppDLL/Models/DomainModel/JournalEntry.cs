@@ -15,5 +15,8 @@ namespace GenericAppDLL.Models.DomainModel
         public string Description { get; set; } = string.Empty;
         public string uploadPaths { get; set; } =string.Empty;
         public string Body { get; set; } = string.Empty;
+        public Decimal Rating { get; set; }
+        public int RatingTotal { get; set; }
+        public int RatingEntry { get; set; }
     }
 }
