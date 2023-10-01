@@ -277,9 +277,36 @@ public class MenuController : Controller
 
 
     // GET: MenuController/Details/5
-    public ActionResult Details(int id)
+    public async Task<ActionResult> Details(string id)
     {
-        return View();
+        if (string.IsNullOrEmpty(id))
+        {
+            return RedirectToAction(actionName: "ShopDashboard");
+        }
+
+        var menuItems = await _MenuService.GetAll();
+
+        var item = menuItems.FirstOrDefault(m=>m.ModelGuid==id);
+        var model = new MenuItemViewModel()
+        {
+            ItemName = item.ItemName,
+            SKUCode = item.SKUCode,
+            Caption = item.Caption,
+            Cost = item.Cost,
+            Currency = item.Currency,
+            ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
+            MenuId = item.MenuId,
+            ModelGUID = item.ModelGuid,
+            IsMod = 1,
+            VendorGuid = item.VendorGuid
+        };
+
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings = await SettingsHandler.GetSettings(email);
+
+        return View(model);
     }
 
     // GET: MenuController/Create

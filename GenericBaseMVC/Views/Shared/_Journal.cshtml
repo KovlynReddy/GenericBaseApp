@@ -12,12 +12,14 @@
     </div>
 </div>
 
+<a asp-controller="Menu" asp-action="Details" asp-route-id="@Model.ItemGuid">
 <div class="row">
     <div class="col-12">
      <input asp-for="Description" style="width:51em;" value="@Model.Description" class="">
 
     </div>
 </div>
+</a>
 
 @*<div class="col-md-12" style="max-height:20em;">
     <partial name="_ImageCarousel" model="Model.uploadPathsList"></partial>
@@ -34,7 +36,6 @@
 
     </div>
 </div>
-
 @*<div class="row">
     <div class="col-12 d-flex">
         <input asp-for="uploads" style="width:10em" class="form-control" />

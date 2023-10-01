@@ -3,6 +3,12 @@
 
 <form asp-action="Create" enctype="multipart/form-data" method="post" asp-controller="Journal">
     <div class="row">
+        <div class="col-12">
+            @Html.DropDownList("ItemGuid",Model.items.Select(m=> new SelectListItem(){Text = m.ItemName,Value = m.ModelGuid}), "Select Item")
+        </div>
+    </div>
+
+    <div class="row">
     <div class="col-md-4">
             <img src="/ProfileImages/DefaultImage.jpg" style="max-height:20em;max-width:20em;"></img>
     </div>
@@ -20,7 +26,7 @@
             <input asp-for="Description" style="width: -webkit-fill-available;"class="">
 
         </div>
-   </div>    
+   </div>        
    
    <div class="row">
         <div class="col-12">

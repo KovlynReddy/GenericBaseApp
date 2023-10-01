@@ -26,13 +26,13 @@ namespace GenericBaseMVC.Controllers
 
             model.UserGuid = currentCustomer.ModelGuid;
             model.journals = mapper.Map<List<JournalViewModel>>(journals);
+
             foreach (var journal in model.journals)
             {
                 var csv = journal.uploadPaths;
                 var files = csv.Split(',').ToList();
                 files.Remove("");
                 journal.uploadPathsList = files;
-
             }
 
             return View(model);
