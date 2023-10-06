@@ -123,3 +123,11 @@ function GetCodeFromFAClass(className) {
     return matchingCode;
 
 }
+
+function openNav() {
+    $(".side-nav-bar").toggle();
+}
+
+function closeNav() {
+    $(".side-nav-bar").toggle();
+}

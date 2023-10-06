@@ -43,33 +43,20 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom bg-primary box-shadow mb-3">
             <div class="container-fluid">
+                <button class="text-button" style="background:none;background-color:transparent !important; border:none;" onclick="openNav()"><span class="navbar-toggler-icon"></span></button>
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-cannabis"></i>GenericBaseMVC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-
+ @*                    <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Social
                             </a>
-                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">
-                                @*
-                                <li class="nav-item dropdown-item">
-                                <a class="nav-link text-dark" href="https://localhost:44388/Menu/Create" @*asp-area="" asp-controller="Menu" asp-action="Create">Create Menu Item</a>
-                                </li>*@
-                                @*<li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Create"><i class="fas fa-pen"></i>Create Post</a>
-                                </li>*@
-                                @*<li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Feed"><i class="fas fa-inbox"></i>Feed</a>
-                                </li>*@                               
-                                @*<li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Journal" asp-action="Create"><i class="fas fa-comments"></i>Journals </a>
-                                </li> *@                               
+                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">                              
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comments"></i>Chats </a>
                                 </li>                        
@@ -103,10 +90,7 @@
                             <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown4">
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="SuggestedMeetup"><i class="fa-solid fa-handshake"></i>Suggested MeetUp</a>
-                                </li>                                
-                       @*         <li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="Suggested"><i class="fa-solid fa-handshake"></i>Suggested MeetUp</a>
-                                </li>*@
+                                </li>   
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="MeetupRequest" asp-action="ViewAll"><i class="fas fa-globe"></i>View Meetup Requests</a>
                                 </li>
@@ -116,15 +100,11 @@
                             </ul>
                         </li>
 
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Vendor
                             </a>
                             <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown3">
-                            @* <li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Create"><i class="fa-solid fa-store"></i>Create Vendor</a>
-                                </li>*@
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="ViewAll"><i class="fa-solid fa-shop"></i>View All Vendor</a>
                                 </li>                                
@@ -134,34 +114,27 @@
                             </ul>
                         </li>
 
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Shop
                             </a>
                             <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">
-                                    @*                               
-                                <li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" href="https://localhost:44388/Menu/Create" @*asp-area="" asp-controller="Menu" asp-action="Create">Create Menu Item</a>
-                                </li>*@
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Suggested"><i class="fa-solid fa-shop"></i>Suggested Vendor</a>
                                 </li>
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Dashboard"><i class="fas fa-cannabis"></i>Shop</a>
                                 </li>
-                                @*
-                                <li class="nav-item dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Create"><i class="fas fa-seedling"></i>Create </a>
-                                </li>*@
                                 <li class="nav-item dropdown-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="ViewCart"><i class="fas fa-shopping-cart"></i>View Cart </a>
                                 </li>
                             </ul>
                         </li>
 
-                    </ul>
-                    <a class="nav-link text-dark p-1 btn-group-vertical" asp-area="" asp-controller="Notification" asp-action="Notifications"><i class="fa-regular fa-bell"></i>
+                    </ul> *@
+                    <div style="flex: auto;"></div>
+
+                    <a class="nav-link text-dark p-1 btn-group-vertical align-content-end" asp-area="" asp-controller="Notification" asp-action="Notifications"><i class="fa-regular fa-bell"></i>
                         <small id="notification-num-parent" style="min-width:1em;" class="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle">
                             <small id="notifications-num"> 99+ </small>
                             <small class="visually-hidden">New alerts</small>
@@ -172,16 +145,146 @@
                 </div>
             </div>
         </nav>
-   
+
     </header>
     <div class="container m-4">
         <main role="main" class="pb-3" style="width:125%">
             <div class="row">
+                <div class="col-2 side-nav-bar" id="side-nav-bar" style="display:none;">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" hidden style="width: 280px;">
+                        <ul class="nav nav-pills flex-column mb-auto flex-side-nav-bar" style="margin-left: -3em;">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button  class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Social
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="" aria-labelledby="navbarDropdown1">
+                                                <li class="nav-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comments"></i>Chats </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Journal" asp-action="ViewAll"><i class="fa-solid fa-newspaper"></i>Journals </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Profiles
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="" aria-labelledby="navbarDropdown1">
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewProfile"><i class="fas fa-user"></i>My Profile </a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index"><i class="fas fa-users"></i>All Profiles </a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewFriendRequests"><i class="fas fa-user-plus"></i>Friend Requests </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            MeetUp
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="" aria-labelledby="navbarDropdown4">
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="SuggestedMeetup"><i class="fa-solid fa-handshake"></i>Suggested MeetUp</a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetupRequest" asp-action="ViewAll"><i class="fas fa-globe"></i>View Meetup Requests</a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="Schedule"><i class="fa-solid fa-calendar-days"></i>View Schedule</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFour">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            Admin
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="" aria-labelledby="navbarDropdown3">
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="ViewAll"><i class="fa-solid fa-shop"></i>View All Vendor</a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Advertisment" asp-action="Hub"><i class="fas fa-shopping-cart"></i>Advertising </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFive">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                            Shop
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="" aria-labelledby="navbarDropdown1">
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Suggested"><i class="fa-solid fa-shop"></i>Suggested Vendor</a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Dashboard"><i class="fas fa-cannabis"></i>Shop</a>
+                                                </li>
+                                                <li class="nav-item dropdown-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="ViewCart"><i class="fas fa-shopping-cart"></i>View Cart </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                          
+                        </ul>
+                        <hr>
+                        <div style="flex:auto;height: 20em !important;">
+
+                        </div>
+                        <div class="dropdown">
+
+                            <partial name="_LoginPartial" />
+                            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                            </a>
+                            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                                <li><a class="dropdown-item" href="#">New project...</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>               
                 <div class="col-1">
                     <partial name="_SideAdvert01" id="left-side-advert" />
                 </div>
 
-                <div class="col-10">
+                <div class="col-8">
                     @RenderBody()
                 </div>
 
