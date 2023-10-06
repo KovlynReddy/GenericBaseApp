@@ -176,6 +176,11 @@ background-color:skyblue !important;
         color: #fc0;
     }
 
+.main-add-button {
+    width: -webkit-fill-available;
+    margin-bottom:1em !important;
+}
+
 /* explanation */
 
 article {

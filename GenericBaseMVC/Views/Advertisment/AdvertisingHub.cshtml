@@ -1,7 +1,6 @@
 ﻿@model GenericAppDLL.Models.ViewModels.HubViewModel
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
-<a class="btn btn-primary text-dark" asp-area="" asp-controller="Advertisment" asp-action="Create"><i class="fas fa-pen"></i></a>
 
 <div class="row">
 
@@ -9,6 +8,8 @@
 
 </div>
 <div class="col-8">
+        <a class="btn btn-primary text-dark main-add-button" asp-area="" asp-controller="Advertisment" asp-action="Create"><i class="fas fa-pen"></i></a>
+
         @foreach (var advert in Model.adverts)
         {
             <partial name="_advertisment" model="@advert"></partial>
