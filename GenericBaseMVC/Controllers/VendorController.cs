@@ -36,6 +36,7 @@ public class VendorController : Controller
             {
                 vendorItems.Add(new MenuItemViewModel() { 
                 ItemName    = item.ItemName,
+                AverageRating = item.AverageRating,
                 SKUCode     = item.SKUCode,
                 Caption     = item.Caption,
                 Cost        = item.Cost,
@@ -84,6 +85,7 @@ public class VendorController : Controller
                     SKUCode = item.SKUCode,
                     Caption = item.Caption,
                     Cost = item.Cost,
+                    AverageRating = item.AverageRating,
                     Currency = item.Currency,
                     ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
                     MenuId = item.MenuId,

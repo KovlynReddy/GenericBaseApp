@@ -71,6 +71,19 @@ namespace VendorAPI.Data.Repository
             return new List<MenuItemDto>();
         }
 
+        public Task<MenuItemDto> UpdateItem(string Id)
+        {
+            var entity = _context.Items.FirstOrDefault(m=>m.ModelGUID == Id);
+            var journalEntries = _context.JournalEntries.Where(m=>m.ItemGuid==Id).ToList();
+
+            entity.AverageRating = journalEntries.Select(m => m.Rating).Average();
+
+            var AverageRating = _context.Entry(entity).Property("AverageRating").IsModified;
+            _context.SaveChanges();
+
+            throw new NotImplementedException();
+        }
+
         Task<MenuItemDto> IBase<MenuItemDto>.Delete(int Id)
         {
             throw new NotImplementedException();

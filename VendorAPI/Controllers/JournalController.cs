@@ -9,12 +9,14 @@ namespace VendorAPI.Controllers
     public class JournalController : Controller
     {
         public IJournalDB JournalDB { get; }
+        public IItemDB ItemDB { get; }
         public IMapper Mapper { get; }
 
-        public JournalController(IJournalDB journalDb, IMapper mapper)
+        public JournalController(IJournalDB journalDb, IMapper mapper, IItemDB itemDB)
         {
             JournalDB = journalDb;
             Mapper = mapper;
+            ItemDB = itemDB;
         }
 
 
@@ -43,6 +45,7 @@ namespace VendorAPI.Controllers
             //var dto = Mapper.Map<JournalEntryDto>(newDto);
 
             var result = await JournalDB.Post(newDto);
+            await ItemDB.UpdateItem(newDto.ItemGuid);
 
             return Ok(result);
         }

@@ -181,12 +181,14 @@ public class MenuController : Controller
         {
             var vendorItems = new List<MenuItemViewModel>();
 
-            foreach (var item in allItems.Where(m => m.VendorGuid == VendorModel.ModelGUID))
+            foreach (var item in allItems.Where(m => m.VendorId == VendorModel.ModelGUID))
             {
                 vendorItems.Add(new MenuItemViewModel()
                 {
                     ItemName = item.ItemName,
                     SKUCode = item.SKUCode,
+                    AverageRating = item.AverageRating,
+                    AverageRatingInt = Convert.ToInt16(item.AverageRating),
                     Caption = item.Caption,
                     Cost = item.Cost,
                     Currency = item.Currency,
@@ -343,6 +345,7 @@ public class MenuController : Controller
                 {
                     ItemName = item.ItemName,
                     SKUCode = item.SKUCode,
+                    AverageRating = item.AverageRating,
                     Caption = item.Caption,
                     Cost = item.Cost,
                     Currency = item.Currency,

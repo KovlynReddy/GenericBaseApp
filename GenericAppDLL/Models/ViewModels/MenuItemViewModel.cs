@@ -22,5 +22,7 @@ namespace GenericAppDLL.Models.ViewModels
         public string Currency { get; set; }
         public string CreatorId { get; set; }
         public string ItemImage { get; set; }
+        public Decimal AverageRating { get; set; }
+        public int AverageRatingInt { get; set; }
     }
 }
