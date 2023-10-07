@@ -21,7 +21,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Create Meetup</h5>
+                            <h5 class="modal-title">Payment Methods  </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -31,14 +31,14 @@
                                 <input asp-for="@Model.CartId" hidden />
 
                             <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> &emsp;Use Card</button>
-                            </form> 
-                            
-                            
+                            </form>
+
+                        <br />
                             <form asp-action="PurchaseTrolleyWithPoints" asp-controller="Menu">
                              <input asp-for="@Model.CartId" hidden />
                             <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> &emsp;Use Points</button>
                             </form>
-
+                            <br/>
                         <form asp-action="ApplyDeals" asp-controller="Deals">
                             <input asp-for="@Model.CartId" hidden />
                             <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> &emsp;Apply Deals</button>
