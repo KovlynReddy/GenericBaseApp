@@ -1,0 +1,69 @@
+﻿@model GenericAppDLL.Models.ViewModels.MenuItemViewModel
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="/@Model.ItemImage" alt="Card image cap">
+    <div class="card-body">
+        <h3 class="card-title">@Model.ItemName</h3>
+        <h5 class="card-title">@Model.Currency @Model.Cost</h5>
+        <h6 class="card-title">@Model.SKUCode</h6>
+        <p class="card-text">@Model.Caption</p>
+        @Model.AverageRatingInt
+
+        <div class="star-rating-check">
+            @if (Model.AverageRatingInt > 4 )
+            {
+                <input  type="radio" disabled checked="checked" id="5-stars" name="AverageRating" value="5" />
+                <label class="star-rating-checked" style="color: #f90;" for="5-stars" class="star">&#9733;</label>
+            }else
+            {
+                <input  type="radio" disabled id="5-stars" name="AverageRating" value="5" />
+                <label for="5-stars" class="star">&#9733;</label>
+            }
+
+            @if (Model.AverageRatingInt > 3)
+            {
+                <input  type="radio" disabled checked="checked" id="4-stars" name="@Model.MenuId" value="4" />
+                <label class="star-rating-checked" style="color: #f90;" for="4-stars" class="star">&#9733;</label>
+            }
+            else
+            {
+                <input  type="radio" disabled id="4-stars" name="AverageRating" value="4" />
+                <label for="4-stars" class="star">&#9733;</label>
+            }
+
+            @if (Model.AverageRatingInt > 2)
+            {
+                <input   type="radio" disabled checked="checked" id="3-stars" name="@Model.MenuId" value="3" />
+                <label class="star-rating-checked" style="color: #f90;" for="3-stars" class="star">&#9733;</label>
+            }
+            else
+            {
+                <input  type="radio" disabled id="3-stars" name="AverageRating" value="3" />
+                <label for="3-stars" class="star">&#9733;</label>
+            }
+
+            @if (Model.AverageRatingInt > 1)
+            {
+                <input  type="radio" disabled checked="checked" id="2-stars" name="@Model.MenuId" value="2" />
+                <label class="star-rating-checked" style="color: #f90;" for="2-stars" class="star">&#9733;</label>
+            }
+            else
+            {
+                <input type="radio" disabled id="2-stars" name="@Model.MenuId" value="2" />
+                <label for="2-stars" class="star">&#9733;</label>
+            }
+
+            @if (Model.AverageRatingInt > 0)
+            {
+                <input  type="radio" disabled checked="checked" id="1-star" name="@Model.MenuId" value="1" />
+                <label class="star-rating-checked" style="color: #f90;" for="1-star" class="star">&#9733;</label>
+            }
+            else
+            {
+                <input  type="radio" disabled id="1-star" name="AverageRating" value="1" />
+                <label for="1-star" class="star">&#9733;</label>
+            }        
+        </div>
+        <button href="#" data-toggle="modal" data-target="#@Model.ModelGUID" class="btn btn-primary @Model.ModelGUID">Add</button>
+    </div>
+</div>

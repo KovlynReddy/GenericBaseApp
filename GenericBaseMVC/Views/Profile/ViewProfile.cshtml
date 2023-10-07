@@ -40,6 +40,9 @@
             </li>            
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Points" href="#Friends">Points</a>
+            </li>          
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Items" href="#Friends">Items</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " data-bs-toggle="tab" data-bs-target="#Bio" href="#Bio" tabindex="-1" aria-disabled="true">Bio</a>
@@ -116,11 +119,21 @@
                         </div>
                     </div>
                 }
-            </div>            
+            </div>
+            <div role="tabpanel" id="Items" class="tab-pane fade">
+                <h3>Items</h3>
+                @*<partial name="_Journal" model="journal"></partial>*@
+                @foreach (var item in Model.Items)
+                {
+                    <div class="col">
+                        @Html.Partial("_MenuItemView", item)
+                    </div>
+                }
+            </div>
             <div role="tabpanel" id="Bio" class="tab-pane fade">
                 <h3>Bio</h3>
                 @*<partial name="_Journal" model="journal"></partial>*@
-
+                <p> This is Where you leave a message to all that visit your page</p>
             </div>
         </div>
 

@@ -14,6 +14,7 @@ namespace GenericAppDLL.Models.ViewModels
         public List<MeetupViewModel> Meetups { get; set; } = new List<MeetupViewModel>();
         public List<CustomerViewModel> Friends { get; set; } = new List<CustomerViewModel>();
         public List<PointsViewModel> Transactions { get; set; } = new List<PointsViewModel>();
+        public List<MenuItemViewModel> Items { get; set; } = new List<MenuItemViewModel>();
         public int TotalPoints { get; set; }
     }
 }

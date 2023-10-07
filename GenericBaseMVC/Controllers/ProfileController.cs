@@ -75,6 +75,44 @@ public class ProfileController : Controller
             journal.uploadPathsList = files;
 
         }
+
+        var allItems =await (new MenuService().GetAll());
+        var allItemVM = new List<MenuItemViewModel>();
+
+        foreach (var item in allItems)
+        {
+            allItemVM.Add(new MenuItemViewModel()
+            {
+                ItemName = item.ItemName,
+                SKUCode = item.SKUCode,
+                AverageRating = item.AverageRating,
+                AverageRatingInt = Convert.ToInt16(item.AverageRating),
+                Caption = item.Caption,
+                Cost = item.Cost,
+                Currency = item.Currency,
+                ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
+                MenuId = item.MenuId,
+                ModelGUID = item.ModelGuid,
+                IsMod = 1,
+                VendorGuid = item.VendorGuid
+            });
+        }
+
+
+        var myItems = model.Journals.Select(m=>m.ItemGuid).Distinct().ToList();
+
+        foreach (var item in myItems)
+        {
+            var itemDetails = allItemVM.FirstOrDefault(m => m.ModelGUID == item);
+            if (itemDetails == null)
+            {
+                continue;
+            }
+
+            model.Items.Add(itemDetails);
+        }
+
+
         //model.Journals = Mapper.Map<List<JournalViewModel>>(await _journalService.Get(currentCustomerId));
         model.Posts = Mapper.Map<List<PostViewModel>>(await _postService.Get(currentCustomerId));
         model.Meetups = Mapper.Map<List<MeetupViewModel>>(await _meetUpService.Get(currentCustomerId));
