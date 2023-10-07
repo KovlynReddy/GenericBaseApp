@@ -59,6 +59,10 @@
                 <partial name="_CartItem" model="item" />
 
             }
+
+        <h5> Subtotal : @Model.purchasedItems.Sum(m=>m.Total) .00 </h5>        
+        <h5> VAT : 0.00 </h5>        
+        <h4> Total : @Model.purchasedItems.Sum(m=>m.Total) .00 </h4>
         <button type="button" id="purchaseTrolley" data-bs-toggle="modal" data-bs-target="#PurchaseChoice" value="Purchase" class="btn btn-primary main-add-button"><i class="fa-regular fa-credit-card"></i></button>
     </div>
 

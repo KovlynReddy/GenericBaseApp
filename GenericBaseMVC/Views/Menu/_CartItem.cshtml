@@ -2,16 +2,16 @@
 
 <div class="d-flex">
 
-<div class="card card-text">
+<div class="card card-text" style="border-right:none;padding-right:2em;">
     <div class="row">
     <div class="col-4">
     <img class="card-img" src="/@Model.ItemImage" alt="Card image cap">
     </div>
     <div class="col-8">
-    <div class="">
-        <span> Item : @Model.ItemName</span><br />
-        <span> Cost @Model.Cost <input asp-for="@Model.Amount" style="max-width:5em;" type="number" /> </span><br />
-        <span>Total @Model.Total</span>
+    <div class="float-end">
+        <h6> Item : @Model.ItemName</h6>
+                    <h6> Cost @Model.Cost Qty : <input asp-for="@Model.Amount" style="max-width:5em;" type="number" />  </h6>
+        <h5> Total @Model.Total</h5>
         <span>
         <button data-toggle="modal" data-target="#Modal" class="btn btn-primary AddItemToCart">Edit</button>
         </span>

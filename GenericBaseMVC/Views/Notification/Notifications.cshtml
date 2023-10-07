@@ -2,7 +2,16 @@
 
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
-@foreach (var notification in Model.notifications)
-{
-    <partial name="_Notification" model="@notification"></partial>
-}
+<div class="row">
+
+    <div class="col-3  d-none d-sm-block">
+    </div>
+    <div class="col-md-6 col-sm-12">
+        @foreach (var notification in Model.notifications)
+        {
+            <partial name="_Notification" model="@notification"></partial>
+        }
+    </div>
+    <div class="col-3  d-none d-sm-block">
+    </div>
+</div>
