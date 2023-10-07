@@ -12,6 +12,7 @@ namespace GenericAppDLL.Models.ViewModels
         public int Type { get; set; }
         public string Link { get; set; }
         public string Description { get; set; }
+        public string Body { get; set; }
         public string DateTime { get; set; }
     }
 }

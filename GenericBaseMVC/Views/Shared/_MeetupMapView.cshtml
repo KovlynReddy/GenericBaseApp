@@ -71,7 +71,7 @@
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Request Message:</label>
-                        <input asp-for="newMeetup.Caption" id="cap" type="text" class="form-control">
+                        <input asp-for="newMeetup.Caption" id="reqCap" type="text" class="form-control">
                     </div>
 
 
@@ -203,11 +203,17 @@
         console.log("respond", id);
         $('#Respond').modal('show');
         var newUrl = "https://localhost:7140/MeetupRequest/";
-        $('#RequestMeetup').attr('href', newUrl + "Post/" + id);
+        $('#RequestMeetup').attr('href', newUrl + "Post?id=" + id + "&caption=3");
         //$('#AcceptMeetup').attr('href', newUrl + "Accept/" + id);
         //$('#DenyMeetup').attr('href', newUrl + "Deny/" + id);
 
         };
+
+    $('#reqCap').on('input', function () {
+        var href = new URL($('#RequestMeetup').prop('href'));
+        href.searchParams.set('caption', this.value);
+        $('#RequestMeetup').prop('href', href.toString())
+    });
 
     const client = new signalR.HubConnectionBuilder().withUrl("/MeetHub").build();
     client.start();

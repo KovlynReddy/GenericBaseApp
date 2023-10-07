@@ -44,6 +44,9 @@ namespace VendorAPI.Data.Repository
 
         public async Task<MeetupRequestDto> Post(MeetupRequestDto model)
         {
+            var meetupDetails = _context.MeetUps.Single(m=>m.ModelGUID==model.MeetupGuid);
+
+            model.ReaderGuid = meetupDetails.SenderGuid;
             var entity = mapper.Map<MeetupRequest>(model);
 
             _context.Add(entity);

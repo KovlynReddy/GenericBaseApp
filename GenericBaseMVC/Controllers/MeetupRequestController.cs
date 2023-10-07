@@ -25,10 +25,22 @@ namespace GenericBaseMVC.Controllers
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
             var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+            var allMeetups = await _meetupService.Get();
+
             var results = await _meetupRequestService.Get();
+            var results2 = await _meetupRequestService.Get();
+            var results3= await _meetupRequestService.Get();
             model.settings = await SettingsHandler.GetSettings(email, true);
 
-            model.meetups = Mapper.Map<List<MeetupViewRequestModel>>(results.ToList());
+            model.meetups = Mapper.Map<List<MeetupViewRequestModel>>(results.ToList().Where(m=>m.Status == 1));
+            model.MyMeetings = Mapper.Map<List<MeetupViewRequestModel>>(results2.ToList().Where(m=>m.SenderGuid == currentCustomer.ModelGuid && m.Status != 3));
+            model.MyMeetings.ForEach(m => m.IsSender = true);
+            foreach (var meetup in model.MyMeetings.Where(m=>m.Status==2))
+            {
+                var meetupDetails = allMeetups.FirstOrDefault(m=>m.ModelGuid == meetup.MeetupGuid);
+                meetup.Message = $"Your Request has been accepted , agreed location to MEETUP : {meetupDetails.Lat}";
+            }
+            model.MyMeetupRequests = Mapper.Map<List<MeetupViewRequestModel>>(results3.ToList().Where(m=>m.ReaderGuid == currentCustomer.ModelGuid && m.Status == 1));
 
             return View("MeetupReqestListView",model);
         }
@@ -42,11 +54,10 @@ namespace GenericBaseMVC.Controllers
 
             var dto = new MeetupRequestDto() { 
             SenderGuid = currentCustomer.ModelGuid,
-            ModelGuid = Guid.NewGuid().ToString(),
-            MeetupGuid = id,
+            ModelGuid = id,
             SenderName = currentCustomer.CustomerName,
             SentDateTime = DateTime.Now.ToString(),
-            Status = 1,
+            Status = 2,
             Description = "",
             Caption = "",
             CreatedDateTime = DateTime.Now,
@@ -71,7 +82,7 @@ namespace GenericBaseMVC.Controllers
                 MeetupGuid = id,
                 SenderName = currentCustomer.CustomerName,
                 SentDateTime = DateTime.Now.ToString(),
-                Status = 1,
+                Status = 3,
                 Description = "",
                 Caption = "",
                 CreatedDateTime = DateTime.Now,
@@ -92,7 +103,7 @@ namespace GenericBaseMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Post(string id)
+        public async Task<IActionResult> Post(string id , string caption)//CreateMeetupMapViewModel newRequest)
         {
             var _customerService = new CustomerService();
             var email = User.Identity.Name;
@@ -106,8 +117,8 @@ namespace GenericBaseMVC.Controllers
                 SenderName = currentCustomer.CustomerName,
                 SentDateTime = DateTime.Now.ToString(),
                 Status = 1,
-                Description = "",
-                Caption = "",
+                Description =caption,
+                Caption = caption,
                 CreatedDateTime = DateTime.Now,
             };
 

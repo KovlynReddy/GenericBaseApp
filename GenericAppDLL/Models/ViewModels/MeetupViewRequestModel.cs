@@ -17,5 +17,8 @@ namespace GenericAppDLL.Models.ViewModels
         public string SentDateTime { get; set; } = string.Empty;
         public string Caption { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+        public string ModelGuid { get; set; } = string.Empty;
+        public bool IsSender { get; set; }
+        public string Message { get; set; }
     }
 }

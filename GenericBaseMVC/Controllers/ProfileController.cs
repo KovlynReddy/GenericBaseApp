@@ -144,8 +144,17 @@ public class ProfileController : Controller
 
         return View("ViewProfile",model); 
        
-    }    
-    
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ViewProfileById(string email)
+    {
+        var model = await GetCustomerProfile(email);
+
+        return View("ViewProfile", model);
+
+    }
+
     [HttpGet]
     public async Task<IActionResult> AcceptFriendRequest(string id)
     {
