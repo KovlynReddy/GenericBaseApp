@@ -19,12 +19,12 @@
         @foreach (var item in Model.items)
         {
             <tr class="row">
-                <td class="col-3">
+                <td class="col-3 d-none d-sm-block">
                 </td>
-                <td class="col-6">
+                <td class="col-6 col-sm-12">
                     @Html.Partial("_MenuItem", item)
                 </td>
-                <td class="col-3">
+                <td class="col-3 d-none d-sm-block">
                 </td>
             </tr>
         }

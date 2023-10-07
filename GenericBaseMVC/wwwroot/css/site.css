@@ -202,11 +202,11 @@ border:none !important;
 
 .side-nav-bar {
     margin-top: -1em !important;
-    background-color:transparent !important;
+    background-color: inherit !important;
 }
 
 .side-nav-bar div{
-    background-color: transparent !important;
+    background-color: inherit !important;
 }
 
 
@@ -220,4 +220,10 @@ article {
     margin: 4em;
     max-width: 30em;
     padding: 2em;
+}
+
+#Side-Nav-Bar > * {
+    position: relative;
+    z-index: 1;
+    background: inherit !important;
 }

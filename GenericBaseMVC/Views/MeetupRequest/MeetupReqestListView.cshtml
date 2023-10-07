@@ -4,17 +4,17 @@
 
 <div class="row">
 
-    <div class="col-1">
+    <div class="col-1 d-none d-sm-block">
 
     </div>    
-    <div class="col-5">
+    <div class="col-md-5 col-sm-12">
         <h3>Sent</h3>
         @foreach (var item in Model.MyMeetings)
         {
             <partial name="_MeetupRequest" model="item"></partial>
         }
     </div>
-    <div class="col-5">
+    <div class="col-md-5 col-sm-12">
         <h3>Recieved</h3>
         @foreach (var item in Model.MyMeetupRequests)
         {
@@ -22,6 +22,6 @@
         }
 
     </div>
-    <div class="col-1">
+    <div class="col-1 d-none d-sm-block">
     </div>
 </div>

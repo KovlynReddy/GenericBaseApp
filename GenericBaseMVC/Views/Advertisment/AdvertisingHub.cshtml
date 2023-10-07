@@ -4,10 +4,10 @@
 
 <div class="row">
 
-<div class="col-2">
+    <div class="col-2 d-none d-sm-block">
 
 </div>
-<div class="col-8">
+    <div class="col-8 col-sm-12">
         <a class="btn btn-primary text-dark main-add-button" asp-area="" asp-controller="Advertisment" asp-action="Create"><i class="fas fa-pen"></i></a>
 
         @foreach (var advert in Model.adverts)
@@ -15,7 +15,7 @@
             <partial name="_advertisment" model="@advert"></partial>
         }
 </div>
-<div class="col-2">
+    <div class="col-2 d-none d-sm-block">
 
 </div>
 </div>

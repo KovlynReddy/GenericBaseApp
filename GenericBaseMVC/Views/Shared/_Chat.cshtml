@@ -21,7 +21,7 @@
 </style>
 <div class="row chat-chat">
 
-    <div class="col-3 overflow-auto" style="height:50em;">
+    <div class="col-md-3  d-none d-sm-block overflow-auto" style="height:50em;">
         @if (Model.OtherChatHeads.Count > 0)
         {
             
@@ -29,7 +29,7 @@
         }
     </div>
 
-    <div class="col-9 overflow-auto" style="height:50em;">
+    <div class="col-9 col-sm-12 overflow-auto" style="height:50em;">
         <partial name="_CurrentChatHeader" model="Model.ChatHead" />
         <partial name="_ChatContent" model="Model.AllMessages" />
     </div>

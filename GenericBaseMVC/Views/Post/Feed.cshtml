@@ -3,12 +3,12 @@
 <partial name="_SettingsImplementation" model="@Model.settings"></partial>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 d-none d-sm-block">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-12">
         <a class="btn btn-primary text-dark main-add-button" asp-area="" asp-controller="Post" asp-action="Create"><i class="fas fa-pen"></i></a>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 d-none d-sm-block">
     </div>
 </div>
 <div class="overflow-auto" style="max-height:60em;">
@@ -16,12 +16,12 @@
 {
    @* @Html.Partial("_Post",item);*@
     <div class="row">
-    <div class="col-md-3">
+            <div class="col-md-3 d-none d-sm-block">
     </div>
-    <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
     <partial name="_Post" model="item"></partial>
     </div>
-    <div class="col-md-3">
+            <div class="col-md-3 d-none d-sm-block">
     </div>
     </div>
 }

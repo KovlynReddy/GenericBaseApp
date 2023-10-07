@@ -9,13 +9,13 @@
     {
     @* @Html.Partial("_Profile",customer);*@    
        <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 d-none d-sm-block">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 @*<partial name="_ProfileCard" model="customer.profileDetails"></partial>*@
                 <partial name="_ProfileSlim" model="customer.profileDetails"></partial>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 d-none d-sm-block">
             </div>
         </div>
     }
