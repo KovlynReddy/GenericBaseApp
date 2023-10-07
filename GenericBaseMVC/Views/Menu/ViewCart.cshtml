@@ -30,14 +30,19 @@
                              <form asp-action="PurchaseTrolleyWithCard" asp-controller="Menu">
                                 <input asp-for="@Model.CartId" hidden />
 
-                                <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> Card</button>
+                            <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> &emsp;Use Card</button>
                             </form> 
                             
                             
                             <form asp-action="PurchaseTrolleyWithPoints" asp-controller="Menu">
                              <input asp-for="@Model.CartId" hidden />
-                                <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> Points</button>
+                            <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> &emsp;Use Points</button>
                             </form>
+
+                        <form asp-action="ApplyDeals" asp-controller="Deals">
+                            <input asp-for="@Model.CartId" hidden />
+                            <button type="submit" value="Purchase" class="btn btn-primary"><i class="fa-regular fa-credit-card"></i> &emsp;Apply Deals</button>
+                        </form>
 
                         </div>
                         <div class="modal-footer">
