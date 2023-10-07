@@ -47,10 +47,13 @@
 
     <div class="pe-2">
         <div class="card card-text d-inline-block p-2 px-3 m-1">
-            @Html.Raw(meetup.Caption)
-        </div>
+           <h4>
+           @Html.Raw(meetup.Caption)
+           </h4> 
         <div class="small">
             @meetup.Lat ,&emsp; @meetup.Lat
+        </div>
+        <button type="button" class="btn btn-primary" onclick="SendRequest()">Request to join</button>
         </div>
     </div>
 }
@@ -74,11 +77,9 @@
                         <input asp-for="newMeetup.Caption" id="reqCap" type="text" class="form-control">
                     </div>
 
-
-
                 </div>
                 <div class="modal-footer">
-                    <a type="submit" id="RequestMeetup" href="" class="btn btn-primary"> Request </a>
+                    <a type="submit" id="RequestMeetup" href="https://localhost:7140/MeetupRequest/Post?id=1&caption=2" class="btn btn-primary"> Request </a>
                     @*<button type="submit" id="AcceptMeetup" href="" class="btn btn-primary"> Request </button>*@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -222,6 +223,10 @@
         console.log("meetup", message)
     
     });
+
+    function SendRequest() {
+        $('#Respond').modal('show');
+    }
 
 </script>
 

@@ -36,13 +36,15 @@
 
 @foreach (var meetup in Model.MapMarks)
 {
-
     <div class="pe-2">
         <div class="card card-text d-inline-block p-2 px-3 m-1">
-            @Html.Raw(meetup.Caption)
-        </div>
-        <div class="small">
-            @meetup.Lat ,&emsp; @meetup.Lat
+            <h4>
+                @Html.Raw(meetup.Caption)
+            </h4>
+            <div class="small">
+                @meetup.Lat ,&emsp; @meetup.Lat
+            </div>
+            <button type="button" class="btn btn-primary" onclick="SendRequest()">Request to join</button>
         </div>
     </div>
 }
