@@ -32,7 +32,7 @@ public class VendorController : Controller
         {
             var vendorItems = new List<MenuItemViewModel>();
 
-            foreach (var item in allItems.Where(m=>m.VendorGuid==VendorModel.ModelGUID))
+            foreach (var item in allItems.Where(m=>m.VendorId==VendorModel.ModelGUID))
             {
                 vendorItems.Add(new MenuItemViewModel() { 
                 ItemName    = item.ItemName,
@@ -77,7 +77,7 @@ public class VendorController : Controller
         {
             var vendorItems = new List<MenuItemViewModel>();
 
-            foreach (var item in allItems.Where(m => m.VendorGuid == VendorModel.ModelGUID))
+            foreach (var item in allItems.Where(m => m.VendorId == VendorModel.ModelGUID))
             {
                 vendorItems.Add(new MenuItemViewModel()
                 {

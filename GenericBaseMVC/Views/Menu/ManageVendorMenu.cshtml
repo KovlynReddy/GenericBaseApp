@@ -1,0 +1,107 @@
+﻿@model GenericAppDLL.Models.ViewModels.ManageVendorMenuViewModel
+<partial name="_SettingsImplementation" model="@Model.settings"></partial>
+
+
+@{
+    var emojiTest = new List<string>() { "face-smile" };
+}
+
+<div class="row">
+    <div class="col-3 d-none d-sm-block"></div>
+    <div class="col-md-6 col-sm-12" style="text-align: -webkit-center;">
+
+        <div class="card" style="width: -webkit-fill-available;">
+            <img class="card-img-top" src="~/@Model.VendorDetails.VendorImage" alt="~/profileimage.png">
+            <h5 class="card-title">@Model.VendorDetails.VendorName</h5>
+            <p class="card-text">@Model.VendorDetails.VendorEmail  @Model.VendorDetails.ModelGUID</p>
+            <a asp-action="SendDirectMessage" asp-controller="Chat" asp-route-itemid="@Model.VendorDetails.ModelGUID" class="btn btn-primary">Message</a>
+            <a href="#" class="btn btn-secondary">Book</a>
+            <a href="#" class="btn btn-success">Delete</a>
+        </div>
+    </div>
+
+    <div class="col-3 d-none d-sm-block"></div>
+</div>
+
+<div class="row">
+    <div class="col-3 d-none d-sm-block"></div>
+    <div class="col-md-6 col-sm-12" style="text-align: -webkit-center;">
+        <ul class="nav nav-tabs  justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#Menu" aria-current="page" href="#Posts">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Bookings" href="#Bookings">Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#Reviews" href="#Reviews">Reviews</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" id="Menu" class="tab-pane fade in show active">
+                <h3>Menu</h3>
+                @foreach (var item in Model.menu)
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            <partial name="_VendorManageMenuItem" model="item"></partial>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                }
+            </div>
+            <div role="tabpanel" id="Bookings" class="tab-pane fade">
+                <h3>Bookings</h3>
+
+            </div>
+            <div role="tabpanel" id="Reviews" class="tab-pane fade">
+                <h3>Reviews</h3>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-3 d-none d-sm-block"></div>
+    <div />
+</div>
+
+<div class="row">
+    <div class="col-md-3 d-none d-sm-block"></div>
+    <div class="col-md-6" style="text-align: -webkit-center;">
+
+        <div class="tab-content">
+            <div role="tabpanel" id="Posts" class="tab-pane fade in active">
+                <h3>Posts</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>Posts Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="Bio" class="tab-pane fade">
+                <h3>Bio</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>Bio Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="MeetUps" class="tab-pane fade">
+                <h3>MeetUps</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>MeetUps Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+            <div role="tabpanel" id="History" class="tab-pane fade">
+                <h3>History</h3>
+                <partial name="EmojiTray" model="emojiTest" />
+                <p>History Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-3 d-none d-sm-block"></div>
+    <div />
+</div>
+
+

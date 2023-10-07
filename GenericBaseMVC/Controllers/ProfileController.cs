@@ -94,7 +94,7 @@ public class ProfileController : Controller
                 MenuId = item.MenuId,
                 ModelGUID = item.ModelGuid,
                 IsMod = 1,
-                VendorGuid = item.VendorGuid
+                VendorGuid = item.VendorId
             });
         }
 

@@ -196,7 +196,7 @@ public class MenuController : Controller
                     MenuId = item.MenuId,
                     ModelGUID = item.ModelGuid,
                     IsMod = 1,
-                    VendorGuid = item.VendorGuid
+                    VendorGuid = item.VendorId
                 });
             }
 
@@ -277,6 +277,38 @@ public class MenuController : Controller
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<ActionResult> Edit(string id)
+    {
+        var alItems = await _MenuService.GetAll();
+        var model = new MenuItemViewModel();
+
+        var itemDetails = alItems.FirstOrDefault(m=>m.ModelGuid==id);
+        model = Mapper.Map<MenuItemViewModel>(itemDetails);
+
+        var _customerService = new CustomerService();
+        var email = User.Identity.Name;
+        var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
+        model.settings = await SettingsHandler.GetSettings(email);
+
+        return View("EditMenuItem",model);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Edit(MenuItemViewModel updatedMenuItem)
+    {
+        var updatedItem = Mapper.Map<MenuItemDto>(updatedMenuItem);
+        await _MenuService.EditMenu();
+        return RedirectToAction("Dashboard");
+    }
+
+
+    [HttpGet]
+    public async Task<ActionResult> Delete(string id)
+    {
+
+        return View();
+    }
 
     // GET: MenuController/Details/5
     public async Task<ActionResult> Details(string id)
@@ -300,7 +332,7 @@ public class MenuController : Controller
             MenuId = item.MenuId,
             ModelGUID = item.ModelGuid,
             IsMod = 1,
-            VendorGuid = item.VendorGuid
+            VendorGuid = item.VendorId
         };
 
         var _customerService = new CustomerService();
@@ -332,31 +364,37 @@ public class MenuController : Controller
     [HttpGet]
     public async Task<IActionResult> ManageVendorMenu(string id)
     {
+        var model = new ManageVendorMenuViewModel();
+
         var allVendors = await _VendorService.GetAll();
         var allItems = await _MenuService.GetAll();
-        var model = new List<VendorViewModel>();
-        foreach (var VendorModel in allVendors.Where(m=>m.ModelGUID==id))
-        {
+
+        var VendorModel = allVendors.FirstOrDefault(m => m.ModelGUID == id);
+        
             var vendorItems = new List<MenuItemViewModel>();
 
-            foreach (var item in allItems.Where(m => m.VendorGuid == VendorModel.ModelGUID))
+            foreach (var item in allItems.Where(m => m.VendorId == id))
             {
                 vendorItems.Add(new MenuItemViewModel()
                 {
                     ItemName = item.ItemName,
                     SKUCode = item.SKUCode,
-                    AverageRating = item.AverageRating,
                     Caption = item.Caption,
                     Cost = item.Cost,
+                    AverageRating = item.AverageRating,
+                    AverageRatingInt = Convert.ToInt16(item.AverageRating),
                     Currency = item.Currency,
                     ItemImage = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path,
                     MenuId = item.MenuId,
+                    VendorGuid = item.VendorId,
+                    ModelGUID = item.ModelGuid,
                     IsMod = 1
                 });
             }
 
+            model.menu = vendorItems;
 
-            model.Add(new VendorViewModel()
+            model.VendorDetails = new VendorViewModel()
             {
                 VendorName = VendorModel.VendorName,
                 VendorEmail = VendorModel.VendorEmail,
@@ -366,20 +404,14 @@ public class MenuController : Controller
                 IsMod = 1,
                 AllVendorItems = vendorItems,
                 VendorImage = VendorModel.VendorImage == string.Empty || VendorModel.VendorImage == null ? "profileimages/profileimage.png" : VendorModel.VendorImage
-            });
-        }
-
-        var addModel = model.FirstOrDefault();
-        CreateMenuItemViewModel addVM = new CreateMenuItemViewModel() { 
-        VendorId = id
-        }; 
-        
+            };      
+                
         var _customerService = new CustomerService();
         var email = User.Identity.Name;
         var currentCustomer = (await _customerService.Get(email)).FirstOrDefault();
-        addVM.settings = await SettingsHandler.GetSettings(email);
+        model.settings = await SettingsHandler.GetSettings(email);
 
-        return View("Create",addVM);
+        return View("ManageVendorMenu", model);
     }
 
 
