@@ -55,7 +55,10 @@ color:black !important;
     overflow: hidden;
 }
 
-.paper:before {
+/*
+    Add side of page effect 
+    
+    .paper:before {
         content: '';
         position: absolute;
         top: 0;
@@ -66,7 +69,8 @@ color:black !important;
         background-size: 30px 30px;
         border-right: 3px solid #D44147;
         box-sizing: border-box;
-    }
+
+    }*/
 
 .paper-content {
     position: absolute;
@@ -209,6 +213,11 @@ border:none !important;
     background-color: inherit !important;
 }
 
+.underline-input {
+border-right:none;
+border-left:none;
+border-top:none;
+}
 
 /* explanation */
 article {

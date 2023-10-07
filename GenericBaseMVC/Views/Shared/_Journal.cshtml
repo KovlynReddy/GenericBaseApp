@@ -11,7 +11,7 @@
     <div class="col-md-6 justify-content-end">
         <input asp-for="UserGuid" hidden value="@Model.UserGuid" class="form-label"></input>
         <input asp-for="ItemGuid" hidden value="@Model.ItemGuid" class="form-label"></input>
-        <input asp-for="Title" value="@Model.Title" style="width:20em;text-align:end;margin-left: 2.5em !important;" class="">
+            <input asp-for="Title" value="@Model.Title" style="width:20em;text-align:end;margin-left: 2.5em !important;" class="underline-input">
         <partial name="_ImageCarousel" model="Model.uploadPathsList"></partial>
     </div>
 </div>
@@ -19,7 +19,7 @@
 <a asp-controller="Menu" asp-action="Details" asp-route-id="@Model.ItemGuid">
 <div class="row">
     <div class="col-12">
-     <input asp-for="Description" style="width:51em;" value="@Model.Description" class="">
+                <input asp-for="Description" style="width:51em;" value="@Model.Description" class="underline-input">
                 <div class="star-rating-check">
                     @if (Model.RatingEntry > 4)
                     {
