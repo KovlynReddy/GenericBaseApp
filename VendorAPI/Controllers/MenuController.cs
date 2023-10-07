@@ -35,7 +35,8 @@ public class MenuController : Controller
             itemDto.Path = item.Path == string.Empty || item.Path == null ? "profileimages/defaultimage.jpg" : item.Path;           
 
             response.Add(itemDto);
-        }               
+        }
+        response.Reverse();
 
         return Ok(response);
     }

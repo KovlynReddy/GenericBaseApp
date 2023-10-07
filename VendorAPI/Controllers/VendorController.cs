@@ -28,6 +28,7 @@ public class VendorController : Controller
         HttpResponseMessage response = new HttpResponseMessage();
         response.StatusCode = System.Net.HttpStatusCode.OK;
         //response.Content = result;
+        result.Reverse();
 
         return Ok(result);
     }
@@ -56,6 +57,8 @@ public class VendorController : Controller
     public async Task<IActionResult> GetAll()
     {
         var result = await _context.Vendors.ToListAsync();
+
+        result.Reverse();
 
         return Ok(result);
     }

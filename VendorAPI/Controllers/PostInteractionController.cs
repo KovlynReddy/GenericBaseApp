@@ -24,7 +24,7 @@ namespace VendorAPI.Controllers
         {
             var result = await PostInteractionDB.Get();
 
-            return Ok(result);
+            return Ok(result.Reverse());
         }
 
         [HttpGet]

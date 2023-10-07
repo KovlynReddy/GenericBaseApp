@@ -26,7 +26,7 @@ namespace VendorAPI.Controllers
         {
             var result = await JournalDB.Get();
 
-            return Ok(result);
+            return Ok(result.Reverse());
         }
 
         [HttpGet]

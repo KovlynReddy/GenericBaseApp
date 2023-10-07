@@ -27,7 +27,7 @@ namespace VendorAPI.Controllers
         {
             var result = await _pointsDb.Get();
 
-            return Ok(result);
+            return Ok(result.Reverse());
         }
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace VendorAPI.Controllers
         {
             var result = await _pointsDb.Get(id);
 
-            return Ok(result);
+            return Ok(result.Reverse());
         }
 
         [HttpPost]

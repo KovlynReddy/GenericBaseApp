@@ -33,7 +33,7 @@ namespace VendorAPI.Controllers
                 advert.ImagePath03 = paths3.Last();
             }
 
-            return Ok(adverts);
+            return Ok(adverts.Reverse());
         }
 
         [HttpPost]

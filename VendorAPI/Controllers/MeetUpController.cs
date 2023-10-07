@@ -36,6 +36,8 @@ public class MeetUpController : Controller
 
         List<MeetUpDto> allMeetups = mapper.Map<List<MeetUpDto>>(AllMeetUps);
 
+        allMeetups.Reverse();
+
         return Ok(allMeetups);
     }
 

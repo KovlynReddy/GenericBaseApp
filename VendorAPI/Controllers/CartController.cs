@@ -34,7 +34,7 @@ namespace VendorAPI.Controllers
         {
             var results = await _purchaseDB.Get(id);
 
-            return Ok(results);
+            return Ok(results.Reverse());
 
         }
 

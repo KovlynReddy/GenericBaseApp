@@ -56,6 +56,8 @@ public class CustomersController : Controller
             response.Add(CustomerDto);
         }
 
+        response.Reverse();
+
         return Ok(response);
     }   
     
@@ -85,6 +87,9 @@ public class CustomersController : Controller
             };
             response.Add(CustomerDto);
         }
+
+        response.Reverse();
+
         return Ok(response);
     }
 

@@ -35,6 +35,8 @@ public class BookingsController : Controller
             });
         }
 
+        allBookingDtos.Reverse();
+
         return Ok(allBookingDtos);
     }
 
