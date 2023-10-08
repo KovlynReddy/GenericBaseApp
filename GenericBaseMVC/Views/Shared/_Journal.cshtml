@@ -3,6 +3,11 @@
 @{
     var uniqueId = Guid.NewGuid().ToString();
 }
+
+@if (!Model.journalHeader.IsProfileView)
+{
+    <partial name="_PostHeader" model="@Model.journalHeader"></partial>
+}
 <div class="journal card card-body">
 <div class="row">
     <div class="col-md-6">

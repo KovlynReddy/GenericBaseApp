@@ -26,9 +26,28 @@ namespace GenericBaseMVC.Controllers
 
             model.UserGuid = currentCustomer.ModelGuid;
             model.journals = mapper.Map<List<JournalViewModel>>(journals);
+            
+            var AllCustomers = await _customerService.Get();
 
             foreach (var journal in model.journals)
             {
+                var SenderDetails = AllCustomers.FirstOrDefault(m=>m.UserGuid == journal.UserGuid);
+
+                var SenderVM = new PostHeaderViewModel()
+                {
+                    SenderDetails = new ProfileHeaderViewModel()
+                    {
+
+                        CustomerName = SenderDetails.CustomerName,
+                        ProfileImagePath = SenderDetails.ProfileImagePath,
+                        CustomerEmail = SenderDetails.CustomerEmail,
+                        UserId = SenderDetails.UserGuid,
+                        SelectedTheme = SenderDetails.SelectedTheme
+                    }
+                };
+
+                journal.journalHeader = SenderVM;
+
                 var csv = journal.uploadPaths;
                 var files = csv.Split(',').ToList();
                 files.Remove("");

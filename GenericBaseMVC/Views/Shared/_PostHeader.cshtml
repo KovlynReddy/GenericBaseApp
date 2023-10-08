@@ -1,0 +1,39 @@
+﻿@model GenericAppDLL.Models.ViewModels.PostHeaderViewModel
+
+<div class="d-inline-block chat-other-header-name">
+    
+</div>
+
+
+<div class="card-header">
+    <div class="navbar navbar-expand p-0">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <div class="position-relative avatar">
+                        <img style="max-width:3em !important;" class="img-fluid rounded-circle" src="~/@Model.SenderDetails.ProfileImagePath" />
+                        <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                            <span class="visually-hidden">new alerts</span>
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    @Model.SenderDetails.CustomerName
+                </a>
+            </li>
+        </ul>
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <i class="fas fa-video"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link">
+                    <i class="fas fa-times"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -15,6 +15,7 @@ namespace GenericBaseMVC.Handlers
             var model = new FeedViewModel();
             var AllPostsDTO = await _PostService.GetAll(currentCustomer);
             var AllPostVM = new List<PostViewModel>();
+            var AllCustomers = await _customerService.Get();
 
             foreach (var post in AllPostsDTO)
             {
@@ -78,6 +79,16 @@ namespace GenericBaseMVC.Handlers
 
                 };
 
+                var SenderDetails = AllCustomers.FirstOrDefault(m=>m.ModelGuid==post.SenderGuid);
+                var SenderVM = new PostHeaderViewModel() { SenderDetails = new ProfileHeaderViewModel() { 
+                
+                CustomerName = SenderDetails.CustomerName,
+                ProfileImagePath = SenderDetails.ProfileImagePath,
+                CustomerEmail = SenderDetails.CustomerEmail,
+                UserId = SenderDetails.UserGuid,
+                SelectedTheme = SenderDetails.SelectedTheme
+                } };
+
                 PostViewModel newEntity = new PostViewModel
                 {
                     SenderGuid = post.SenderGuid,
@@ -89,7 +100,8 @@ namespace GenericBaseMVC.Handlers
                     Message = post.Message,
                     RecieverGuid = post.RecieverGuid,
                     postFooter = footer,
-                    PostGuid = post.ModelGuid
+                    PostGuid = post.ModelGuid,
+                    postHeader = SenderVM
                 };
                 newEntity.AttatchmentPath = newEntity.AttatchmentPath;//.Split("root\\")[1];
 

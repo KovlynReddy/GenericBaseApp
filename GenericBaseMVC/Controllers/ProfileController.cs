@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericAppDLL.Models.DomainModel;
 using GenericBaseMVC.Handlers;
 
 namespace GenericBaseMVC.Controllers;
@@ -67,8 +68,27 @@ public class ProfileController : Controller
         model.settings = await SettingsHandler.GetSettings(email);
         //model.Friends = _customerService.Get();
         model.Journals = Mapper.Map<List<JournalViewModel>>((await _journalService.Get(currentCustomerId)));
+        var SenderDetails = customerDetails;
+
         foreach (var journal in model.Journals)
         {
+
+            var JournalSenderVM = new PostHeaderViewModel()
+            {
+                IsProfileView = true,
+                SenderDetails = new ProfileHeaderViewModel()
+                {
+
+                    CustomerName = SenderDetails.CustomerName,
+                    ProfileImagePath = SenderDetails.ProfileImagePath,
+                    CustomerEmail = SenderDetails.CustomerEmail,
+                    UserId = SenderDetails.UserGuid,
+                    SelectedTheme = SenderDetails.SelectedTheme
+                }
+            };
+
+            journal.journalHeader = JournalSenderVM;
+
             var csv = journal.uploadPaths;
             var files = csv.Split(',').ToList();
             files.Remove("");
@@ -116,6 +136,24 @@ public class ProfileController : Controller
         //model.Journals = Mapper.Map<List<JournalViewModel>>(await _journalService.Get(currentCustomerId));
         model.Posts = Mapper.Map<List<PostViewModel>>(await _postService.Get(currentCustomerId));
         model.Meetups = Mapper.Map<List<MeetupViewModel>>(await _meetUpService.Get(currentCustomerId));
+
+        foreach (var post in model.Posts)
+        {
+            var SenderVM = new PostHeaderViewModel()
+            {
+                IsProfileView = true,
+                SenderDetails = new ProfileHeaderViewModel()
+                {
+
+                    CustomerName = SenderDetails.CustomerName,
+                    ProfileImagePath = SenderDetails.ProfileImagePath,
+                    CustomerEmail = SenderDetails.CustomerEmail,
+                    UserId = SenderDetails.UserGuid,
+                    SelectedTheme = SenderDetails.SelectedTheme
+                }
+            };
+            post.postHeader = SenderVM;
+        }
 
 
         return model;

@@ -19,5 +19,6 @@ namespace GenericAppDLL.Models.ViewModels
         public string AttatchmentPath { get; set; } = string.Empty;
         public IFormFile Attachment { get; set; }
         public PostFooterViewModel postFooter { get; set; } = new PostFooterViewModel();
+        public PostHeaderViewModel postHeader { get; set; } = new PostHeaderViewModel();
     }
 }

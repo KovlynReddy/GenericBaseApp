@@ -20,5 +20,6 @@ namespace GenericAppDLL.Models.ViewModels
         public Decimal Rating { get; set; }
         public int RatingTotal { get; set; }
         public int RatingEntry { get; set; }
+        public PostHeaderViewModel journalHeader { get; set; } = new PostHeaderViewModel();
     }
 }

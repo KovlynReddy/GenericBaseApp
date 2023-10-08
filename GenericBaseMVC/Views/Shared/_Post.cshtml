@@ -2,6 +2,10 @@
 
 
 <div class="card" @*style="width: 18rem;"*@>
+    @if (!Model.postHeader.IsProfileView)
+    {
+    <partial name="_PostHeader" model="@Model.postHeader"></partial>        
+    }
     <img class="card-img-top" src="~/@Model.AttatchmentPath" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">@Model.Caption</h5>
