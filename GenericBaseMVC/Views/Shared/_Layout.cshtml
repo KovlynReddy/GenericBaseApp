@@ -43,7 +43,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom bg-primary box-shadow mb-3">
             <div class="container-fluid">
-                <button class="text-button" style="background:none;background-color:transparent !important; border:none;" onclick="openNav()"><span class="navbar-toggler-icon"></span></button>
+                <button id="side-main-nav-bar" style="display:none;" class="text-button" style="background:none;background-color:transparent !important; border:none;" onclick="openNav()"><span class="navbar-toggler-icon"></span></button>
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-cannabis"></i> GenericBaseMVC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -51,92 +51,89 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
-                    <div style="flex: auto;">
+                    <div  style="flex: auto;">
+                        <ul id="top-main-nav-bar" style="display:none;" class="navbar-nav flex-grow-1">
 
-                        @*                    
-     <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Social
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comments"></i>Chats </a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Journal" asp-action="ViewAll"><i class="fa-solid fa-newspaper"></i>Journals </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item bg-light rounded-pill dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Social
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">                              
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comments"></i>Chats </a>
-                                </li>                        
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Journal" asp-action="ViewAll"><i class="fa-solid fa-newspaper"></i>Journals </a>
-                                </li>
-                            </ul>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Profiles
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewProfile"><i class="fas fa-user"></i>My Profile </a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index"><i class="fas fa-users"></i>All Profiles </a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewFriendRequests"><i class="fas fa-user-plus"></i>Friend Requests </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item bg-light rounded-pill dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Profiles
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">                               
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewProfile"><i class="fas fa-user"></i>My Profile </a>
-                                </li>
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index"><i class="fas fa-users"></i>All Profiles </a>
-                                </li>
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ViewFriendRequests"><i class="fas fa-user-plus"></i>Friend Requests </a>
-                                </li>
-                            </ul>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    MeetUp
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown4">
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="SuggestedMeetup"><i class="fa-solid fa-handshake"></i>Suggested MeetUp</a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="MeetupRequest" asp-action="ViewAll"><i class="fas fa-globe"></i>View Meetup Requests</a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="Schedule"><i class="fa-solid fa-calendar-days"></i>View Schedule</a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item bg-light rounded-pill dropdown">
-                            <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                MeetUp
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown4">
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="SuggestedMeetup"><i class="fa-solid fa-handshake"></i>Suggested MeetUp</a>
-                                </li>   
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetupRequest" asp-action="ViewAll"><i class="fas fa-globe"></i>View Meetup Requests</a>
-                                </li>
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeetUp" asp-action="Schedule"><i class="fa-solid fa-calendar-days"></i>View Schedule</a>
-                                </li>
-                            </ul>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Vendor
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown3">
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="ViewAll"><i class="fa-solid fa-shop"></i>View All Vendor</a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Advertisment" asp-action="Hub"><i class="fas fa-shopping-cart"></i>Advertising </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item bg-light rounded-pill dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Vendor
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown3">
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="ViewAll"><i class="fa-solid fa-shop"></i>View All Vendor</a>
-                                </li>                                
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Advertisment" asp-action="Hub"><i class="fas fa-shopping-cart"></i>Advertising </a>
-                                </li>
-                            </ul>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Shop
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Suggested"><i class="fa-solid fa-shop"></i>Suggested Vendor</a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Dashboard"><i class="fas fa-cannabis"></i>Shop</a>
+                                    </li>
+                                    <li class="nav-item dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="ViewCart"><i class="fas fa-shopping-cart"></i>View Cart </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item bg-light rounded-pill dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Shop
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Suggested"><i class="fa-solid fa-shop"></i>Suggested Vendor</a>
-                                </li>
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Dashboard"><i class="fas fa-cannabis"></i>Shop</a>
-                                </li>
-                                <li class="nav-item bg-light rounded-pill dropdown-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="ViewCart"><i class="fas fa-shopping-cart"></i>View Cart </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul> 
-                    *@
+                        </ul>
                     </div>
                     &emsp;
                     <div style="width:fit-content;">

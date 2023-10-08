@@ -21,6 +21,10 @@
             <br />*@
             }
             <br /><br />
+            <h6> Menu Settings </h6>&emsp;
+            @Html.RadioButtonFor(model => model.SelectedMenu,"Side", new { @class = "", @id = "sideRadio"}) Side &emsp; &emsp;&emsp;&emsp;
+            @Html.RadioButtonFor(model => model.SelectedMenu,"Top", new { @class = "" , @id = "topRadio"}) Top &emsp;
+            <br /><br />
             <h6> Update Profile Image </h6>&emsp;
             <input asp-for="newProfile" type="file"></input>
             <br /><br />

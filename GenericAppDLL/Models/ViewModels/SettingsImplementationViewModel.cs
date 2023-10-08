@@ -9,6 +9,7 @@ namespace GenericAppDLL.Models.ViewModels
     public class SettingsImplementationViewModel
     {
         public string SelectedTheme { get; set; }
+        public string SelectedMenu { get; set; } = "Side";
         public int NumNotifcations { get; set; }
 
         public bool EnableSideAdvert { get; set; } = false;

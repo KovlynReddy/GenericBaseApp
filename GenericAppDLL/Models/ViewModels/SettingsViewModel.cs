@@ -8,7 +8,7 @@ namespace GenericAppDLL.Models.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public int Model { get; set; }
+        public string SelectedMenu { get; set; } = "Side";
         public IFormFile newProfile { get; set; }
         public ThemeControlViewModel Themes { get; set; } = new ThemeControlViewModel();
     }

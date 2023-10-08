@@ -83,9 +83,16 @@ if (adverts.length > 1) {
 console.log("side-advert", adverts);
 
     var selectedTheme = $("#Theme-Selected").val();
+    var selectedMenu = $("#Menu-Selected").val();
     var numNotifications = $("#Settings-Notification-Num").val();
 
+if (selectedMenu == "Side") {
+    ShowSideNav();
+}
 
+if (selectedMenu == "Top") {
+    ShowTopNav();
+}
 
 if (selectedTheme == "" || selectedTheme == null) {
     selectedTheme = "Neon";
@@ -131,3 +138,26 @@ function openNav() {
 function closeNav() {
     $(".side-nav-bar").toggle();
 }
+
+function ShowTopNav() {
+    $("#top-main-nav-bar").toggle();
+}
+
+function ShowSideNav() {
+    $("#side-main-nav-bar").toggle();
+}
+
+$('#topRadio').on('click', function () {
+    console.log("Top Menu");
+    if (this.checked) {
+    $("#top-main-nav-bar").show();
+    $("#side-main-nav-bar").hide();
+    }
+});
+
+$('#sideRadio').on('click', function () {
+    if (this.checked) {
+        $("#top-main-nav-bar").hide();
+        $("#side-main-nav-bar").show();
+    }
+});
