@@ -10,14 +10,14 @@
         </span>
     </div>
 
-    <div class="pe-2">
-        <h5>@Model.SenderName</h5>
-        <div class="card card-text d-inline-block p-2 px-3 m-1">
+    <div class="card card-text d-inline-block p-2 px-3 m-1 rounded-pill">
+        <div class="pe-2">
+            <h5>@Model.SenderName</h5>
             @Model.Comment
+            <small class="small">
+                @Model.SentDateTime
+            </small>
         </div>
-        <small class="small">
-            @Model.SentDateTime
-        </small>
     </div>
     @*text-end justify-content-end*@
 
