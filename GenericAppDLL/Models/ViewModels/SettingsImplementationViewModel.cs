@@ -11,7 +11,6 @@ namespace GenericAppDLL.Models.ViewModels
         public string SelectedTheme { get; set; }
         public string SelectedMenu { get; set; } = "Side";
         public int NumNotifcations { get; set; }
-
         public bool EnableSideAdvert { get; set; } = false;
         public List<SideAdvertViewModel> sideAdverts { get; set; } = new List<SideAdvertViewModel>();
     }
